@@ -7,4 +7,9 @@
     <string name="classes">Kelas</string>
     <string name="course">Kursus</string>
     <string name="account">Akun</string>
+    <string name="my_profile_text">Profil Saya</string>
+    <string name="history_text">Riwayat Pembayaran</string>
+    <string name="change_password_text">Ubah Password</string>
+    <string name="logout_text">Keluar</string>
+    <string name="version">Versi 1.1.0</string>
 </resources>
