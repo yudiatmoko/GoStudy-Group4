@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GoStudy</string>
+    <string name="homepage">Beranda</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notification">Notifikasi</string>
+    <string name="classes">Kelas</string>
+    <string name="course">Kursus</string>
+    <string name="account">Akun</string>
 </resources>
