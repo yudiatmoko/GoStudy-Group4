@@ -12,4 +12,11 @@
     <string name="change_password_text">Ubah Password</string>
     <string name="logout_text">Keluar</string>
     <string name="version">Versi 1.1.0</string>
+    <string name="form_name">Nama</string>
+    <string name="form_email">Email</string>
+    <string name="form_password">Password</string>
+    <string name="form_phone_number">Nomor Telepon</string>
+    <string name="form_country">Negara</string>
+    <string name="form_city">Kota</string>
+    <string name="save">Simpan</string>
 </resources>
