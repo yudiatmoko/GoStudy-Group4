@@ -8,4 +8,5 @@
     <color name="red_warning">#FA2C5A</color>
     <color name="green_success">#73CA5C</color>
     <color name="yellow_warning">#F9CC00</color>
+    <color name="deep_grey">#8A8A8A</color>
 </resources>

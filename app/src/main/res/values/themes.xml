@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.GoStudy" parent="Base.Theme.GoStudy" />
+
+    <style name="BottomNavigationViewTextStyle">
+        ...
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        ...
+    </style>
 </resources>

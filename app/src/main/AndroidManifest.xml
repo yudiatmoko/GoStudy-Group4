@@ -15,6 +15,12 @@
         android:theme="@style/Theme.GoStudy"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.account.history.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.account.myprofile.MyProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
