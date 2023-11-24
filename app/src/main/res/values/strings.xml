@@ -19,4 +19,11 @@
     <string name="form_country">Negara</string>
     <string name="form_city">Kota</string>
     <string name="save">Simpan</string>
+    <string name="form_old_password">Masukkan Password Lama</string>
+    <string name="form_new_password">Masukkan Password Baru</string>
+    <string name="form_confirm_new_password">Ulangi Password Baru</string>
+    <string name="save_password_text">Simpan Password</string>
+    <string name="want_to_logout_text">Apakah anda yakin ingin logout?</string>
+    <string name="no">Tidak</string>
+    <string name="yes">Ya</string>
 </resources>
