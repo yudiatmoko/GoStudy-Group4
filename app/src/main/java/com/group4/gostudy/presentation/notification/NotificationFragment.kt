@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.databinding.FragmentNotificationBinding
-import com.group4.gostudy.model.NotificationProvider
+import com.group4.gostudy.utils.proceedWhen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationBinding
+    private val notificationViewModel: NotificationViewModel by viewModel()
     private val notificationAdapter: NotificationListAdapter by lazy {
         NotificationListAdapter {}
     }
@@ -36,13 +39,30 @@ class NotificationFragment : Fragment() {
         )
 
         setNotificationRV()
+        getData()
+    }
+
+    private fun setObserveNotificationData() {
+        notificationViewModel.notifications.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.rvNotificationList.isVisible = true
+                    it.payload?.let {
+                        notificationAdapter.setData(it)
+                    }
+                }
+            )
+        }
+    }
+    private fun getData() {
+        notificationViewModel.getNotification()
     }
 
     private fun setNotificationRV() {
         binding.rvNotificationList.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = notificationAdapter
-            notificationAdapter.setData(NotificationProvider.getDummyData())
         }
+        setObserveNotificationData()
     }
 }
