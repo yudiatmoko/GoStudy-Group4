@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp">
@@ -10,70 +11,59 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
         <!--cardNumber-->
-        <LinearLayout
-            android:id="@+id/ll_card_number"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_card_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp"
+            android:visibility="gone"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/text_card_number" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_card_holder_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
-                android:hint="@string/text_3550_0000_0000_0000"
-                android:maxLines="1" />
-
-        </LinearLayout>
-        <!--cardHolderName-->
-        <LinearLayout
-            android:id="@+id/ll_card_holder_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_card_number">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/text_card_holder_name" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_card_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:hint="@string/text_jeff_bezos"
+                android:hint="@string/text_card_number"
                 android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+        <!--cardHolderName-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_holder_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_card_number"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_holder_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/text_card_holder_name"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
         <!--cardCVV-->
-        <LinearLayout
-            android:id="@+id/ll_card_cvv"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_cvv"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:endIconMode="clear_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_card_holder_name">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/text_cvv" />
-
+            app:layout_constraintTop_toBottomOf="@id/til_holder_name"
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_card_cvv"
@@ -83,32 +73,30 @@
                 android:hint="@string/text_cvv"
                 android:maxLines="1" />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <!--cardExpiry-->
-        <LinearLayout
-            android:id="@+id/ll_card_expiry"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_card_expiry"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_card_holder_name">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/text_expiry_date" />
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toEndOf="@id/til_cvv"
+            app:layout_constraintTop_toBottomOf="@id/til_holder_name"
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_card_expiry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:hint="@string/text_08_24"
+                android:hint="@string/text_expiry_date"
                 android:maxLines="1" />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <!--logo-->
         <LinearLayout
             android:id="@+id/ll_logo"
@@ -119,7 +107,7 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:padding="10dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_card_cvv">
+            app:layout_constraintTop_toBottomOf="@id/til_cvv">
 
             <ImageView
                 android:layout_width="wrap_content"

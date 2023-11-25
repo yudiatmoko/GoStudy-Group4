@@ -52,9 +52,6 @@
     <string name="text_card_holder_name">Card Holder Name</string>
     <string name="text_cvv">CVV</string>
     <string name="text_expiry_date">Expiry Date</string>
-    <string name="text_08_24">08/24</string>
-    <string name="text_jeff_bezos">Jeff Bezos</string>
-    <string name="text_3550_0000_0000_0000">3550 0000 0000 0000</string>
     <string name="text_rincian_pembayaran">Rincian Pembayaran</string>
     <string name="text_konfirmasi_pembayaran">Konfirmasi Pembayaran</string>
     <string name="text_desc_onboarding">Persiapkan hal berikut untuk belajar yang maksimal:</string>
