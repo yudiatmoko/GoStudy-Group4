@@ -1,7 +1,7 @@
 package com.group4.gostudy.presentation.account.changepassword
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.group4.gostudy.R
 
 class ChangePasswordActivity :
