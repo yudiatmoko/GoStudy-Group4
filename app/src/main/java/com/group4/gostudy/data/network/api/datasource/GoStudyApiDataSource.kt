@@ -1,5 +1,6 @@
 package com.group4.gostudy.data.network.api.datasource
 
+import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.profile.ProfileResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
@@ -12,6 +13,7 @@ https://github.com/yudiatmoko
 interface GoStudyApiDataSource {
     suspend fun getNotifications(): NotificationsResponse
     suspend fun getProfile(): ProfileResponse
+    suspend fun getHistories(): HistoriesResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -23,5 +25,9 @@ class GoStudyApiDataSourceImpl(
 
     override suspend fun getProfile(): ProfileResponse {
         return service.getProfile()
+    }
+
+    override suspend fun getHistories(): HistoriesResponse {
+        return service.getHistories()
     }
 }

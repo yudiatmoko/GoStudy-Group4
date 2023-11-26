@@ -4,10 +4,13 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSourceImpl
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
+import com.group4.gostudy.data.repository.HistoryRepository
+import com.group4.gostudy.data.repository.HistoryRepositoryImpl
 import com.group4.gostudy.data.repository.NotificationRepository
 import com.group4.gostudy.data.repository.NotificationRepositoryImpl
 import com.group4.gostudy.data.repository.ProfileRepository
 import com.group4.gostudy.data.repository.ProfileRepositoryImpl
+import com.group4.gostudy.presentation.account.history.HistoryViewModel
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
 import com.group4.gostudy.presentation.notification.NotificationViewModel
 import com.group4.gostudy.utils.AssetWrapper
@@ -30,6 +33,7 @@ object AppModules {
     private val repositoryModule = module {
         single<NotificationRepository> { NotificationRepositoryImpl(get()) }
         single<ProfileRepository> { ProfileRepositoryImpl(get()) }
+        single<HistoryRepository> { HistoryRepositoryImpl(get()) }
     }
 
     private val utilsModule = module {
@@ -39,6 +43,7 @@ object AppModules {
     private val viewModelModule = module {
         viewModelOf(::NotificationViewModel)
         viewModelOf(::MyProfileViewModel)
+        viewModelOf(::HistoryViewModel)
     }
 
     val modules: List<Module> = listOf(

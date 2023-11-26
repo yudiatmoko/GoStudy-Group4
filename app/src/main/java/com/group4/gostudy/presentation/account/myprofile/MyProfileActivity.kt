@@ -58,6 +58,17 @@ class MyProfileActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+        binding.btnSave.setOnClickListener {
+            updateProfile()
+        }
+    }
+
+    private fun updateProfile() {
+        val name = binding.layoutForm.etName.text.toString().trim()
+        val email = binding.layoutForm.etEmail.text.toString().trim()
+        val phone = binding.layoutForm.etPhoneNumber.text.toString().trim()
+        val country = binding.layoutForm.etCountry.text.toString().trim()
+        val city = binding.layoutForm.etCity.text.toString().trim()
     }
 
     companion object {

@@ -2,6 +2,7 @@ package com.group4.gostudy.data.network.api.service
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.group4.gostudy.BuildConfig
+import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.profile.ProfileResponse
 import okhttp3.OkHttpClient
@@ -22,6 +23,9 @@ interface GoStudyApiService {
 
     @GET("myprofile")
     suspend fun getProfile(): ProfileResponse
+
+    @GET("history")
+    suspend fun getHistories(): HistoriesResponse
 
     companion object {
         @JvmStatic
