@@ -3,11 +3,9 @@ package com.group4.gostudy.presentation.account.history
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.group4.gostudy.R
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.HistoryItemListBinding
 import com.group4.gostudy.model.History
-import com.group4.gostudy.R.string
 
 /*
 Hi, Code Enthusiast!

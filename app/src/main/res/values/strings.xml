@@ -36,4 +36,6 @@
     <string name="txt_class_topic">Topik Kelas</string>
     <string name="txt_premium">Premium</string>
     <string name="txt_filter">Filter</string>
+    <string name="paid">Selesai Pembayaran</string>
+    <string name="waiting_for_payment">Menunggu Pembayaran</string>
 </resources>
