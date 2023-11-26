@@ -19,6 +19,16 @@
     <string name="form_country">Negara</string>
     <string name="form_city">Kota</string>
     <string name="save">Simpan</string>
+    <string name="text_login">Login</string>
+    <string name="text_emailortelp">Email / Nomor Telepon</string>
+    <string name="text_password">Password</string>
+    <string name="text_lupakatasandi">Lupa Kata Sandi</string>
+    <string name="text_daftar_disini">Daftar Disini</string>
+    <string name="text_belum_punya_akun_daftar_disini">Belum Punya Akun? Daftar Disini</string>
+    <string name="text_register">Daftar</string>
+    <string name="text_name">Nama</string>
+    <string name="text_buat_password">Buat Password</string>
+    <string name="text_daftar">Daftar</string>
     <string name="form_old_password">Masukkan Password Lama</string>
     <string name="form_new_password">Masukkan Password Baru</string>
     <string name="form_confirm_new_password">Ulangi Password Baru</string>
