@@ -26,9 +26,6 @@
     <string name="want_to_logout_text">Apakah anda yakin ingin logout?</string>
     <string name="no">Tidak</string>
     <string name="yes">Ya</string>
-    <string name="by">by %$s</string>
-    <string name="paid">Selesai Pembayaran</string>
-    <string name="waiting_for_payment">Menunggu Pembayaran</string>
     <string name="txt_tittle_class">UI/UX Design</string>
     <string name="txt_search_best_course">Cari Kursus Terbaik…</string>
     <string name="txt_running_class">Kelas Berjalan</string>
