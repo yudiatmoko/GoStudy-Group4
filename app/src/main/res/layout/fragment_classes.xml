@@ -21,6 +21,7 @@
         <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
             android:layoutDirection="rtl"
             app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
@@ -42,6 +43,7 @@
             style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
             android:text="@string/txt_running_class"
             android:textStyle="bold" />
     </LinearLayout>
