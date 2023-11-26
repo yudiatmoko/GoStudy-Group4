@@ -23,6 +23,12 @@
             android:name=".presentation.payment.PaymentActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.payment.PaymentDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.account.changepassword.ChangePasswordActivity"
             android:exported="false" />
         <activity
