@@ -41,9 +41,9 @@
 
                 <TextView
                     android:id="@+id/tv_class_name"
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
                     android:layout_weight="1"
                     android:textColor="@color/dark_blue"
                     android:textStyle="bold"
@@ -60,9 +60,9 @@
                 <TextView
                     android:id="@+id/tv_rating"
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_bold"
                     tools:text="5.0" />
             </LinearLayout>
 
@@ -80,8 +80,8 @@
                     style="@style/TextAppearance.Material3.BodyMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     tools:text="Belajar Web Designer dengan Figma" />
 
@@ -89,8 +89,8 @@
                     android:id="@+id/txt_mentor_name"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="match_parent"
-                    android:fontFamily="@font/montserrat_regular"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     tools:text="by Angela Doe" />
             </LinearLayout>
 
@@ -114,8 +114,8 @@
                     android:id="@+id/tv_level"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/montserrat_regular"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/dark_blue"
                     tools:text="@string/txt_intermediate_level" />
 
@@ -148,36 +148,36 @@
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_regular"
                     tools:text="@string/txt_120_menit" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/ll_kind_of_class"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_category"
                 android:orientation="horizontal"
-                android:layout_marginHorizontal="4dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_detail">
-
+                app:layout_constraintTop_toBottomOf="@id/ll_detail"
+                app:layout_constraintBottom_toBottomOf="parent">
                 <ImageView
-                    android:id="@+id/progress_class"
+                    android:layout_width="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="2dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_diamond"/>
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_marginVertical="8dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_check_progress" />
-
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:layout_marginVertical="8dp"
-                    app:indicatorColor="@color/black"
-                    app:trackColor="@color/dark_blue"
-                    app:trackCornerRadius="10dp"
-                    app:trackThickness="14dp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="@string/txt_premium"/>
 
             </LinearLayout>
 

@@ -33,4 +33,7 @@
     <string name="txt_intermediate_level">Intermediate Level</string>
     <string name="txt_7_modul">7 Modul</string>
     <string name="txt_120_menit">120 menit</string>
+    <string name="txt_class_topic">Topik Kelas</string>
+    <string name="txt_premium">Premium</string>
+    <string name="txt_filter">Filter</string>
 </resources>
