@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.databinding.ActivityHistoryBinding
-import com.group4.gostudy.model.HistoryProvider
+import com.group4.gostudy.utils.proceedWhen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -19,20 +20,37 @@ class HistoryActivity : AppCompatActivity() {
         HistoryListAdapter {}
     }
 
+    private val historyViewModel: HistoryViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setClickListener()
         setHistoryRV()
+        getData()
+    }
+
+    private fun getData() {
+        historyViewModel.getHistory()
     }
 
     private fun setHistoryRV() {
         binding.rvHistoryList.apply {
             layoutManager = LinearLayoutManager(this@HistoryActivity, RecyclerView.VERTICAL, false)
             adapter = historyAdapter
-            historyAdapter.setData(
-                HistoryProvider.getDummyData()
+        }
+        setObserveHistoryData()
+    }
+
+    private fun setObserveHistoryData() {
+        historyViewModel.history.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    it.payload?.let {
+                        historyAdapter.setData(it)
+                    }
+                }
             )
         }
     }
