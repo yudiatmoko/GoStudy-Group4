@@ -61,5 +61,4 @@ class DetailCourseMaterialFragment : Fragment() {
         adapter.addAll(sections)
     }
 
-
 }
