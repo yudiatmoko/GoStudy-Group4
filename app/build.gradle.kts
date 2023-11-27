@@ -134,4 +134,7 @@ dependencies {
     testImplementation("app.cash.turbine:turbine:1.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
+    //groupie
+    implementation ("com.github.lisawray.groupie:groupie:2.10.1")
+    implementation ("com.github.lisawray.groupie:groupie-viewbinding:2.10.1")
 }
