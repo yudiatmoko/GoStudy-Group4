@@ -5,10 +5,14 @@ import com.group4.gostudy.BuildConfig
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.profile.ProfileResponse
+import com.group4.gostudy.data.network.api.model.updateprofile.UpdateProfileRequest
+import com.group4.gostudy.data.network.api.model.updateprofile.UpdateProfileResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 /*
@@ -26,6 +30,11 @@ interface GoStudyApiService {
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse
+
+    @POST("myprofile/update")
+    suspend fun updateProfile(
+        @Body updateProfileRequest: UpdateProfileRequest
+    ): UpdateProfileResponse
 
     companion object {
         @JvmStatic

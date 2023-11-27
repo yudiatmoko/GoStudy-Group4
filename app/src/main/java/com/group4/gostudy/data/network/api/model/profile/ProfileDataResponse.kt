@@ -15,7 +15,9 @@ data class ProfileDataResponse(
     @SerializedName("name")
     val name: String?,
     @SerializedName("phone")
-    val phone: String?
+    val phone: String?,
+    @SerializedName("password")
+    val password: String?
 )
 
 fun ProfileDataResponse.toProfile() = Profile(
@@ -23,7 +25,8 @@ fun ProfileDataResponse.toProfile() = Profile(
     email = this.email.orEmpty(),
     phone = this.phone.orEmpty(),
     country = this.country.orEmpty(),
-    city = this.city.orEmpty()
+    city = this.city.orEmpty(),
+    password = this.password.orEmpty()
 )
 
 fun Collection<ProfileDataResponse>.toProfileView() = this.map {
