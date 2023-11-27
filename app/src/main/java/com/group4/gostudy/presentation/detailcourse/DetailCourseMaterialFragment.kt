@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.group4.gostudy.data.dummy.DummyDetailCourseMaterialDataSource
+import com.group4.gostudy.data.dummy.DummyDetailCourseMaterialDataSourceImpl
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
-import com.group4.gostudy.model.DummyDetailCourseMaterialDataSource
 import com.group4.gostudy.viewitem.DataItem
 import com.group4.gostudy.viewitem.HeaderItem
 import com.xwray.groupie.GroupieAdapter
@@ -18,6 +19,9 @@ class DetailCourseMaterialFragment : Fragment() {
 
     private val adapter: GroupieAdapter by lazy {
         GroupieAdapter()
+    }
+    private val dataSource: DummyDetailCourseMaterialDataSource by lazy {
+        DummyDetailCourseMaterialDataSourceImpl()
     }
 
     override fun onCreateView(
@@ -35,7 +39,7 @@ class DetailCourseMaterialFragment : Fragment() {
 
     private fun setData() {
         binding.rvData.adapter = adapter
-        val sections = DummyDetailCourseMaterialDataSource.getListData().map { sectionData ->
+        val sections = dataSource.getListData().map { sectionData ->
             val section = Section()
             section.setHeader(HeaderItem(sectionData.name, sectionData.time) {
                 Toast.makeText(
@@ -56,4 +60,6 @@ class DetailCourseMaterialFragment : Fragment() {
         }
         adapter.addAll(sections)
     }
+
+
 }
