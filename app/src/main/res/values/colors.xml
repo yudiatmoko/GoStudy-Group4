@@ -3,6 +3,13 @@
     <color name="seed">#B5F1CC</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="dark_blue">#6148FF</color>
+    <color name="light_blue">#489CFF</color>
+    <color name="light_blue_5">#EBF3FC</color>
+    <color name="red_warning">#FA2C5A</color>
+    <color name="green_success">#73CA5C</color>
+    <color name="yellow_warning">#F9CC00</color>
+    <color name="deep_grey">#8A8A8A</color>
     <color name="md_theme_light_primary">#006C45</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#90F7BF</color>
