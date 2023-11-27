@@ -9,5 +9,6 @@ data class Profile(
     val country: String,
     val email: String,
     val name: String,
-    val phone: String
+    val phone: String,
+    val password: String
 )
