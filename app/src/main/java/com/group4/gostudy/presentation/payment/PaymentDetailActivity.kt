@@ -23,6 +23,6 @@ class PaymentDetailActivity : AppCompatActivity() {
     }
 
     private fun openPopUpDialog() {
-        DialogSuccessFragment().show(supportFragmentManager,null)
+        DialogSuccessFragment().show(supportFragmentManager, null)
     }
 }
