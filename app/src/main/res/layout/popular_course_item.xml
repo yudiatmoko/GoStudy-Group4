@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -24,10 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:scaleType="centerCrop"
+                tools:src="@drawable/img_ui_ux"
                 app:layout_constraintBottom_toTopOf="@id/cl_history_contain"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/img_ui_ux" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_history_contain"
@@ -44,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/dark_blue"
+                    android:textColor="@color/md_theme_light_primary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="UI/UX Design" />
@@ -53,14 +54,14 @@
                     android:id="@+id/tv_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="4dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/ic_rating"
+                    android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="4.8" />
+                    tools:text="4.8"
+                    android:drawablePadding="4dp"
+                    app:drawableStartCompat="@drawable/ic_rating" />
 
                 <TextView
                     android:id="@+id/tv_course_title"
@@ -90,12 +91,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_module"
                     android:drawablePadding="4dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:drawableStartCompat="@drawable/ic_level"
-                    app:layout_constraintEnd_toStartOf="@id/tv_module"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_instructor_name"
                     tools:text="Intermediate Level" />
@@ -105,12 +106,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginStart="20dp"
                     android:drawablePadding="4dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:drawableStartCompat="@drawable/ic_module"
-                    app:layout_constraintEnd_toStartOf="@id/tv_duration"
                     app:layout_constraintStart_toEndOf="@id/tv_level"
                     app:layout_constraintTop_toBottomOf="@id/tv_instructor_name"
                     tools:text="10 Modul" />
@@ -125,42 +126,23 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:drawableStartCompat="@drawable/ic_time"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_module"
-                    app:layout_constraintTop_toBottomOf="@id/tv_instructor_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_level"
                     tools:text="60 Menit" />
 
                 <TextView
-                    android:id="@+id/tv_paid_status_true"
+                    android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:background="@drawable/background_rounded"
-                    android:drawablePadding="4dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="@string/paid"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/ic_paid"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_level" />
-
-                <TextView
-                    android:id="@+id/tv_paid_status_false"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:backgroundTint="@color/md_theme_light_primary"
                     android:background="@drawable/background_rounded"
-                    android:backgroundTint="@color/red_warning"
-                    android:drawablePadding="4dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:text="@string/waiting_for_payment"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    app:drawableStartCompat="@drawable/ic_paid"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_level" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_duration"
+                    tools:text="@string/buy" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

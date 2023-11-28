@@ -59,4 +59,8 @@
     <string name="text_desc_onboarding2">Mempunyai akun Figma atau Install Adobe XD Menggunakan internet minimal kecepatan 2Mbps Belajar di tempat yang nyaman</string>
     <string name="text_ikuti_kelas">Ikuti Kelas</string>
     <string name="text_join_class">Bayar dan ikuti kelas Selamanya</string>
+    <string name="category_text">Kategori</string>
+    <string name="popular_course_text">Kursus Populer</string>
+    <string name="view_more_text">Lihat Semua</string>
+    <string name="buy">Beli Rp 250.000</string>
 </resources>

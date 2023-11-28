@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.group4.gostudy.databinding.FragmentDialogSuccessBinding
 
-
 class DialogSuccessFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentDialogSuccessBinding
 

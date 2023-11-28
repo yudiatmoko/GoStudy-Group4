@@ -26,7 +26,7 @@
             app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
             app:queryHint="@string/txt_search_best_course"
-            app:searchIcon="@drawable/ic_search">
+            app:searchIcon="@drawable/ic_searching">
 
         </androidx.appcompat.widget.SearchView>
     </com.google.android.material.card.MaterialCardView>
