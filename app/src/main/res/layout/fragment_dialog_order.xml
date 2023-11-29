@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/text_selangkah_lagi_menuju"
+        android:text="Selangkah Lagi Menuju"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/tv_title_dialog2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/text_kelas_premium"
+        android:text="Kelas Premium"
         android:textSize="20sp"
         android:textColor="@color/md_theme_light_primary"
         app:layout_constraintBottom_toTopOf="@id/layout_content"
@@ -56,7 +56,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/text_beli_sekarang"
+        android:text="Beli Sekarang"
         android:drawableEnd="@drawable/ic_next"
         app:layout_constraintTop_toBottomOf="@id/layout_content"/>
 
