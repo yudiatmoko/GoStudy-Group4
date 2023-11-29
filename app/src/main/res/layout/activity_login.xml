@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.login.LoginActivity"
-    android:background="@color/light_blue_5">
+    android:background="@color/seed">
 
     <TextView
         android:id="@+id/tv_header_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_login"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/md_theme_dark_scrim"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="160dp"
         android:textSize="24sp"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:visibility="gone"
-            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundColor="@color/md_theme_light_onPrimary"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -83,7 +83,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/text_lupakatasandi"
             android:textStyle="bold"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/md_theme_light_secondary"
             app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/montserrat_regular"
             app:layout_constraintHorizontal_bias="0.925"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:visibility="gone"
-            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundColor="@color/md_theme_light_onPrimary"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -159,7 +159,7 @@
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
-            android:textColor="@color/dark_blue"/>
+            android:textColor="@color/md_theme_dark_scrim"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

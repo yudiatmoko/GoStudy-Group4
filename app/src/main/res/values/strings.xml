@@ -77,4 +77,7 @@
     <string name="txt_oops">Oops !</string>
     <string name="txt_must_login">Maaf, Anda harus login terlebih dahulu !</string>
     <string name="txt_login">Login</string>
+    <string name="text_temukan_ilmu">Temukan Ilmu,</string>
+    <string name="text_temukan_keunggulanmu">Temukan Keunggulanmu !</string>
+    <string name="text_sudah_punya_akun">Sudah punya akun? Klik Disini</string>
 </resources>

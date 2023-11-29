@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.register.RegisterActivity"
-    android:background="@color/light_blue_5">
+    android:background="@color/seed">
 
     <LinearLayout
         android:id="@+id/ln_backpressed"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_register"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/md_theme_dark_scrim"
         android:textSize="24sp"
         android:fontFamily="@font/montserrat_bold"
         android:layout_marginStart="26dp"
@@ -58,7 +58,7 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundColor="@color/md_theme_light_onPrimary"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:visibility="gone"
-            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundColor="@color/md_theme_light_onPrimary"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -139,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundColor="@color/md_theme_light_onPrimary"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -179,7 +179,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundColor="@color/md_theme_light_onPrimary"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
