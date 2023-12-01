@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="60dp"
+    tools:context=".presentation.payment.dialog.DialogSuccessFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_exit_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_close" />
+
+    <TextView
+        android:id="@+id/tv_oops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/txt_oops"
+        android:textColor="@color/md_theme_light_primary"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/iv_must_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tb_exit_dialog" />
+
+    <ImageView
+        android:id="@+id/iv_must_login"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_home_non_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_oops" />
+
+    <TextView
+        android:id="@+id/tv_must_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/txt_must_login"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_must_login" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/md_theme_light_primary"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/txt_login"
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_must_login"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,20 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="8dp">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_image_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/iv_my_class"
@@ -40,12 +42,12 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_my_class">
 
                 <TextView
-                    android:id="@+id/tv_class_name"
+                    android:id="@+id/tv_category_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
                     android:layout_weight="1"
-                    android:textColor="@color/dark_blue"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/md_theme_light_primary"
                     android:textStyle="bold"
                     tools:text="@string/txt_tittle_class" />
 
@@ -63,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/black"
                     tools:text="5.0" />
             </LinearLayout>
 
@@ -78,19 +81,20 @@
                 <TextView
                     android:id="@+id/tv_class_title"
                     style="@style/TextAppearance.Material3.BodyMedium"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     tools:text="Belajar Web Designer dengan Figma" />
 
                 <TextView
-                    android:id="@+id/txt_mentor_name"
+                    android:id="@+id/tv_mentor_name"
                     style="@style/TextAppearance.Material3.BodySmall"
-                    android:layout_width="match_parent"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/black"
                     tools:text="by Angela Doe" />
             </LinearLayout>
 
@@ -98,8 +102,8 @@
                 android:id="@+id/ll_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
                 android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_desc_author">
@@ -114,9 +118,9 @@
                     android:id="@+id/tv_level"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/montserrat_regular"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/dark_blue"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/black"
                     tools:text="@string/txt_intermediate_level" />
 
                 <ImageView
@@ -130,8 +134,8 @@
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="2dp"
+                    android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
                     tools:text="@string/txt_7_modul" />
@@ -156,26 +160,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginHorizontal="4dp"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_detail">
 
                 <ImageView
                     android:id="@+id/progress_class"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_marginVertical="8dp"
-                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_check_progress" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:indeterminate="true"
                     android:layout_marginVertical="8dp"
-                    app:indicatorColor="@color/black"
-                    app:trackColor="@color/dark_blue"
+                    android:max="100"
+                    android:progress="50"
+                    android:visibility="visible"
+                    app:indicatorColor="@color/md_theme_light_inversePrimary"
+                    app:trackColor="@color/md_theme_light_primary"
                     app:trackCornerRadius="10dp"
                     app:trackThickness="14dp" />
 
