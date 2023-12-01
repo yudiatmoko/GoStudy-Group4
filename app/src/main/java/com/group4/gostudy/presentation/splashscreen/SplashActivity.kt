@@ -1,6 +1,5 @@
 package com.group4.gostudy.presentation.splashscreen
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.github.appintro.AppIntro
 import com.group4.gostudy.R
