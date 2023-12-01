@@ -12,7 +12,9 @@ data class Course(
     val modules: String,
     val duration: String,
     val rating: String,
-    val price: Double
+    val price: Double,
+    val progress: Int
+
 )
 
 object CourseProvider {
@@ -28,7 +30,7 @@ object CourseProvider {
                 "12 Modul",
                 "90 Menit",
                 "4.9",
-                350000.0
+                350000.0, 50
             ),
             Course(
                 2,
@@ -40,7 +42,8 @@ object CourseProvider {
                 "12 Modul",
                 "120 Menit",
                 "4.9",
-                350000.0
+                350000.0, 50
+
             ),
             Course(
                 3,
@@ -52,7 +55,21 @@ object CourseProvider {
                 "10 Modul",
                 "160 Menit",
                 "4.7",
-                350000.0
+                350000.0, 50
+
+            ),
+            Course(
+                4,
+                "Python",
+                R.drawable.img_ui_ux,
+                "Flutter Multiplatform",
+                "Ilham Yudiatmoko",
+                "Beginner Level",
+                "10 Modul",
+                "160 Menit",
+                "4.7",
+                350000.0, 50
+
             )
         )
     }
