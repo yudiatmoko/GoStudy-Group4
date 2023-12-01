@@ -3,10 +3,10 @@ package com.group4.gostudy.data.network.api.service
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.group4.gostudy.BuildConfig
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
+import com.group4.gostudy.data.network.api.model.login.LoginRequest
+import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.profile.ProfileResponse
-import com.group4.gostudy.data.network.api.model.updateprofile.UpdateProfileRequest
-import com.group4.gostudy.data.network.api.model.updateprofile.UpdateProfileResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,16 +25,16 @@ interface GoStudyApiService {
     @GET("notification")
     suspend fun getNotifications(): NotificationsResponse
 
-    @GET("myprofile")
+    @GET("auth/me")
     suspend fun getProfile(): ProfileResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse
 
-    @POST("myprofile/update")
-    suspend fun updateProfile(
-        @Body updateProfileRequest: UpdateProfileRequest
-    ): UpdateProfileResponse
+    @POST("auth/login")
+    suspend fun login(
+        @Body loginRequest: LoginRequest
+    ): LoginResponse
 
     companion object {
         @JvmStatic

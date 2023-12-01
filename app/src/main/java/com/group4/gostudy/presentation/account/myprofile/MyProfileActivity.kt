@@ -25,6 +25,12 @@ class MyProfileActivity : AppCompatActivity() {
         setForm()
         setDataProfile()
         getData()
+
+        setLogin()
+    }
+
+    private fun setLogin() {
+        profileViewModel.login()
     }
 
     private fun setDataProfile() {

@@ -1,8 +1,8 @@
 package com.group4.gostudy.data.repository
 
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
+import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.profile.toProfile
-import com.group4.gostudy.data.network.api.model.updateprofile.UpdateProfileRequest
 import com.group4.gostudy.model.Profile
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
@@ -15,7 +15,7 @@ https://github.com/yudiatmoko
 
 interface ProfileRepository {
     suspend fun getProfile(): Flow<ResultWrapper<Profile>>
-    suspend fun updateProfile(item: Profile): Flow<ResultWrapper<Boolean>>
+    suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>>
 }
 
 class ProfileRepositoryImpl(
@@ -28,16 +28,9 @@ class ProfileRepositoryImpl(
         }
     }
 
-    override suspend fun updateProfile(item: Profile): Flow<ResultWrapper<Boolean>> {
+    override suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>> {
         return proceedFlow {
-            val updateRequest = UpdateProfileRequest(
-                item.name,
-                item.phone,
-                item.email,
-                item.country,
-                item.city
-            )
-            apiDataSource.updateProfile(updateRequest).status == true
+            apiDataSource.login(loginRequest).data?.token.orEmpty()
         }
     }
 }
