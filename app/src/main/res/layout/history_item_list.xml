@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/dark_blue"
+                    android:textColor="@color/md_theme_light_primary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="UI/UX Design" />
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/background_rounded"
-                    android:backgroundTint="@color/red_warning"
+                    android:backgroundTint="@color/md_theme_light_error"
                     android:drawablePadding="4dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="@string/waiting_for_payment"

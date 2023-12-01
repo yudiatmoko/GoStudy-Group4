@@ -8,18 +8,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_name"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:boxStrokeColor="@color/md_theme_light_primary"
         app:boxBackgroundColor="@color/white"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
         app:boxStrokeWidth="1.5dp"
         app:endIconMode="clear_text"
+        tools:ignore="PrivateResource"
         tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -34,8 +36,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
@@ -44,8 +47,10 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
         app:boxStrokeWidth="1.5dp"
         app:endIconMode="clear_text"
+        tools:ignore="PrivateResource"
         tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -60,8 +65,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_phone_number"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
@@ -70,8 +76,10 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
         app:boxStrokeWidth="1.5dp"
         app:endIconMode="clear_text"
+        tools:ignore="PrivateResource"
         tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -86,8 +94,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_country"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
@@ -96,8 +105,10 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
         app:boxStrokeWidth="1.5dp"
         app:endIconMode="clear_text"
+        tools:ignore="PrivateResource"
         tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -112,8 +123,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_city"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
@@ -122,8 +134,10 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
         app:boxStrokeWidth="1.5dp"
         app:endIconMode="clear_text"
+        tools:ignore="PrivateResource"
         tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -138,8 +152,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_password"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
@@ -148,8 +163,10 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
         app:boxStrokeWidth="1.5dp"
         app:passwordToggleEnabled="true"
+        tools:ignore="PrivateResource"
         tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText

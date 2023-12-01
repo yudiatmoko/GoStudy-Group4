@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/seed"
+    android:background="@color/md_theme_light_background"
     android:padding="16dp"
     tools:context=".presentation.account.AccountFragment">
 
@@ -17,6 +17,10 @@
         android:textColor="@color/md_theme_light_primary"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/notification"
+        android:shadowColor="@color/md_theme_light_outline"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

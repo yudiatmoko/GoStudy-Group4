@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/md_theme_light_background"
     android:padding="16dp"
     tools:context=".presentation.account.AccountFragment">
 
@@ -15,8 +15,12 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="86dp"
         android:fontFamily="@font/montserrat_bold"
-        android:textColor="@color/md_theme_light_primary"
+        android:shadowColor="@color/md_theme_light_outline"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
         android:text="@string/account"
+        android:textColor="@color/md_theme_light_primary"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +42,8 @@
             android:drawablePadding="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:padding="16dp"
-            android:textColor="@color/white"
             android:text="@string/my_profile_text"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_edit_profile" />
 
@@ -61,8 +65,8 @@
             android:drawablePadding="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:padding="16dp"
-            android:textColor="@color/white"
             android:text="@string/history_text"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_cart_history" />
 
@@ -84,8 +88,8 @@
             android:drawablePadding="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:padding="16dp"
-            android:textColor="@color/white"
             android:text="@string/change_password_text"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_setting" />
 
@@ -107,8 +111,8 @@
             android:drawablePadding="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:padding="16dp"
-            android:textColor="@color/white"
             android:text="@string/logout_text"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_logout" />
 
@@ -119,10 +123,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:textColor="@color/md_theme_light_primary"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/version"
         android:textAlignment="center"
+        android:textColor="@color/md_theme_light_primary"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/cv_logout_contain" />
 
