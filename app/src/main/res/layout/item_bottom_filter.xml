@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/ic_close_filter"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <CheckBox
+                android:id="@+id/cb_paling_baru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paling Baru"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_paling_populer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paling Populer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_paling_baru"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_Promo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Promo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_paling_populer"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <TextView
+                android:id="@+id/tv_kategori_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Kategori"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_Promo" />
+
+            <CheckBox
+                android:id="@+id/cb_uiux"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI/UX Design"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_kategori_filter"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_web_dev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Web Development"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_uiux"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_android_development"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Android Development"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_web_dev"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_ds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Science"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_android_development"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_bi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Business Intelligence"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_ds"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <TextView
+                android:id="@+id/tv_level_kesulitan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Level Kesulitan"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_bi" />
+
+            <CheckBox
+                android:id="@+id/cb_all_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Semua Level"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_level_kesulitan"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_beinner_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Beginner Level"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_all_level"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_intermediate_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intermediate Level"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_beinner_level"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <CheckBox
+                android:id="@+id/cb_advance_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Advanced level"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_intermediate_level"
+                tools:layout_editor_absoluteX="102dp" />
+
+            <Button
+                android:id="@+id/btn_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Terapkan Filter"
+                app:layout_constraintTop_toBottomOf="@+id/cb_advance_level" />
+
+            <Button
+                android:id="@+id/btn_delete_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Hapus Filter"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_filter" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
