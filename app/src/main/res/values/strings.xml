@@ -63,4 +63,8 @@
     <string name="popular_course_text">Kursus Populer</string>
     <string name="view_more_text">Lihat Semua</string>
     <string name="buy">Beli Rp 250.000</string>
+    <string name="txt_masuk">Masuk</string>
+    <string name="txt_oops">Oops !</string>
+    <string name="txt_must_login">Maaf, Anda harus login terlebih dahulu !</string>
+    <string name="txt_login">Login</string>
 </resources>
