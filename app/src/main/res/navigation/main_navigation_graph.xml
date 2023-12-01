@@ -36,5 +36,4 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" />
 
-
 </navigation>
