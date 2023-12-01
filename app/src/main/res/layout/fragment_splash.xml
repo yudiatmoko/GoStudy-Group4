@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.splashscreen.SplashFragment"
+    android:background="@color/seed">
+
+    <ImageView
+        android:id="@+id/ic_logo"
+        android:layout_width="340dp"
+        android:layout_height="200dp"
+        android:src="@drawable/gostudy_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_splashscreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ic_logo">
+
+        <TextView
+            android:id="@+id/tv_temukan_ilmu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_temukan_ilmu"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_regular"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tv_temukan_keunggulanmu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_temukan_ilmu"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_regular"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:text="@string/text_temukan_keunggulanmu"/>
+
+        <ImageView
+            android:id="@+id/iv_splashscreen1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/splashscreen1"
+            app:layout_constraintTop_toBottomOf="@id/tv_temukan_keunggulanmu"
+            android:layout_marginTop="10dp"/>
+
+        <ImageView
+            android:id="@+id/next_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/iv_splashscreen1"
+            android:src="@drawable/ic_button"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_sudah_punya_akun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_sudah_punya_akun"
+            app:layout_constraintTop_toBottomOf="@id/next_button"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="18sp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

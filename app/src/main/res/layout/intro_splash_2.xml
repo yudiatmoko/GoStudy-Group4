@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/seed">
+
+    <ImageView
+        android:id="@+id/ic_logo"
+        android:layout_width="340dp"
+        android:layout_height="200dp"
+        android:src="@drawable/gostudy_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_splashscreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ic_logo">
+
+        <TextView
+            android:id="@+id/tv_temukan_ilmu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_temukan_ilmu"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_regular"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tv_temukan_keunggulanmu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_temukan_ilmu"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_regular"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/light_blue"
+            android:text="@string/text_temukan_keunggulanmu"/>
+
+        <ImageView
+            android:id="@+id/iv_splashscreen1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/splashscreen2"
+            app:layout_constraintTop_toBottomOf="@id/tv_temukan_keunggulanmu"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/btn_guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_login"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintTop_toBottomOf="@id/iv_splashscreen1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/btn_guest"
+            android:text="@string/text_guest"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

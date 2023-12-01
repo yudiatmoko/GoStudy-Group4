@@ -123,6 +123,10 @@ dependencies {
     // hilt
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:hilt-android-compiler:2.48")
+
+    // app intro
+    implementation("com.github.AppIntro:AppIntro:6.3.1")
+
     // unit testing
     testImplementation("io.mockk:mockk-android:1.13.8")
     testImplementation("io.mockk:mockk-agent:1.13.8")
