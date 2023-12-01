@@ -22,7 +22,7 @@
             android:layout_alignBottom="@id/tv_notification_title"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_notification_filled"
-            app:tint="@color/dark_blue" />
+            app:tint="@color/md_theme_light_primary" />
 
         <TextView
             android:id="@+id/tv_notification_title"
@@ -31,7 +31,7 @@
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@id/iv_notification_icon"
             android:fontFamily="@font/montserrat_regular"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/md_theme_light_primary"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="Promosi" />

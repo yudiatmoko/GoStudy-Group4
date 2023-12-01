@@ -50,7 +50,7 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://e567b164-fea3-40b1-b1f2-58485d01fa3c.mock.pstmn.io\"")
         }
         create("integration") {
-            buildConfigField("String", "BASE_URL", "\"https://e567b164-fea3-40b1-b1f2-58485d01fa3c.mock.pstmn.io\"")
+            buildConfigField("String", "BASE_URL", "\"https://gostudy.up.railway.app/api/v1/\"")
         }
         create("mock") {
             buildConfigField("String", "BASE_URL", "\"https://gostudy.wiremockapi.cloud/\"")
