@@ -17,7 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_splashscreen"
         android:layout_width="match_parent"
@@ -45,6 +44,7 @@
             android:fontFamily="@font/montserrat_regular"
             android:textStyle="bold"
             android:textSize="22sp"
+            android:textColor="@color/light_blue"
             android:text="@string/text_temukan_keunggulanmu"/>
 
         <ImageView

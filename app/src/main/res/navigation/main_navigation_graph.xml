@@ -30,5 +30,10 @@
         android:name="com.group4.gostudy.presentation.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
+    <activity
+        android:id="@+id/splashFragment"
+        android:name="com.group4.gostudy.presentation.splashscreen.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" />
 
 </navigation>
