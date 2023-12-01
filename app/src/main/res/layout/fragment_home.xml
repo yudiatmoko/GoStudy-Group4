@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/md_theme_light_background"
         android:padding="16dp">
 
         <com.google.android.material.card.MaterialCardView
@@ -53,6 +53,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_bold"
+                android:shadowColor="@color/md_theme_light_outline"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
                 android:text="@string/category_text"
                 android:textColor="@color/md_theme_light_primary"
                 android:textSize="24sp" />
@@ -63,6 +67,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_regular"
+                android:shadowColor="@color/md_theme_light_outline"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
                 android:text="@string/view_more_text"
                 android:textAlignment="textEnd"
                 android:textColor="@color/md_theme_light_primary"
@@ -98,6 +106,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_bold"
+                android:shadowColor="@color/md_theme_light_outline"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
                 android:text="@string/popular_course_text"
                 android:textColor="@color/md_theme_light_primary"
                 android:textSize="24sp" />
@@ -108,6 +120,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_regular"
+                android:shadowColor="@color/md_theme_light_outline"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
                 android:text="@string/view_more_text"
                 android:textAlignment="textEnd"
                 android:textColor="@color/md_theme_light_primary"

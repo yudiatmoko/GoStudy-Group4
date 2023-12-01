@@ -41,6 +41,7 @@
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:maxLines="2"
+                android:layout_marginHorizontal="12dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp"

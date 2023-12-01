@@ -5,5 +5,5 @@
     <padding android:bottom="4dp"/>
     <padding android:right="8dp"/>
     <padding android:left="8dp"/>
-    <solid android:color="@color/green_success"/>
+    <solid android:color="@color/md_theme_light_primary"/>
 </shape>
