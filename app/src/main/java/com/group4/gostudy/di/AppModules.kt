@@ -1,8 +1,12 @@
 package com.group4.gostudy.di
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.group4.gostudy.data.local.datastore.UserPreferenceDataSource
+import com.group4.gostudy.data.local.datastore.UserPreferenceDataSourceImpl
+import com.group4.gostudy.data.local.datastore.appDataStore
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSourceImpl
+import com.group4.gostudy.data.network.api.service.AuthorizationInterceptor
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import com.group4.gostudy.data.repository.HistoryRepository
 import com.group4.gostudy.data.repository.HistoryRepositoryImpl
@@ -10,10 +14,15 @@ import com.group4.gostudy.data.repository.NotificationRepository
 import com.group4.gostudy.data.repository.NotificationRepositoryImpl
 import com.group4.gostudy.data.repository.ProfileRepository
 import com.group4.gostudy.data.repository.ProfileRepositoryImpl
+import com.group4.gostudy.presentation.account.AccountViewModel
+import com.group4.gostudy.presentation.account.changepassword.ChangePasswordViewModel
 import com.group4.gostudy.presentation.account.history.HistoryViewModel
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.notification.NotificationViewModel
 import com.group4.gostudy.utils.AssetWrapper
+import com.group4.gostudy.utils.PreferenceDataStoreHelper
+import com.group4.gostudy.utils.PreferenceDataStoreHelperImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
@@ -23,11 +32,18 @@ object AppModules {
 
     private val networkModule = module {
         single { ChuckerInterceptor(androidContext()) }
-        single { GoStudyApiService.invoke(get()) }
+        single { AuthorizationInterceptor(get()) }
+        single { GoStudyApiService.invoke(get(), get()) }
+    }
+
+    private val localModule = module {
+        single { androidContext().appDataStore }
+        single<PreferenceDataStoreHelper> { PreferenceDataStoreHelperImpl(get()) }
     }
 
     private val dataSourceModule = module {
         single<GoStudyApiDataSource> { GoStudyApiDataSourceImpl(get()) }
+        single<UserPreferenceDataSource> { UserPreferenceDataSourceImpl(get()) }
     }
 
     private val repositoryModule = module {
@@ -44,10 +60,14 @@ object AppModules {
         viewModelOf(::NotificationViewModel)
         viewModelOf(::MyProfileViewModel)
         viewModelOf(::HistoryViewModel)
+        viewModelOf(::MainViewModel)
+        viewModelOf(::AccountViewModel)
+        viewModelOf(::ChangePasswordViewModel)
     }
 
     val modules: List<Module> = listOf(
         networkModule,
+        localModule,
         dataSourceModule,
         repositoryModule,
         viewModelModule,

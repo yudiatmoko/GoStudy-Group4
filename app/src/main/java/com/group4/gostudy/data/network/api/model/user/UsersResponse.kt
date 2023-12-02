@@ -1,14 +1,14 @@
-package com.group4.gostudy.data.network.api.model.login
+package com.group4.gostudy.data.network.api.model.user
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class LoginResponse(
+data class UsersResponse(
     @SerializedName("data")
-    val data: DataLoginResponse?,
+    val data: DataUserResponse,
     @SerializedName("message")
     val message: String?,
     @SerializedName("success")
-    val success: String?
+    val success: Boolean?
 )

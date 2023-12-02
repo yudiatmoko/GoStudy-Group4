@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class DataLoginResponse(
-    @SerializedName("token")
-    val token: String?
+    @SerializedName("accessToken")
+    val accessToken: String?
 )
