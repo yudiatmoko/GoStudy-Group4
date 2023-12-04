@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroCustomLayoutFragment
 import com.group4.gostudy.R
+import com.group4.gostudy.presentation.home.HomeFragment
 import com.group4.gostudy.presentation.main.MainActivity
 
 class SplashActivity : AppIntro() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,7 +34,8 @@ class SplashActivity : AppIntro() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        startActivity(
+            Intent(this, HomeFragment::class.java)
+        )
     }
 }
