@@ -1,10 +1,12 @@
-package com.group4.gostudy.data.network.api.model.user.updatepassword
+package com.group4.gostudy.data.network.api.model.user.updateuser
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class UpdatePasswordResponse(
+data class UpdateUsersResponse(
+    @SerializedName("data")
+    val data: DataUpdateUser,
     @SerializedName("message")
     val message: String?,
     @SerializedName("status")

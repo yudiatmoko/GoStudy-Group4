@@ -53,17 +53,17 @@ class MyProfileActivity : AppCompatActivity() {
                 doOnSuccess = {
                     binding.layoutForm.etName.setText(it.payload?.name.orEmpty())
                     binding.layoutForm.etEmail.setText(it.payload?.email.orEmpty())
-                    binding.layoutForm.etPhoneNumber.setText(it.payload?.phone.orEmpty())
+                    binding.layoutForm.etPhoneNumber.setText(it.payload?.phoneNumber.orEmpty())
                     binding.layoutForm.etCountry.setText(it.payload?.country.orEmpty())
                     binding.layoutForm.etCity.setText(it.payload?.city.orEmpty())
-                    binding.ivProfileImage.load(it.payload?.imageProfile.orEmpty())
+                    binding.ivProfileImage.load(it.payload?.imageUrl.orEmpty())
                 }
             )
         }
     }
 
     private fun getData() {
-        profileViewModel.getProfile("656a6578d18660b07b58cc7b")
+        profileViewModel.getProfile()
     }
 
     private fun setForm() {
@@ -95,14 +95,12 @@ class MyProfileActivity : AppCompatActivity() {
         val city = binding.layoutForm.etCity.text.toString().trim()
 
         profileViewModel.updateProfile(
-            "656a6578d18660b07b58cc7b",
             UpdateUserRequest(
                 name = name,
-                email = email,
-                phone = phone,
+                phoneNumber = phone,
                 country = country,
                 city = city,
-                imageProfile = "https://raw.githubusercontent.com/yudiatmoko/Asset_Challenge_App_Ilham/main/img_all.webp"
+                image = "https://raw.githubusercontent.com/yudiatmoko/Asset_Challenge_App_Ilham/main/img_all.webp"
             )
         )
     }

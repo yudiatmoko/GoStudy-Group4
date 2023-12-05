@@ -16,60 +16,49 @@ https://github.com/yudiatmoko
 */
 
 interface ProfileRepository {
-    suspend fun getProfile(userId: String): Flow<ResultWrapper<User>>
+    suspend fun getProfile(): Flow<ResultWrapper<User>>
     suspend fun updateProfile(
-        userId: String,
         updateUserRequest: UpdateUserRequest
     ): Flow<ResultWrapper<User>>
 
     suspend fun updatePassword(
-        userId: String,
         updatePasswordRequest: UpdatePasswordRequest
-    ): Boolean
+    ): String
 
     suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>>
-    suspend fun logout(): Boolean
 }
 
 class ProfileRepositoryImpl(
     private val apiDataSource: GoStudyApiDataSource
 ) : ProfileRepository {
 
-    override suspend fun getProfile(userId: String): Flow<ResultWrapper<User>> {
+    override suspend fun getProfile(): Flow<ResultWrapper<User>> {
         return proceedFlow {
-            apiDataSource.getProfile(userId).data.toUser()
+            apiDataSource.getProfile().data.user.toUser()
         }
     }
 
     override suspend fun updateProfile(
-        userId: String,
         updateUserRequest: UpdateUserRequest
     ): Flow<ResultWrapper<User>> {
         return proceedFlow {
             apiDataSource.updateProfile(
-                userId,
                 updateUserRequest
-            ).data.toUser()
+            ).data.updatedUser.toUser()
         }
     }
 
     override suspend fun updatePassword(
-        userId: String,
         updatePasswordRequest: UpdatePasswordRequest
-    ): Boolean {
+    ): String {
         return apiDataSource.updatePassword(
-            userId,
             updatePasswordRequest
-        ).success ?: false
+        ).message.orEmpty()
     }
 
     override suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>> {
         return proceedFlow {
-            apiDataSource.login(loginRequest).data?.accessToken.orEmpty()
+            apiDataSource.login(loginRequest).data?.token.orEmpty()
         }
-    }
-
-    override suspend fun logout(): Boolean {
-        return apiDataSource.logout().success ?: false
     }
 }

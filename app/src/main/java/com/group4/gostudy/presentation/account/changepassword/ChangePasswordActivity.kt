@@ -46,7 +46,6 @@ class ChangePasswordActivity : AppCompatActivity() {
         val confirmPassword = binding.layoutForm.etConfirmNewPassword.text.toString().trim()
 
         changePasswordViewModel.updatePassword(
-            userId = "656a6578d18660b07b58cc7b",
             UpdatePasswordRequest(
                 newPassword = newPassword,
                 oldPassword = oldPassword,

@@ -71,7 +71,6 @@ class AccountFragment : Fragment() {
         view.confirmYesLogoutButton.setOnClickListener {
             alertDialog?.dismiss()
             navigateToLogin()
-            accountViewModel.logout()
             mainViewModel.removeUserToken()
         }
 

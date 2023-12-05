@@ -17,12 +17,10 @@ class ChangePasswordViewModel(
 ) : ViewModel() {
 
     fun updatePassword(
-        userId: String,
         updatePasswordRequest: UpdatePasswordRequest
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             profileRepository.updatePassword(
-                userId,
                 updatePasswordRequest
             )
         }

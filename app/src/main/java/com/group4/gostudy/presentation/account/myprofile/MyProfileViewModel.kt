@@ -27,9 +27,9 @@ class MyProfileViewModel(
     val profile: LiveData<ResultWrapper<User>>
         get() = _profile
 
-    fun getProfile(userId: String) {
+    fun getProfile() {
         viewModelScope.launch(Dispatchers.IO) {
-            profileRepository.getProfile(userId)
+            profileRepository.getProfile()
                 .collect {
                     _profile.postValue(it)
                 }
@@ -37,12 +37,10 @@ class MyProfileViewModel(
     }
 
     fun updateProfile(
-        userId: String,
         updateUserRequest: UpdateUserRequest
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             profileRepository.updateProfile(
-                userId,
                 updateUserRequest
             ).collect {
                 _profile.postValue(it)
@@ -60,8 +58,8 @@ class MyProfileViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             profileRepository.login(
                 LoginRequest(
-                    identifier = "atmokogblk@gmail.com",
-                    password = "jawa483483"
+                    email = "hamatmoko@gmail.com",
+                    password = "jawa123123"
                 )
             ).collect {
                 _login.postValue(it)

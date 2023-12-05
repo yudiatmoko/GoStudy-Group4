@@ -8,19 +8,17 @@ import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
-import com.group4.gostudy.data.network.api.model.user.logout.LogoutResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
+import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.PUT
 import java.util.concurrent.TimeUnit
 
 /*
@@ -29,30 +27,23 @@ https://github.com/yudiatmoko
 */
 
 interface GoStudyApiService {
-    @GET("/api/v1/users/{id}")
-    suspend fun getProfile(
-        @Path("id") userId: String
-    ): UsersResponse
+    @GET("user/me")
+    suspend fun getProfile(): UsersResponse
 
-    @PATCH("/api/v1/users/{id}")
+    @PUT("user/update")
     suspend fun updateProfile(
-        @Path("id") userId: String,
         @Body updateUserRequest: UpdateUserRequest
-    ): UsersResponse
+    ): UpdateUsersResponse
 
-    @PATCH("/api/v1/users/update-password/{id}")
+    @PUT("user/update-password")
     suspend fun updatePassword(
-        @Path("id") userId: String,
         @Body updatePasswordRequest: UpdatePasswordRequest
     ): UpdatePasswordResponse
 
-    @POST("/api/v1/auths/login")
+    @POST("auth/login")
     suspend fun login(
         @Body loginRequest: LoginRequest
     ): LoginResponse
-
-    @DELETE("/api/v1/auths/logout")
-    suspend fun logout(): LogoutResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse

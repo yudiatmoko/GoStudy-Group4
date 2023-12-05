@@ -7,14 +7,12 @@ import retrofit2.http.Field
 data class UpdateUserRequest(
     @Field("name")
     val name: String,
-    @Field("email")
-    val email: String,
-    @Field("phone")
-    val phone: String,
+    @Field("phoneNumber")
+    val phoneNumber: String,
     @Field("country")
     val country: String,
     @Field("city")
     val city: String,
-    @Field("imageProfile")
-    val imageProfile: String
+    @Field("image")
+    val image: String
 )

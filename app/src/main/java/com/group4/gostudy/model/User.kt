@@ -6,16 +6,17 @@ https://github.com/yudiatmoko
 */
 
 data class User(
+    val city: String?,
+    val country: String?,
     val createdAt: String?,
     val email: String?,
-    val id: String?,
-    val imageProfile: String?,
-    val isActive: Boolean?,
-    val isVerify: Boolean?,
+    val id: Int?,
+    val imageId: String?,
+    val imageUrl: String?,
     val name: String?,
-    val phone: String?,
+    val password: String?,
+    val phoneNumber: String?,
     val role: String?,
-    val username: String?,
-    val country: String?,
-    val city: String?
+    val updatedAt: String?,
+    val verify: Boolean?
 )

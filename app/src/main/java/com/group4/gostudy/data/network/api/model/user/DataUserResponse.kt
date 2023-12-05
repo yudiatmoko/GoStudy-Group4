@@ -6,43 +6,46 @@ import com.group4.gostudy.model.User
 
 @Keep
 data class DataUserResponse(
+    @SerializedName("city")
+    val city: String?,
+    @SerializedName("country")
+    val country: String?,
     @SerializedName("createdAt")
     val createdAt: String?,
     @SerializedName("email")
     val email: String?,
-    @SerializedName("_id")
-    val id: String?,
-    @SerializedName("image_profile")
-    val imageProfile: String?,
-    @SerializedName("isActive")
-    val isActive: Boolean?,
-    @SerializedName("isVerify")
-    val isVerify: Boolean?,
+    @SerializedName("id")
+    val id: Int?,
+    @SerializedName("imageId")
+    val imageId: String?,
+    @SerializedName("imageUrl")
+    val imageUrl: String?,
     @SerializedName("name")
     val name: String?,
-    @SerializedName("phone")
-    val phone: String?,
+    @SerializedName("password")
+    val password: String?,
+    @SerializedName("phoneNumber")
+    val phoneNumber: String?,
     @SerializedName("role")
     val role: String?,
-    @SerializedName("username")
-    val username: String?,
-    @SerializedName("country")
-    val country: String?,
-    @SerializedName("city")
-    val city: String?
+    @SerializedName("updatedAt")
+    val updatedAt: String?,
+    @SerializedName("verify")
+    val verify: Boolean?
 )
 
 fun DataUserResponse.toUser() = User(
     name = this.name.orEmpty(),
     email = this.email.orEmpty(),
-    phone = this.phone.orEmpty(),
+    phoneNumber = this.phoneNumber.orEmpty(),
     country = this.country.orEmpty(),
     city = this.city.orEmpty(),
-    username = this.username.orEmpty(),
-    imageProfile = this.imageProfile.orEmpty(),
+    imageUrl = this.imageUrl.orEmpty(),
+    imageId = this.imageId.orEmpty(),
     role = this.role.orEmpty(),
     createdAt = this.createdAt.orEmpty(),
-    id = this.id.orEmpty(),
-    isActive = this.isActive ?: false,
-    isVerify = this.isVerify ?: false
+    id = this.id ?: 0,
+    verify = this.verify ?: false,
+    updatedAt = this.updatedAt.orEmpty(),
+    password = this.password.orEmpty()
 )
