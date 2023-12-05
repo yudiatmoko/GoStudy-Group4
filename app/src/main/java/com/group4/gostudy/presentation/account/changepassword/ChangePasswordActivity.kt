@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.databinding.ActivityChangePasswordBinding
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
 import com.group4.gostudy.utils.proceedWhen
@@ -17,13 +18,15 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     private val viewModel: MyProfileViewModel by viewModel()
+
+    private val changePasswordViewModel: ChangePasswordViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setClickListener()
         setForm()
-        getData()
         setDataOldPassword()
     }
 
@@ -31,14 +34,24 @@ class ChangePasswordActivity : AppCompatActivity() {
         viewModel.profile.observe(this) {
             it.proceedWhen(
                 doOnSuccess = {
-                    binding.layoutForm.etOldPassword.setText(it.payload?.password)
+//                    binding.layoutForm.etOldPassword.setText(it.payload?.password)
                 }
             )
         }
     }
 
-    private fun getData() {
-        viewModel.getProfile()
+    private fun updatePassword() {
+        val newPassword = binding.layoutForm.etNewPassword.text.toString().trim()
+        val oldPassword = binding.layoutForm.etOldPassword.text.toString().trim()
+        val confirmPassword = binding.layoutForm.etConfirmNewPassword.text.toString().trim()
+
+        changePasswordViewModel.updatePassword(
+            UpdatePasswordRequest(
+                newPassword = newPassword,
+                oldPassword = oldPassword,
+                confirmPassword = confirmPassword
+            )
+        )
     }
 
     private fun setForm() {
@@ -50,6 +63,9 @@ class ChangePasswordActivity : AppCompatActivity() {
     private fun setClickListener() {
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
+        }
+        binding.btnSavePassword.setOnClickListener {
+            updatePassword()
         }
     }
 

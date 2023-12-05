@@ -12,10 +12,16 @@ import com.group4.gostudy.databinding.LayoutLogoutDialogBinding
 import com.group4.gostudy.presentation.account.changepassword.ChangePasswordActivity
 import com.group4.gostudy.presentation.account.history.HistoryActivity
 import com.group4.gostudy.presentation.account.myprofile.MyProfileActivity
+import com.group4.gostudy.presentation.main.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
+
+    private val accountViewModel: AccountViewModel by viewModel()
+
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +71,7 @@ class AccountFragment : Fragment() {
         view.confirmYesLogoutButton.setOnClickListener {
             alertDialog?.dismiss()
             navigateToLogin()
+            mainViewModel.removeUserToken()
         }
 
         alertDialog = builder.create()

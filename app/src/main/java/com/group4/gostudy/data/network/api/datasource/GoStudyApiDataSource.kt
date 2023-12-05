@@ -4,7 +4,11 @@ import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
-import com.group4.gostudy.data.network.api.model.profile.ProfileResponse
+import com.group4.gostudy.data.network.api.model.user.UsersResponse
+import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
+import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
+import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
+import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 
 /*
@@ -14,8 +18,19 @@ https://github.com/yudiatmoko
 
 interface GoStudyApiDataSource {
     suspend fun getNotifications(): NotificationsResponse
-    suspend fun getProfile(): ProfileResponse
+
+    suspend fun getProfile(): UsersResponse
+
+    suspend fun updateProfile(
+        updateUserRequest: UpdateUserRequest
+    ): UpdateUsersResponse
+
+    suspend fun updatePassword(
+        updatePasswordRequest: UpdatePasswordRequest
+    ): UpdatePasswordResponse
+
     suspend fun getHistories(): HistoriesResponse
+
     suspend fun login(loginRequest: LoginRequest): LoginResponse
 }
 
@@ -26,8 +41,24 @@ class GoStudyApiDataSourceImpl(
         return service.getNotifications()
     }
 
-    override suspend fun getProfile(): ProfileResponse {
+    override suspend fun getProfile(): UsersResponse {
         return service.getProfile()
+    }
+
+    override suspend fun updateProfile(
+        updateUserRequest: UpdateUserRequest
+    ): UpdateUsersResponse {
+        return service.updateProfile(
+            updateUserRequest
+        )
+    }
+
+    override suspend fun updatePassword(
+        updatePasswordRequest: UpdatePasswordRequest
+    ): UpdatePasswordResponse {
+        return service.updatePassword(
+            updatePasswordRequest
+        )
     }
 
     override suspend fun getHistories(): HistoriesResponse {

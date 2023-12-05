@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import coil.load
+import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
 import com.group4.gostudy.databinding.ActivityMyProfileBinding
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,6 +20,8 @@ class MyProfileActivity : AppCompatActivity() {
 
     private val profileViewModel: MyProfileViewModel by viewModel()
 
+    private val mainViewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -25,12 +30,21 @@ class MyProfileActivity : AppCompatActivity() {
         setForm()
         setDataProfile()
         getData()
-
-        setLogin()
     }
 
     private fun setLogin() {
         profileViewModel.login()
+        profileViewModel.login.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    it.payload?.let { token ->
+                        mainViewModel.setUserToken(
+                            token
+                        )
+                    }
+                }
+            )
+        }
     }
 
     private fun setDataProfile() {
@@ -39,9 +53,10 @@ class MyProfileActivity : AppCompatActivity() {
                 doOnSuccess = {
                     binding.layoutForm.etName.setText(it.payload?.name.orEmpty())
                     binding.layoutForm.etEmail.setText(it.payload?.email.orEmpty())
-                    binding.layoutForm.etPhoneNumber.setText(it.payload?.phone.orEmpty())
+                    binding.layoutForm.etPhoneNumber.setText(it.payload?.phoneNumber.orEmpty())
                     binding.layoutForm.etCountry.setText(it.payload?.country.orEmpty())
                     binding.layoutForm.etCity.setText(it.payload?.city.orEmpty())
+                    binding.ivProfileImage.load(it.payload?.imageUrl.orEmpty())
                 }
             )
         }
@@ -67,6 +82,9 @@ class MyProfileActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             updateProfile()
         }
+        binding.btnLogin.setOnClickListener {
+            setLogin()
+        }
     }
 
     private fun updateProfile() {
@@ -75,6 +93,16 @@ class MyProfileActivity : AppCompatActivity() {
         val phone = binding.layoutForm.etPhoneNumber.text.toString().trim()
         val country = binding.layoutForm.etCountry.text.toString().trim()
         val city = binding.layoutForm.etCity.text.toString().trim()
+
+        profileViewModel.updateProfile(
+            UpdateUserRequest(
+                name = name,
+                phoneNumber = phone,
+                country = country,
+                city = city,
+                image = "https://raw.githubusercontent.com/yudiatmoko/Asset_Challenge_App_Ilham/main/img_all.webp"
+            )
+        )
     }
 
     companion object {
