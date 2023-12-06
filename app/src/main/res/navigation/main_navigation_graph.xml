@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/splashActivity">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -30,10 +30,5 @@
         android:name="com.group4.gostudy.presentation.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
-    <activity
-        android:id="@+id/splashActivity"
-        android:name="com.group4.gostudy.presentation.splashscreen.SplashActivity"
-        android:label="activity_splash"
-        tools:layout="@layout/activity_splash" />
 
 </navigation>

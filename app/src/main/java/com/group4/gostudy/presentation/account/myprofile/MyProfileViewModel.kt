@@ -58,8 +58,8 @@ class MyProfileViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             profileRepository.login(
                 LoginRequest(
-                    email = "hamatmoko@gmail.com",
-                    password = "jawa123123"
+                    email = "johndoe@mail.com",
+                    password = "12345678"
                 )
             ).collect {
                 _login.postValue(it)

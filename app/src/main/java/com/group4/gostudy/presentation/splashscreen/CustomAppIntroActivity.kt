@@ -8,7 +8,7 @@ import com.github.appintro.AppIntroCustomLayoutFragment
 import com.group4.gostudy.R
 import com.group4.gostudy.presentation.main.MainActivity
 
-class SplashActivity : AppIntro() {
+class CustomAppIntroActivity : AppIntro() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
