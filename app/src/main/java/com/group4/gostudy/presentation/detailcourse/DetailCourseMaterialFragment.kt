@@ -21,7 +21,8 @@ class DetailCourseMaterialFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailCourseMaterialBinding.inflate(inflater, container, false)
@@ -37,14 +38,16 @@ class DetailCourseMaterialFragment : Fragment() {
         binding.rvData.adapter = adapter
         val sections = DummyDetailCourseMaterialDataSource.getListData().map { sectionData ->
             val section = Section()
-            section.setHeader(HeaderItem(sectionData.name, sectionData.time) {
-                Toast.makeText(
-                    requireContext(),
-                    "Header Clicked: ${sectionData.name}",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            })
+            section.setHeader(
+                HeaderItem(sectionData.name, sectionData.time) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Header Clicked: ${sectionData.name}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            )
             val items = sectionData.data.map { data ->
                 DataItem(data) {
                     Toast.makeText(requireContext(), "Item Clicked: $data", Toast.LENGTH_SHORT)
