@@ -23,19 +23,28 @@
         tools:text="Ini data" />
 
     <ImageView
-        android:id="@+id/iv_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="16dp"
-        android:visibility="gone"
-        android:src="@drawable/ic_progress" />
-    <ImageView
         android:id="@+id/iv_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_play" />
+        android:src="@drawable/ic_progress" />
 
+    <ImageView
+        android:id="@+id/iv_not_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_play"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_lock"
+        android:visibility="gone" />
 </androidx.cardview.widget.CardView>
