@@ -4,65 +4,85 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import com.group4.gostudy.R
+import com.group4.gostudy.databinding.FragmentCourseBinding
+import com.group4.gostudy.model.CourseProvider
+import com.group4.gostudy.model.TypeOfClassProvider
+import com.group4.gostudy.presentation.course.course.CourseAdapter
+import com.group4.gostudy.presentation.course.typeofclass.TypeOfClassAdapter
+import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CourseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CourseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var binding: FragmentCourseBinding
+    private val typeOfClassAdapter: TypeOfClassAdapter by lazy {
+        TypeOfClassAdapter {}
     }
-
+    private val courseAdapter: CourseAdapter by lazy {
+        CourseAdapter {}
+    }
+    private val dialogFragment = DialogHomeNonLoginFragment()
+    private lateinit var searchView: SearchView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(
-            R.layout.fragment_course,
-            container,
-            false
-        )
+        binding = FragmentCourseBinding.inflate(inflater)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CourseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(
-            param1: String,
-            param2: String
-        ) =
-            CourseFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(
+            view,
+            savedInstanceState
+        )
+        setTypeOfClassRV()
+        setCourseRV()
+        navigateToNonLoginFragment()
+        searchFeature()
+    }
+
+    private fun searchFeature() {
+        searchView = binding.svCourse
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
             }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterCourses(newText)
+                return true
+            }
+
+            private fun filterCourses(query: String?) {
+                val originalData = CourseProvider.getDummyData()
+                val filteredCourses = originalData.filter {
+                    it.title.contains(query.orEmpty(), true)
+                }
+                courseAdapter.setData(filteredCourses)
+            }
+        })
+    }
+
+    private fun navigateToNonLoginFragment() {
+        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
+    }
+
+    private fun setCourseRV() {
+        binding.rvListOfClass.apply {
+            adapter = courseAdapter
+            courseAdapter.setData(CourseProvider.getDummyData())
+        }
+    }
+
+    private fun setTypeOfClassRV() {
+        binding.rvCatProgress.apply {
+            adapter = typeOfClassAdapter
+            typeOfClassAdapter.setData(TypeOfClassProvider.getDummyData())
+        }
     }
 }
