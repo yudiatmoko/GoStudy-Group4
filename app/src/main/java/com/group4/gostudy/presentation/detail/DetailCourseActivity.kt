@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.group4.gostudy.R
+import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
 
 class DetailCourseActivity : AppCompatActivity() {
 

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="40dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.detailcourse.dialog.DialogOrderFragment">
+    tools:context=".presentation.detail.material.dialog.DialogOrderFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -57,7 +57,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/text_beli_sekarang"
-        android:drawableEnd="@drawable/ic_next"
+        android:drawableEnd="@drawable/ic_next_fill"
         app:layout_constraintTop_toBottomOf="@id/layout_content"/>
 
 
