@@ -13,7 +13,8 @@ class DialogOrderFragment : Fragment() {
     private lateinit var binding: FragmentDialogOrderBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDialogOrderBinding.inflate(inflater, container, false)
@@ -37,5 +38,4 @@ class DialogOrderFragment : Fragment() {
         }
         startActivity(intent)
     }
-
 }
