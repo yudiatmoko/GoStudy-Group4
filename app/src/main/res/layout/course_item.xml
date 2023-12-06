@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="8dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_image_class"
         android:layout_width="match_parent"
+        android:layout_marginVertical="8dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:background="@color/white"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -40,12 +42,12 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_my_class">
 
                 <TextView
-                    android:id="@+id/tv_class_name"
+                    android:id="@+id/tv_category_name"
                     android:fontFamily="@font/montserrat_bold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/dark_blue"
+                    android:textColor="@color/md_theme_light_primary"
                     android:textStyle="bold"
                     tools:text="@string/txt_tittle_class" />
 
@@ -60,6 +62,7 @@
                 <TextView
                     android:id="@+id/tv_rating"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_bold"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
@@ -86,7 +89,8 @@
                     tools:text="Belajar Web Designer dengan Figma" />
 
                 <TextView
-                    android:id="@+id/txt_mentor_name"
+                    android:textColor="@color/black"
+                    android:id="@+id/tv_mentor_name"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -116,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
-                    android:textColor="@color/dark_blue"
+                    android:textColor="@color/black"
                     tools:text="@string/txt_intermediate_level" />
 
                 <ImageView
@@ -154,11 +158,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_kind_of_class"
+                android:id="@+id/ll_kind_of_class_premium"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:background="@drawable/bg_category"
+                android:visibility="gone"
                 android:orientation="horizontal"
+                android:backgroundTint="@color/md_theme_light_primary"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -171,6 +177,7 @@
                     android:layout_height="16dp"
                     android:src="@drawable/ic_diamond"/>
                 <TextView
+                    android:id="@+id/tv_premium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
@@ -178,6 +185,29 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:text="@string/txt_premium"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_kind_of_class_free"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_category"
+                android:orientation="horizontal"
+                android:backgroundTint="@color/md_theme_light_primary"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_detail"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <TextView
+                    android:id="@+id/tv_free"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="@string/txt_start_class"/>
 
             </LinearLayout>
 
