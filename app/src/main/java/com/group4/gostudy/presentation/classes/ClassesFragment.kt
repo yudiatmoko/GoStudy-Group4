@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentClassesBinding
 import com.group4.gostudy.model.CourseProvider
@@ -27,6 +28,7 @@ class ClassesFragment : Fragment() {
         MyClassAdapter { _ ->
         }
     }
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +49,29 @@ class ClassesFragment : Fragment() {
         navigateToNonLoginFragment()
         setProgressCategoryRV()
         setMyClassRv()
+        searchFeature()
+    }
+
+    private fun searchFeature() {
+        searchView = binding.svCourse
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterCourses(newText)
+                return true
+            }
+
+            private fun filterCourses(query: String?) {
+                val originalData = CourseProvider.getDummyData()
+                val filteredCourses = originalData.filter {
+                    it.title.contains(query.orEmpty(), true)
+                }
+                myClassAdapter.setData(filteredCourses)
+            }
+        })
     }
 
     private fun setMyClassRv() {
