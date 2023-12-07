@@ -65,12 +65,12 @@ class ProfileRepositoryImpl(
         updatePasswordRequest: UpdatePasswordRequest
     ): Flow<ResultWrapper<String>> {
         return proceedFlow {
-            apiDataSource.updatePassword(updatePasswordRequest).baseResponse.message.orEmpty()
-        }.catch {
-            emit(ResultWrapper.Error(Exception(it)))
+            apiDataSource.updatePassword(updatePasswordRequest).message.orEmpty()
         }.onStart {
             emit(ResultWrapper.Loading())
             delay(2000)
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
         }
     }
 
