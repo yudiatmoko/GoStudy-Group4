@@ -127,6 +127,10 @@ dependencies {
     // app intro
     implementation("com.github.AppIntro:AppIntro:6.3.1")
 
+    // otpview
+    implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview-compose:3.1.0")
+    implementation("com.github.appsfeature:otp-view:1.0")
+
     // unit testing
     testImplementation("io.mockk:mockk-android:1.13.8")
     testImplementation("io.mockk:mockk-agent:1.13.8")
