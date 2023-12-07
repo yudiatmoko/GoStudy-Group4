@@ -3,12 +3,14 @@ package com.group4.gostudy.presentation.account.myprofile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import coil.load
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
 import com.group4.gostudy.databinding.ActivityMyProfileBinding
 import com.group4.gostudy.presentation.main.MainViewModel
+import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,7 +38,23 @@ class MyProfileActivity : AppCompatActivity() {
         profileViewModel.login()
         profileViewModel.login.observe(this) {
             it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = true
+                    binding.layoutState.llAnimError.isVisible = false
+                    binding.layoutForm.root.isVisible = false
+                    binding.ivProfileImage.isVisible = false
+                    binding.btnLogin.isVisible = false
+                    binding.btnSave.isVisible = false
+                },
                 doOnSuccess = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutForm.root.isVisible = true
+                    binding.ivProfileImage.isVisible = true
+                    binding.btnLogin.isVisible = true
+                    binding.btnSave.isVisible = true
                     it.payload?.let { token ->
                         mainViewModel.setUserToken(
                             token
@@ -50,7 +68,40 @@ class MyProfileActivity : AppCompatActivity() {
     private fun setDataProfile() {
         profileViewModel.profile.observe(this) {
             it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = true
+                    binding.layoutState.llAnimError.isVisible = false
+                    binding.layoutForm.root.isVisible = false
+                    binding.ivProfileImage.isVisible = false
+                    binding.btnLogin.isVisible = false
+                    binding.btnSave.isVisible = false
+                },
+                doOnError = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = false
+                    binding.layoutState.llAnimError.isVisible = true
+                    binding.layoutForm.root.isVisible = false
+                    binding.ivProfileImage.isVisible = false
+                    binding.btnLogin.isVisible = true
+                    binding.btnSave.isVisible = false
+                    if (it.exception is ApiException) {
+                        if (it.exception.httpCode == 401) {
+                            binding.layoutState.tvError.isVisible = true
+                            binding.layoutState.tvError.text = it.exception.getParsedError()?.message
+                        } else {
+                            Toast.makeText(this@MyProfileActivity, it.exception.getParsedError()?.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                },
                 doOnSuccess = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutForm.root.isVisible = true
+                    binding.ivProfileImage.isVisible = true
+                    binding.btnLogin.isVisible = true
+                    binding.btnSave.isVisible = true
                     binding.layoutForm.etName.setText(it.payload?.name.orEmpty())
                     binding.layoutForm.etEmail.setText(it.payload?.email.orEmpty())
                     binding.layoutForm.etPhoneNumber.setText(it.payload?.phoneNumber.orEmpty())
@@ -89,7 +140,6 @@ class MyProfileActivity : AppCompatActivity() {
 
     private fun updateProfile() {
         val name = binding.layoutForm.etName.text.toString().trim()
-        val email = binding.layoutForm.etEmail.text.toString().trim()
         val phone = binding.layoutForm.etPhoneNumber.text.toString().trim()
         val country = binding.layoutForm.etCountry.text.toString().trim()
         val city = binding.layoutForm.etCity.text.toString().trim()

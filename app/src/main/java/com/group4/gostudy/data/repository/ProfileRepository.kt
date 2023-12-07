@@ -8,7 +8,10 @@ import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserReque
 import com.group4.gostudy.model.User
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 
 /*
 Hi, Code Enthusiast!
@@ -23,7 +26,7 @@ interface ProfileRepository {
 
     suspend fun updatePassword(
         updatePasswordRequest: UpdatePasswordRequest
-    ): String
+    ): Flow<ResultWrapper<String>>
 
     suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>>
 }
@@ -35,6 +38,11 @@ class ProfileRepositoryImpl(
     override suspend fun getProfile(): Flow<ResultWrapper<User>> {
         return proceedFlow {
             apiDataSource.getProfile().data.user.toUser()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
         }
     }
 
@@ -45,20 +53,35 @@ class ProfileRepositoryImpl(
             apiDataSource.updateProfile(
                 updateUserRequest
             ).data.updatedUser.toUser()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
         }
     }
 
     override suspend fun updatePassword(
         updatePasswordRequest: UpdatePasswordRequest
-    ): String {
-        return apiDataSource.updatePassword(
-            updatePasswordRequest
-        ).message.orEmpty()
+    ): Flow<ResultWrapper<String>> {
+        return proceedFlow {
+            apiDataSource.updatePassword(updatePasswordRequest).message.orEmpty()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
+        }
     }
 
     override suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>> {
         return proceedFlow {
             apiDataSource.login(loginRequest).data?.token.orEmpty()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
         }
     }
 }

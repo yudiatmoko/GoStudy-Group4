@@ -7,6 +7,14 @@
     android:background="@color/md_theme_light_background"
     tools:context=".presentation.account.myprofile.MyProfileActivity">
 
+    <include
+        android:id="@+id/layout_state"
+        layout="@layout/common_layout_content_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
