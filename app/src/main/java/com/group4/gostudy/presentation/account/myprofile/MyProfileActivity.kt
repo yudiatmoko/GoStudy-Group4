@@ -53,8 +53,10 @@ class MyProfileActivity : AppCompatActivity() {
                     binding.layoutState.tvError.isVisible = false
                     binding.layoutForm.root.isVisible = true
                     binding.ivProfileImage.isVisible = true
-                    binding.btnLogin.isVisible = true
+                    binding.btnLogin.isVisible = false
                     binding.btnSave.isVisible = true
+                    finish()
+                    startActivity(this)
                     it.payload?.let { token ->
                         mainViewModel.setUserToken(
                             token
@@ -83,13 +85,14 @@ class MyProfileActivity : AppCompatActivity() {
                     binding.layoutState.llAnimError.isVisible = true
                     binding.layoutForm.root.isVisible = false
                     binding.ivProfileImage.isVisible = false
-                    binding.btnLogin.isVisible = true
                     binding.btnSave.isVisible = false
                     if (it.exception is ApiException) {
                         if (it.exception.httpCode == 401) {
                             binding.layoutState.tvError.isVisible = true
                             binding.layoutState.tvError.text = it.exception.getParsedError()?.message
+                            binding.btnLogin.isVisible = true
                         } else {
+                            binding.btnRepeat.isVisible = true
                             Toast.makeText(this@MyProfileActivity, it.exception.getParsedError()?.message, Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -100,8 +103,8 @@ class MyProfileActivity : AppCompatActivity() {
                     binding.layoutState.llAnimError.isVisible = false
                     binding.layoutForm.root.isVisible = true
                     binding.ivProfileImage.isVisible = true
-                    binding.btnLogin.isVisible = true
                     binding.btnSave.isVisible = true
+                    binding.btnLogin.isVisible = false
                     binding.layoutForm.etName.setText(it.payload?.name.orEmpty())
                     binding.layoutForm.etEmail.setText(it.payload?.email.orEmpty())
                     binding.layoutForm.etPhoneNumber.setText(it.payload?.phoneNumber.orEmpty())

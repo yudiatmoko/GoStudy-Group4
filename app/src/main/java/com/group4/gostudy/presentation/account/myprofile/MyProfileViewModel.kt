@@ -59,7 +59,7 @@ class MyProfileViewModel(
             profileRepository.login(
                 LoginRequest(
                     email = "johndoe@mail.com",
-                    password = "12345678"
+                    password = "jawa123123"
                 )
             ).collect {
                 _login.postValue(it)

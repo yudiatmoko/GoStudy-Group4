@@ -3,11 +3,13 @@ package com.group4.gostudy.presentation.account.changepassword
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.databinding.ActivityChangePasswordBinding
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
+import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,14 +29,42 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         setClickListener()
         setForm()
-        setDataOldPassword()
     }
 
-    private fun setDataOldPassword() {
-        viewModel.profile.observe(this) {
+    private fun setUpdatePassword() {
+        updatePassword()
+        changePasswordViewModel.updatedPassword.observe(this) {
             it.proceedWhen(
+                doOnError = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = false
+                    binding.layoutState.llAnimError.isVisible = true
+                    binding.layoutForm.root.isVisible = false
+                    if (it.exception is ApiException) {
+                        binding.layoutState.tvError.isVisible = true
+                        binding.layoutState.tvError.text = it.exception.getParsedError()?.message
+                        binding.btnRepeat.isVisible = true
+                    }
+                },
+                doOnLoading = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = true
+                    binding.layoutState.llAnimError.isVisible = false
+                    binding.layoutForm.root.isVisible = false
+                },
                 doOnSuccess = {
-//                    binding.layoutForm.etOldPassword.setText(it.payload?.password)
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.animLoading.isVisible = false
+                    binding.layoutState.llAnimError.isVisible = false
+                    binding.layoutForm.root.isVisible = true
+                    binding.layoutForm.etOldPassword.text?.clear()
+                    binding.layoutForm.etNewPassword.text?.clear()
+                    binding.layoutForm.etConfirmNewPassword.text?.clear()
+                    Toast.makeText(
+                        this,
+                        it.payload,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             )
         }
@@ -65,7 +95,11 @@ class ChangePasswordActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding.btnSavePassword.setOnClickListener {
-            updatePassword()
+            setUpdatePassword()
+        }
+        binding.btnRepeat.setOnClickListener {
+            finish()
+            startActivity(this)
         }
     }
 
