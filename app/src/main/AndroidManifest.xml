@@ -29,6 +29,9 @@
             android:name=".presentation.detail.DetailCourseActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.otp.OtpActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.resetpassword.ResetPasswordActivity"
             android:exported="false" />
         <activity
