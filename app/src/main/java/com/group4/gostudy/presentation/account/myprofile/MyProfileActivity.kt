@@ -97,7 +97,7 @@ class MyProfileActivity : AppCompatActivity() {
                 doOnSuccess = {
                     binding.layoutState.root.isVisible = true
                     binding.layoutState.animLoading.isVisible = false
-                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutState.llAnimError.isVisible = false
                     binding.layoutForm.root.isVisible = true
                     binding.ivProfileImage.isVisible = true
                     binding.btnLogin.isVisible = true
