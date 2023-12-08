@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".presentation.detail.DetailCourseActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.resetpassword.ResetPasswordActivity"
             android:exported="false" />
         <activity
