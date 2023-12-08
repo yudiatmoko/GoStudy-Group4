@@ -1,11 +1,11 @@
-package com.group4.gostudy.presentation.detail
+package com.group4.gostudy.presentation.detail.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.group4.gostudy.presentation.detail.about.AboutFragment
-import com.group4.gostudy.presentation.detail.material.MaterialFragment
+import com.group4.gostudy.presentation.detail.material.DetailCourseMaterialFragment
 
 class AdapterViewPager(
     fragmentManager: FragmentManager,
@@ -19,7 +19,7 @@ class AdapterViewPager(
         return if (position == 0) {
             AboutFragment()
         } else {
-            MaterialFragment()
+            DetailCourseMaterialFragment()
         }
     }
 }

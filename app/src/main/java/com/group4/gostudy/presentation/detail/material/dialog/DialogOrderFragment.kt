@@ -1,4 +1,4 @@
-package com.group4.gostudy.presentation.detailcourse.dialog
+package com.group4.gostudy.presentation.detail.material.dialog
 
 import android.content.Intent
 import android.os.Bundle
