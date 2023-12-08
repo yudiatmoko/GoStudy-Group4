@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
-import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
 import com.group4.gostudy.data.repository.ProfileRepository
 import com.group4.gostudy.model.User
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 /*
 Hi, Code Enthusiast!
@@ -37,11 +38,19 @@ class MyProfileViewModel(
     }
 
     fun updateProfile(
-        updateUserRequest: UpdateUserRequest
+        name: RequestBody,
+        phoneNumber: RequestBody,
+        country: RequestBody,
+        city: RequestBody,
+        image: MultipartBody.Part
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             profileRepository.updateProfile(
-                updateUserRequest
+                name,
+                phoneNumber,
+                country,
+                city,
+                image
             ).collect {
                 _profile.postValue(it)
             }
@@ -59,7 +68,7 @@ class MyProfileViewModel(
             profileRepository.login(
                 LoginRequest(
                     email = "johndoe@mail.com",
-                    password = "jawa123123"
+                    password = "12345678"
                 )
             ).collect {
                 _login.postValue(it)

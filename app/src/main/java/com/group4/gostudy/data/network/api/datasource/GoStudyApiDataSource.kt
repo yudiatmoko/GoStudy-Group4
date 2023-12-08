@@ -7,9 +7,11 @@ import com.group4.gostudy.data.network.api.model.notifcation.NotificationsRespon
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
-import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.Part
 
 /*
 Hi, Code Enthusiast!
@@ -22,7 +24,11 @@ interface GoStudyApiDataSource {
     suspend fun getProfile(): UsersResponse
 
     suspend fun updateProfile(
-        updateUserRequest: UpdateUserRequest
+        name: RequestBody,
+        phoneNumber: RequestBody,
+        country: RequestBody,
+        city: RequestBody,
+        image: MultipartBody.Part
     ): UpdateUsersResponse
 
     suspend fun updatePassword(
@@ -46,10 +52,18 @@ class GoStudyApiDataSourceImpl(
     }
 
     override suspend fun updateProfile(
-        updateUserRequest: UpdateUserRequest
+        name: RequestBody,
+        phoneNumber: RequestBody,
+        country: RequestBody,
+        city: RequestBody,
+        image: MultipartBody.Part
     ): UpdateUsersResponse {
         return service.updateProfile(
-            updateUserRequest
+            name,
+            phoneNumber,
+            country,
+            city,
+            image
         )
     }
 
