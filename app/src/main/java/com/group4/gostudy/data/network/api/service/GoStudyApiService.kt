@@ -10,15 +10,18 @@ import com.group4.gostudy.data.network.api.model.notifcation.NotificationsRespon
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
-import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import java.util.concurrent.TimeUnit
 
 /*
@@ -30,9 +33,14 @@ interface GoStudyApiService {
     @GET("user/me")
     suspend fun getProfile(): UsersResponse
 
+    @Multipart
     @PUT("user/update")
     suspend fun updateProfile(
-        @Body updateUserRequest: UpdateUserRequest
+        @Part("name") name: RequestBody,
+        @Part("phoneNumber") phoneNumber: RequestBody,
+        @Part("country") country: RequestBody,
+        @Part("city") city: RequestBody,
+        @Part image: MultipartBody.Part
     ): UpdateUsersResponse
 
     @PUT("user/update-password")

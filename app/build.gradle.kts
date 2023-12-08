@@ -139,4 +139,6 @@ dependencies {
     implementation("com.github.lisawray.groupie:groupie-viewbinding:2.10.1")
     // lottie
     implementation("com.airbnb.android:lottie:6.2.0")
+    // image picker
+    implementation("com.github.dhaval2404:imagepicker:2.1")
 }

@@ -1,18 +1,26 @@
 package com.group4.gostudy.presentation.account.myprofile
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
 import androidx.core.view.isVisible
 import coil.load
-import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUserRequest
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.group4.gostudy.databinding.ActivityMyProfileBinding
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class MyProfileActivity : AppCompatActivity() {
 
@@ -78,6 +86,7 @@ class MyProfileActivity : AppCompatActivity() {
                     binding.ivProfileImage.isVisible = false
                     binding.btnLogin.isVisible = false
                     binding.btnSave.isVisible = false
+                    binding.btnChangePhoto.isVisible = false
                 },
                 doOnError = {
                     binding.layoutState.root.isVisible = true
@@ -86,6 +95,7 @@ class MyProfileActivity : AppCompatActivity() {
                     binding.layoutForm.root.isVisible = false
                     binding.ivProfileImage.isVisible = false
                     binding.btnSave.isVisible = false
+                    binding.btnChangePhoto.isVisible = false
                     if (it.exception is ApiException) {
                         if (it.exception.httpCode == 401) {
                             binding.layoutState.tvError.isVisible = true
@@ -104,6 +114,7 @@ class MyProfileActivity : AppCompatActivity() {
                     binding.layoutForm.root.isVisible = true
                     binding.ivProfileImage.isVisible = true
                     binding.btnSave.isVisible = true
+                    binding.btnChangePhoto.isVisible = true
                     binding.btnLogin.isVisible = false
                     binding.layoutForm.etName.setText(it.payload?.name.orEmpty())
                     binding.layoutForm.etEmail.setText(it.payload?.email.orEmpty())
@@ -139,6 +150,44 @@ class MyProfileActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             setLogin()
         }
+        binding.btnChangePhoto.setOnClickListener {
+            imagePicker()
+        }
+    }
+
+    private fun imagePicker() {
+        ImagePicker.with(this)
+            .cropSquare()
+            .galleryOnly()
+            .compress(1024)
+            .maxResultSize(1080, 1080)
+            .start()
+    }
+
+    private var getFile: File? = null
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(
+            requestCode,
+            resultCode,
+            data
+        )
+
+        if (resultCode == Activity.RESULT_OK) {
+            val uri: Uri? = data?.data
+            val img = uri?.toFile()
+            binding.ivProfileImage.load(uri)
+            getFile = img
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun updateProfile() {
@@ -147,14 +196,19 @@ class MyProfileActivity : AppCompatActivity() {
         val country = binding.layoutForm.etCountry.text.toString().trim()
         val city = binding.layoutForm.etCity.text.toString().trim()
 
+        val requestFile = getFile?.asRequestBody("image/jpeg".toMediaType())
+        val imageMulipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "image",
+            getFile?.name ?: "",
+            requestFile!!
+        )
+
         profileViewModel.updateProfile(
-            UpdateUserRequest(
-                name = name,
-                phoneNumber = phone,
-                country = country,
-                city = city,
-                image = "https://raw.githubusercontent.com/yudiatmoko/Asset_Challenge_App_Ilham/main/img_all.webp"
-            )
+            name.toRequestBody("multipart/form-data".toMediaType()),
+            phone.toRequestBody("multipart/form-data".toMediaType()),
+            country.toRequestBody("multipart/form-data".toMediaType()),
+            city.toRequestBody("multipart/form-data".toMediaType()),
+            imageMulipart
         )
     }
 

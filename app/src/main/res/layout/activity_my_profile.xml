@@ -25,17 +25,27 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_profile_image"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
         android:layout_marginVertical="12dp"
         android:scaleType="centerCrop"
         android:src="@drawable/img_profile"
-        app:layout_constraintBottom_toTopOf="@id/layout_form"
+        app:layout_constraintBottom_toTopOf="@id/btn_change_photo"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_change_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/layout_form"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_profile_image"
+        android:text="@string/change_photo_text"/>
 
     <include
         android:id="@+id/layout_form"
@@ -43,16 +53,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
+        app:layout_constraintTop_toBottomOf="@id/btn_change_photo" />
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:visibility="gone"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/text_login"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/btn_save" />
 
     <Button
@@ -69,9 +79,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:visibility="gone"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/repeat_text"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
