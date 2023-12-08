@@ -57,7 +57,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/text_beli_sekarang"
-        android:drawableEnd="@drawable/ic_next_fill"
+        android:drawableEnd="@drawable/ic_next_rounded"
         app:layout_constraintTop_toBottomOf="@id/layout_content"/>
 
 
