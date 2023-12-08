@@ -24,11 +24,11 @@ interface GoStudyApiDataSource {
     suspend fun getProfile(): UsersResponse
 
     suspend fun updateProfile(
-        name: RequestBody,
-        phoneNumber: RequestBody,
-        country: RequestBody,
-        city: RequestBody,
-        image: MultipartBody.Part
+        name: RequestBody?,
+        phoneNumber: RequestBody?,
+        country: RequestBody?,
+        city: RequestBody?,
+        image: MultipartBody.Part?
     ): UpdateUsersResponse
 
     suspend fun updatePassword(
@@ -52,11 +52,11 @@ class GoStudyApiDataSourceImpl(
     }
 
     override suspend fun updateProfile(
-        name: RequestBody,
-        phoneNumber: RequestBody,
-        country: RequestBody,
-        city: RequestBody,
-        image: MultipartBody.Part
+        name: RequestBody?,
+        phoneNumber: RequestBody?,
+        country: RequestBody?,
+        city: RequestBody?,
+        image: MultipartBody.Part?
     ): UpdateUsersResponse {
         return service.updateProfile(
             name,

@@ -38,11 +38,11 @@ class MyProfileViewModel(
     }
 
     fun updateProfile(
-        name: RequestBody,
-        phoneNumber: RequestBody,
-        country: RequestBody,
-        city: RequestBody,
-        image: MultipartBody.Part
+        name: RequestBody?,
+        phoneNumber: RequestBody?,
+        country: RequestBody?,
+        city: RequestBody?,
+        image: MultipartBody.Part?
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             profileRepository.updateProfile(
