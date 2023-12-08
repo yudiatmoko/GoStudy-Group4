@@ -15,7 +15,7 @@ import com.group4.gostudy.databinding.ActivityMyProfileBinding
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
-import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -196,20 +196,33 @@ class MyProfileActivity : AppCompatActivity() {
         val country = binding.layoutForm.etCountry.text.toString().trim()
         val city = binding.layoutForm.etCity.text.toString().trim()
 
-        val requestFile = getFile?.asRequestBody("image/jpeg".toMediaType())
-        val imageMulipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "image",
-            getFile?.name ?: "",
-            requestFile!!
-        )
+        val requestFile = getFile?.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart: MultipartBody.Part? =
+            requestFile?.let {
+                MultipartBody.Part.createFormData(
+                    "image",
+                    getFile?.name ?: "",
+                    it
+                )
+            }
 
-        profileViewModel.updateProfile(
-            name.toRequestBody("multipart/form-data".toMediaType()),
-            phone.toRequestBody("multipart/form-data".toMediaType()),
-            country.toRequestBody("multipart/form-data".toMediaType()),
-            city.toRequestBody("multipart/form-data".toMediaType()),
-            imageMulipart
-        )
+        if (imageMultipart != null) {
+            profileViewModel.updateProfile(
+                name.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                phone.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                country.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                city.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                imageMultipart
+            )
+        } else {
+            profileViewModel.updateProfile(
+                name.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                phone.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                country.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                city.toRequestBody("multipart/form-data".toMediaTypeOrNull()),
+                null
+            )
+        }
     }
 
     companion object {

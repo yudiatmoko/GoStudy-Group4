@@ -36,11 +36,11 @@ interface GoStudyApiService {
     @Multipart
     @PUT("user/update")
     suspend fun updateProfile(
-        @Part("name") name: RequestBody,
-        @Part("phoneNumber") phoneNumber: RequestBody,
-        @Part("country") country: RequestBody,
-        @Part("city") city: RequestBody,
-        @Part image: MultipartBody.Part
+        @Part("name") name: RequestBody?,
+        @Part("phoneNumber") phoneNumber: RequestBody?,
+        @Part("country") country: RequestBody?,
+        @Part("city") city: RequestBody?,
+        @Part image: MultipartBody.Part?
     ): UpdateUsersResponse
 
     @PUT("user/update-password")

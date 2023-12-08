@@ -22,11 +22,11 @@ https://github.com/yudiatmoko
 interface ProfileRepository {
     suspend fun getProfile(): Flow<ResultWrapper<User>>
     suspend fun updateProfile(
-        name: RequestBody,
-        phoneNumber: RequestBody,
-        country: RequestBody,
-        city: RequestBody,
-        image: MultipartBody.Part
+        name: RequestBody?,
+        phoneNumber: RequestBody?,
+        country: RequestBody?,
+        city: RequestBody?,
+        image: MultipartBody.Part?
     ): Flow<ResultWrapper<User>>
 
     suspend fun updatePassword(
@@ -52,11 +52,11 @@ class ProfileRepositoryImpl(
     }
 
     override suspend fun updateProfile(
-        name: RequestBody,
-        phoneNumber: RequestBody,
-        country: RequestBody,
-        city: RequestBody,
-        image: MultipartBody.Part
+        name: RequestBody?,
+        phoneNumber: RequestBody?,
+        country: RequestBody?,
+        city: RequestBody?,
+        image: MultipartBody.Part?
     ): Flow<ResultWrapper<User>> {
         return proceedFlow {
             apiDataSource.updateProfile(
