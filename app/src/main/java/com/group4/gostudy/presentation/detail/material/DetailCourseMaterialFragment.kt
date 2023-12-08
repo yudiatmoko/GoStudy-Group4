@@ -1,4 +1,4 @@
-package com.group4.gostudy.presentation.detailcourse
+package com.group4.gostudy.presentation.detail.material
 
 import android.os.Bundle
 import android.view.LayoutInflater
