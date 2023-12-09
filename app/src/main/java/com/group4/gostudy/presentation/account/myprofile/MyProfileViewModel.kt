@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
-import com.group4.gostudy.data.repository.ProfileRepository
+import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.model.User
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ https://github.com/yudiatmoko
 */
 
 class MyProfileViewModel(
-    private val profileRepository: ProfileRepository
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _profile =
@@ -30,7 +30,7 @@ class MyProfileViewModel(
 
     fun getProfile() {
         viewModelScope.launch(Dispatchers.IO) {
-            profileRepository.getProfile()
+            userRepository.getProfile()
                 .collect {
                     _profile.postValue(it)
                 }
@@ -45,7 +45,7 @@ class MyProfileViewModel(
         image: MultipartBody.Part?
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            profileRepository.updateProfile(
+            userRepository.updateProfile(
                 name,
                 phoneNumber,
                 country,
@@ -65,7 +65,7 @@ class MyProfileViewModel(
 
     fun login() {
         viewModelScope.launch(Dispatchers.IO) {
-            profileRepository.login(
+            userRepository.login(
                 LoginRequest(
                     email = "hamatmoko@gmail.com",
                     password = "ilham123"

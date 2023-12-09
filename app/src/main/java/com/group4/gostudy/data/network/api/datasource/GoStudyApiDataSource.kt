@@ -1,5 +1,7 @@
 package com.group4.gostudy.data.network.api.datasource
 
+import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
+import com.group4.gostudy.data.network.api.model.course.CoursesResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
@@ -22,6 +24,9 @@ interface GoStudyApiDataSource {
     suspend fun getNotifications(): NotificationsResponse
 
     suspend fun getProfile(): UsersResponse
+
+    suspend fun getCategories(): CategoriesResponse
+    suspend fun getCourses(): CoursesResponse
 
     suspend fun updateProfile(
         name: RequestBody?,
@@ -49,6 +54,14 @@ class GoStudyApiDataSourceImpl(
 
     override suspend fun getProfile(): UsersResponse {
         return service.getProfile()
+    }
+
+    override suspend fun getCategories(): CategoriesResponse {
+        return service.getCategories()
+    }
+
+    override suspend fun getCourses(): CoursesResponse {
+        return service.getCourses()
     }
 
     override suspend fun updateProfile(

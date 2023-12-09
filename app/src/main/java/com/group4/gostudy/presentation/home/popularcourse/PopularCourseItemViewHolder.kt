@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.PopularCourseItemBinding
-import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.PopularCourse
 
 /*
 Hi, Code Enthusiast!
@@ -13,19 +13,19 @@ https://github.com/yudiatmoko
 
 class PopularCourseItemViewHolder(
     private val binding: PopularCourseItemBinding,
-    private val onClicked: (Course) -> Unit
+    private val onClicked: (PopularCourse) -> Unit
 ) : RecyclerView.ViewHolder(binding.root),
-    ViewHolderBinder<Course> {
+    ViewHolderBinder<PopularCourse> {
 
-    override fun bind(item: Course) {
-        binding.tvCategoryName.text = item.category
-        binding.tvCourseTitle.text = item.title
-        binding.tvInstructorName.text = String.format("by %s", item.instructor)
+    override fun bind(item: PopularCourse) {
+        binding.tvCategoryName.text = item.category?.name
+        binding.tvCourseTitle.text = item.name
+        binding.tvInstructorName.text = String.format("by %s", item.courseBy)
         binding.tvLevel.text = item.level
-        binding.tvModule.text = item.modules
-        binding.tvDuration.text = item.duration
-        binding.tvRating.text = item.rating
-        binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price)
-        binding.ivCourseImg.load(item.img)
+        binding.tvModule.text = String.format("%.0f Modul", item.totalModule?.toDouble())
+        binding.tvDuration.text = String.format("%.0f Menit", item.totalDuration?.toDouble())
+        binding.tvRating.text = ""
+        binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
+        binding.ivCourseImg.load(item.imageUrl)
     }
 }

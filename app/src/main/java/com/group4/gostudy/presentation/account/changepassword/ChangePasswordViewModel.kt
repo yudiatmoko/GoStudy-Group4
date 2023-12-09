@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
-import com.group4.gostudy.data.repository.ProfileRepository
+import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ https://github.com/yudiatmoko
 */
 
 class ChangePasswordViewModel(
-    private val profileRepository: ProfileRepository
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _updatedPassword =
@@ -29,7 +29,7 @@ class ChangePasswordViewModel(
         updatePasswordRequest: UpdatePasswordRequest
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            profileRepository.updatePassword(
+            userRepository.updatePassword(
                 updatePasswordRequest
             ).collect {
                 _updatedPassword.postValue(it)

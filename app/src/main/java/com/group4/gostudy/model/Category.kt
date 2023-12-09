@@ -1,15 +1,16 @@
 package com.group4.gostudy.model
 
-import com.group4.gostudy.R
-
 data class Category(
-    val id: Int,
-    val name: String,
-    val imgSrc: Int,
-    val slug: String
+    val createdAt: String?,
+    val id: Int?,
+    val imageId: String?,
+    val imageUrl: String?,
+    val name: String?,
+    val slug: String?,
+    val updatedAt: String?
 )
 
-object CategoryProvider {
+/*object CategoryProvider {
     fun getDummyData(): List<Category> {
         return listOf(
             Category(
@@ -38,4 +39,4 @@ object CategoryProvider {
             )
         )
     }
-}
+}*/

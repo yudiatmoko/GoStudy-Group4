@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.PopularCourseItemBinding
-import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.PopularCourse
 
 /*
 Hi, Code Enthusiast!
@@ -15,22 +15,22 @@ https://github.com/yudiatmoko
 */
 
 class PopularCourseAdapter(
-    private val itemClick: (Course) -> Unit
+    private val itemClick: (PopularCourse) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val differ = AsyncListDiffer(
         this,
-        object : DiffUtil.ItemCallback<Course>() {
+        object : DiffUtil.ItemCallback<PopularCourse>() {
             override fun areItemsTheSame(
-                oldItem: Course,
-                newItem: Course
+                oldItem: PopularCourse,
+                newItem: PopularCourse
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Course,
-                newItem: Course
+                oldItem: PopularCourse,
+                newItem: PopularCourse
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
@@ -55,10 +55,10 @@ class PopularCourseAdapter(
         holder: RecyclerView.ViewHolder,
         position: Int
     ) {
-        (holder as ViewHolderBinder<Course>).bind(differ.currentList[position])
+        (holder as ViewHolderBinder<PopularCourse>).bind(differ.currentList[position])
     }
 
-    fun setData(data: List<Course>) {
+    fun setData(data: List<PopularCourse>) {
         differ.submitList(data)
     }
 }

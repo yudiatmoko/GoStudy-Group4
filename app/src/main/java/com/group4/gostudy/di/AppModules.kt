@@ -8,16 +8,19 @@ import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSourceImpl
 import com.group4.gostudy.data.network.api.service.AuthorizationInterceptor
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
+import com.group4.gostudy.data.repository.CourseRepository
+import com.group4.gostudy.data.repository.CourseRepositoryImpl
 import com.group4.gostudy.data.repository.HistoryRepository
 import com.group4.gostudy.data.repository.HistoryRepositoryImpl
 import com.group4.gostudy.data.repository.NotificationRepository
 import com.group4.gostudy.data.repository.NotificationRepositoryImpl
-import com.group4.gostudy.data.repository.ProfileRepository
-import com.group4.gostudy.data.repository.ProfileRepositoryImpl
+import com.group4.gostudy.data.repository.UserRepository
+import com.group4.gostudy.data.repository.UserRepositoryImpl
 import com.group4.gostudy.presentation.account.AccountViewModel
 import com.group4.gostudy.presentation.account.changepassword.ChangePasswordViewModel
 import com.group4.gostudy.presentation.account.history.HistoryViewModel
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
+import com.group4.gostudy.presentation.home.HomeViewModel
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.notification.NotificationViewModel
 import com.group4.gostudy.utils.AssetWrapper
@@ -48,8 +51,9 @@ object AppModules {
 
     private val repositoryModule = module {
         single<NotificationRepository> { NotificationRepositoryImpl(get()) }
-        single<ProfileRepository> { ProfileRepositoryImpl(get()) }
+        single<UserRepository> { UserRepositoryImpl(get()) }
         single<HistoryRepository> { HistoryRepositoryImpl(get()) }
+        single<CourseRepository> { CourseRepositoryImpl(get()) }
     }
 
     private val utilsModule = module {
@@ -63,6 +67,7 @@ object AppModules {
         viewModelOf(::MainViewModel)
         viewModelOf(::AccountViewModel)
         viewModelOf(::ChangePasswordViewModel)
+        viewModelOf(::HomeViewModel)
     }
 
     val modules: List<Module> = listOf(
