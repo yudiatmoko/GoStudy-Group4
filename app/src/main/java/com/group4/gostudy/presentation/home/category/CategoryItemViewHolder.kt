@@ -20,7 +20,7 @@ class CategoryItemViewHolder(
 
     override fun bind(item: Category) {
         binding.tvCategoryName.text = item.name
-        binding.ivCategoryImage.load(item.imgSrc)
+        binding.ivCategoryImage.load(item.imageUrl)
         binding.root.setOnClickListener {
             onClicked.invoke(item)
         }

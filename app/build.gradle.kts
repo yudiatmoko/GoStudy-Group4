@@ -141,4 +141,6 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.2.0")
     // image picker
     implementation("com.github.dhaval2404:imagepicker:2.1")
+    // flexbox
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
 }

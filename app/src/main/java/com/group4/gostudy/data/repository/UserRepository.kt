@@ -19,7 +19,7 @@ Hi, Code Enthusiast!
 https://github.com/yudiatmoko
 */
 
-interface ProfileRepository {
+interface UserRepository {
     suspend fun getProfile(): Flow<ResultWrapper<User>>
     suspend fun updateProfile(
         name: RequestBody?,
@@ -36,9 +36,9 @@ interface ProfileRepository {
     suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>>
 }
 
-class ProfileRepositoryImpl(
+class UserRepositoryImpl(
     private val apiDataSource: GoStudyApiDataSource
-) : ProfileRepository {
+) : UserRepository {
 
     override suspend fun getProfile(): Flow<ResultWrapper<User>> {
         return proceedFlow {
