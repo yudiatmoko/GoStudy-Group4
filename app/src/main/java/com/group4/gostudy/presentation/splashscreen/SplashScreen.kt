@@ -31,13 +31,10 @@ class SplashScreen : AppCompatActivity() {
 
     private fun checkIfUserLogin() {
         mainViewModel.userTokenLiveData.observe(this) {
-            lifecycleScope.launch {
-                delay(2000)
-                if (it != "") {
-                    startMainActivity()
-                } else {
-                    startAppIntro()
-                }
+            if (it != "") {
+                startMainActivity()
+            } else {
+                startAppIntro()
             }
         }
     }
