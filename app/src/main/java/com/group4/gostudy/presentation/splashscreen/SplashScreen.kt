@@ -3,12 +3,9 @@ package com.group4.gostudy.presentation.splashscreen
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.databinding.ActivitySplashScreenBinding
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashScreen : AppCompatActivity() {
@@ -28,17 +25,13 @@ class SplashScreen : AppCompatActivity() {
 
     private fun checkIfUserLogin() {
         mainViewModel.userTokenLiveData.observe(this) {
-            lifecycleScope.launch {
-                delay(2000)
-                if (it != "") {
-                    startMainActivity()
-                } else {
-                    startAppIntro()
-                }
+            if (it != "") {
+                startMainActivity()
+            } else {
+                startAppIntro()
             }
         }
     }
-
     private fun startAppIntro() {
         val intent = Intent(this, CustomAppIntroActivity::class.java)
         startActivity(intent)

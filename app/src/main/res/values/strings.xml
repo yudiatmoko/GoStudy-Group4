@@ -81,6 +81,8 @@
     <string name="text_temukan_keunggulanmu">Temukan Keunggulanmu !</string>
     <string name="text_sudah_punya_akun">Sudah punya akun? Klik Disini</string>
     <string name="text_guest">Guest</string>
+    <string name="text_masukkan_otp">Masukkan OTP</string>
+    <string name="text_minta_kode_baru_via_email">Minta Kode Baru Via Email</string>
     <string name="txt_start_class">Mulai Kelas</string>
     <string name="text_selangkah_lagi_menuju">Selangkah lagi menuju</string>
     <string name="text_kelas_premium">Kelas Premium</string>
@@ -94,4 +96,5 @@
     <string name="text_start_with_us">Mari belajar bersama kami!</string>
     <string name="hello_user">Hello, User!</string>
     <string name="text_hello">Hello, %1$s!</string>
+    <string name="text_highlight_daftardisini">Daftar Disini</string>
 </resources>

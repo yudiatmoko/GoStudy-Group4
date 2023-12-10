@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.otp.OtpActivity"
+    android:background="@color/seed">
+
+    <LinearLayout
+        android:id="@+id/ln_backpressed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_back"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_header_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_masukkan_otp"
+        android:textColor="@color/md_theme_dark_scrim"
+        android:textSize="24sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/ln_backpressed"/>
+
+    <com.otpview.OTPTextView
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        app:otp_text_size="20sp"
+        app:otp_box_background="@drawable/bg_otp_box"
+        app:otp_box_background_active="@drawable/bg_otp_box_active"
+        app:otp_box_background_inactive="@drawable/bg_otp_box_inactive"
+        app:otp_box_background_error="@drawable/bg_otp_box_error"
+        app:otp_box_background_success="@drawable/bg_otp_box_success"
+        app:hide_otp_drawable="@drawable/bg_otp_box_hide"
+        app:height="45dp"
+        app:width="40dp"
+        app:box_margin="6dp"
+        app:hide_otp="false"
+        app:length="6"
+        app:otp=""
+        app:layout_constraintTop_toBottomOf="@+id/tv_header_otp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="26dp"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/otp_view"
+        android:layout_marginTop="40dp"
+        android:text="@string/text_minta_kode_baru_via_email"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_regular"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

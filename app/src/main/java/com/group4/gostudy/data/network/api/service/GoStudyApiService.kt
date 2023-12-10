@@ -9,6 +9,8 @@ import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.register.RegisterRequest
+import com.group4.gostudy.data.network.api.model.register.RegisterResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
@@ -64,6 +66,11 @@ interface GoStudyApiService {
         @Query("categoryName") category: String? = null,
         @Query("search") search: String? = null
     ): CoursesResponse
+
+    @POST("auth/register")
+    suspend fun register(
+        @Body registerRequest: RegisterRequest
+    ): RegisterResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse

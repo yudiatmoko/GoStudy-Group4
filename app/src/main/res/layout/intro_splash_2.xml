@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/seed">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/ic_logo"
@@ -14,8 +14,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_splashscreen"
@@ -44,7 +42,7 @@
             android:fontFamily="@font/montserrat_regular"
             android:textStyle="bold"
             android:textSize="22sp"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/md_theme_dark_surfaceTint"
             android:text="@string/text_temukan_keunggulanmu"/>
 
         <ImageView
@@ -56,7 +54,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_login_intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_login"
@@ -67,10 +65,10 @@
             android:layout_marginTop="20dp"/>
 
         <Button
-            android:id="@+id/btn_guest"
+            android:id="@+id/btn_guest_intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/btn_login"
+            app:layout_constraintTop_toBottomOf="@id/btn_login_intro"
             android:text="@string/text_guest"
             android:fontFamily="@font/montserrat_bold"
             app:layout_constraintStart_toStartOf="parent"

@@ -6,6 +6,8 @@ import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.register.RegisterRequest
+import com.group4.gostudy.data.network.api.model.register.RegisterResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
@@ -47,6 +49,8 @@ interface GoStudyApiDataSource {
     suspend fun getHistories(): HistoriesResponse
 
     suspend fun login(loginRequest: LoginRequest): LoginResponse
+
+    suspend fun register(registerRequest: RegisterRequest): RegisterResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -103,5 +107,11 @@ class GoStudyApiDataSourceImpl(
         loginRequest: LoginRequest
     ): LoginResponse {
         return service.login(loginRequest)
+    }
+
+    override suspend fun register(
+        registerRequest: RegisterRequest
+    ): RegisterResponse {
+        return service.register(registerRequest)
     }
 }
