@@ -2,16 +2,10 @@ package com.group4.gostudy.presentation.splashscreen
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.databinding.ActivitySplashScreenBinding
-import com.group4.gostudy.R
-import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashScreen : AppCompatActivity() {
@@ -48,12 +42,5 @@ class SplashScreen : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
-    }
-
-    private fun startLoginActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        binding.btnLogin1.setOnClickListener {
-            startActivity(intent)
-        }
     }
 }
