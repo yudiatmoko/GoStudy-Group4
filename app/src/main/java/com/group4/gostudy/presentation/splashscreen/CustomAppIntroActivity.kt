@@ -22,11 +22,6 @@ class CustomAppIntroActivity : AppIntro() {
         setProgressIndicator()
     }
 
-    public override fun onSkipPressed(currentFragment: Fragment?) {
-        super.onSkipPressed(currentFragment)
-        finish()
-    }
-
     public override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
         navigateToHome()
