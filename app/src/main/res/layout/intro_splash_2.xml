@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/seed">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/ic_logo"
@@ -42,7 +42,7 @@
             android:fontFamily="@font/montserrat_regular"
             android:textStyle="bold"
             android:textSize="22sp"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/md_theme_dark_surfaceTint"
             android:text="@string/text_temukan_keunggulanmu"/>
 
         <ImageView
