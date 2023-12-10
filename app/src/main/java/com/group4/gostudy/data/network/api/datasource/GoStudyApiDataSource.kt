@@ -26,7 +26,11 @@ interface GoStudyApiDataSource {
     suspend fun getProfile(): UsersResponse
 
     suspend fun getCategories(): CategoriesResponse
-    suspend fun getCourses(): CoursesResponse
+
+    suspend fun getCourses(
+        category: String?,
+        search: String?
+    ): CoursesResponse
 
     suspend fun updateProfile(
         name: RequestBody?,
@@ -60,8 +64,11 @@ class GoStudyApiDataSourceImpl(
         return service.getCategories()
     }
 
-    override suspend fun getCourses(): CoursesResponse {
-        return service.getCourses()
+    override suspend fun getCourses(
+        category: String?,
+        search: String?
+    ): CoursesResponse {
+        return service.getCourses(category, search)
     }
 
     override suspend fun updateProfile(

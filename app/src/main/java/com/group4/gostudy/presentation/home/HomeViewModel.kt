@@ -38,9 +38,9 @@ class HomeViewModel(
     val courses: LiveData<ResultWrapper<List<PopularCourse>>>
         get() = _courses
 
-    fun getCourse() {
+    fun getCourse(category: String? = null, search: String? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            courseRepository.getCourses().collect {
+            courseRepository.getCourses(category, search).collect {
                 _courses.postValue(it)
             }
         }
