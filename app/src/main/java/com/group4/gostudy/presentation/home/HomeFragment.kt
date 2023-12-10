@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import coil.load
+import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentHomeBinding
 import com.group4.gostudy.presentation.home.category.CategoryAdapter
 import com.group4.gostudy.presentation.home.category.CourseCategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,8 +23,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
     private val categoryAdapter: CategoryAdapter by lazy {
-        CategoryAdapter {}
+        CategoryAdapter {
+            homeViewModel.getCourse(it.slug)
+        }
     }
     private val courseCategoryAdapter: CourseCategoryAdapter by lazy {
         CourseCategoryAdapter {}
@@ -51,6 +59,57 @@ class HomeFragment : Fragment() {
         setPopularCourseRV()
         observeCategory()
         observeCourse()
+        setHeader()
+        setSearchFeature()
+    }
+
+    private fun setSearchFeature() {
+        binding.svCourse.setOnQueryTextListener(
+            object :
+                SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (!query.isNullOrEmpty()) {
+                        homeViewModel.getCourse(search = query)
+                    }
+                    return true
+                }
+
+                override fun onQueryTextChange(newQuery: String?): Boolean {
+                    if (!newQuery.isNullOrEmpty()) {
+                        homeViewModel.getCourse(search = newQuery)
+                    } else {
+                        homeViewModel.getCourse()
+                    }
+                    return true
+                }
+            }
+        )
+
+        binding.svCourse.setOnCloseListener {
+            binding.svCourse.setQuery("", false)
+            true
+        }
+    }
+
+    private fun setHeader() {
+        mainViewModel.getProfile()
+        mainViewModel.profile.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.ivProfileImage.load(it.payload?.imageUrl) {
+                        crossfade(true)
+                    }
+                    val firstName = it.payload?.let { it1 ->
+                        mainViewModel.getFirstName(it1)
+                    }
+                    binding.tvGreetingText.text = getString(
+                        R.string.text_hello,
+                        firstName
+                    )
+                }
+            )
+        }
     }
 
     private fun observeCourse() {

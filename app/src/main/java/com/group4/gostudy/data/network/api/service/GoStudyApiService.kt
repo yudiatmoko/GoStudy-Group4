@@ -24,6 +24,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 /*
@@ -59,7 +60,10 @@ interface GoStudyApiService {
     suspend fun getCategories(): CategoriesResponse
 
     @GET("course")
-    suspend fun getCourses(): CoursesResponse
+    suspend fun getCourses(
+        @Query("categoryName") category: String? = null,
+        @Query("search") search: String? = null
+    ): CoursesResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse

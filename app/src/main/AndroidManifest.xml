@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.home.category.CategoryViewMoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.splashscreen.SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -56,9 +59,9 @@
             android:name=".presentation.account.myprofile.MyProfileActivity"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".presentation.main.MainActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
     </application>
 
 </manifest>

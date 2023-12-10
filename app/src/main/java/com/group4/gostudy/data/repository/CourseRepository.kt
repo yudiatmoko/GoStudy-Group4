@@ -20,7 +20,10 @@ https://github.com/yudiatmoko
 interface CourseRepository {
     suspend fun getCategories(): Flow<ResultWrapper<List<Category>>>
 
-    suspend fun getCourses(): Flow<ResultWrapper<List<PopularCourse>>>
+    suspend fun getCourses(
+        category: String?,
+        search: String?
+    ): Flow<ResultWrapper<List<PopularCourse>>>
 }
 
 class CourseRepositoryImpl(
@@ -37,9 +40,12 @@ class CourseRepositoryImpl(
         }
     }
 
-    override suspend fun getCourses(): Flow<ResultWrapper<List<PopularCourse>>> {
+    override suspend fun getCourses(
+        category: String?,
+        search: String?
+    ): Flow<ResultWrapper<List<PopularCourse>>> {
         return proceedFlow {
-            apiDataSource.getCourses().data?.courses?.toCourseList() ?: emptyList()
+            apiDataSource.getCourses(category, search).data?.courses?.toCourseList() ?: emptyList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
