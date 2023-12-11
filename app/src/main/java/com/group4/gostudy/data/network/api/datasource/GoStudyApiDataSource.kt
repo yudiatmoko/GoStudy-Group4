@@ -148,4 +148,8 @@ class GoStudyApiDataSourceImpl(
     override suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse {
         return service.forgotPassword(request)
     }
+
+    override suspend fun getChapter(): ChaptersResponse {
+        return service.getChapter()
+    }
 }

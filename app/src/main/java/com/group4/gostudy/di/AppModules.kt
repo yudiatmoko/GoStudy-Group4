@@ -27,6 +27,7 @@ import com.group4.gostudy.presentation.course.CourseViewModel
 import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordViewModel
 import com.group4.gostudy.presentation.detail.material.DetailMaterialViewModel
 import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderViewModel
+import com.group4.gostudy.presentation.detail.material.DetailMaterialViewModel
 import com.group4.gostudy.presentation.home.HomeViewModel
 import com.group4.gostudy.presentation.login.LoginViewModel
 import com.group4.gostudy.presentation.main.MainViewModel
