@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
-import com.group4.gostudy.model.DummyDetailCourseMaterialDataSource
+import com.group4.gostudy.model.DummyDetailCourseMaterialDataSource.getListData
+import com.group4.gostudy.utils.ApiException
+import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.viewitem.DataItem
 import com.group4.gostudy.viewitem.HeaderItem
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailCourseMaterialFragment : Fragment() {
     private lateinit var binding: FragmentDetailCourseMaterialBinding
@@ -19,6 +23,7 @@ class DetailCourseMaterialFragment : Fragment() {
     private val adapter: GroupieAdapter by lazy {
         GroupieAdapter()
     }
+    private val detailMaterialViewModel: DetailMaterialViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,11 +37,12 @@ class DetailCourseMaterialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
+        observeChapter()
     }
 
     private fun setData() {
         binding.rvData.adapter = adapter
-        val sections = DummyDetailCourseMaterialDataSource.getListData().map { sectionData ->
+        val sections = getListData().map { sectionData ->
             val section = Section()
             section.setHeader(
                 HeaderItem(sectionData.name, sectionData.time) {
@@ -58,5 +64,50 @@ class DetailCourseMaterialFragment : Fragment() {
             section
         }
         adapter.addAll(sections)
+    }
+
+    private fun observeChapter() {
+        detailMaterialViewModel.getChapter()
+        detailMaterialViewModel.chapters.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutStateChapter.root.isVisible =
+                        true
+                    binding.layoutStateChapter.animLoading.isVisible =
+                        true
+                    binding.layoutStateChapter.llAnimError.isVisible =
+                        false
+                    binding.rvData.isVisible =
+                        false
+                },
+                doOnSuccess = { result ->
+                    binding.layoutStateChapter.root.isVisible =
+                        true
+                    binding.layoutStateChapter.animLoading.isVisible =
+                        false
+                    binding.layoutStateChapter.llAnimError.isVisible =
+                        false
+                    binding.rvData.isVisible = true
+                    result.payload?.let {
+                    }
+                },
+                doOnError = {
+                    binding.layoutStateChapter.root.isVisible =
+                        true
+                    binding.layoutStateChapter.animLoading.isVisible =
+                        false
+                    binding.layoutStateChapter.llAnimError.isVisible =
+                        true
+                    binding.rvData.isVisible =
+                        false
+                    if (it.exception is ApiException) {
+                        binding.layoutStateChapter.tvError.isVisible =
+                            true
+                        binding.layoutStateChapter.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                }
+            )
+        }
     }
 }
