@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/iv_splashscreen1"
-            android:src="@drawable/ic_button"
+            android:src="@drawable/next_icon_1"
             android:layout_marginTop="60dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
