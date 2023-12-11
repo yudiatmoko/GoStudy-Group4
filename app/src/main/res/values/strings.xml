@@ -97,5 +97,6 @@
     <string name="hello_guest">Hello, Guest!</string>
     <string name="text_hello">Hello, %1$s!</string>
     <string name="text_highlight_daftardisini">Daftar Disini</string>
+    <string name="text_title_list_chapter">Materi Belajar</string>
     <string name="text_no_data">Tidak ada data</string>
 </resources>
