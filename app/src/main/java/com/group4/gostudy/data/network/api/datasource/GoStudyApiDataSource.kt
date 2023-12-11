@@ -1,6 +1,7 @@
 package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
+import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
@@ -51,6 +52,8 @@ interface GoStudyApiDataSource {
     suspend fun login(loginRequest: LoginRequest): LoginResponse
 
     suspend fun register(registerRequest: RegisterRequest): RegisterResponse
+
+    suspend fun getChapter(): ChaptersResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -113,5 +116,9 @@ class GoStudyApiDataSourceImpl(
         registerRequest: RegisterRequest
     ): RegisterResponse {
         return service.register(registerRequest)
+    }
+
+    override suspend fun getChapter(): ChaptersResponse {
+        return service.getChapter()
     }
 }
