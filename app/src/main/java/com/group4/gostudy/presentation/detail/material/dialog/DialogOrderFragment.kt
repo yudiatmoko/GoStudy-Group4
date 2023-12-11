@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentDialogOrderBinding
+import com.group4.gostudy.presentation.home.HomeViewModel
 import com.group4.gostudy.presentation.payment.PaymentActivity
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
@@ -25,6 +26,7 @@ class DialogOrderFragment : Fragment() {
         binding = FragmentDialogOrderBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
