@@ -13,7 +13,7 @@ class SplashActivity : AppIntro() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        addSlide(AppIntroCustomLayoutFragment.newInstance(R.layout.fragment_splash))
+        addSlide(AppIntroCustomLayoutFragment.newInstance(R.layout.intro_splash_1))
         addSlide(AppIntroCustomLayoutFragment.newInstance(R.layout.intro_splash_2))
 
         showStatusBar(true)

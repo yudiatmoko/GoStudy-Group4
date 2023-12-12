@@ -4,71 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.login.LoginActivity"
-    android:background="@color/seed">
+    android:background="@color/md_theme_light_background"
+    android:padding="16dp"
+    tools:context=".presentation.login.LoginActivity">
 
     <TextView
-        android:id="@+id/tv_header_login"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_login_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_login"
-        android:textColor="@color/md_theme_dark_scrim"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="160dp"
-        android:textSize="24sp"
+        android:layout_marginTop="86dp"
         android:fontFamily="@font/montserrat_bold"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"/>
+        android:shadowColor="@color/md_theme_light_outline"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:textColor="@color/md_theme_light_primary"
+        android:shadowRadius="2"
+        android:text="@string/text_login"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/layout_form_login"
         layout="@layout/layout_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_header_login"
-        android:visibility="visible"
-        />
+        android:layout_marginVertical="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_text" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/to_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/layout_form_login"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_form_login">
 
-    <TextView
-        android:id="@+id/tv_belumpunya_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_belum_punya_akun_daftar_disini"
-        android:textAlignment="center"
-        android:fontFamily="@font/montserrat_regular"
-        android:layout_marginTop="10dp"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/tv_belum_punya_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/text_belum_punya_akun_daftar_disini"
+            android:textAlignment="center"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_belumpunya_account"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_regular"
             android:text="@string/text_lupakatasandi"
             android:textAlignment="center"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_marginTop="10dp"
+            android:textColor="@color/md_theme_dark_scrim"
             android:textStyle="bold"
-            android:textColor="@color/md_theme_dark_scrim"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_belum_punya_account" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

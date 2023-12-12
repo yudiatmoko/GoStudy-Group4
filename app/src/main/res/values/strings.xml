@@ -98,4 +98,9 @@
     <string name="text_hello">Hello, %1$s!</string>
     <string name="text_highlight_daftardisini">Daftar Disini</string>
     <string name="text_no_data">Tidak ada data</string>
+    <string name="text_error_email_empty">Email harus diisi</string>
+    <string name="text_error_email_invalid">Format email tidak valid</string>
+    <string name="text_error_password_empty">Password harus diisi</string>
+    <string name="text_error_password_less_than_8_char">Password minimal 8 karakter</string>
+    <string name="login_failed">Gagal login: %1$s</string>
 </resources>
