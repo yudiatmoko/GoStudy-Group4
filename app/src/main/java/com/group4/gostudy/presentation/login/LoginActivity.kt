@@ -6,7 +6,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.catnip.rizkyilmann_challange4.utils.highLightWord
+import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityLoginBinding
 import com.group4.gostudy.presentation.main.MainActivity
