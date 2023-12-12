@@ -1,4 +1,4 @@
-package com.catnip.rizkyilmann_challange4.utils
+package com.group4.gostudy.utils
 
 import android.text.SpannableStringBuilder
 import android.text.Spanned
