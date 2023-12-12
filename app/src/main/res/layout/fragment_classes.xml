@@ -3,18 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/md_theme_light_background"
-    android:layout_height="match_parent">
+    android:padding="16dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_search"
-        android:layout_width="373dp"
-        android:layout_height="67dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:elevation="12dp"
         app:cardCornerRadius="12dp"
-        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,50 +29,88 @@
             app:searchIcon="@drawable/ic_searching">
 
         </androidx.appcompat.widget.SearchView>
+
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:id="@+id/ll_class"
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tv_class_topic_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:shadowColor="@color/md_theme_light_outline"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/txt_running_class"
+        android:textColor="@color/md_theme_light_primary"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/fl_type_of_class"
+        app:layout_constraintTop_toBottomOf="@id/mcv_search" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/fl_type_of_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mcv_search">
+        app:alignContent="stretch"
+        app:alignItems="stretch"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:justifyContent="space_between"
+        app:layout_constraintBottom_toTopOf="@id/rv_list_of_class"
+        app:layout_constraintTop_toBottomOf="@id/tv_class_topic_text">
 
         <TextView
-            style="@style/TextAppearance.Material3.TitleLarge"
-            android:layout_width="match_parent"
-            android:textColor="@color/black"
+            android:id="@+id/tv_all_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/txt_running_class"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:background="@drawable/background_rounded"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/txt_all"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_flexBasisPercent="30%" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_cat_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginVertical="12dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_class"
-        tools:itemCount="8"
-        tools:listitem="@layout/category_progress_item" />
+        <TextView
+            android:id="@+id/tv_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rounded"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/progress_class"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_flexBasisPercent="30%" />
+
+        <TextView
+            android:id="@+id/tv_done_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rounded"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/done_class"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_flexBasisPercent="30%" />
+    </com.google.android.flexbox.FlexboxLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_of_class"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="8dp"
-        tools:listitem="@layout/my_class_item"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/rv_cat_progress"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fl_type_of_class"
+        tools:listitem="@layout/my_class_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

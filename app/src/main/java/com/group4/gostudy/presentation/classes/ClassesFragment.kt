@@ -8,7 +8,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentClassesBinding
 import com.group4.gostudy.model.CourseProvider
-import com.group4.gostudy.model.ProgressCategoryProvider
 import com.group4.gostudy.presentation.classes.myclass.MyClassAdapter
 import com.group4.gostudy.presentation.classes.progresscategory.ProgressCategoryAdapter
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
@@ -82,9 +81,9 @@ class ClassesFragment : Fragment() {
     }
 
     private fun setProgressCategoryRV() {
-        binding.rvCatProgress.apply {
-            adapter = progressCategoryAdapter
-            progressCategoryAdapter.setData(ProgressCategoryProvider.getDummyData())
-        }
+//        binding.rvCatProgress.apply {
+//            adapter = progressCategoryAdapter
+//            progressCategoryAdapter.setData(ProgressCategoryProvider.getDummyData())
+//        }
     }
 }

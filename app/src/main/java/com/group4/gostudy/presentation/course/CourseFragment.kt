@@ -8,7 +8,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentCourseBinding
 import com.group4.gostudy.model.CourseProvider
-import com.group4.gostudy.model.TypeOfClassProvider
 import com.group4.gostudy.presentation.course.course.CourseAdapter
 import com.group4.gostudy.presentation.course.typeofclass.TypeOfClassAdapter
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
@@ -75,14 +74,11 @@ class CourseFragment : Fragment() {
     private fun setCourseRV() {
         binding.rvListOfClass.apply {
             adapter = courseAdapter
+
             courseAdapter.setData(CourseProvider.getDummyData())
         }
     }
 
     private fun setTypeOfClassRV() {
-        binding.rvCatProgress.apply {
-            adapter = typeOfClassAdapter
-            typeOfClassAdapter.setData(TypeOfClassProvider.getDummyData())
-        }
     }
 }

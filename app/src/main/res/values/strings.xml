@@ -103,4 +103,7 @@
     <string name="text_error_password_empty">Password harus diisi</string>
     <string name="text_error_password_less_than_8_char">Password minimal 8 karakter</string>
     <string name="login_failed">Gagal login: %1$s</string>
+    <string name="free_class">Kelas Gratis</string>
+    <string name="progress_class">In Progress</string>
+    <string name="done_class">Selesai</string>
 </resources>
