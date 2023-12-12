@@ -15,21 +15,32 @@ object DummyDetailCourseMaterialDataSource {
     fun getListData(): List<Chapter> {
         return listOf(
             Chapter(
-                "1", 1, "Pendahuluan", listOf(
+                "1",
+                1,
+                "Pendahuluan",
+                listOf(
                     "Tujuan mengikuti kelas Design System",
                     "Pengenalan Design System",
                     "Contoh dalam membagun Design System"
-                ),"120 menit", "9-12-2023", "9-12-2023"
+                ),
+                "120 menit",
+                "9-12-2023",
+                "9-12-2023"
             ),
             Chapter(
-                "2", 2, "Memulai Design", listOf(
+                "2",
+                2,
+                "Memulai Design",
+                listOf(
                     "Color Palette",
                     "Typography",
                     "Layout dan Grid",
                     "Button Component"
-                ),"60 menit", "9-12-2023", "9-12-2023"
+                ),
+                "60 menit",
+                "9-12-2023",
+                "9-12-2023"
             )
         )
     }
-
 }

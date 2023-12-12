@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.group4.gostudy.data.repository.ChapterRepository
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.model.PopularCourse
 import com.group4.gostudy.utils.ResultWrapper

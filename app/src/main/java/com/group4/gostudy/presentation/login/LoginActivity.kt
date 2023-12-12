@@ -6,12 +6,12 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityLoginBinding
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.register.RegisterActivity
+import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
