@@ -6,15 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.core.ViewHolderBinder
-import com.group4.gostudy.databinding.CategoryProgressItemBinding
+import com.group4.gostudy.databinding.CourseCategoryItemListBinding
 import com.group4.gostudy.model.ProgressCategory
 
 class ProgressCategoryAdapter(
     private val itemClick: (ProgressCategory) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding =
-            CategoryProgressItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CourseCategoryItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryProgressViewHolder(binding, itemClick)
     }
 

@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="8dp">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_image_class"
         android:layout_width="match_parent"
-        android:layout_marginVertical="8dp"
         android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/iv_my_class"
@@ -43,10 +41,10 @@
 
                 <TextView
                     android:id="@+id/tv_category_name"
-                    android:fontFamily="@font/montserrat_bold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/md_theme_light_primary"
                     android:textStyle="bold"
                     tools:text="@string/txt_tittle_class" />
@@ -62,10 +60,10 @@
                 <TextView
                     android:id="@+id/tv_rating"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_bold"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/black"
                     tools:text="5.0" />
             </LinearLayout>
 
@@ -89,12 +87,12 @@
                     tools:text="Belajar Web Designer dengan Figma" />
 
                 <TextView
-                    android:textColor="@color/black"
                     android:id="@+id/tv_mentor_name"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/black"
                     tools:text="by Angela Doe" />
             </LinearLayout>
 
@@ -102,8 +100,8 @@
                 android:id="@+id/ll_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
                 android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_desc_author">
@@ -134,8 +132,8 @@
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="2dp"
+                    android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
                     tools:text="@string/txt_7_modul" />
@@ -152,8 +150,8 @@
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/black"
                     tools:text="@string/txt_120_menit" />
             </LinearLayout>
 
@@ -161,55 +159,51 @@
                 android:id="@+id/ll_kind_of_class_premium"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:background="@drawable/bg_category"
-                android:visibility="gone"
-                android:orientation="horizontal"
-                android:backgroundTint="@color/md_theme_light_primary"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginVertical="8dp"
+                android:background="@drawable/bg_category"
+                android:backgroundTint="@color/md_theme_light_primary"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_detail"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/ll_detail">
+
                 <ImageView
                     android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginVertical="2dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_diamond"/>
+                    android:src="@drawable/ic_diamond" />
+
                 <TextView
                     android:id="@+id/tv_premium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:fontFamily="@font/montserrat_regular"
                     android:gravity="center"
+                    android:text="@string/txt_premium"
                     android:textColor="@color/white"
-                    android:text="@string/txt_premium"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ll_kind_of_class_free"
+
+            <TextView
+                android:id="@+id/tv_starting_class"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:background="@drawable/bg_category"
-                android:orientation="horizontal"
-                android:backgroundTint="@color/md_theme_light_primary"
-                android:layout_marginHorizontal="8dp"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/background_rounded"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/txt_start_class"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_detail"
-                app:layout_constraintBottom_toBottomOf="parent">
-                <TextView
-                    android:id="@+id/tv_free"
-                    android:layout_width="match_parent"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:text="@string/txt_start_class"/>
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/ll_detail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
