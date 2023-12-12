@@ -16,6 +16,7 @@ import com.group4.gostudy.presentation.home.category.CourseCategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
+import com.group4.gostudy.utils.hideKeyboard
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -64,49 +65,76 @@ class HomeFragment : Fragment() {
     }
 
     private fun setSearchFeature() {
+        binding.svCourse.setOnCloseListener {
+            hideKeyboard()
+            homeViewModel.getCourse()
+            false
+        }
         binding.svCourse.setOnQueryTextListener(
-            object :
-                SearchView.OnQueryTextListener,
-                androidx.appcompat.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    if (!query.isNullOrEmpty()) {
-                        homeViewModel.getCourse(search = query)
+            object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(
+                    query: String?
+                ): Boolean {
+                    return if (!query.isNullOrEmpty()) {
+                        homeViewModel.getCourse(search = query.trim())
+                        false
+                    } else {
+                        homeViewModel.getCategory()
+                        false
                     }
-                    return true
                 }
 
-                override fun onQueryTextChange(newQuery: String?): Boolean {
-                    if (!newQuery.isNullOrEmpty()) {
-                        homeViewModel.getCourse(search = newQuery)
-                    } else {
-                        homeViewModel.getCourse()
-                    }
-                    return true
+                override fun onQueryTextChange(
+                    newQuery: String?
+                ): Boolean {
+                    return false
                 }
             }
         )
-
-        binding.svCourse.setOnCloseListener {
-            binding.svCourse.setQuery("", false)
-            true
-        }
     }
 
     private fun setHeader() {
         mainViewModel.getProfile()
-        mainViewModel.profile.observe(viewLifecycleOwner) {
+        mainViewModel.profile.observe(
+            viewLifecycleOwner
+        ) {
             it.proceedWhen(
+                doOnLoading = {
+                    binding.sflHeader.isVisible = true
+                    binding.sflHeader.startShimmer()
+                    binding.llHeaderGreetings.isVisible = false
+                    binding.ivProfileImage.isVisible = false
+                },
                 doOnSuccess = {
+                    binding.sflHeader.stopShimmer()
+                    binding.sflHeader.isVisible = false
+                    binding.llHeaderGreetings.isVisible = true
+                    binding.ivProfileImage.isVisible = true
                     binding.ivProfileImage.load(it.payload?.imageUrl) {
                         crossfade(true)
                     }
                     val firstName = it.payload?.let { it1 ->
-                        mainViewModel.getFirstName(it1)
+                        mainViewModel.getFirstName(
+                            it1
+                        )
                     }
-                    binding.tvGreetingText.text = getString(
-                        R.string.text_hello,
-                        firstName
-                    )
+                    binding.tvGreetingText.text =
+                        getString(
+                            R.string.text_hello,
+                            firstName
+                        )
+                },
+                doOnError = {
+                    binding.sflHeader.stopShimmer()
+                    binding.sflHeader.isVisible = false
+                    binding.llHeaderGreetings.isVisible = true
+                    binding.ivProfileImage.isVisible = true
+                },
+                doOnEmpty = {
+                    binding.sflHeader.stopShimmer()
+                    binding.sflHeader.isVisible = false
+                    binding.llHeaderGreetings.isVisible = true
+                    binding.ivProfileImage.isVisible = true
                 }
             )
         }
@@ -153,6 +181,24 @@ class HomeFragment : Fragment() {
                     if (it.exception is ApiException) {
                         binding.layoutStateCourse.tvError.isVisible =
                             true
+                        binding.layoutStateCourse.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                },
+                doOnEmpty = {
+                    binding.layoutStateCourse.root.isVisible =
+                        true
+                    binding.layoutStateCourse.animLoading.isVisible =
+                        false
+                    binding.layoutStateCourse.tvError.isVisible =
+                        true
+                    binding.layoutStateCourse.llAnimError.isVisible =
+                        true
+                    binding.rvCourse.isVisible =
+                        false
+                    binding.layoutStateCourse.tvError.text =
+                        getString(R.string.text_no_data)
+                    if (it.exception is ApiException) {
                         binding.layoutStateCourse.tvError.text =
                             it.exception.getParsedError()?.message
                     }
@@ -210,6 +256,24 @@ class HomeFragment : Fragment() {
                         binding.layoutStateCategory.tvError.text =
                             it.exception.getParsedError()?.message
                     }
+                },
+                doOnEmpty = {
+                    binding.layoutStateCategory.root.isVisible =
+                        true
+                    binding.layoutStateCategory.animLoading.isVisible =
+                        false
+                    binding.layoutStateCategory.tvError.isVisible =
+                        true
+                    binding.layoutStateCategory.llAnimError.isVisible =
+                        true
+                    binding.rvCategoryList.isVisible =
+                        false
+                    binding.layoutStateCategory.tvError.text =
+                        getString(R.string.text_no_data)
+                    if (it.exception is ApiException) {
+                        binding.layoutStateCategory.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
                 }
             )
         }
@@ -225,5 +289,10 @@ class HomeFragment : Fragment() {
         binding.rvCategoryList.apply {
             adapter = categoryAdapter
         }
+    }
+
+    override fun onDestroy() {
+        binding.svCourse.setQuery(null, false)
+        super.onDestroy()
     }
 }

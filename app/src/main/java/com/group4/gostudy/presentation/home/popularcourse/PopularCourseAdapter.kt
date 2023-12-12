@@ -61,4 +61,8 @@ class PopularCourseAdapter(
     fun setData(data: List<PopularCourse>) {
         differ.submitList(data)
     }
+
+    fun refreshList() {
+        notifyItemRangeChanged(0, differ.currentList.size)
+    }
 }

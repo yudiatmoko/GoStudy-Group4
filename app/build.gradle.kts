@@ -147,4 +147,6 @@ dependencies {
     implementation("com.github.dhaval2404:imagepicker:2.1")
     // flexbox
     implementation("com.google.android.flexbox:flexbox:3.0.0")
+    // shimmer
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 }
