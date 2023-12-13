@@ -106,4 +106,8 @@
     <string name="free_class">Kelas Gratis</string>
     <string name="progress_class">In Progress</string>
     <string name="done_class">Selesai</string>
+    <string name="text_login_here">Sudah memiliki akun? Login</string>
+    <string name="text_error_name_cannot_empty">Nama harus diisi</string>
+    <string name="text_error_phone_cannot_empty">Nomor telepon harus diisi\n</string>
+    <string name="register_failed">Gagal register : %1$s</string>
 </resources>

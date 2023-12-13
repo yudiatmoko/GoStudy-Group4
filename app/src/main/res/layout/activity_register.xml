@@ -4,46 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.register.RegisterActivity"
-    android:background="@color/seed">
+    android:background="@color/md_theme_light_background"
+    android:padding="16dp"
+    tools:context=".presentation.register.RegisterActivity">
 
-    <LinearLayout
-        android:id="@+id/ln_backpressed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_register_back"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_back"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"/>
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_register_back"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_header_register"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_register"
-        android:textColor="@color/md_theme_dark_scrim"
-        android:textSize="24sp"
+        android:layout_marginTop="86dp"
         android:fontFamily="@font/montserrat_bold"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/ln_backpressed"/>
+        android:shadowColor="@color/md_theme_light_outline"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/text_register"
+        android:textColor="@color/md_theme_light_primary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:layout_marginVertical="16dp"
         android:id="@+id/layout_form_register"
         layout="@layout/layout_form_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_header_register"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_register" />
 
-        />
+    <TextView
+        android:id="@+id/tv_nav_to_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:text="@string/text_login_here"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/layout_form_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
