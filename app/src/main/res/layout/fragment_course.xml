@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/ll_class_title"
-            app:layout_constraintBottom_toTopOf="@id/rv_list_of_class"
+            app:layout_constraintBottom_toTopOf="@id/fl_rv_course_and_state"
             app:flexDirection="row"
             app:justifyContent="space_between"
             app:flexWrap="wrap"
@@ -127,7 +127,21 @@
                 android:textStyle="bold"
                 android:text="@string/text_kelas_premium" />
         </com.google.android.flexbox.FlexboxLayout>
-
+        <FrameLayout
+            android:id="@+id/fl_rv_course_and_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_type_of_class">
+            <include
+                android:id="@+id/layout_state_course"
+                layout="@layout/common_layout_content_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="8dp"
             android:id="@+id/rv_list_of_class"
@@ -140,6 +154,7 @@
             app:layout_constraintTop_toBottomOf="@id/fl_type_of_class"
             tools:listitem="@layout/course_item" />
 
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
