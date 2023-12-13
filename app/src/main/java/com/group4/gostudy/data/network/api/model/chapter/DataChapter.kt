@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class DataChapter(
     @SerializedName("chapter")
-    val chapters: List<DataChapterResponse>
+    val chapters: List<DataChapterResponse>?
 )

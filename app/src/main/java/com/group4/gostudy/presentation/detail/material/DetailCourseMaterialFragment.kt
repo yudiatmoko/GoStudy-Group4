@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
+import com.group4.gostudy.model.Chapter
 import com.group4.gostudy.model.DummyDetailCourseMaterialDataSource.getListData
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
@@ -36,13 +37,12 @@ class DetailCourseMaterialFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setData()
         observeChapter()
     }
 
-    private fun setData() {
+    private fun setData(chapters: List<Chapter>) {
         binding.rvData.adapter = adapter
-        val sections = getListData().map { sectionData ->
+        val sections = chapters.map { sectionData ->
             val section = Section()
             section.setHeader(
                 HeaderItem(sectionData.name, sectionData.time) {
@@ -89,6 +89,7 @@ class DetailCourseMaterialFragment : Fragment() {
                         false
                     binding.rvData.isVisible = true
                     result.payload?.let {
+                        setData(it)
                     }
                 },
                 doOnError = {
