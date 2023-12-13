@@ -7,7 +7,7 @@ import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
-import com.group4.gostudy.data.network.api.model.register.RegisterResponse
+import com.group4.gostudy.data.network.api.model.register.RegistersResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
@@ -15,7 +15,6 @@ import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResp
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Part
 
 /*
 Hi, Code Enthusiast!
@@ -50,7 +49,7 @@ interface GoStudyApiDataSource {
 
     suspend fun login(loginRequest: LoginRequest): LoginResponse
 
-    suspend fun register(registerRequest: RegisterRequest): RegisterResponse
+    suspend fun register(registerRequest: RegisterRequest): RegistersResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -111,7 +110,7 @@ class GoStudyApiDataSourceImpl(
 
     override suspend fun register(
         registerRequest: RegisterRequest
-    ): RegisterResponse {
+    ): RegistersResponse {
         return service.register(registerRequest)
     }
 }

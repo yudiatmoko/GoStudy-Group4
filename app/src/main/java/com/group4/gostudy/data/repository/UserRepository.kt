@@ -2,6 +2,7 @@ package com.group4.gostudy.data.repository
 
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
+import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.user.toUser
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.model.User
@@ -31,6 +32,10 @@ interface UserRepository {
 
     suspend fun updatePassword(
         updatePasswordRequest: UpdatePasswordRequest
+    ): Flow<ResultWrapper<String>>
+
+    suspend fun register(
+        registerRequest: RegisterRequest
     ): Flow<ResultWrapper<String>>
 
     suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>>
@@ -84,6 +89,17 @@ class UserRepositoryImpl(
             delay(2000)
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
+        }
+    }
+
+    override suspend fun register(registerRequest: RegisterRequest): Flow<ResultWrapper<String>> {
+        return proceedFlow {
+            apiDataSource.register(registerRequest).data?.token.orEmpty()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
         }
     }
 
