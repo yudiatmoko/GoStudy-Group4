@@ -6,7 +6,7 @@ import com.group4.gostudy.databinding.ItemSectionDataBinding
 import com.group4.gostudy.databinding.ItemSectionHeaderBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
-class HeaderItem(private val title: String, private val timeDuration: String, private val onHeaderClick: (item: String) -> Unit) :
+class HeaderItem(private val title: String, private val onHeaderClick: (item: String) -> Unit) :
     BindableItem<ItemSectionHeaderBinding>() {
     override fun bind(viewBinding: ItemSectionHeaderBinding, position: Int) {
         viewBinding.tvHeaderSectionName.text = title

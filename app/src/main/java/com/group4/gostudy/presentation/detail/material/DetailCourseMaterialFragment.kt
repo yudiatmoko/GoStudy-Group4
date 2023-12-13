@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
 import com.group4.gostudy.model.Chapter
-import com.group4.gostudy.model.DummyDetailCourseMaterialDataSource.getListData
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.viewitem.DataItem
@@ -45,7 +44,7 @@ class DetailCourseMaterialFragment : Fragment() {
         val sections = chapters.map { sectionData ->
             val section = Section()
             section.setHeader(
-                HeaderItem(sectionData.name, sectionData.time) {
+                HeaderItem(sectionData.name) {
                     Toast.makeText(
                         requireContext(),
                         "Header Clicked: ${sectionData.name}",

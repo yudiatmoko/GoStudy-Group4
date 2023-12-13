@@ -1,12 +1,11 @@
 package com.group4.gostudy.model
 
-import com.google.gson.annotations.SerializedName
-
 data class Chapter(
     val courseId: Int?,
     val createdAt: String?,
     val id: Int?,
-    val name: String?,
+    val data: List<String>,
+    val name: String,
     val noChapter: Int?,
     val updatedAt: String?
 )
