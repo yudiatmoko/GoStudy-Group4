@@ -16,7 +16,6 @@ import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResp
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Part
 
 /*
 Hi, Code Enthusiast!
