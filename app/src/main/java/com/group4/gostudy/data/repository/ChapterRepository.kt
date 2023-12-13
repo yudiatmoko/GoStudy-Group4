@@ -19,7 +19,7 @@ class ChapterRepositoryImpl(
 ) : ChapterRepository {
     override suspend fun getChapters(): Flow<ResultWrapper<List<Chapter>>> {
         return proceedFlow {
-            apiDataSource.getChapter().data.chapters?.toChapterList() ?: emptyList()
+            apiDataSource.getChapter().data?.chapters?.toChapterList() ?: emptyList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {

@@ -1,16 +1,17 @@
 package com.group4.gostudy.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Chapter(
-    val noChapter: String?,
-    var courseId: Int?,
-    val name: String,
-    val data: List<String>,
-    val time: String,
+    val courseId: Int?,
     val createdAt: String?,
-    val updateAt: String?
+    val id: Int?,
+    val name: String?,
+    val noChapter: Int?,
+    val updatedAt: String?
 )
 
-object DummyDetailCourseMaterialDataSource {
+/*object DummyDetailCourseMaterialDataSource {
 
     fun getListData(): List<Chapter> {
         return listOf(
@@ -43,4 +44,4 @@ object DummyDetailCourseMaterialDataSource {
             )
         )
     }
-}
+}*/
