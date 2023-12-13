@@ -1,15 +1,12 @@
 package com.group4.gostudy.data.network.api.model.chapter
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
+import com.group4.gostudy.data.network.api.model.common.BaseResponse
 
 @Keep
 data class ChaptersResponse(
+    val baseResponse: BaseResponse,
     @SerializedName("data")
-    val data: DataChapters?,
-    @SerializedName("message")
-    val message: String?,
-    @SerializedName("status")
-    val status: String?
+    val data: DataChapters
 )
