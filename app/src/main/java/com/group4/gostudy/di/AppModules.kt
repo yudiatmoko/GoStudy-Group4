@@ -76,7 +76,6 @@ object AppModules {
         viewModelOf(::RegisterViewModel)
         viewModelOf(::CourseViewModel)
         viewModelOf(::ClassesViewModel)
-        viewModelOf(::RegisterViewModel)
     }
 
     val modules: List<Module> = listOf(
