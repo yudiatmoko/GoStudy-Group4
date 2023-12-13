@@ -10,7 +10,6 @@ class HeaderItem(private val title: String, private val onHeaderClick: (item: St
     BindableItem<ItemSectionHeaderBinding>() {
     override fun bind(viewBinding: ItemSectionHeaderBinding, position: Int) {
         viewBinding.tvHeaderSectionName.text = title
-        viewBinding.tvHeaderSectionTime.text = timeDuration
         viewBinding.root.setOnClickListener { onHeaderClick.invoke(title) }
     }
 
