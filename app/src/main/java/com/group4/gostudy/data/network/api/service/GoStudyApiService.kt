@@ -9,6 +9,7 @@ import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
@@ -72,6 +73,9 @@ interface GoStudyApiService {
     suspend fun register(
         @Body registerRequest: RegisterRequest
     ): RegistersResponse
+
+    @POST("auth/resend")
+    suspend fun resendOtp(): OtpResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse
