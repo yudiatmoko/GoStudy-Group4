@@ -11,6 +11,7 @@ import com.group4.gostudy.databinding.ActivityLoginBinding
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.register.RegisterActivity
+import com.group4.gostudy.presentation.resetpassword.ResetPasswordActivity
 import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -86,6 +87,14 @@ class LoginActivity : AppCompatActivity() {
         binding.layoutFormLogin.btnLogin.setOnClickListener {
             doLogin()
         }
+        binding.tvLupasandi.highLightWord(getString(R.string.text_lupakatasandi)) {
+            navigateToResetPassword()
+        }
+    }
+
+    private fun navigateToResetPassword() {
+        val intent = Intent(this, ResetPasswordActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToRegister() {
