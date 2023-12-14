@@ -13,6 +13,8 @@ import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.verify.VerifyRequest
+import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -54,6 +56,8 @@ interface GoStudyApiDataSource {
     suspend fun register(registerRequest: RegisterRequest): RegistersResponse
 
     suspend fun resendOtp(): OtpResponse
+
+    suspend fun verify(VerifyRequest: VerifyRequest): VerifyResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -121,5 +125,11 @@ class GoStudyApiDataSourceImpl(
 
     override suspend fun resendOtp(): OtpResponse {
         return service.resendOtp()
+    }
+
+    override suspend fun verify(
+        VerifyRequest: VerifyRequest
+    ): VerifyResponse {
+        return service.verify(VerifyRequest)
     }
 }

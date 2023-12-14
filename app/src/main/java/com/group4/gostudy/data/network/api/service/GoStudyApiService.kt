@@ -16,6 +16,8 @@ import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.verify.VerifyRequest
+import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -76,6 +78,11 @@ interface GoStudyApiService {
 
     @POST("auth/resend")
     suspend fun resendOtp(): OtpResponse
+
+    @POST("auth/verify")
+    suspend fun verify(
+        @Body verifyRequest: VerifyRequest
+    ): VerifyResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse
