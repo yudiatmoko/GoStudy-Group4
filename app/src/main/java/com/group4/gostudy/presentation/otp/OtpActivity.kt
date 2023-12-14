@@ -1,12 +1,10 @@
 package com.group4.gostudy.presentation.otp
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityOtpBinding
-import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.utils.highLightWord
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,22 +37,5 @@ class OtpActivity : AppCompatActivity() {
             // You can also show a toast or perform other actions as needed
             Toast.makeText(this, "Resending OTP...", Toast.LENGTH_SHORT).show()
         }
-
-        binding.btnSubmitOtp.setOnClickListener {
-            if (isOtpValid()) {
-                val otp = binding.otpView.otp
-                viewModel.verifyResult(otp.orEmpty())
-
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish() // Optional: finish current activity
-            } else {
-                Toast.makeText(this, "Invalid OTP. Please try again.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun isOtpValid(): Boolean {
-        return true
     }
 }
