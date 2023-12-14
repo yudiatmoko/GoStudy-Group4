@@ -52,7 +52,7 @@
         app:width="40dp"
         app:box_margin="6dp"
         app:hide_otp="false"
-        app:length="6"
+        app:length="4"
         app:otp=""
         app:layout_constraintTop_toBottomOf="@+id/tv_header_otp"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,11 +66,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/otp_view"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="120dp"
         android:text="@string/text_button_submit"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat_regular"
-        android:layout_marginEnd="80dp"/>
+        android:layout_marginEnd="120dp"/>
 
     <TextView
         android:id="@+id/tv_resend_otp"
