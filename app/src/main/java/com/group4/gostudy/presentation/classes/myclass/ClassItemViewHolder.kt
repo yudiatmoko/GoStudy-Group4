@@ -4,22 +4,22 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.MyClassItemBinding
-import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.PopularCourse
 
 class ClassItemViewHolder(
     private val binding: MyClassItemBinding,
-    private val onClicked: (Course) -> Unit
+    private val onClicked: (PopularCourse) -> Unit
 ) : RecyclerView.ViewHolder(binding.root),
-    ViewHolderBinder<Course> {
+    ViewHolderBinder<PopularCourse> {
 
-    override fun bind(item: Course) {
-        binding.tvCategoryName.text = item.category
-        binding.tvClassTitle.text = item.title
-        binding.tvMentorName.text = String.format("by %s", item.instructor)
+    override fun bind(item: PopularCourse) {
+        binding.tvCategoryName.text = item.category?.name
+        binding.tvClassTitle.text = item.name
+        binding.tvMentorName.text = String.format("by %s", item.courseBy)
         binding.tvLevel.text = item.level
-        binding.tvModule.text = item.modules
-        binding.tvDuration.text = item.duration
-        binding.tvRating.text = item.rating
-        binding.ivMyClass.load(item.img)
+        binding.tvModule.text = item.totalModule.toString()
+        binding.tvDuration.text = item.totalDuration.toString()
+        binding.tvRating.text = item.level
+        binding.ivMyClass.load(item.imageUrl)
     }
 }

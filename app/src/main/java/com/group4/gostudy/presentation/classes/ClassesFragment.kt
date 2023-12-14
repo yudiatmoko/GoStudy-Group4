@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentClassesBinding
-import com.group4.gostudy.model.CourseProvider
 import com.group4.gostudy.presentation.classes.myclass.MyClassAdapter
-import com.group4.gostudy.presentation.classes.progresscategory.ProgressCategoryAdapter
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
+import com.group4.gostudy.utils.ApiException
+import com.group4.gostudy.utils.hideKeyboard
+import com.group4.gostudy.utils.proceedWhen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClassesFragment : Fragment() {
     private lateinit var binding: FragmentClassesBinding
-    private val progressCategoryAdapter: ProgressCategoryAdapter by lazy {
-        ProgressCategoryAdapter {}
-    }
     private val dialogFragment = DialogHomeNonLoginFragment()
+    private val classesViewModel: ClassesViewModel by viewModel()
 
     private fun navigateToNonLoginFragment() {
         dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
@@ -27,7 +29,6 @@ class ClassesFragment : Fragment() {
         MyClassAdapter { _ ->
         }
     }
-    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,27 +49,95 @@ class ClassesFragment : Fragment() {
         navigateToNonLoginFragment()
         setProgressCategoryRV()
         setMyClassRv()
-        searchFeature()
+        setSearchFeature()
+        observeCourse()
     }
-
-    private fun searchFeature() {
-        searchView = binding.svCourse
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterCourses(newText)
-                return true
-            }
-
-            private fun filterCourses(query: String?) {
-                val originalData = CourseProvider.getDummyData()
-                val filteredCourses = originalData.filter {
-                    it.title.contains(query.orEmpty(), true)
+    private fun observeCourse() {
+        classesViewModel.getCourse()
+        classesViewModel.courses.observe(
+            viewLifecycleOwner
+        ) {
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutStateCourse.root.isVisible =
+                        true
+                    binding.layoutStateCourse.animLoading.isVisible =
+                        true
+                    binding.layoutStateCourse.llAnimError.isVisible =
+                        false
+                    binding.rvListOfClass.isVisible =
+                        false
+                },
+                doOnSuccess = {
+                    binding.layoutStateCourse.root.isVisible =
+                        true
+                    binding.layoutStateCourse.animLoading.isVisible =
+                        false
+                    binding.layoutStateCourse.llAnimError.isVisible =
+                        false
+                    binding.rvListOfClass.isVisible =
+                        true
+                    it.payload?.let {
+                        myClassAdapter.setData(it)
+                    }
+                },
+                doOnError = {
+                    binding.layoutStateCourse.root.isVisible =
+                        true
+                    binding.layoutStateCourse.animLoading.isVisible =
+                        false
+                    binding.layoutStateCourse.llAnimError.isVisible =
+                        true
+                    binding.rvListOfClass.isVisible =
+                        false
+                    if (it.exception is ApiException) {
+                        binding.layoutStateCourse.tvError.isVisible =
+                            true
+                        binding.layoutStateCourse.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                },
+                doOnEmpty = {
+                    binding.layoutStateCourse.root.isVisible =
+                        true
+                    binding.layoutStateCourse.animLoading.isVisible =
+                        false
+                    binding.layoutStateCourse.tvError.isVisible =
+                        true
+                    binding.layoutStateCourse.llAnimError.isVisible =
+                        true
+                    binding.rvListOfClass.isVisible =
+                        false
+                    binding.layoutStateCourse.tvError.text =
+                        getString(R.string.text_no_data)
+                    if (it.exception is ApiException) {
+                        binding.layoutStateCourse.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
                 }
-                myClassAdapter.setData(filteredCourses)
+            )
+        }
+    }
+    private fun setSearchFeature() {
+        binding.svCourse.setOnCloseListener() {
+            hideKeyboard()
+            classesViewModel.getCourse()
+            false
+        }
+
+        binding.svCourse.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return if (!query.isNullOrEmpty()) {
+                    classesViewModel.getCourse(search = query.trim())
+                    false
+                } else {
+                    classesViewModel.getCourse() // Mengambil semua data course
+                    false
+                }
+            }
+
+            override fun onQueryTextChange(newQuery: String?): Boolean {
+                return false
             }
         })
     }
@@ -76,7 +145,6 @@ class ClassesFragment : Fragment() {
     private fun setMyClassRv() {
         binding.rvListOfClass.apply {
             adapter = myClassAdapter
-            myClassAdapter.setData(CourseProvider.getDummyData())
         }
     }
 

@@ -64,7 +64,8 @@ interface GoStudyApiService {
     @GET("course")
     suspend fun getCourses(
         @Query("categoryName") category: String? = null,
-        @Query("search") search: String? = null
+        @Query("search") search: String? = null,
+        @Query("type")type: String? = null
     ): CoursesResponse
 
     @POST("auth/register")

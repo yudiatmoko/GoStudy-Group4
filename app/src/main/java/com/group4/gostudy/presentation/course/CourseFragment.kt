@@ -46,6 +46,21 @@ class CourseFragment : Fragment() {
         setSearchFeature()
         observeCourse()
         navigateToFilter()
+        setupFilterButtons()
+    }
+
+    private fun setupFilterButtons() {
+        binding.tvAllText.setOnClickListener {
+            courseViewModel.getCourse()
+        }
+
+        binding.tvFreeText.setOnClickListener {
+            courseViewModel.getCourse(type = "Free".trim())
+        }
+
+        binding.tvPremiumText.setOnClickListener {
+            courseViewModel.getCourse(type = "Premium".trim())
+        }
     }
 
     private fun navigateToFilter() {

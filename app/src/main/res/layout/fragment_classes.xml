@@ -1,66 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/md_theme_light_background"
-    android:padding="16dp">
+    android:background="@color/white"
+    android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcv_search"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="12dp"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/md_theme_light_background"
+        android:padding="16dp">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/sv_course"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="12dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/sv_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:layoutDirection="rtl"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@android:color/transparent"
+                app:queryHint="@string/txt_search_best_course"
+                app:searchIcon="@drawable/ic_searching">
+
+            </androidx.appcompat.widget.SearchView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/ll_class_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:layoutDirection="rtl"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@android:color/transparent"
-            app:queryHint="@string/txt_search_best_course"
-            app:searchIcon="@drawable/ic_searching">
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="8dp"
+            app:layout_constraintBottom_toTopOf="@id/ll_class_title"
+            app:layout_constraintTop_toBottomOf="@id/mcv_search">
 
-        </androidx.appcompat.widget.SearchView>
+            <TextView
+                android:id="@+id/tv_class_topic_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:shadowColor="@color/md_theme_light_outline"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/txt_class_topic"
+                android:textColor="@color/md_theme_light_primary"
+                android:textSize="24sp" />
 
-    </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
-
-    <TextView
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/tv_class_topic_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:shadowColor="@color/md_theme_light_outline"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2"
-        android:text="@string/txt_running_class"
-        android:textColor="@color/md_theme_light_primary"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/fl_type_of_class"
-        app:layout_constraintTop_toBottomOf="@id/mcv_search" />
-
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/fl_type_of_class"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:alignContent="stretch"
-        app:alignItems="stretch"
-        app:flexDirection="row"
-        app:flexWrap="wrap"
-        app:justifyContent="space_between"
-        app:layout_constraintBottom_toTopOf="@id/rv_list_of_class"
-        app:layout_constraintTop_toBottomOf="@id/tv_class_topic_text">
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/fl_type_of_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alignContent="stretch"
+            app:alignItems="stretch"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:justifyContent="space_between"
+            app:layout_constraintBottom_toTopOf="@id/fl_rv_course_and_state"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_class_title">
 
         <TextView
             android:id="@+id/tv_all_text"
@@ -100,17 +115,35 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_flexBasisPercent="30%" />
-    </com.google.android.flexbox.FlexboxLayout>
+        </com.google.android.flexbox.FlexboxLayout>
+        <FrameLayout
+            android:id="@+id/fl_rv_course_and_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_type_of_class">
+            <include
+                android:id="@+id/layout_state_course"
+                layout="@layout/common_layout_content_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="8dp"
+                android:id="@+id/rv_list_of_class"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fl_type_of_class"
+                tools:listitem="@layout/course_item" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list_of_class"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fl_type_of_class"
-        tools:listitem="@layout/my_class_item" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

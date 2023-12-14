@@ -1,4 +1,4 @@
-package com.group4.gostudy.presentation.course
+package com.group4.gostudy.presentation.classes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CourseViewModel(
+class ClassesViewModel(
     private val courseRepository: CourseRepository
 ) : ViewModel() {
 
