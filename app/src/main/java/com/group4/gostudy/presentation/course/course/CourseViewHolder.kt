@@ -13,7 +13,7 @@ class CourseViewHolder(
     ViewHolderBinder<PopularCourse> {
 
     override fun bind(item: PopularCourse) {
-        binding.tvCategoryName.text = item.name
+        binding.tvCategoryName.text = item.category?.name
         binding.tvClassTitle.text = item.name
         binding.tvMentorName.text = String.format("by %s", item.courseBy)
         binding.tvLevel.text = item.level

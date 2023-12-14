@@ -31,7 +31,8 @@ interface GoStudyApiDataSource {
 
     suspend fun getCourses(
         category: String?,
-        search: String?
+        search: String?,
+        type: String?
     ): CoursesResponse
 
     suspend fun updateProfile(
@@ -70,9 +71,10 @@ class GoStudyApiDataSourceImpl(
 
     override suspend fun getCourses(
         category: String?,
-        search: String?
+        search: String?,
+        type: String?
     ): CoursesResponse {
-        return service.getCourses(category, search)
+        return service.getCourses(category, search, type)
     }
 
     override suspend fun updateProfile(

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,15 +41,17 @@
             android:id="@+id/ll_class_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ll_class_title"
             app:layout_constraintTop_toBottomOf="@id/mcv_search">
 
             <TextView
                 android:id="@+id/tv_class_topic_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:shadowColor="@color/md_theme_light_outline"
@@ -62,7 +64,7 @@
 
             <TextView
                 android:id="@+id/tv_class_filter_text"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_regular"
@@ -71,24 +73,24 @@
                 android:shadowDy="1"
                 android:shadowRadius="2"
                 android:text="@string/txt_filter"
-                android:textAlignment="textEnd"
                 android:textColor="@color/md_theme_light_primary"
                 android:textSize="12sp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent" />
         </LinearLayout>
+
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/fl_type_of_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ll_class_title"
-            app:layout_constraintBottom_toTopOf="@id/fl_rv_course_and_state"
-            app:flexDirection="row"
-            app:justifyContent="space_between"
-            app:flexWrap="wrap"
+            app:alignContent="stretch"
             app:alignItems="stretch"
-            app:alignContent="stretch" >
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:justifyContent="space_between"
+            app:layout_constraintBottom_toTopOf="@id/fl_rv_course_and_state"
+            app:layout_constraintTop_toBottomOf="@id/ll_class_title">
 
             <TextView
                 android:id="@+id/tv_all_text"
@@ -96,12 +98,12 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_rounded"
                 android:fontFamily="@font/montserrat_regular"
+                android:text="@string/txt_all"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_flexBasisPercent="25%"
                 android:textStyle="bold"
-                android:text="@string/txt_all" />
+                app:layout_flexBasisPercent="25%" />
 
             <TextView
                 android:id="@+id/tv_free_text"
@@ -109,11 +111,11 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_rounded"
                 android:fontFamily="@font/montserrat_regular"
+                android:text="@string/free_class"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="@string/free_class" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_premium_text"
@@ -121,12 +123,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_rounded"
                 android:fontFamily="@font/montserrat_regular"
+                android:text="@string/text_kelas_premium"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="@string/text_kelas_premium" />
+                android:textStyle="bold" />
         </com.google.android.flexbox.FlexboxLayout>
+
         <FrameLayout
             android:id="@+id/fl_rv_course_and_state"
             android:layout_width="match_parent"
@@ -135,6 +138,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fl_type_of_class">
+
             <include
                 android:id="@+id/layout_state_course"
                 layout="@layout/common_layout_content_state"
@@ -142,17 +146,18 @@
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="8dp"
-            android:id="@+id/rv_list_of_class"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fl_type_of_class"
-            tools:listitem="@layout/course_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_of_class"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fl_type_of_class"
+                tools:listitem="@layout/course_item" />
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
