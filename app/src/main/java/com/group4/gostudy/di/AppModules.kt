@@ -73,7 +73,6 @@ object AppModules {
         viewModelOf(::ChangePasswordViewModel)
         viewModelOf(::HomeViewModel)
         viewModelOf(::LoginViewModel)
-        viewModelOf(::RegisterViewModel)
         viewModelOf(::CourseViewModel)
         viewModelOf(::ClassesViewModel)
         viewModelOf(::RegisterViewModel)
