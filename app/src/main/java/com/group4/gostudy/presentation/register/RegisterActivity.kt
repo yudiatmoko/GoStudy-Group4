@@ -13,6 +13,7 @@ import com.group4.gostudy.databinding.ActivityRegisterBinding
 import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
+import com.group4.gostudy.presentation.otp.OtpActivity
 import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -53,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                             it1
                         )
                     }
-                    navigateToMain()
+                    navigateToOtp()
                 },
                 doOnLoading = {
                     binding.layoutFormRegister.pbLoading.isVisible = true
@@ -187,6 +188,11 @@ class RegisterActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
+        startActivity(intent)
+    }
+
+    private fun navigateToOtp() {
+        val intent = Intent(this, OtpActivity::class.java)
         startActivity(intent)
     }
 }
