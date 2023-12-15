@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
+<<<<<<< HEAD
 import com.group4.gostudy.data.network.api.model.verify.VerifyRequest
+=======
+>>>>>>> origin/feature/feature_login
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
