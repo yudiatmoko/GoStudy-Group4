@@ -38,47 +38,22 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
-            android:id="@+id/ll_category_title"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_category_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/ll_category_title"
-            app:layout_constraintTop_toBottomOf="@id/mcv_search">
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/md_theme_light_outline"
+            android:shadowDx="1"
+            android:paddingVertical="8dp"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="@string/category_text"
+            android:textColor="@color/md_theme_light_primary"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mcv_search" />
 
-            <TextView
-                android:id="@+id/tv_category_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:shadowColor="@color/md_theme_light_outline"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:text="@string/category_text"
-                android:textColor="@color/md_theme_light_primary"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/tv_category_view_more_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:shadowColor="@color/md_theme_light_outline"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:text="@string/view_more_text"
-                android:textAlignment="textEnd"
-                android:textColor="@color/md_theme_light_primary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"
@@ -92,8 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <include
-                    layout="@layout/header_placeholder"/>
+                <include layout="@layout/header_placeholder" />
 
             </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -143,7 +117,7 @@
             android:id="@+id/fl_rv_category_and_state"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_category_title">
+            app:layout_constraintTop_toBottomOf="@id/tv_category_text">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_category_list"
@@ -152,7 +126,7 @@
                 android:orientation="horizontal"
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/ll_category_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_category_text"
                 app:spanCount="2"
                 tools:itemCount="6"
                 tools:listitem="@layout/category_item_list" />
@@ -210,7 +184,7 @@
 
         <FrameLayout
             android:id="@+id/fl_rv_course_and_state"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
