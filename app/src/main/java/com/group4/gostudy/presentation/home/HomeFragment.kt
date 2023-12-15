@@ -12,7 +12,6 @@ import coil.load
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentHomeBinding
 import com.group4.gostudy.presentation.home.category.CategoryAdapter
-import com.group4.gostudy.presentation.home.category.CourseCategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
@@ -29,9 +28,6 @@ class HomeFragment : Fragment() {
         CategoryAdapter {
             homeViewModel.getCourse(it.slug)
         }
-    }
-    private val courseCategoryAdapter: CourseCategoryAdapter by lazy {
-        CourseCategoryAdapter {}
     }
     private val courseAdapter: PopularCourseAdapter by lazy {
         PopularCourseAdapter {}
@@ -235,11 +231,6 @@ class HomeFragment : Fragment() {
                     it.payload?.let {
                         categoryAdapter.setData(it)
                     }
-                    it.payload?.let {
-                        courseCategoryAdapter.setData(
-                            it
-                        )
-                    }
                 },
                 doOnError = {
                     binding.layoutStateCategory.root.isVisible =
@@ -291,8 +282,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         binding.svCourse.setQuery(null, false)
-        super.onDestroy()
+        super.onDestroyView()
     }
 }
