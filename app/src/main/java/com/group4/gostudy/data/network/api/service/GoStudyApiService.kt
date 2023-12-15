@@ -7,6 +7,7 @@ import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
+import com.group4.gostudy.data.network.api.model.detail.ModuleResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
@@ -96,6 +97,9 @@ interface GoStudyApiService {
 
     @GET("notification")
     suspend fun getNotifications(): NotificationsResponse
+
+    @GET("module")
+    suspend fun getModules(): ModuleResponse
 
     companion object {
         @JvmStatic
