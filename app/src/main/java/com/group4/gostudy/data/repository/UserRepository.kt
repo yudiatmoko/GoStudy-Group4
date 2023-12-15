@@ -2,6 +2,7 @@ package com.group4.gostudy.data.repository
 
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
+import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.user.toUser
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
@@ -39,6 +40,10 @@ interface UserRepository {
     ): Flow<ResultWrapper<String>>
 
     suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>>
+
+    suspend fun verify(otp: String): Flow<ResultWrapper<String>>
+
+    suspend fun resendOtp(): Flow<ResultWrapper<OtpResponse>>
 }
 
 class UserRepositoryImpl(
@@ -106,6 +111,28 @@ class UserRepositoryImpl(
     override suspend fun login(loginRequest: LoginRequest): Flow<ResultWrapper<String>> {
         return proceedFlow {
             apiDataSource.login(loginRequest).data?.token.orEmpty()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
+        }
+    }
+
+    override suspend fun verify(otp: String): Flow<ResultWrapper<String>> {
+        return proceedFlow {
+            apiDataSource.verify(otp).message.orEmpty()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
+        }
+    }
+
+    override suspend fun resendOtp(): Flow<ResultWrapper<OtpResponse>> {
+        return proceedFlow {
+            apiDataSource.resendOtp()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {

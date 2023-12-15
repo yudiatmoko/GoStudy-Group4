@@ -4,32 +4,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
+import com.group4.gostudy.data.repository.UserRepository
+import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class OtpViewModel(private val apiDataSource: GoStudyApiDataSource) : ViewModel() {
+class OtpViewModel(private val repository: UserRepository) : ViewModel() {
 
-    private val _otpResult = MutableLiveData<OtpResult>()
-    val otpResult: LiveData<OtpResult> get() = _otpResult
+    private val _verify = MutableLiveData<ResultWrapper<String>>()
+    private val _resendOtp = MutableLiveData<ResultWrapper<OtpResponse>>()
 
-    fun resendOtp() {
-        viewModelScope.launch {
-            try {
-                val response = withContext(Dispatchers.IO) {
-                    apiDataSource.resendOtp()
-                }
-                _otpResult.value = OtpResult.Success(response)
-            } catch (e: Exception) {
-                _otpResult.value = OtpResult.Error(e)
+    val verify: LiveData<ResultWrapper<String>>
+        get() = _verify
+
+    val resendOtp: LiveData<ResultWrapper<OtpResponse>>
+        get() = _resendOtp
+
+    fun verifyResult(otp: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.verify(otp).collect {
+                _verify.postValue(it)
             }
         }
     }
 
-    sealed class OtpResult {
-        data class Success(val response: OtpResponse) : OtpResult()
-        data class Error(val exception: Exception) : OtpResult()
+    fun resendOtp() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.resendOtp().collect {
+                _resendOtp.postValue(it)
+            }
+        }
     }
 }

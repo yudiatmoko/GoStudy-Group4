@@ -6,7 +6,5 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class VerifyRequest(
     @SerializedName("otp")
-    val otp: String?,
-    @SerializedName("token")
-    val token: String?
+    val otp: String?
 )
