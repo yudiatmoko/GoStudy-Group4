@@ -6,12 +6,14 @@ import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -54,7 +56,7 @@ interface GoStudyApiDataSource {
 
     suspend fun resendOtp(): OtpResponse
 
-    suspend fun verify(VerifyRequest: VerifyRequest): VerifyResponse
+    suspend fun verify(otp: String): VerifyResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -77,7 +79,7 @@ class GoStudyApiDataSourceImpl(
         search: String?,
         type: String?
     ): CoursesResponse {
-        return service.getCourses(category, search, type)
+        return service.getCourses(category, search)
     }
 
     override suspend fun updateProfile(
@@ -125,8 +127,8 @@ class GoStudyApiDataSourceImpl(
     }
 
     override suspend fun verify(
-        VerifyRequest: VerifyRequest
+        otp: String
     ): VerifyResponse {
-        return service.verify(VerifyRequest)
+        return service.verify(otp)
     }
 }

@@ -16,7 +16,6 @@ import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
-import com.group4.gostudy.data.network.api.model.verify.VerifyRequest
 import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -80,7 +79,7 @@ interface GoStudyApiService {
 
     @POST("auth/verify")
     suspend fun verify(
-        @Body verifyRequest: VerifyRequest
+        @Body otp: String
     ): VerifyResponse
 
     @GET("history")

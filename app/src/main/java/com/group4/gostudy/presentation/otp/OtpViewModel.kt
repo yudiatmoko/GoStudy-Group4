@@ -4,60 +4,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
-<<<<<<< HEAD
-import com.group4.gostudy.data.network.api.model.verify.VerifyRequest
-=======
->>>>>>> origin/feature/feature_login
+import com.group4.gostudy.data.repository.UserRepository
+import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class OtpViewModel(private val apiDataSource: GoStudyApiDataSource) : ViewModel() {
+class OtpViewModel(private val repository: UserRepository) : ViewModel() {
 
-    private val _otpResult = MutableLiveData<OtpResult>()
-    val otpResult: LiveData<OtpResult> get() = _otpResult
+    private val _verify = MutableLiveData<ResultWrapper<String>>()
+    private val _resendOtp = MutableLiveData<ResultWrapper<OtpResponse>>()
+
+    val verify: LiveData<ResultWrapper<String>>
+        get() = _verify
+
+    val resendOtp: LiveData<ResultWrapper<OtpResponse>>
+        get() = _resendOtp
+
+    fun verifyResult(otp: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.verify(otp).collect {
+                _verify.postValue(it)
+            }
+        }
+    }
 
     fun resendOtp() {
-        viewModelScope.launch {
-            try {
-                val response = withContext(Dispatchers.IO) {
-                    apiDataSource.resendOtp()
-                }
-                _otpResult.value = OtpResult.Success(response)
-            } catch (e: Exception) {
-                _otpResult.value = OtpResult.Error(e)
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.resendOtp().collect {
+                _resendOtp.postValue(it)
             }
         }
-    }
-
-    fun verifyOtp(otp: String, token: String) {
-        viewModelScope.launch {
-            try {
-                val verifyRequest = VerifyRequest(otp, token)
-
-                val response = withContext(Dispatchers.IO) {
-                    apiDataSource.verify(verifyRequest)
-                }
-
-                if (response.response.status == "success") {
-                    // Jika status adalah "success," buat OtpResponse dan beri tahu hasil yang berhasil
-                    val otpResponse = OtpResponse(response.response)
-                    _otpResult.value = OtpResult.Success(otpResponse)
-                } else {
-                    // Jika status bukan "success," beri tahu hasil error
-                    _otpResult.value = OtpResult.Error(Exception(response.response.message))
-                }
-            } catch (e: Exception) {
-                // Handle any exceptions that may occur during OTP verification
-                _otpResult.value = OtpResult.Error(e)
-            }
-        }
-    }
-
-    sealed class OtpResult {
-        data class Success(val response: OtpResponse) : OtpResult()
-        data class Error(val exception: Exception) : OtpResult()
     }
 }
