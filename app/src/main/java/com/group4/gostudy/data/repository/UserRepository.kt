@@ -1,6 +1,7 @@
 package com.group4.gostudy.data.repository
 
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
@@ -44,6 +45,8 @@ interface UserRepository {
     suspend fun verify(otp: String): Flow<ResultWrapper<String>>
 
     suspend fun resendOtp(): Flow<ResultWrapper<OtpResponse>>
+
+    suspend fun forgotPassword(email: String): Flow<ResultWrapper<String>>
 }
 
 class UserRepositoryImpl(
@@ -138,6 +141,17 @@ class UserRepositoryImpl(
         }.onStart {
             emit(ResultWrapper.Loading())
             delay(2000)
+        }
+    }
+
+    override suspend fun forgotPassword(email: String): Flow<ResultWrapper<String>> {
+        return proceedFlow {
+            apiDataSource.forgotPassword(ForgotPasswordRequest(email)).message.orEmpty()
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
         }
     }
 }

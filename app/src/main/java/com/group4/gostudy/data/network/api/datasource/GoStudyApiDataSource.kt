@@ -2,6 +2,8 @@ package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
@@ -57,6 +59,8 @@ interface GoStudyApiDataSource {
     suspend fun resendOtp(): OtpResponse
 
     suspend fun verify(otp: String): VerifyResponse
+
+    suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -130,5 +134,9 @@ class GoStudyApiDataSourceImpl(
         otp: String
     ): VerifyResponse {
         return service.verify(otp)
+    }
+
+    override suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse {
+        return service.forgotPassword(request)
     }
 }

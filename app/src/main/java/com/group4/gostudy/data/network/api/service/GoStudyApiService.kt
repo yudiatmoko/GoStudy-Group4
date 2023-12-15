@@ -5,6 +5,8 @@ import com.group4.gostudy.BuildConfig
 import com.group4.gostudy.data.local.datastore.UserPreferenceDataSource
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
@@ -81,6 +83,11 @@ interface GoStudyApiService {
     suspend fun verify(
         @Body otp: String
     ): VerifyResponse
+
+    @POST("auth/forgot-password")
+    suspend fun forgotPassword(
+        @Body forgotPasswordRequest: ForgotPasswordRequest
+    ): ForgotPasswordResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse

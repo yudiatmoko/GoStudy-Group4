@@ -22,6 +22,7 @@ import com.group4.gostudy.presentation.account.history.HistoryViewModel
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
 import com.group4.gostudy.presentation.classes.ClassesViewModel
 import com.group4.gostudy.presentation.course.CourseViewModel
+import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordViewModel
 import com.group4.gostudy.presentation.home.HomeViewModel
 import com.group4.gostudy.presentation.login.LoginViewModel
 import com.group4.gostudy.presentation.main.MainViewModel
@@ -78,6 +79,7 @@ object AppModules {
         viewModelOf(::ClassesViewModel)
         viewModelOf(::RegisterViewModel)
         viewModelOf(::OtpViewModel)
+        viewModelOf(::ForgotPasswordViewModel)
     }
 
     val modules: List<Module> = listOf(

@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityLoginBinding
+import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.register.RegisterActivity
-import com.group4.gostudy.presentation.resetpassword.ResetPasswordActivity
 import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToResetPassword() {
-        val intent = Intent(this, ResetPasswordActivity::class.java)
+        val intent = Intent(this, ForgotPasswordActivity::class.java)
         startActivity(intent)
     }
 

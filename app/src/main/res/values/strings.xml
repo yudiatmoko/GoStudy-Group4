@@ -111,4 +111,6 @@
     <string name="text_error_phone_cannot_empty">Nomor telepon harus diisi\n</string>
     <string name="register_failed">Gagal register : %1$s</string>
     <string name="text_button_submit">Submit</string>
+    <string name="text_reset_password">Forgot Password</string>
+    <string name="text_reset">Reset</string>
 </resources>
