@@ -1,11 +1,10 @@
 package com.group4.gostudy.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import coil.load
@@ -13,6 +12,7 @@ import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentHomeBinding
 import com.group4.gostudy.presentation.home.category.CategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
+import com.group4.gostudy.presentation.home.popularcourse.ViewMoreCourseActivity
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.hideKeyboard
@@ -58,6 +58,20 @@ class HomeFragment : Fragment() {
         observeCourse()
         setHeader()
         setSearchFeature()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.tvCourseViewMoreText.setOnClickListener {
+            navigateToViewMore()
+        }
+    }
+
+    private fun navigateToViewMore() {
+        activity.let {
+            val intent = Intent(it, ViewMoreCourseActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setSearchFeature() {
