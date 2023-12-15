@@ -41,9 +41,10 @@ class OtpActivity : AppCompatActivity() {
         }
 
         binding.btnSubmitOtp.setOnClickListener {
-            // Assume that isOtpValid is a function to check if the entered OTP is valid
             if (isOtpValid()) {
-                // Navigate to home (replace HomeActivity::class.java with your actual home activity)
+                val otp = binding.otpView.otp
+                viewModel.verifyResult(otp.orEmpty())
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish() // Optional: finish current activity
