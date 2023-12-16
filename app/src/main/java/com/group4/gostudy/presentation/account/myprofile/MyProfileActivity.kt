@@ -12,7 +12,6 @@ import androidx.core.view.isVisible
 import coil.load
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.group4.gostudy.databinding.ActivityMyProfileBinding
-import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -30,8 +29,6 @@ class MyProfileActivity : AppCompatActivity() {
 
     private val profileViewModel: MyProfileViewModel by viewModel()
 
-    private val mainViewModel: MainViewModel by viewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -40,39 +37,6 @@ class MyProfileActivity : AppCompatActivity() {
         setForm()
         setDataProfile()
         getData()
-    }
-
-    private fun setLogin() {
-        profileViewModel.login()
-        profileViewModel.login.observe(this) {
-            it.proceedWhen(
-                doOnLoading = {
-                    binding.layoutState.root.isVisible = true
-                    binding.layoutState.animLoading.isVisible = true
-                    binding.layoutState.llAnimError.isVisible = false
-                    binding.layoutForm.root.isVisible = false
-                    binding.ivProfileImage.isVisible = false
-                    binding.btnLogin.isVisible = false
-                    binding.btnSave.isVisible = false
-                },
-                doOnSuccess = {
-                    binding.layoutState.root.isVisible = true
-                    binding.layoutState.animLoading.isVisible = false
-                    binding.layoutState.tvError.isVisible = false
-                    binding.layoutForm.root.isVisible = true
-                    binding.ivProfileImage.isVisible = true
-                    binding.btnLogin.isVisible = false
-                    binding.btnSave.isVisible = true
-                    finish()
-                    startActivity(this)
-                    it.payload?.let { token ->
-                        mainViewModel.setUserToken(
-                            token
-                        )
-                    }
-                }
-            )
-        }
     }
 
     private fun setDataProfile() {
@@ -147,11 +111,12 @@ class MyProfileActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             updateProfile()
         }
-        binding.btnLogin.setOnClickListener {
-            setLogin()
-        }
         binding.btnChangePhoto.setOnClickListener {
             imagePicker()
+        }
+        binding.btnRepeat.setOnClickListener {
+            finish()
+            startActivity(this)
         }
     }
 

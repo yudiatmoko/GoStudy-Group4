@@ -38,7 +38,7 @@
             android:name=".presentation.otp.OtpActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.resetpassword.ResetPasswordActivity"
+            android:name=".presentation.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.splashscreen.CustomAppIntroActivity"

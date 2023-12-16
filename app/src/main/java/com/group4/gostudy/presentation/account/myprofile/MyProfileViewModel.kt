@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.model.User
 import com.group4.gostudy.utils.ResultWrapper
@@ -53,25 +52,6 @@ class MyProfileViewModel(
                 image
             ).collect {
                 _profile.postValue(it)
-            }
-        }
-    }
-
-    private val _login =
-        MutableLiveData<ResultWrapper<String>>()
-
-    val login: LiveData<ResultWrapper<String>>
-        get() = _login
-
-    fun login() {
-        viewModelScope.launch(Dispatchers.IO) {
-            userRepository.login(
-                LoginRequest(
-                    email = "hamatmoko@gmail.com",
-                    password = "ilham123"
-                )
-            ).collect {
-                _login.postValue(it)
             }
         }
     }

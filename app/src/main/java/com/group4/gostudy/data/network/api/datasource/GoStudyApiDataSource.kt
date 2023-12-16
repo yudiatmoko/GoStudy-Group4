@@ -2,16 +2,21 @@ package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.otp.OtpRequest
+import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -51,6 +56,12 @@ interface GoStudyApiDataSource {
     suspend fun login(loginRequest: LoginRequest): LoginResponse
 
     suspend fun register(registerRequest: RegisterRequest): RegistersResponse
+
+    suspend fun resendOtp(): OtpResponse
+
+    suspend fun verify(otp: OtpRequest): VerifyResponse
+
+    suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -73,7 +84,7 @@ class GoStudyApiDataSourceImpl(
         search: String?,
         type: String?
     ): CoursesResponse {
-        return service.getCourses(category, search, type)
+        return service.getCourses(category, search)
     }
 
     override suspend fun updateProfile(
@@ -114,5 +125,19 @@ class GoStudyApiDataSourceImpl(
         registerRequest: RegisterRequest
     ): RegistersResponse {
         return service.register(registerRequest)
+    }
+
+    override suspend fun resendOtp(): OtpResponse {
+        return service.resendOtp()
+    }
+
+    override suspend fun verify(
+        otp: OtpRequest
+    ): VerifyResponse {
+        return service.verify(otp)
+    }
+
+    override suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse {
+        return service.forgotPassword(request)
     }
 }

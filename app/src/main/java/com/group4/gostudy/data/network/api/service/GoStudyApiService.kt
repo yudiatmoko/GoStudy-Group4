@@ -5,16 +5,21 @@ import com.group4.gostudy.BuildConfig
 import com.group4.gostudy.data.local.datastore.UserPreferenceDataSource
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.otp.OtpRequest
+import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -64,14 +69,26 @@ interface GoStudyApiService {
     @GET("course")
     suspend fun getCourses(
         @Query("categoryName") category: String? = null,
-        @Query("search") search: String? = null,
-        @Query("type")type: String? = null
+        @Query("search") search: String? = null
     ): CoursesResponse
 
     @POST("auth/register")
     suspend fun register(
         @Body registerRequest: RegisterRequest
     ): RegistersResponse
+
+    @POST("auth/resend")
+    suspend fun resendOtp(): OtpResponse
+
+    @POST("auth/verify")
+    suspend fun verify(
+        @Body otp: OtpRequest
+    ): VerifyResponse
+
+    @POST("auth/forgot-password")
+    suspend fun forgotPassword(
+        @Body forgotPasswordRequest: ForgotPasswordRequest
+    ): ForgotPasswordResponse
 
     @GET("history")
     suspend fun getHistories(): HistoriesResponse

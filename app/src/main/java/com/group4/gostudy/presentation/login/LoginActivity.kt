@@ -8,9 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityLoginBinding
+import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.register.RegisterActivity
+import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -61,14 +63,16 @@ class LoginActivity : AppCompatActivity() {
                     binding.layoutFormLogin.pbLoading.isVisible = false
                     binding.layoutFormLogin.btnLogin.isVisible = true
                     binding.layoutFormLogin.btnLogin.isEnabled = true
-                    Toast.makeText(
-                        this,
-                        getString(
-                            R.string.login_failed,
-                            it.exception?.message.orEmpty()
-                        ),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if (it.exception is ApiException) {
+                        Toast.makeText(
+                            this,
+                            getString(
+                                R.string.login_failed,
+                                it.exception.getParsedError()?.message
+                            ),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             )
         }
@@ -86,6 +90,14 @@ class LoginActivity : AppCompatActivity() {
         binding.layoutFormLogin.btnLogin.setOnClickListener {
             doLogin()
         }
+        binding.tvLupasandi.highLightWord(getString(R.string.text_lupakatasandi)) {
+            navigateToResetPassword()
+        }
+    }
+
+    private fun navigateToResetPassword() {
+        val intent = Intent(this, ForgotPasswordActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToRegister() {

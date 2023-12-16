@@ -12,8 +12,8 @@ import com.group4.gostudy.databinding.LayoutLogoutDialogBinding
 import com.group4.gostudy.presentation.account.changepassword.ChangePasswordActivity
 import com.group4.gostudy.presentation.account.history.HistoryActivity
 import com.group4.gostudy.presentation.account.myprofile.MyProfileActivity
+import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainViewModel
-import com.group4.gostudy.presentation.splashscreen.SplashScreen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {
@@ -55,7 +55,7 @@ class AccountFragment : Fragment() {
     }
     private fun navigateToLogin() {
         requireActivity().run {
-            startActivity(Intent(this, SplashScreen::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
