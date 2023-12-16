@@ -11,6 +11,7 @@ import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
@@ -81,7 +82,7 @@ interface GoStudyApiService {
 
     @POST("auth/verify")
     suspend fun verify(
-        @Body otp: String
+        @Body otp: OtpRequest
     ): VerifyResponse
 
     @POST("auth/forgot-password")

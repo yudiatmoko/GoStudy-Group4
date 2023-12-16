@@ -12,6 +12,7 @@ import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.register.RegisterActivity
+import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,14 +63,16 @@ class LoginActivity : AppCompatActivity() {
                     binding.layoutFormLogin.pbLoading.isVisible = false
                     binding.layoutFormLogin.btnLogin.isVisible = true
                     binding.layoutFormLogin.btnLogin.isEnabled = true
-                    Toast.makeText(
-                        this,
-                        getString(
-                            R.string.login_failed,
-                            it.exception?.message.orEmpty()
-                        ),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if (it.exception is ApiException) {
+                        Toast.makeText(
+                            this,
+                            getString(
+                                R.string.login_failed,
+                                it.exception.getParsedError()?.message
+                            ),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             )
         }

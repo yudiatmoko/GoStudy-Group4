@@ -8,6 +8,7 @@ import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
@@ -58,7 +59,7 @@ interface GoStudyApiDataSource {
 
     suspend fun resendOtp(): OtpResponse
 
-    suspend fun verify(otp: String): VerifyResponse
+    suspend fun verify(otp: OtpRequest): VerifyResponse
 
     suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse
 }
@@ -131,7 +132,7 @@ class GoStudyApiDataSourceImpl(
     }
 
     override suspend fun verify(
-        otp: String
+        otp: OtpRequest
     ): VerifyResponse {
         return service.verify(otp)
     }

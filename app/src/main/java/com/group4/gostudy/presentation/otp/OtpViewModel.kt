@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.utils.ResultWrapper
@@ -21,7 +22,7 @@ class OtpViewModel(private val repository: UserRepository) : ViewModel() {
     val resendOtp: LiveData<ResultWrapper<OtpResponse>>
         get() = _resendOtp
 
-    fun verifyResult(otp: String) {
+    fun verifyResult(otp: OtpRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.verify(otp).collect {
                 _verify.postValue(it)

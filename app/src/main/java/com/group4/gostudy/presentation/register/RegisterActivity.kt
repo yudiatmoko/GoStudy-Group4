@@ -14,6 +14,7 @@ import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.otp.OtpActivity
+import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.highLightWord
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -64,14 +65,16 @@ class RegisterActivity : AppCompatActivity() {
                     binding.layoutFormRegister.pbLoading.isVisible = false
                     binding.layoutFormRegister.btnRegister.isVisible = true
                     binding.layoutFormRegister.btnRegister.isEnabled = true
-                    Toast.makeText(
-                        this,
-                        getString(
-                            R.string.register_failed,
-                            it.exception?.message.orEmpty()
-                        ),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if (it.exception is ApiException) {
+                        Toast.makeText(
+                            this,
+                            getString(
+                                R.string.register_failed,
+                                it.exception.getParsedError()?.message
+                            ),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             )
         }
