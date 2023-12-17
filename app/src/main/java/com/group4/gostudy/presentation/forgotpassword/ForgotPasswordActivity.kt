@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.group4.gostudy.databinding.ActivityResetPasswordBinding
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ResultWrapper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -12,6 +13,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResetPasswordBinding
     private val viewModel: ForgotPasswordViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
