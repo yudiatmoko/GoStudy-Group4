@@ -1,43 +1,28 @@
 package com.group4.gostudy.model
 
 data class SectionedData(
-    val name: String,
-    val time: String,
-    val data: List<String>
+    val dataHeader: List<Chapter>?,
+    val dataItem: List<Module>?
 )
 
-object DummyDetailCourseMaterialDataSource {
-    fun getListData(): List<SectionedData> {
-        return listOf(
-            SectionedData(
-                "Chapter 1 - Pendahuluan",
-                "60 menit",
-                listOf(
-                    "Tujuan mengikuti kelas Design System",
-                    "Pengenalan Design System",
-                    "Contoh dalam membagun Design System"
-                )
-            ),
-            SectionedData(
-                "Chapter 2 - Memulai Desain",
-                "120 menit",
-                listOf(
-                    "Color Palette",
-                    "Typography",
-                    "Layout dan Grid",
-                    "Button Component"
-                )
-            ),
-            SectionedData(
-                "Chapter 3 - Workflow",
-                "120",
-                listOf(
-                    "Color Palette",
-                    "Typography",
-                    "Layout dan Grid",
-                    "Button Component"
-                )
-            )
-        )
-    }
-}
+data class Chapter(
+    val noChapter: Int?,
+    var id: Int?,
+    val courseId: Int?,
+    val name: String?,
+    val createdAt: String?,
+    val updateAt: String?
+)
+data class Module(
+    val id:Int,
+    val no:Int,
+    val name:String,
+    val description: String,
+    val chapterId:Int?,
+    val videoUrl:String,
+    val videoId: String,
+    val duration: Int,
+    val createdBy: String,
+    val createdAt: String,
+    val updatedAt: String,
+)
