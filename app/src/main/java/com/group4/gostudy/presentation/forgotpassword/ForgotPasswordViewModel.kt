@@ -5,19 +5,39 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.repository.UserRepository
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ForgotPasswordViewModel(private val repository: UserRepository) : ViewModel() {
+class ForgotPasswordViewModel(private val repository: UserRepository, private val mainViewModel: MainViewModel) : ViewModel() {
 
     private val _forgotPasswordResult = MutableLiveData<ResultWrapper<String>>()
     val forgotPasswordResult: LiveData<ResultWrapper<String>> get() = _forgotPasswordResult
 
+    private val _tokenResult = MutableLiveData<String>()
+    val tokenResult: LiveData<String> get() = _tokenResult
+
     fun forgotPassword(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.forgotPassword(email).collect {
-                _forgotPasswordResult.postValue(it)
+                when (it) {
+                    is ResultWrapper.Success -> {
+                        val token = it.payload
+                        token?.let { nonNullToken ->
+                            mainViewModel.setUserToken(nonNullToken)
+                        }
+                        _forgotPasswordResult.postValue(it)
+                    }
+                    is ResultWrapper.Error -> {
+                        _forgotPasswordResult.postValue(it)
+                    }
+                    is ResultWrapper.Loading -> {
+                        _forgotPasswordResult.postValue(it)
+                    }
+                    else -> {
+                    }
+                }
             }
         }
     }
