@@ -28,6 +28,7 @@ import com.group4.gostudy.presentation.login.LoginViewModel
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.notification.NotificationViewModel
 import com.group4.gostudy.presentation.otp.OtpViewModel
+import com.group4.gostudy.presentation.payment.PaymentViewModel
 import com.group4.gostudy.presentation.register.RegisterViewModel
 import com.group4.gostudy.utils.AssetWrapper
 import com.group4.gostudy.utils.PreferenceDataStoreHelper
@@ -80,6 +81,7 @@ object AppModules {
         viewModelOf(::RegisterViewModel)
         viewModelOf(::OtpViewModel)
         viewModelOf(::ForgotPasswordViewModel)
+        viewModelOf(::PaymentViewModel)
     }
 
     val modules: List<Module> = listOf(
