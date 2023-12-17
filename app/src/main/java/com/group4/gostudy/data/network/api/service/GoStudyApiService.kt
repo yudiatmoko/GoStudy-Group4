@@ -4,12 +4,14 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.group4.gostudy.BuildConfig
 import com.group4.gostudy.data.local.datastore.UserPreferenceDataSource
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
+import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
+import com.group4.gostudy.data.network.api.model.module.ModulesResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
@@ -96,9 +98,18 @@ interface GoStudyApiService {
     @GET("notification")
     suspend fun getNotifications(): NotificationsResponse
 
+    @GET("chapter")
+    suspend fun getChapter(): ChaptersResponse
+
+    @GET("module")
+    suspend fun getModules(): ModulesResponse
+
     companion object {
         @JvmStatic
-        operator fun invoke(chucker: ChuckerInterceptor, userPreferenceDataSource: UserPreferenceDataSource): GoStudyApiService {
+        operator fun invoke(
+            chucker: ChuckerInterceptor,
+            userPreferenceDataSource: UserPreferenceDataSource
+        ): GoStudyApiService {
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(chucker)
                 .addInterceptor(AuthorizationInterceptor(userPreferenceDataSource))
