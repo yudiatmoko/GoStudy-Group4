@@ -1,10 +1,5 @@
 package com.group4.gostudy.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
-
 data class DetailCourse(
     val chapterId: Int?,
     val createdAt: String?,
@@ -17,4 +12,4 @@ data class DetailCourse(
     val updatedAt: String?,
     val videoId: String?,
     val videoUrl: String?
-) : Parcelable
+)

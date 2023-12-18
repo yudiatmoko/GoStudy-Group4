@@ -1,21 +1,16 @@
 package com.group4.gostudy.presentation.detail.about
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.databinding.FragmentAboutBinding
-import com.group4.gostudy.model.DetailCourse
-import com.group4.gostudy.utils.proceedWhen
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AboutFragment : Fragment() {
     private lateinit var binding: FragmentAboutBinding
 
-    private val aboutViewModel: AboutViewModel by viewModel()
+    //  private val viewModel: AboutViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,21 +21,59 @@ class AboutFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+ /*   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showdataDetail(aboutViewModel.detail)
-        setObserve()
+        setObserveAbout()
+        showdataDetail()
     }
 
-    private fun showdataDetail(item: DetailCourse?) {
-        binding.tvAboutClass.text = item?.description
+    private fun showdataDetail() {
+        binding.tvAboutClass.text = viewModel.
     }
 
-    private fun setObserve() {
-        aboutViewModel.getModule()
-        aboutViewModel.modules.observe(viewLifecycleOwner) {
-            it.proceedWhen {
-            }
+    private fun setObserveAbout() {
+        viewModel.getModule()
+        viewModel.modules.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = true
+                    binding.layoutStateCourse.llAnimError.isVisible = false
+                    binding.tvAboutClass.isVisible = false
+                },
+                doOnSuccess = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = false
+                    binding.layoutStateCourse.llAnimError.isVisible = false
+                    binding.tvAboutClass.isVisible = true
+                },
+                doOnError = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = false
+                    binding.layoutStateCourse.llAnimError.isVisible = true
+                    binding.tvAboutClass.isVisible = false
+                    if (it.exception is ApiException) {
+                        binding.layoutStateCourse.tvError.isVisible =
+                            true
+                        binding.layoutStateCourse.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                },
+                doOnEmpty = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = false
+                    binding.layoutStateCourse.tvError.isVisible = true
+                    binding.layoutStateCourse.llAnimError.isVisible = true
+                    binding.tvAboutClass.isVisible = false
+                    binding.layoutStateCourse.tvError.text =
+                        getString(R.string.text_no_data)
+                    if (it.exception is ApiException) {
+                        binding.layoutStateCourse.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                }
+
+            )
         }
     }
 
@@ -51,5 +84,5 @@ class AboutFragment : Fragment() {
             intent.putExtra(EXTRA_PRODUCT, detail)
             context.startActivity(intent)
         }
-    }
+    }*/
 }

@@ -24,6 +24,11 @@
             android:exported="false" />
         <activity
             android:name=".presentation.splashscreen.SplashScreen"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".presentation.detail.DetailCourseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,9 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.detail.DetailCourseActivity"
-            android:exported="false" />
         <activity
             android:name=".presentation.otp.OtpActivity"
             android:exported="false" />
