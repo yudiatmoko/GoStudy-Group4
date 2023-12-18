@@ -84,7 +84,7 @@ class GoStudyApiDataSourceImpl(
         search: String?,
         type: String?
     ): CoursesResponse {
-        return service.getCourses(category, search)
+        return service.getCourses(category, search, type)
     }
 
     override suspend fun updateProfile(
