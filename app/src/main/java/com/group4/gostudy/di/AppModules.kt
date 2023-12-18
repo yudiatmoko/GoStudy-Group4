@@ -10,6 +10,8 @@ import com.group4.gostudy.data.network.api.service.AuthorizationInterceptor
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.data.repository.CourseRepositoryImpl
+import com.group4.gostudy.data.repository.DetailRepository
+import com.group4.gostudy.data.repository.DetailRepositoryImpl
 import com.group4.gostudy.data.repository.HistoryRepository
 import com.group4.gostudy.data.repository.HistoryRepositoryImpl
 import com.group4.gostudy.data.repository.NotificationRepository
@@ -22,6 +24,7 @@ import com.group4.gostudy.presentation.account.history.HistoryViewModel
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
 import com.group4.gostudy.presentation.classes.ClassesViewModel
 import com.group4.gostudy.presentation.course.CourseViewModel
+import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordViewModel
 import com.group4.gostudy.presentation.home.HomeViewModel
 import com.group4.gostudy.presentation.login.LoginViewModel
@@ -60,7 +63,7 @@ object AppModules {
         single<UserRepository> { UserRepositoryImpl(get()) }
         single<HistoryRepository> { HistoryRepositoryImpl(get()) }
         single<CourseRepository> { CourseRepositoryImpl(get()) }
-        //  single<DetailRepository> { DetailRepositoryImpl(get()) }
+        single<DetailRepository> { DetailRepositoryImpl(get()) }
     }
 
     private val utilsModule = module {
@@ -81,7 +84,7 @@ object AppModules {
         viewModelOf(::RegisterViewModel)
         viewModelOf(::OtpViewModel)
         viewModelOf(::ForgotPasswordViewModel)
-        // viewModel { AboutViewModel(get(), get()) }
+        viewModelOf(::DetailViewModel)
     }
 
     val modules: List<Module> = listOf(

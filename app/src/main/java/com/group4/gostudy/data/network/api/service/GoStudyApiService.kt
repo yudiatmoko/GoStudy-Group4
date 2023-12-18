@@ -4,13 +4,15 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.group4.gostudy.BuildConfig
 import com.group4.gostudy.data.local.datastore.UserPreferenceDataSource
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
+import com.group4.gostudy.data.network.api.model.chapter.ChapterRespone
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
-import com.group4.gostudy.data.network.api.model.detail.ModuleResponse
+import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
+import com.group4.gostudy.data.network.api.model.module.ModuleResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
@@ -99,6 +101,16 @@ interface GoStudyApiService {
 
     @GET("module")
     suspend fun getModules(): ModuleResponse
+
+    @GET("chapter")
+    suspend fun getChapters(): ChapterRespone
+
+    @GET("course/{id}")
+    suspend fun getCourseId(
+        @Query("categoryName") category: String? = null,
+        @Query("moduleName") module: String? = null,
+        @Query("chapterName") chapter: String? = null
+    ): CoursesIdResponse
 
     companion object {
         @JvmStatic

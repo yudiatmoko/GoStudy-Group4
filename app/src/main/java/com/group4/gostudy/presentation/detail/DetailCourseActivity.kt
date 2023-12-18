@@ -1,5 +1,7 @@
 package com.group4.gostudy.presentation.detail
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
@@ -16,11 +18,14 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityDetailCourseBinding
+import com.group4.gostudy.model.PopularCourse
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailCourseActivity : AppCompatActivity() {
     private val binding: ActivityDetailCourseBinding by lazy {
@@ -39,9 +44,12 @@ class DetailCourseActivity : AppCompatActivity() {
     }
 
     private var previousOrientation: Int = -1
+
+    private val viewModel: DetailViewModel by viewModel { parametersOf(intent?.extras) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        showData(viewModel.course)
 
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -104,6 +112,7 @@ class DetailCourseActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun initYoutube() {
         val iFramePlayerOptions = IFramePlayerOptions.Builder()
             .controls(1)
@@ -172,6 +181,27 @@ class DetailCourseActivity : AppCompatActivity() {
         binding.flFullscreen.apply {
             isVisible = true
             addView(view)
+        }
+    }
+
+    private fun showData(course: PopularCourse?) {
+        course?.let {
+            binding.tvClassName.text = it.category?.name
+            binding.tvLevel.text = it.level
+            binding.tvDuration.text = String.format("%.0f Menit", it.totalDuration?.toDouble())
+            binding.tvModule.text = String.format("%.0f Modul", it.totalModule?.toDouble())
+            binding.tvClassTitle.text = it.name
+            binding.tvRating.text = ""
+            binding.txtMentorName.text = String.format("by %s", it.courseBy)
+        }
+    }
+
+    companion object {
+        const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+        fun startActivity(context: Context, course: PopularCourse?) {
+            val intent = Intent(context, DetailCourseActivity::class.java)
+            intent.putExtra(EXTRA_PRODUCT, course)
+            context.startActivity(intent)
         }
     }
 }
