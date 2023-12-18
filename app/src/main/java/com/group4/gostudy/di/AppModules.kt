@@ -28,6 +28,8 @@ import com.group4.gostudy.presentation.classes.ClassesViewModel
 import com.group4.gostudy.presentation.course.CourseViewModel
 import com.group4.gostudy.presentation.detail.material.MaterialViewModel
 import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderViewModel
+import com.group4.gostudy.presentation.detail.material.MaterialViewModel
+import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderViewModel
 import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordViewModel
 import com.group4.gostudy.presentation.home.HomeViewModel
@@ -68,6 +70,8 @@ object AppModules {
         single<UserRepository> { UserRepositoryImpl(get()) }
         single<HistoryRepository> { HistoryRepositoryImpl(get()) }
         single<CourseRepository> { CourseRepositoryImpl(get()) }
+        single<ChapterRepository> { ChapterRepositoryImpl(get()) }
+
     }
 
     private val utilsModule = module {
@@ -88,6 +92,8 @@ object AppModules {
         viewModelOf(::RegisterViewModel)
         viewModelOf(::OtpViewModel)
         viewModelOf(::ForgotPasswordViewModel)
+        viewModelOf(::MaterialViewModel)
+        viewModelOf(::DialogOrderViewModel)
         viewModelOf(::PaymentViewModel)
         viewModelOf(::DetailViewModel)
         viewModelOf(::MaterialViewModel)
