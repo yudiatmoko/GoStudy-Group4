@@ -114,6 +114,22 @@ class GoStudyApiDataSourceImpl(
         return service.getCourseId(category, module, chapter)
     }
 
+    override suspend fun getModules(): ModuleResponse {
+        return service.getModules()
+    }
+
+    override suspend fun getChapters(): ChapterRespone {
+        return service.getChapters()
+    }
+
+    override suspend fun getCourseId(
+        category: String?,
+        chapter: String?,
+        module: String?
+    ): CoursesIdResponse {
+        return service.getCourseId(category, module, chapter)
+    }
+
     override suspend fun updateProfile(
         name: RequestBody?,
         phoneNumber: RequestBody?,
