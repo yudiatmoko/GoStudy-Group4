@@ -33,7 +33,7 @@ class ChapterRepositoryImpl(
 
     override suspend fun getModules(): Flow<ResultWrapper<List<Module>>> {
         return proceedFlow {
-            apiDataSource.getModules().data.module?.toModuleList() ?: emptyList()
+            apiDataSource.getModules().data.modules.toModuleList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {

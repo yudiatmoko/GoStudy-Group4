@@ -111,7 +111,6 @@ class DialogOrderFragment : Fragment() {
         }
         binding.toolbar.setOnClickListener {
             findNavController().popBackStack()
-            // dismiss()
         }
     }
 

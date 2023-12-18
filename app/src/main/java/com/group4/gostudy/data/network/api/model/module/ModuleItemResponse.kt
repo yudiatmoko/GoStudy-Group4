@@ -31,17 +31,17 @@ data class ModuleItemResponse(
 )
 
 fun ModuleItemResponse.toModule() = Module(
-    chapterId = this.chapterId ?: 0,
-    createdAt = this.createdAt.orEmpty(),
-    createdBy = this.createdBy.orEmpty(),
-    description = this.description.orEmpty(),
-    duration = this.duration ?: 0,
     id = this.id ?: 0,
-    name = this.name.orEmpty(),
     no = this.no ?: 0,
-    updatedAt = this.updatedAt.orEmpty(),
+    name = this.name.orEmpty(),
+    description = this.description.orEmpty(),
+    chapterId = this.chapterId ?: 0,
     videoUrl = this.videoUrl.orEmpty(),
-    videoId = this.videoId.orEmpty()
+    videoId = this.videoId.orEmpty(),
+    duration = this.duration ?: 0,
+    createdBy = this.createdBy.orEmpty(),
+    createdAt = this.createdAt.orEmpty(),
+    updatedAt = this.updatedAt.orEmpty()
 )
 
 fun Collection<ModuleItemResponse>.toModuleList() = this.map {

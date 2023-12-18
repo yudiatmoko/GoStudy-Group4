@@ -27,7 +27,6 @@ fun DataChapterResponse.toChapter() = Chapter(
     name = this.name.orEmpty(),
     createdAt = this.createdAt.orEmpty(),
     updateAt = this.updatedAt.orEmpty()
-
 )
 
 fun Collection<DataChapterResponse>.toChapterList() = this.map {
