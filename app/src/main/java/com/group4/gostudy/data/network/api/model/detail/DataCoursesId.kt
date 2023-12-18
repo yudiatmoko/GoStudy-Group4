@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class DataModules(
-    @SerializedName("modules")
-    val module: List<ModuleItemResponse>?
+data class DataCoursesId(
+    @SerializedName("course")
+    val course: List<CourseIdItemResponse>?
 )

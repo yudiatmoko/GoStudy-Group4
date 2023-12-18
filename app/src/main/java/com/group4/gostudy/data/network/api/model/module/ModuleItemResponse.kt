@@ -1,8 +1,8 @@
-package com.group4.gostudy.data.network.api.model.detail
+package com.group4.gostudy.data.network.api.model.module
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.group4.gostudy.model.DetailCourse
+import com.group4.gostudy.model.Module
 
 @Keep
 data class ModuleItemResponse(
@@ -30,7 +30,7 @@ data class ModuleItemResponse(
     val videoUrl: String?
 )
 
-fun ModuleItemResponse.toModule() = DetailCourse(
+fun ModuleItemResponse.toModule() = Module(
     chapterId = this.chapterId ?: 0,
     createdAt = this.createdAt.orEmpty(),
     createdBy = this.createdBy ?: 0,
