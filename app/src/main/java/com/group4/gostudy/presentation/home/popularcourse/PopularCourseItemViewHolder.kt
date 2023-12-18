@@ -19,6 +19,9 @@ class PopularCourseItemViewHolder(
     ViewHolderBinder<PopularCourse> {
 
     override fun bind(item: PopularCourse) {
+        binding.root.setOnClickListener {
+            onClicked.invoke(item)
+        }
         binding.tvCategoryName.text = item.category?.name
         binding.tvCourseTitle.text = item.name
         binding.tvInstructorName.text = String.format("by %s", item.courseBy)
@@ -38,6 +41,10 @@ class PopularCourseViewMoreItemViewHolder(
     ViewHolderBinder<PopularCourse> {
 
     override fun bind(item: PopularCourse) {
+        binding.root.setOnClickListener {
+            onClicked.invoke(item)
+        }
+
         binding.tvCategoryName.text = item.category?.name
         binding.tvCourseTitle.text = item.name
         binding.tvInstructorName.text = String.format("by %s", item.courseBy)

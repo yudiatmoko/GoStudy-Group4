@@ -1,12 +1,15 @@
 package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
+import com.group4.gostudy.data.network.api.model.chapter.ChapterRespone
 import com.group4.gostudy.data.network.api.model.course.CoursesResponse
+import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
+import com.group4.gostudy.data.network.api.model.module.ModuleResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
@@ -38,6 +41,14 @@ interface GoStudyApiDataSource {
         search: String?,
         type: String?
     ): CoursesResponse
+
+    suspend fun getModules(): ModuleResponse
+    suspend fun getChapters(): ChapterRespone
+    suspend fun getCourseId(
+        category: String?,
+        chapter: String?,
+        module: String?
+    ): CoursesIdResponse
 
     suspend fun updateProfile(
         name: RequestBody?,
@@ -85,6 +96,22 @@ class GoStudyApiDataSourceImpl(
         type: String?
     ): CoursesResponse {
         return service.getCourses(category, search, type)
+    }
+
+    override suspend fun getModules(): ModuleResponse {
+        return service.getModules()
+    }
+
+    override suspend fun getChapters(): ChapterRespone {
+        return service.getChapters()
+    }
+
+    override suspend fun getCourseId(
+        category: String?,
+        chapter: String?,
+        module: String?
+    ): CoursesIdResponse {
+        return service.getCourseId(category, module, chapter)
     }
 
     override suspend fun updateProfile(

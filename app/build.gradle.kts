@@ -149,4 +149,6 @@ dependencies {
     implementation("com.google.android.flexbox:flexbox:3.0.0")
     // shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+    // ytplayer
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 }

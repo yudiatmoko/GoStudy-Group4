@@ -1,5 +1,9 @@
 package com.group4.gostudy.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Category(
     val createdAt: String?,
     val id: Int?,
@@ -8,7 +12,7 @@ data class Category(
     val name: String?,
     val slug: String?,
     val updatedAt: String?
-)
+) : Parcelable
 
 /*object CategoryProvider {
     fun getDummyData(): List<Category> {

@@ -10,7 +10,7 @@ import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PaymentViewModel(private val courseRepository: CourseRepository): ViewModel() {
+class PaymentViewModel(private val courseRepository: CourseRepository) : ViewModel() {
     val priceLiveData = MutableLiveData<Double>().apply {
         postValue(0.0)
     }

@@ -5,57 +5,84 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.group4.gostudy.R
+import com.group4.gostudy.databinding.FragmentAboutBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AboutFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AboutFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentAboutBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    //  private val viewModel: AboutViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false)
+    ): View {
+        binding = FragmentAboutBinding.inflate(inflater)
+        return binding.root
+    }
+
+ /*   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setObserveAbout()
+        showdataDetail()
+    }
+
+    private fun showdataDetail() {
+        binding.tvAboutClass.text = viewModel.
+    }
+
+    private fun setObserveAbout() {
+        viewModel.getModule()
+        viewModel.modules.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = true
+                    binding.layoutStateCourse.llAnimError.isVisible = false
+                    binding.tvAboutClass.isVisible = false
+                },
+                doOnSuccess = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = false
+                    binding.layoutStateCourse.llAnimError.isVisible = false
+                    binding.tvAboutClass.isVisible = true
+                },
+                doOnError = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = false
+                    binding.layoutStateCourse.llAnimError.isVisible = true
+                    binding.tvAboutClass.isVisible = false
+                    if (it.exception is ApiException) {
+                        binding.layoutStateCourse.tvError.isVisible =
+                            true
+                        binding.layoutStateCourse.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                },
+                doOnEmpty = {
+                    binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.animLoading.isVisible = false
+                    binding.layoutStateCourse.tvError.isVisible = true
+                    binding.layoutStateCourse.llAnimError.isVisible = true
+                    binding.tvAboutClass.isVisible = false
+                    binding.layoutStateCourse.tvError.text =
+                        getString(R.string.text_no_data)
+                    if (it.exception is ApiException) {
+                        binding.layoutStateCourse.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                }
+
+            )
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AboutFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AboutFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+        const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+        fun startActivity(context: Context, detail: DetailCourse?) {
+            val intent = Intent(context, AboutFragment::class.java)
+            intent.putExtra(EXTRA_PRODUCT, detail)
+            context.startActivity(intent)
+        }
+    }*/
 }

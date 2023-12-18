@@ -3,14 +3,12 @@ package com.group4.gostudy.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-/*
-Hi, Code Enthusiast!
-https://github.com/yudiatmoko
-*/
 @Parcelize
-data class PopularCourse(
+data class DetailCourse(
     val benefits: String?,
     val category: Category?,
+    val chapter: Chapter?,
+    val module: Module?,
     val categoryId: Int?,
     val classCode: String?,
     val courseBy: String?,

@@ -36,11 +36,11 @@ class PaymentDetailActivity : AppCompatActivity() {
                 request: WebResourceRequest
             ): Boolean {
                 val requestUrl: String = request.getUrl().toString()
-                return if (requestUrl.contains("gojek://")
-                    || requestUrl.contains("shopeeid://")
-                    || requestUrl.contains("//wsa.wallet.airpay.co.id/") // This is handle for sandbox Simulator
-                    || requestUrl.contains("/gopay/partner/")
-                    || requestUrl.contains("/shopeepay/")
+                return if (requestUrl.contains("gojek://") ||
+                    requestUrl.contains("shopeeid://") ||
+                    requestUrl.contains("//wsa.wallet.airpay.co.id/") || // This is handle for sandbox Simulator
+                    requestUrl.contains("/gopay/partner/") ||
+                    requestUrl.contains("/shopeepay/")
                 ) {
                     val intent = Intent(Intent.ACTION_VIEW, request.getUrl())
                     startActivity(intent)
@@ -68,5 +68,4 @@ class PaymentDetailActivity : AppCompatActivity() {
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY)
         webView.loadUrl(url)
     }
-
 }
