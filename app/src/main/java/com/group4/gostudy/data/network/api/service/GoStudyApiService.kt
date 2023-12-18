@@ -115,7 +115,10 @@ interface GoStudyApiService {
 
     companion object {
         @JvmStatic
-        operator fun invoke(chucker: ChuckerInterceptor, userPreferenceDataSource: UserPreferenceDataSource): GoStudyApiService {
+        operator fun invoke(
+            chucker: ChuckerInterceptor,
+            userPreferenceDataSource: UserPreferenceDataSource
+        ): GoStudyApiService {
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(chucker)
                 .addInterceptor(AuthorizationInterceptor(userPreferenceDataSource))

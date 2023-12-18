@@ -73,8 +73,6 @@ interface GoStudyApiDataSource {
     suspend fun verify(otp: OtpRequest): VerifyResponse
 
     suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse
-    suspend fun getChapter(): ChaptersResponse
-    suspend fun getModules(): ModulesResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -169,11 +167,4 @@ class GoStudyApiDataSourceImpl(
     override suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse {
         return service.forgotPassword(request)
     }
-    override suspend fun getChapter(): ChaptersResponse {
-        return  service.getChapter()
-    }
-    override suspend fun getModules(): ModulesResponse {
-        return service.getModules()
-    }
-
 }

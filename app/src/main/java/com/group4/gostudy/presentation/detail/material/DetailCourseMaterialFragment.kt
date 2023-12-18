@@ -40,6 +40,7 @@ class DetailCourseMaterialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeChapter()
+        observeModule()
     }
 
     private fun observeChapter() {
@@ -72,6 +73,18 @@ class DetailCourseMaterialFragment : Fragment() {
                             true
                         binding.layoutStateChapter.tvError.text =
                             it.exception.getParsedError()?.message
+                    }
+                }
+            )
+        }
+    }
+    private fun observeModule() {
+        materialViewModel.getModule()
+        materialViewModel.modules.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnSuccess = { moduleResult ->
+                    moduleResult.payload?.let { modules ->
+                        setData(null, modules)
                     }
                 }
             )

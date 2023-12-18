@@ -9,5 +9,4 @@ data class ChaptersResponse(
     val baseResponse: BaseResponse,
     @SerializedName("data")
     val data: DataChapter
-
 )

@@ -11,14 +11,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DialogOrderViewModel(private val orderRepo: CourseRepository) : ViewModel() {
-    private val _courses = MutableLiveData<ResultWrapper<List<PopularCourse>>>()
+    private val _courses =
+        MutableLiveData<ResultWrapper<List<PopularCourse>>>()
 
     val courses: LiveData<ResultWrapper<List<PopularCourse>>>
         get() = _courses
 
-    fun getCourse(category: String? = null, search: String? = null, type: String? = null) {
+    fun getCourse(
+        category: String? = null,
+        search: String? = null,
+        type: String? = null
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            orderRepo.getCourses(category, search, type).collect {
+            orderRepo.getCourses(
+                category,
+                search,
+                type
+            ).collect {
                 _courses.postValue(it)
             }
         }
