@@ -25,7 +25,6 @@ class MaterialViewModel(
             chapterRepo.getChapters().collect {
                 _chapters.postValue(it)
             }
-
         }
     }
 

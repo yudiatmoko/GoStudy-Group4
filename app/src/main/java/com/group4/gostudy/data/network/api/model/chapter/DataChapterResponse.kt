@@ -17,8 +17,8 @@ data class DataChapterResponse(
     @SerializedName("updatedAt")
     val updatedAt: String?,
     @SerializedName("createdAt")
-    val createdAt: String?,
-    )
+    val createdAt: String?
+)
 
 fun DataChapterResponse.toChapter() = Chapter(
     id = this.id ?: 0,
@@ -26,11 +26,10 @@ fun DataChapterResponse.toChapter() = Chapter(
     courseId = this.courseId ?: 0,
     name = this.name.orEmpty(),
     createdAt = this.createdAt.orEmpty(),
-    updateAt = this.updatedAt.orEmpty(),
+    updateAt = this.updatedAt.orEmpty()
 
-    )
+)
 
 fun Collection<DataChapterResponse>.toChapterList() = this.map {
     it.toChapter()
 }
-

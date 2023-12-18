@@ -28,7 +28,6 @@ class DetailCourseMaterialFragment : Fragment() {
     }
     private val materialViewModel: MaterialViewModel by viewModel()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,7 +57,6 @@ class DetailCourseMaterialFragment : Fragment() {
                     chapterResult.payload?.let { chapters ->
                         setData(chapters, null)
                     }
-
                 },
                 doOnError = {
                     binding.layoutStateChapter.root.isVisible =

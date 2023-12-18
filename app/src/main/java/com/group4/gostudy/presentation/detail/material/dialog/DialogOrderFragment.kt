@@ -20,7 +20,6 @@ class DialogOrderFragment : Fragment() {
     private lateinit var binding: FragmentDialogOrderBinding
     private val dialogOrderViewModel: DialogOrderViewModel by viewModel()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -106,14 +105,13 @@ class DialogOrderFragment : Fragment() {
         }
     }
 
-
     private fun setClickListeners() {
         binding.btnOrder.setOnClickListener {
             navigateToPayment()
         }
         binding.toolbar.setOnClickListener {
             findNavController().popBackStack()
-            //dismiss()
+            // dismiss()
         }
     }
 

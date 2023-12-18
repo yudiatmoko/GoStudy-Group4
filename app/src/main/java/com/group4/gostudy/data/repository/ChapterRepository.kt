@@ -22,7 +22,7 @@ class ChapterRepositoryImpl(
 ) : ChapterRepository {
     override suspend fun getChapters(): Flow<ResultWrapper<List<Chapter>>> {
         return proceedFlow {
-            apiDataSource.getChapter().data.chapters.toChapterList()
+            apiDataSource.getChapters().data.chapters.toChapterList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
@@ -33,7 +33,7 @@ class ChapterRepositoryImpl(
 
     override suspend fun getModules(): Flow<ResultWrapper<List<Module>>> {
         return proceedFlow {
-            apiDataSource.getModules().data.modules.toModuleList()
+            apiDataSource.getModules().data.module?.toModuleList() ?: emptyList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {

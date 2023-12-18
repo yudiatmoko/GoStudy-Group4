@@ -11,7 +11,7 @@ data class ModuleItemResponse(
     @SerializedName("createdAt")
     val createdAt: String?,
     @SerializedName("createdBy")
-    val createdBy: Int?,
+    val createdBy: String?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("duration")
@@ -33,7 +33,7 @@ data class ModuleItemResponse(
 fun ModuleItemResponse.toModule() = Module(
     chapterId = this.chapterId ?: 0,
     createdAt = this.createdAt.orEmpty(),
-    createdBy = this.createdBy ?: 0,
+    createdBy = this.createdBy.orEmpty(),
     description = this.description.orEmpty(),
     duration = this.duration ?: 0,
     id = this.id ?: 0,

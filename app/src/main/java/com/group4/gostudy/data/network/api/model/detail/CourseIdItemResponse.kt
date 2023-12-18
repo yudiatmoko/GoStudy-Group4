@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.group4.gostudy.data.network.api.model.category.CategoryItemResponse
 import com.group4.gostudy.data.network.api.model.category.toCategory
-import com.group4.gostudy.data.network.api.model.chapter.ChapterItemRespone
+import com.group4.gostudy.data.network.api.model.chapter.DataChapterResponse
 import com.group4.gostudy.data.network.api.model.chapter.toChapter
 import com.group4.gostudy.data.network.api.model.module.ModuleItemResponse
 import com.group4.gostudy.data.network.api.model.module.toModule
@@ -17,7 +17,7 @@ data class CourseIdItemResponse(
     @SerializedName("Category")
     val category: CategoryItemResponse?,
     @SerializedName("Chapter")
-    val chapter: ChapterItemRespone?,
+    val chapter: DataChapterResponse?,
     @SerializedName("Category")
     val module: ModuleItemResponse?,
     @SerializedName("categoryId")
