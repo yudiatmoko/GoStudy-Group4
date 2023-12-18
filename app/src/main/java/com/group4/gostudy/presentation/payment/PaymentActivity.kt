@@ -95,7 +95,7 @@ class PaymentActivity : AppCompatActivity() {
         paymentViewModel.priceLiveData.observe(this) {
             binding.tvTotalPrice.text = it.toCurrencyFormat()
         }
-        paymentViewModel.ppnLiveData.observe(this){
+        paymentViewModel.ppnLiveData.observe(this) {
             binding.tvPpn.text = it.toCurrencyFormat()
         }
     }
@@ -109,7 +109,6 @@ class PaymentActivity : AppCompatActivity() {
             binding.tvPrice.text = courses.price.toString()
         }
     }
-
 
     private fun setClickListener() {
         binding.btnJoinClass.setOnClickListener {
@@ -130,5 +129,4 @@ class PaymentActivity : AppCompatActivity() {
         )
         startActivity(intent)
     }
-
 }
