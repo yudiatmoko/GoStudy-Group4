@@ -8,5 +8,7 @@ data class ForgotPasswordResponse(
     @SerializedName("message")
     val message: String?,
     @SerializedName("status")
-    val status: String?
+    val status: String?,
+    @SerializedName("data")
+    val data: DataForgotPasswordResponse
 )
