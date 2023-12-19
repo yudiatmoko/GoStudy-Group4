@@ -6,8 +6,6 @@ import com.group4.gostudy.data.network.api.model.user.DataUserResponse
 
 @Keep
 data class DataRegisterResponse(
-    @SerializedName("otp")
-    val otp: String?,
     @SerializedName("token")
     val token: String?,
     @SerializedName("user")
