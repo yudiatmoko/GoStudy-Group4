@@ -23,7 +23,10 @@ interface CourseRepository {
     suspend fun getCourses(
         category: String?,
         search: String?,
-        type: String?
+        type: String?,
+        level: String?,
+        promoPrecentage: Boolean?,
+        createAt: Boolean?
     ): Flow<ResultWrapper<List<PopularCourse>>>
 }
 
@@ -44,10 +47,13 @@ class CourseRepositoryImpl(
     override suspend fun getCourses(
         category: String?,
         search: String?,
-        type: String?
+        type: String?,
+        level: String?,
+        promoPrecentage: Boolean?,
+        createAt: Boolean?
     ): Flow<ResultWrapper<List<PopularCourse>>> {
         return proceedFlow {
-            apiDataSource.getCourses(category, search, type).data?.courses?.toCourseList() ?: emptyList()
+            apiDataSource.getCourses(category, search, type, level, promoPrecentage, createAt).data?.courses?.toCourseList() ?: emptyList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {

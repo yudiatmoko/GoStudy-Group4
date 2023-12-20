@@ -9,7 +9,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentClassesBinding
+import com.group4.gostudy.model.PopularCourse
 import com.group4.gostudy.presentation.classes.myclass.MyClassAdapter
+import com.group4.gostudy.presentation.course.course.CourseAdapter
+import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.hideKeyboard
@@ -26,8 +29,15 @@ class ClassesFragment : Fragment() {
     }
 
     private val myClassAdapter: MyClassAdapter by lazy {
-        MyClassAdapter { _ ->
+        MyClassAdapter {
+            CourseAdapter { course: PopularCourse ->
+                navigateToDetail(course)
+            }
         }
+    }
+
+    private fun navigateToDetail(courses: PopularCourse) {
+        DetailCourseActivity.startActivity(requireContext(), courses)
     }
 
     override fun onCreateView(
@@ -38,6 +48,7 @@ class ClassesFragment : Fragment() {
         binding = FragmentClassesBinding.inflate(inflater)
         return binding.root
     }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?
@@ -47,11 +58,11 @@ class ClassesFragment : Fragment() {
             savedInstanceState
         )
         navigateToNonLoginFragment()
-        setProgressCategoryRV()
         setMyClassRv()
         setSearchFeature()
         observeCourse()
     }
+
     private fun observeCourse() {
         classesViewModel.getCourse()
         classesViewModel.courses.observe(
@@ -118,6 +129,7 @@ class ClassesFragment : Fragment() {
             )
         }
     }
+
     private fun setSearchFeature() {
         binding.svCourse.setOnCloseListener() {
             hideKeyboard()
@@ -146,12 +158,5 @@ class ClassesFragment : Fragment() {
         binding.rvListOfClass.apply {
             adapter = myClassAdapter
         }
-    }
-
-    private fun setProgressCategoryRV() {
-//        binding.rvCatProgress.apply {
-//            adapter = progressCategoryAdapter
-//            progressCategoryAdapter.setData(ProgressCategoryProvider.getDummyData())
-//        }
     }
 }
