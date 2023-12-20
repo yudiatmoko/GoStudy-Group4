@@ -5,13 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
-import com.group4.gostudy.model.DummyDetailCourseMaterialDataSource
+import com.group4.gostudy.model.Chapter
+import com.group4.gostudy.model.Module
+import com.group4.gostudy.model.SectionedData
+import com.group4.gostudy.utils.ApiException
+import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.viewitem.DataItem
 import com.group4.gostudy.viewitem.HeaderItem
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailCourseMaterialFragment : Fragment() {
     private lateinit var binding: FragmentDetailCourseMaterialBinding
@@ -19,6 +26,7 @@ class DetailCourseMaterialFragment : Fragment() {
     private val adapter: GroupieAdapter by lazy {
         GroupieAdapter()
     }
+    private val materialViewModel: MaterialViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,32 +39,87 @@ class DetailCourseMaterialFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setData()
+        observeChapter()
+        observeModule()
     }
 
-    private fun setData() {
-        binding.rvData.adapter = adapter
-        val sections = DummyDetailCourseMaterialDataSource.getListData().map { sectionData ->
+    private fun observeChapter() {
+        materialViewModel.getChapter()
+        materialViewModel.chapters.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnSuccess = { chapterResult ->
+                    binding.layoutStateChapter.root.isVisible =
+                        true
+                    binding.layoutStateChapter.animLoading.isVisible =
+                        false
+                    binding.layoutStateChapter.llAnimError.isVisible =
+                        false
+                    binding.rvData.isVisible = true
+                    chapterResult.payload?.let { chapters ->
+                        setData(chapters, null)
+                    }
+                },
+                doOnError = {
+                    binding.layoutStateChapter.root.isVisible =
+                        true
+                    binding.layoutStateChapter.animLoading.isVisible =
+                        false
+                    binding.layoutStateChapter.llAnimError.isVisible =
+                        true
+                    binding.rvData.isVisible =
+                        false
+                    if (it.exception is ApiException) {
+                        binding.layoutStateChapter.tvError.isVisible =
+                            true
+                        binding.layoutStateChapter.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                }
+            )
+        }
+    }
+    private fun observeModule() {
+        materialViewModel.getModule()
+        materialViewModel.modules.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnSuccess = { moduleResult ->
+                    moduleResult.payload?.let { modules ->
+                        setData(null, modules)
+                    }
+                }
+            )
+        }
+    }
+
+    private fun setData(chapters: List<Chapter>?, module: List<Module>?) {
+        binding.rvData.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = adapter
+        }
+        val section = getListData(chapters, module).map {
             val section = Section()
             section.setHeader(
-                HeaderItem(sectionData.name, sectionData.time) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Header Clicked: ${sectionData.name}",
-                        Toast.LENGTH_SHORT
-                    )
+                HeaderItem(it.dataHeader?.get(0)?.name.orEmpty()) { data ->
+                    Toast.makeText(requireContext(), "Header Clicked : $data", Toast.LENGTH_SHORT)
                         .show()
                 }
             )
-            val items = sectionData.data.map { data ->
-                DataItem(data) {
-                    Toast.makeText(requireContext(), "Item Clicked: $data", Toast.LENGTH_SHORT)
+            val dataSection = it.dataItem?.map { data ->
+                DataItem(data.name) { data ->
+                    Toast.makeText(requireContext(), "Item Clicked : $data", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
-            section.addAll(items)
+            if (dataSection != null) {
+                section.addAll(dataSection)
+            }
             section
         }
-        adapter.addAll(sections)
+        adapter.addAll(section)
     }
+
+    private fun getListData(chapters: List<Chapter>?, module: List<Module>?): List<SectionedData> =
+        listOf(
+            SectionedData(chapters, module)
+        )
 }

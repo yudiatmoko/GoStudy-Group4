@@ -5,15 +5,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Module(
+    val id: Int,
+    val no: Int,
+    val name: String,
+    val description: String,
     val chapterId: Int?,
-    val createdAt: String?,
-    val createdBy: Int?,
-    val description: String?,
-    val duration: Int?,
-    val id: Int?,
-    val name: String?,
-    val no: Int?,
-    val updatedAt: String?,
-    val videoId: String?,
-    val videoUrl: String?
+    val videoUrl: String,
+    val videoId: String,
+    val duration: Int,
+    val createdBy: String,
+    val createdAt: String,
+    val updatedAt: String
 ) : Parcelable

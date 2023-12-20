@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName
 import com.group4.gostudy.data.network.api.model.common.BaseResponse
 
 @Keep
-data class ModuleResponse(
+data class ModulesResponse(
+    val baseResponse: BaseResponse,
     @SerializedName("data")
-    val dataModules: DataModules?,
-    val baseResponse: BaseResponse
+    val data: DataModules
 )

@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Chapter(
-    val courseId: Int?,
-    val createAt: String?,
-    val name: String?,
     val noChapter: Int?,
+    var id: Int?,
+    val courseId: Int?,
+    val name: String?,
+    val createdAt: String?,
     val updateAt: String?
-
 ) : Parcelable
