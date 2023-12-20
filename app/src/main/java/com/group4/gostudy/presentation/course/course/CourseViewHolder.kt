@@ -13,13 +13,16 @@ class CourseViewHolder(
     ViewHolderBinder<PopularCourse> {
 
     override fun bind(item: PopularCourse) {
+        binding.root.setOnClickListener {
+            onClicked.invoke(item)
+        }
         binding.tvCategoryName.text = item.category?.name
         binding.tvClassTitle.text = item.name
         binding.tvMentorName.text = String.format("by %s", item.courseBy)
         binding.tvLevel.text = item.level
         binding.tvModule.text = item.totalModule.toString()
         binding.tvDuration.text = item.totalDuration.toString()
-        binding.tvRating.text = item.level
+        binding.tvRating.text = item.rating.toString()
         binding.ivMyClass.load(item.imageUrl)
         binding.tvTypeClass.text = item.type
     }

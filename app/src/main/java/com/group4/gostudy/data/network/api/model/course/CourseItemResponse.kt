@@ -1,3 +1,4 @@
+ 
 package com.group4.gostudy.data.network.api.model.course
 
 import androidx.annotation.Keep
@@ -9,9 +10,7 @@ import com.group4.gostudy.model.PopularCourse
 @Keep
 data class CourseItemResponse(
     @SerializedName("benefits")
-    val benefits: String?,
-    @SerializedName("Category")
-    val category: CategoryItemResponse?,
+    val benefits: List<String>?,
     @SerializedName("categoryId")
     val categoryId: Int?,
     @SerializedName("classCode")
@@ -36,6 +35,8 @@ data class CourseItemResponse(
     val name: String?,
     @SerializedName("price")
     val price: Int?,
+    @SerializedName("rating")
+    val rating: Double?,
     @SerializedName("totalDuration")
     val totalDuration: Int?,
     @SerializedName("totalModule")
@@ -43,14 +44,17 @@ data class CourseItemResponse(
     @SerializedName("type")
     val type: String?,
     @SerializedName("updatedAt")
-    val updatedAt: String?
+    val updatedAt: String?,
+    @SerializedName("Category")
+    val category: CategoryItemResponse?
 )
 
 fun CourseItemResponse.toCourse() = PopularCourse(
-    benefits = this.benefits.orEmpty(),
+    benefits = this.benefits.orEmpty().joinToString(", "),
     categoryId = this.categoryId ?: 0,
     classCode = this.classCode.orEmpty(),
     courseBy = this.courseBy.orEmpty(),
+    rating = this.rating ?: 0.0,
     createdAt = this.createdAt.orEmpty(),
     createdBy = this.createdBy ?: 0,
     description = this.description.orEmpty(),

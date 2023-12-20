@@ -6,15 +6,8 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/ic_close_filter"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:src="@drawable/ic_close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,11 +19,20 @@
             android:layout_height="wrap_content">
 
 
+            <ImageView
+                android:id="@+id/ic_close_filter"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_close"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <CheckBox
                 android:id="@+id/cb_paling_baru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Paling Baru"
+                android:text="@string/txt_paling_baru"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="102dp" />
@@ -39,7 +41,7 @@
                 android:id="@+id/cb_paling_populer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Paling Populer"
+                android:text="@string/txt_paling_populer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_paling_baru"
                 tools:layout_editor_absoluteX="102dp" />
@@ -48,7 +50,7 @@
                 android:id="@+id/cb_Promo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Promo"
+                android:text="@string/txt_promo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_paling_populer"
                 tools:layout_editor_absoluteX="102dp" />
@@ -59,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Kategori"
+                android:text="@string/txt_kategori"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_Promo" />
@@ -68,7 +70,7 @@
                 android:id="@+id/cb_uiux"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UI/UX Design"
+                android:text="@string/txt_ui_ux_design"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_kategori_filter"
                 tools:layout_editor_absoluteX="102dp" />
@@ -77,7 +79,7 @@
                 android:id="@+id/cb_web_dev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Web Development"
+                android:text="@string/txt_web_development"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_uiux"
                 tools:layout_editor_absoluteX="102dp" />
@@ -86,7 +88,7 @@
                 android:id="@+id/cb_android_development"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Android Development"
+                android:text="@string/txt_android_development"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_web_dev"
                 tools:layout_editor_absoluteX="102dp" />
@@ -95,7 +97,7 @@
                 android:id="@+id/cb_ds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data Science"
+                android:text="@string/txt_data_science"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_android_development"
                 tools:layout_editor_absoluteX="102dp" />
@@ -104,7 +106,7 @@
                 android:id="@+id/cb_bi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Business Intelligence"
+                android:text="@string/txt_business_intelligence"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_ds"
                 tools:layout_editor_absoluteX="102dp" />
@@ -115,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Level Kesulitan"
+                android:text="@string/txt_level_kesulitan"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_bi" />
@@ -124,16 +126,16 @@
                 android:id="@+id/cb_all_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Semua Level"
+                android:text="@string/txt_semua_level"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_level_kesulitan"
                 tools:layout_editor_absoluteX="102dp" />
 
             <CheckBox
-                android:id="@+id/cb_beinner_level"
+                android:id="@+id/cb_beginner_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Beginner Level"
+                android:text="@string/txt_beginner_level"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_all_level"
                 tools:layout_editor_absoluteX="102dp" />
@@ -142,16 +144,16 @@
                 android:id="@+id/cb_intermediate_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Intermediate Level"
+                android:text="@string/txt_intermediate_level_2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_beinner_level"
+                app:layout_constraintTop_toBottomOf="@+id/cb_beginner_level"
                 tools:layout_editor_absoluteX="102dp" />
 
             <CheckBox
-                android:id="@+id/cb_advance_level"
+                android:id="@+id/cb_advanced_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Advanced level"
+                android:text="@string/txt_advanced_level"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_intermediate_level"
                 tools:layout_editor_absoluteX="102dp" />
@@ -163,7 +165,7 @@
                 android:layout_margin="8dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Terapkan Filter"
-                app:layout_constraintTop_toBottomOf="@+id/cb_advance_level" />
+                app:layout_constraintTop_toBottomOf="@+id/cb_advanced_level" />
 
             <Button
                 android:id="@+id/btn_delete_filter"

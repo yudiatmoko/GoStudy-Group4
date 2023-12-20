@@ -73,7 +73,10 @@ interface GoStudyApiService {
     suspend fun getCourses(
         @Query("categoryName") category: String? = null,
         @Query("search") search: String? = null,
-        @Query("type") type: String? = null
+        @Query("type") type: String? = null,
+        @Query("level") level: String? = null,
+        @Query("createAt") createAt: Boolean? = null,
+        @Query("promoPrecentage") promoPrecentage: Boolean? = null
     ): CoursesResponse
 
     @POST("auth/register")

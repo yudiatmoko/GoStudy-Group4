@@ -115,4 +115,20 @@
     <string name="text_reset">Reset</string>
     <string name="verify_failed">Gagal verifikasi OTP: %1$s</string>
     <string name="verify_success">Sukses verifikasi OTP: %1$s</string>
+    <string name="txt_modul">Modul</string>
+    <string name="txt_menit">Menit</string>
+    <string name="txt_paling_baru">Paling Baru</string>
+    <string name="txt_paling_populer">Paling Populer</string>
+    <string name="txt_promo">Promo</string>
+    <string name="txt_kategori">Kategori</string>
+    <string name="txt_ui_ux_design">UI/UX Design</string>
+    <string name="txt_web_development">Web Development</string>
+    <string name="txt_android_development">Android Development</string>
+    <string name="txt_data_science">Data Science</string>
+    <string name="txt_business_intelligence">Business Intelligence</string>
+    <string name="txt_level_kesulitan">Level Kesulitan</string>
+    <string name="txt_semua_level">Semua Level</string>
+    <string name="txt_beginner_level">Beginner Level</string>
+    <string name="txt_intermediate_level_2">Intermediate Level</string>
+    <string name="txt_advanced_level">Advanced level</string>
 </resources>

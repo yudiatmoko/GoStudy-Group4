@@ -38,4 +38,9 @@ class DialogHomeNonLoginFragment : BottomSheetDialogFragment() {
             dismiss()
         }
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
 }
