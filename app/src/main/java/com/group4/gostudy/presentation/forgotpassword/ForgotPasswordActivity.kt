@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.databinding.ActivityResetPasswordBinding
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ResultWrapper
@@ -34,7 +35,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
             if (isValidEmail(email)) {
                 // Panggil metode forgotPassword dari viewModel
-                viewModel.forgotPassword(email)
+                viewModel.forgotPassword(
+                    ForgotPasswordRequest(email)
+                )
             } else {
                 Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show()
             }
