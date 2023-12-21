@@ -103,7 +103,6 @@ interface GoStudyApiService {
     @GET("notification")
     suspend fun getNotifications(): NotificationsResponse
 
-
     @GET("module")
     suspend fun getModules(): ModulesResponse
 
