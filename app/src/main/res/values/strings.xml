@@ -132,4 +132,5 @@
     <string name="txt_intermediate_level_2">Intermediate Level</string>
     <string name="txt_advanced_level">Advanced level</string>
     <string name="text_title_list">Materi belajar</string>
+    <string name="text_materi_belajar">Materi belajar</string>
 </resources>
