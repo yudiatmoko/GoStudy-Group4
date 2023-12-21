@@ -116,4 +116,5 @@
     <string name="verify_failed">Gagal verifikasi OTP: %1$s</string>
     <string name="verify_success">Sukses verifikasi OTP: %1$s</string>
     <string name="text_title_list">Materi belajar</string>
+    <string name="text_materi_belajar">Materi belajar</string>
 </resources>
