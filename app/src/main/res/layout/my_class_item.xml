@@ -133,10 +133,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="4dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
                     tools:text="@string/txt_7_modul" />
+                <TextView
+                    android:id="@+id/tv_module_2"
+                    style="@style/TextAppearance.Material3.BodySmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/black"
+                    android:text="@string/txt_modul" />
+
 
                 <ImageView
                     android:layout_width="16dp"
@@ -150,9 +161,18 @@
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/black"
                     tools:text="@string/txt_120_menit" />
+                <TextView
+                    android:id="@+id/tv_duration_2"
+                    style="@style/TextAppearance.Material3.BodySmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/black"
+                    android:text="@string/txt_menit" />
             </LinearLayout>
 
             <LinearLayout

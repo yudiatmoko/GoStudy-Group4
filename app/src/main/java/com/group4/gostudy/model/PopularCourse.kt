@@ -18,6 +18,7 @@ data class PopularCourse(
     val createdBy: Int?,
     val description: String?,
     val id: Int?,
+    val rating: Double,
     val imageId: String?,
     val imageUrl: String?,
     val level: String?,

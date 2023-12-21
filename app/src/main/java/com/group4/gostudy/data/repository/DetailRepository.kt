@@ -1,7 +1,7 @@
 package com.group4.gostudy.data.repository
 
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
-import com.group4.gostudy.data.network.api.model.course.toCourseList
+// import com.group4.gostudy.data.network.api.model.course.toCourseList
 import com.group4.gostudy.data.network.api.model.detail.toCourseList
 import com.group4.gostudy.model.DetailCourse
 import com.group4.gostudy.utils.ResultWrapper
