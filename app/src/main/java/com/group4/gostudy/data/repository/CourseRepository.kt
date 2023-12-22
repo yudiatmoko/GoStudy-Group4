@@ -2,9 +2,11 @@ package com.group4.gostudy.data.repository
 
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.category.toCategoryList
+import com.group4.gostudy.data.network.api.model.coursev2.toChapterList
 import com.group4.gostudy.data.network.api.model.coursev2.toCourse
 import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
 import com.group4.gostudy.model.Category
+import com.group4.gostudy.model.Chapter
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
@@ -31,6 +33,7 @@ interface CourseRepository {
     ): Flow<ResultWrapper<List<Course>>>
 
     suspend fun getCourseById(id: Int): Flow<ResultWrapper<Course>>
+    suspend fun getChaptersV2(id: Int): Flow<ResultWrapper<List<Chapter>>>
 }
 
 class CourseRepositoryImpl(
@@ -75,6 +78,17 @@ class CourseRepositoryImpl(
     override suspend fun getCourseById(id: Int): Flow<ResultWrapper<Course>> {
         return proceedFlow {
             apiDataSource.getCourseById(id).data.course.toCourse()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
+        }
+    }
+
+    override suspend fun getChaptersV2(id: Int): Flow<ResultWrapper<List<Chapter>>> {
+        return proceedFlow {
+            apiDataSource.getCourseById(id).data.course.chapters?.toChapterList() ?: emptyList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {

@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
 import com.group4.gostudy.model.Chapter
-import com.group4.gostudy.model.Module
-import com.group4.gostudy.model.SectionedData
-import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
+import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.viewitem.DataItem
@@ -19,6 +17,7 @@ import com.group4.gostudy.viewitem.HeaderItem
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailCourseMaterialFragment : Fragment() {
     private lateinit var binding: FragmentDetailCourseMaterialBinding
@@ -27,6 +26,8 @@ class DetailCourseMaterialFragment : Fragment() {
         GroupieAdapter()
     }
     private val materialViewModel: MaterialViewModel by viewModel()
+
+    private val detailViewModel: DetailViewModel by viewModel { parametersOf(requireActivity().intent?.extras) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,12 +41,15 @@ class DetailCourseMaterialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeChapter()
-        observeModule()
     }
 
     private fun observeChapter() {
-        materialViewModel.getChapter()
-        materialViewModel.chapters.observe(viewLifecycleOwner) {
+        detailViewModel.idCourse?.let {
+            materialViewModel.getChaptersV2(
+                it
+            )
+        }
+        materialViewModel.chapter.observe(viewLifecycleOwner) {
             it.proceedWhen(
                 doOnLoading = {
                     binding.layoutStateChapter.root.isVisible =
@@ -66,7 +70,7 @@ class DetailCourseMaterialFragment : Fragment() {
                         false
                     binding.rvData.isVisible = true
                     chapterResult.payload?.let { chapters ->
-                        setData(chapters, null)
+                        setData(chapters)
                     }
                 },
                 doOnError = {
@@ -88,34 +92,22 @@ class DetailCourseMaterialFragment : Fragment() {
             )
         }
     }
-    private fun observeModule() {
-        materialViewModel.getModule()
-        materialViewModel.modules.observe(viewLifecycleOwner) {
-            it.proceedWhen(
-                doOnSuccess = { moduleResult ->
-                    moduleResult.payload?.let { modules ->
-                        setData(null, modules)
-                    }
-                }
-            )
-        }
-    }
 
-    private fun setData(chapters: List<Chapter>?, module: List<Module>?) {
+    private fun setData(chapters: List<Chapter>) {
         binding.rvData.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = groupieAdapter
         }
-        val section = getListData(chapters, module).map {
+        val section = chapters.map {
             val section = Section()
             section.setHeader(
                 HeaderItem(
-                    it.dataHeader?.get(0)?.name.orEmpty(),
-                    it.dataHeader?.get(0)?.totalDuration ?:0
+                    it.name.orEmpty(),
+                    it.totalDuration ?: 0
                 )
             )
-            val dataSection = it.dataItem?.map { data ->
-                DataItem(data.name, data.isUnlocked) {
+            val dataSection = it.modules?.map { data ->
+                DataItem(data.name.orEmpty()) {
                     showDialogOrder()
                 }
             }
@@ -128,11 +120,6 @@ class DetailCourseMaterialFragment : Fragment() {
     }
 
     private fun showDialogOrder() {
-        DialogOrderFragment().show(childFragmentManager, "DialogOrderFragment")
+//        DialogOrderFragment().show(childFragmentManager, "DialogOrderFragment")
     }
-
-    private fun getListData(chapters: List<Chapter>?, module: List<Module>?): List<SectionedData> =
-        listOf(
-            SectionedData(chapters, module)
-        )
 }

@@ -12,7 +12,6 @@ import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentHomeBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.DetailCourseActivity
-import com.group4.gostudy.presentation.detail.material.DetailCourseMaterialFragment
 import com.group4.gostudy.presentation.home.category.CategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
 import com.group4.gostudy.presentation.home.popularcourse.ViewMoreCourseActivity
@@ -35,15 +34,11 @@ class HomeFragment : Fragment() {
     private val courseAdapter: PopularCourseAdapter by lazy {
         PopularCourseAdapter { course: Course ->
             navigateToDetail(course)
-            navigateToDetailList(course.id?:0)
         }
     }
 
     private fun navigateToDetail(courses: Course) {
         DetailCourseActivity.startActivity(requireContext(), courses)
-    }
-    private fun navigateToDetailList(id: Int) {
-        DetailCourseMaterialFragment.startActivity(requireContext(), id)
     }
 
     override fun onCreateView(

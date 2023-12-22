@@ -72,7 +72,7 @@ fun CourseItemResponseV2.toCourse() = Course(
     updatedAt = this.updatedAt.orEmpty(),
     category = this.category?.toCategory(),
     promoPercentage = this.promoPercentage ?: 0,
-    chapters = this.chapters?.map { it.toChapter() }
+    chapters = this.chapters?.toChapterList()
 )
 
 fun Collection<CourseItemResponseV2>.toCourseList() = this.map {

@@ -35,7 +35,7 @@ fun ChapterItemResponseV2.toChapter() = Chapter(
     updatedAt = this.updatedAt.orEmpty(),
     totalDuration = this.totalDuration ?: 0,
     totalModule = this.totalModule ?: 0,
-    modules = this.modules?.map { it.toModule() }
+    modules = this.modules?.toModuleList()
 )
 
 fun Collection<ChapterItemResponseV2>.toChapterList() = this.map {
