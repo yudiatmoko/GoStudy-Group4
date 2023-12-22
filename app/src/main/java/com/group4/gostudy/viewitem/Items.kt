@@ -22,11 +22,11 @@ class HeaderItem(
         ItemSectionHeaderBinding.bind(view)
 }
 
-class DataItem(private val data: String, private val isLocked: Boolean, private val onItemClick: (item: String) -> Unit) :
+class DataItem(private val data: String, private val onItemClick: (item: String) -> Unit) :
     BindableItem<ItemSectionDataBinding>() {
     override fun bind(viewBinding: ItemSectionDataBinding, position: Int) {
         viewBinding.tvSectionData.text = data
-        viewBinding.ivLock.setImageResource(R.drawable.ic_lock)
+//        viewBinding.ivLock.setImageResource(R.drawable.ic_lock)
         viewBinding.root.setOnClickListener { onItemClick.invoke(data) }
     }
 

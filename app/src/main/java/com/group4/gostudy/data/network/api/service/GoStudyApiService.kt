@@ -5,6 +5,8 @@ import com.group4.gostudy.BuildConfig
 import com.group4.gostudy.data.local.datastore.UserPreferenceDataSource
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
+import com.group4.gostudy.data.network.api.model.course.CoursesResponse
+import com.group4.gostudy.data.network.api.model.coursebyid.CourseByIdResponse
 import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
 import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
@@ -34,6 +36,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
@@ -115,6 +118,9 @@ interface GoStudyApiService {
         @Query("moduleName") module: String? = null,
         @Query("chapterName") chapter: String? = null
     ): CoursesIdResponse
+
+    @GET("course/{id}")
+    suspend fun getCourseById(@Path("id") id: Int? = null): CourseByIdResponse
 
     companion object {
         @JvmStatic

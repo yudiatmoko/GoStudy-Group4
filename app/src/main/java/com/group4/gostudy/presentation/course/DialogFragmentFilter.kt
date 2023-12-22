@@ -86,7 +86,7 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
             if (cbUiux.isChecked) categorySelected.add("UI/UX")
             if (cbWebDev.isChecked) categorySelected.add("Web Development")
             if (cbAndroidDevelopment.isChecked) categorySelected.add("Android Development")
-            if (cbDs.isChecked) categorySelected.add("Data Science")
+            if (cbDs.isChecked) categorySelected.add("DataCourseById Science")
             if (cbBi.isChecked) categorySelected.add("Business Intelligence")
             if (cbPalingBaru.isChecked) {
                 createAt = true
