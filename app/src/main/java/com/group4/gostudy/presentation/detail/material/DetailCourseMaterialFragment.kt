@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +11,7 @@ import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
 import com.group4.gostudy.model.Chapter
 import com.group4.gostudy.model.Module
 import com.group4.gostudy.model.SectionedData
+import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.viewitem.DataItem
@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DetailCourseMaterialFragment : Fragment() {
     private lateinit var binding: FragmentDetailCourseMaterialBinding
 
-    private val adapter: GroupieAdapter by lazy {
+    private val groupieAdapter: GroupieAdapter by lazy {
         GroupieAdapter()
     }
     private val materialViewModel: MaterialViewModel by viewModel()
@@ -47,6 +47,16 @@ class DetailCourseMaterialFragment : Fragment() {
         materialViewModel.getChapter()
         materialViewModel.chapters.observe(viewLifecycleOwner) {
             it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutStateChapter.root.isVisible =
+                        true
+                    binding.layoutStateChapter.animLoading.isVisible =
+                        true
+                    binding.layoutStateChapter.llAnimError.isVisible =
+                        false
+                    binding.rvData.isVisible =
+                        false
+                },
                 doOnSuccess = { chapterResult ->
                     binding.layoutStateChapter.root.isVisible =
                         true
@@ -94,20 +104,19 @@ class DetailCourseMaterialFragment : Fragment() {
     private fun setData(chapters: List<Chapter>?, module: List<Module>?) {
         binding.rvData.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = adapter
+            adapter = groupieAdapter
         }
         val section = getListData(chapters, module).map {
             val section = Section()
             section.setHeader(
-                HeaderItem(it.dataHeader?.get(0)?.name.orEmpty()) { data ->
-                    Toast.makeText(requireContext(), "Header Clicked : $data", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                HeaderItem(
+                    it.dataHeader?.get(0)?.name.orEmpty(),
+                    it.dataHeader?.get(0)?.totalDuration ?:0
+                )
             )
             val dataSection = it.dataItem?.map { data ->
-                DataItem(data.name.orEmpty()) { data ->
-                    Toast.makeText(requireContext(), "Item Clicked : $data", Toast.LENGTH_SHORT)
-                        .show()
+                DataItem(data.name, data.isUnlocked) {
+                    showDialogOrder()
                 }
             }
             if (dataSection != null) {
@@ -115,7 +124,11 @@ class DetailCourseMaterialFragment : Fragment() {
             }
             section
         }
-        adapter.addAll(section)
+        groupieAdapter.addAll(section)
+    }
+
+    private fun showDialogOrder() {
+        DialogOrderFragment().show(childFragmentManager, "DialogOrderFragment")
     }
 
     private fun getListData(chapters: List<Chapter>?, module: List<Module>?): List<SectionedData> =
