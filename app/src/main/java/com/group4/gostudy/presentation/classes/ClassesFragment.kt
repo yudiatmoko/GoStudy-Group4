@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentClassesBinding
 import com.group4.gostudy.model.Course
@@ -14,15 +15,18 @@ import com.group4.gostudy.presentation.classes.myclass.MyClassAdapter
 import com.group4.gostudy.presentation.course.course.CourseAdapter
 import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.hideKeyboard
 import com.group4.gostudy.utils.proceedWhen
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClassesFragment : Fragment() {
     private lateinit var binding: FragmentClassesBinding
     private val dialogFragment = DialogHomeNonLoginFragment()
     private val classesViewModel: ClassesViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
 
     private fun navigateToNonLoginFragment() {
         dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
@@ -57,10 +61,20 @@ class ClassesFragment : Fragment() {
             view,
             savedInstanceState
         )
-        navigateToNonLoginFragment()
+        checkUserLoginAndLoadData()
         setMyClassRv()
         setSearchFeature()
-        observeCourse()
+    }
+
+    private fun checkUserLoginAndLoadData() {
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                observeCourse()
+            }
+        }
     }
 
     private fun observeCourse() {
