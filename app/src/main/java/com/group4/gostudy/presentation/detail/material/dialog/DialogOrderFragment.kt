@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.group4.gostudy.databinding.FragmentDialogOrderBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.payment.PaymentActivity
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
@@ -87,7 +87,7 @@ class DialogOrderFragment : Fragment() {
         }
     }
 
-    private fun setData(item: List<PopularCourse>) {
+    private fun setData(item: List<Course>) {
         if (item.isNotEmpty()) {
             val courses = item[0]
             binding.layoutContent.ivCourseImg.load(courses.imageUrl)

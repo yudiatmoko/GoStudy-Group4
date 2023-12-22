@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.repository.CourseRepository
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DialogOrderViewModel(private val orderRepo: CourseRepository) : ViewModel() {
     private val _courses =
-        MutableLiveData<ResultWrapper<List<PopularCourse>>>()
+        MutableLiveData<ResultWrapper<List<Course>>>()
 
-    val courses: LiveData<ResultWrapper<List<PopularCourse>>>
+    val courses: LiveData<ResultWrapper<List<Course>>>
         get() = _courses
 
     fun getCourse(

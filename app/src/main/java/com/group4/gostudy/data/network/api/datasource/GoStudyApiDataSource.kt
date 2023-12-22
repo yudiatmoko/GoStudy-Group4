@@ -2,7 +2,6 @@ package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
-import com.group4.gostudy.data.network.api.model.course.CoursesResponse
 import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
 import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest

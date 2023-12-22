@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import coil.load
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.utils.toCurrencyFormat
@@ -99,7 +99,7 @@ class PaymentActivity : AppCompatActivity() {
             binding.tvPpn.text = it.toCurrencyFormat()
         }
     }
-    private fun setData(item: List<PopularCourse>) {
+    private fun setData(item: List<Course>) {
         if (item.isNotEmpty()) {
             val courses = item[0]
             binding.layoutContent.ivCourseImg.load(courses.imageUrl)

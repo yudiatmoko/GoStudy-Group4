@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import coil.load
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentHomeBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.category.CategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
@@ -32,12 +32,12 @@ class HomeFragment : Fragment() {
         }
     }
     private val courseAdapter: PopularCourseAdapter by lazy {
-        PopularCourseAdapter { course: PopularCourse ->
+        PopularCourseAdapter { course: Course ->
             navigateToDetail(course)
         }
     }
 
-    private fun navigateToDetail(courses: PopularCourse) {
+    private fun navigateToDetail(courses: Course) {
         DetailCourseActivity.startActivity(requireContext(), courses)
     }
 

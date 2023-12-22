@@ -6,7 +6,6 @@ import com.group4.gostudy.data.network.api.model.course.toCourseList
 import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
 import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Course
-import com.group4.gostudy.model.PopularCourse
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
 import kotlinx.coroutines.delay

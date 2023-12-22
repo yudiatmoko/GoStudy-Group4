@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentClassesBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.classes.myclass.MyClassAdapter
 import com.group4.gostudy.presentation.course.course.CourseAdapter
 import com.group4.gostudy.presentation.detail.DetailCourseActivity
@@ -30,13 +30,13 @@ class ClassesFragment : Fragment() {
 
     private val myClassAdapter: MyClassAdapter by lazy {
         MyClassAdapter {
-            CourseAdapter { course: PopularCourse ->
+            CourseAdapter { course: Course ->
                 navigateToDetail(course)
             }
         }
     }
 
-    private fun navigateToDetail(courses: PopularCourse) {
+    private fun navigateToDetail(courses: Course) {
         DetailCourseActivity.startActivity(requireContext(), courses)
     }
 

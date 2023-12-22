@@ -4,15 +4,15 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.CourseItemBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 
 class CourseViewHolder(
     private val binding: CourseItemBinding,
-    private val onClicked: (PopularCourse) -> Unit
+    private val onClicked: (Course) -> Unit
 ) : RecyclerView.ViewHolder(binding.root),
-    ViewHolderBinder<PopularCourse> {
+    ViewHolderBinder<Course> {
 
-    override fun bind(item: PopularCourse) {
+    override fun bind(item: Course) {
         binding.root.setOnClickListener {
             onClicked.invoke(item)
         }

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Course
-import com.group4.gostudy.model.PopularCourse
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
