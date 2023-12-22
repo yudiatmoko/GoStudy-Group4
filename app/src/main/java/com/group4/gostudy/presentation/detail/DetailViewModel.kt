@@ -3,14 +3,14 @@ package com.group4.gostudy.presentation.detail
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import com.group4.gostudy.data.repository.DetailRepository
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 
 class DetailViewModel(
     private val extras: Bundle?,
     private val detailRepository: DetailRepository
 
 ) : ViewModel() {
-    val course = extras?.getParcelable<PopularCourse>(DetailCourseActivity.EXTRA_PRODUCT)
+    val course = extras?.getParcelable<Course>(DetailCourseActivity.EXTRA_PRODUCT)
 
   /*  private val _detail = MutableLiveData<ResultWrapper<List<PopularCourse>>>()
 

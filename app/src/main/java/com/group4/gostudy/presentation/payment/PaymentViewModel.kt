@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.repository.CourseRepository
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,9 +17,9 @@ class PaymentViewModel(private val courseRepository: CourseRepository) : ViewMod
     val ppnLiveData = MutableLiveData<Double>().apply {
         postValue(0.0)
     }
-    private val _courses = MutableLiveData<ResultWrapper<List<PopularCourse>>>()
+    private val _courses = MutableLiveData<ResultWrapper<List<Course>>>()
 
-    val courses: LiveData<ResultWrapper<List<PopularCourse>>>
+    val courses: LiveData<ResultWrapper<List<Course>>>
         get() = _courses
     fun getCourse(category: String? = null, search: String? = null, type: String? = null, level: String? = null, createAt: Boolean? = null, promoPrecentage: Boolean? = null) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -2,7 +2,7 @@ package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
-import com.group4.gostudy.data.network.api.model.course.CoursesResponse
+import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
 import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
@@ -43,7 +43,7 @@ interface GoStudyApiDataSource {
         level: String?,
         promoPrecentage: Boolean?,
         createAt: Boolean?
-    ): CoursesResponse
+    ): CoursesResponseV2
 
     suspend fun getModules(): ModulesResponse
     suspend fun getChapters(): ChaptersResponse
@@ -100,7 +100,7 @@ class GoStudyApiDataSourceImpl(
         level: String?,
         promoPrecentage: Boolean?,
         createAt: Boolean?
-    ): CoursesResponse {
+    ): CoursesResponseV2 {
         return service.getCourses(category, search, type, level, promoPrecentage, createAt)
     }
 

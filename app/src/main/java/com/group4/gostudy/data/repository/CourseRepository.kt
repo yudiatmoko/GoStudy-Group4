@@ -3,8 +3,9 @@ package com.group4.gostudy.data.repository
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.category.toCategoryList
 import com.group4.gostudy.data.network.api.model.course.toCourseList
+import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
 import com.group4.gostudy.model.Category
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
 import kotlinx.coroutines.delay
@@ -27,7 +28,7 @@ interface CourseRepository {
         level: String?,
         promoPrecentage: Boolean?,
         createAt: Boolean?
-    ): Flow<ResultWrapper<List<PopularCourse>>>
+    ): Flow<ResultWrapper<List<Course>>>
 }
 
 class CourseRepositoryImpl(
@@ -51,7 +52,7 @@ class CourseRepositoryImpl(
         level: String?,
         promoPrecentage: Boolean?,
         createAt: Boolean?
-    ): Flow<ResultWrapper<List<PopularCourse>>> {
+    ): Flow<ResultWrapper<List<Course>>> {
         return proceedFlow {
             apiDataSource.getCourses(category, search, type, level, promoPrecentage, createAt).data?.courses?.toCourseList() ?: emptyList()
         }.catch {

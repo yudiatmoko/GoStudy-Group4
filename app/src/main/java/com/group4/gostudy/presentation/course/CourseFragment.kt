@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentCourseBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.course.course.CourseAdapter
 import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
@@ -21,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
     private lateinit var binding: FragmentCourseBinding
     private val courseAdapter: CourseAdapter by lazy {
-        CourseAdapter { course: PopularCourse ->
+        CourseAdapter { course: Course ->
             navigateToDetail(course)
         }
     }
@@ -57,7 +57,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         navigateToFilter()
         setupFilterButtons()
     }
-    private fun navigateToDetail(courses: PopularCourse) {
+    private fun navigateToDetail(courses: Course) {
         DetailCourseActivity.startActivity(requireContext(), courses)
     }
     private fun setupFilterButtons() {

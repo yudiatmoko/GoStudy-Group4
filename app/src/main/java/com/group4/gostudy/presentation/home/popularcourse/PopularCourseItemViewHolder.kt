@@ -5,7 +5,7 @@ import coil.load
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.PopularCourseItemBinding
 import com.group4.gostudy.databinding.PopularCourseViewMoreItemBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 
 /*
 Hi, Code Enthusiast!
@@ -14,11 +14,11 @@ https://github.com/yudiatmoko
 
 class PopularCourseItemViewHolder(
     private val binding: PopularCourseItemBinding,
-    private val onClicked: (PopularCourse) -> Unit
+    private val onClicked: (Course) -> Unit
 ) : RecyclerView.ViewHolder(binding.root),
-    ViewHolderBinder<PopularCourse> {
+    ViewHolderBinder<Course> {
 
-    override fun bind(item: PopularCourse) {
+    override fun bind(item: Course) {
         binding.root.setOnClickListener {
             onClicked.invoke(item)
         }
@@ -36,11 +36,11 @@ class PopularCourseItemViewHolder(
 
 class PopularCourseViewMoreItemViewHolder(
     private val binding: PopularCourseViewMoreItemBinding,
-    private val onClicked: (PopularCourse) -> Unit
+    private val onClicked: (Course) -> Unit
 ) : RecyclerView.ViewHolder(binding.root),
-    ViewHolderBinder<PopularCourse> {
+    ViewHolderBinder<Course> {
 
-    override fun bind(item: PopularCourse) {
+    override fun bind(item: Course) {
         binding.root.setOnClickListener {
             onClicked.invoke(item)
         }

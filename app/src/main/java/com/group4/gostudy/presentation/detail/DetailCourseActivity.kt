@@ -18,7 +18,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityDetailCourseBinding
-import com.group4.gostudy.model.PopularCourse
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -184,7 +184,7 @@ class DetailCourseActivity : AppCompatActivity() {
         }
     }
 
-    private fun showData(course: PopularCourse?) {
+    private fun showData(course: Course?) {
         course?.let {
             binding.tvClassName.text = it.category?.name
             binding.tvLevel.text = it.level
@@ -198,7 +198,7 @@ class DetailCourseActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
-        fun startActivity(context: Context, course: PopularCourse?) {
+        fun startActivity(context: Context, course: Course?) {
             val intent = Intent(context, DetailCourseActivity::class.java)
             intent.putExtra(EXTRA_PRODUCT, course)
             context.startActivity(intent)
