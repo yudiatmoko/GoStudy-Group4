@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
 import com.group4.gostudy.model.Chapter
-import com.group4.gostudy.model.Module
-import com.group4.gostudy.model.SectionedData
+import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.viewitem.DataItem
@@ -19,14 +17,17 @@ import com.group4.gostudy.viewitem.HeaderItem
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailCourseMaterialFragment : Fragment() {
     private lateinit var binding: FragmentDetailCourseMaterialBinding
 
-    private val adapter: GroupieAdapter by lazy {
+    private val groupieAdapter: GroupieAdapter by lazy {
         GroupieAdapter()
     }
     private val materialViewModel: MaterialViewModel by viewModel()
+
+    private val detailViewModel: DetailViewModel by viewModel { parametersOf(requireActivity().intent?.extras) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +41,26 @@ class DetailCourseMaterialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeChapter()
-        observeModule()
     }
 
     private fun observeChapter() {
-        materialViewModel.getChapter()
-        materialViewModel.chapters.observe(viewLifecycleOwner) {
+        detailViewModel.idCourse?.let {
+            materialViewModel.getChaptersV2(
+                it
+            )
+        }
+        materialViewModel.chapter.observe(viewLifecycleOwner) {
             it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutStateChapter.root.isVisible =
+                        true
+                    binding.layoutStateChapter.animLoading.isVisible =
+                        true
+                    binding.layoutStateChapter.llAnimError.isVisible =
+                        false
+                    binding.rvData.isVisible =
+                        false
+                },
                 doOnSuccess = { chapterResult ->
                     binding.layoutStateChapter.root.isVisible =
                         true
@@ -56,7 +70,7 @@ class DetailCourseMaterialFragment : Fragment() {
                         false
                     binding.rvData.isVisible = true
                     chapterResult.payload?.let { chapters ->
-                        setData(chapters, null)
+                        setData(chapters)
                     }
                 },
                 doOnError = {
@@ -78,36 +92,23 @@ class DetailCourseMaterialFragment : Fragment() {
             )
         }
     }
-    private fun observeModule() {
-        materialViewModel.getModule()
-        materialViewModel.modules.observe(viewLifecycleOwner) {
-            it.proceedWhen(
-                doOnSuccess = { moduleResult ->
-                    moduleResult.payload?.let { modules ->
-                        setData(null, modules)
-                    }
-                }
-            )
-        }
-    }
 
-    private fun setData(chapters: List<Chapter>?, module: List<Module>?) {
+    private fun setData(chapters: List<Chapter>) {
         binding.rvData.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = adapter
+            adapter = groupieAdapter
         }
-        val section = getListData(chapters, module).map {
+        val section = chapters.map {
             val section = Section()
             section.setHeader(
-                HeaderItem(it.dataHeader?.get(0)?.name.orEmpty()) { data ->
-                    Toast.makeText(requireContext(), "Header Clicked : $data", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                HeaderItem(
+                    it.name.orEmpty(),
+                    it.totalDuration ?: 0
+                )
             )
-            val dataSection = it.dataItem?.map { data ->
-                DataItem(data.name.orEmpty()) { data ->
-                    Toast.makeText(requireContext(), "Item Clicked : $data", Toast.LENGTH_SHORT)
-                        .show()
+            val dataSection = it.modules?.map { data ->
+                DataItem(data.name.orEmpty()) {
+                    showDialogOrder()
                 }
             }
             if (dataSection != null) {
@@ -115,11 +116,10 @@ class DetailCourseMaterialFragment : Fragment() {
             }
             section
         }
-        adapter.addAll(section)
+        groupieAdapter.addAll(section)
     }
 
-    private fun getListData(chapters: List<Chapter>?, module: List<Module>?): List<SectionedData> =
-        listOf(
-            SectionedData(chapters, module)
-        )
+    private fun showDialogOrder() {
+//        DialogOrderFragment().show(childFragmentManager, "DialogOrderFragment")
+    }
 }

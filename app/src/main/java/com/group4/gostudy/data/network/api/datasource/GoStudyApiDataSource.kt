@@ -2,6 +2,7 @@ package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
+import com.group4.gostudy.data.network.api.model.coursebyid.CourseByIdResponse
 import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
 import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
@@ -61,6 +62,14 @@ interface GoStudyApiDataSource {
         image: MultipartBody.Part?
     ): UpdateUsersResponse
 
+    suspend fun getCourseById(
+        id: Int?
+    ): CourseByIdResponse
+
+    suspend fun getChaptersV2(
+        id: Int?
+    ): CourseByIdResponse
+
     suspend fun updatePassword(
         updatePasswordRequest: UpdatePasswordRequest
     ): UpdatePasswordResponse
@@ -110,6 +119,10 @@ class GoStudyApiDataSourceImpl(
 
     override suspend fun getChapters(): ChaptersResponse {
         return service.getChapters()
+    }
+
+    override suspend fun getChaptersV2(id: Int?): CourseByIdResponse {
+        return service.getChaptersV2(id)
     }
 
     override suspend fun getCourseId(
@@ -172,5 +185,9 @@ class GoStudyApiDataSourceImpl(
 
     override suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse {
         return service.forgotPassword(request)
+    }
+
+    override suspend fun getCourseById(id: Int?): CourseByIdResponse {
+        return service.getCourseById(id)
     }
 }

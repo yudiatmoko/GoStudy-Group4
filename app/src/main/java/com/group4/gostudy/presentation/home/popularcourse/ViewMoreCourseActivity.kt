@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityViewMoreCourseBinding
+import com.group4.gostudy.model.Course
+import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.HomeViewModel
 import com.group4.gostudy.presentation.home.category.CategoryViewMoreAdapter
 import com.group4.gostudy.utils.ApiException
@@ -24,7 +26,9 @@ class ViewMoreCourseActivity : AppCompatActivity() {
         }
     }
     private val courseAdapter: PopularCourseViewMoreAdapter by lazy {
-        PopularCourseViewMoreAdapter {}
+        PopularCourseViewMoreAdapter { course: Course ->
+            navigateToDetail(course)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +40,10 @@ class ViewMoreCourseActivity : AppCompatActivity() {
         observeCategory()
         observeCourse()
         setClickListener()
+    }
+
+    private fun navigateToDetail(courses: Course) {
+        DetailCourseActivity.startActivity(this, courses)
     }
 
     private fun setClickListener() {

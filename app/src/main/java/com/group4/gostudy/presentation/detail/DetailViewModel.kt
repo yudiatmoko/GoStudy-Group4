@@ -12,6 +12,8 @@ class DetailViewModel(
 ) : ViewModel() {
     val course = extras?.getParcelable<Course>(DetailCourseActivity.EXTRA_PRODUCT)
 
+    var idCourse: Int? = course?.id
+
   /*  private val _detail = MutableLiveData<ResultWrapper<List<PopularCourse>>>()
 
     val details: LiveData<ResultWrapper<List<DetailCourse>>>

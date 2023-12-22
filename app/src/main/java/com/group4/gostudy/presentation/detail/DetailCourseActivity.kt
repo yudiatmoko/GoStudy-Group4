@@ -46,6 +46,7 @@ class DetailCourseActivity : AppCompatActivity() {
     private var previousOrientation: Int = -1
 
     private val viewModel: DetailViewModel by viewModel { parametersOf(intent?.extras) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -191,7 +192,7 @@ class DetailCourseActivity : AppCompatActivity() {
             binding.tvDuration.text = String.format("%.0f Menit", it.totalDuration?.toDouble())
             binding.tvModule.text = String.format("%.0f Modul", it.totalModule?.toDouble())
             binding.tvClassTitle.text = it.name
-            binding.tvRating.text = ""
+            binding.tvRating.text = it.rating.toString()
             binding.txtMentorName.text = String.format("by %s", it.courseBy)
         }
     }
