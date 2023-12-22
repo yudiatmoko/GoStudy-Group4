@@ -11,17 +11,19 @@ data class ModuleItemResponse(
     @SerializedName("createdAt")
     val createdAt: String?,
     @SerializedName("createdBy")
-    val createdBy: String?,
+    val createdBy: Int?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("duration")
     val duration: Int?,
     @SerializedName("id")
     val id: Int?,
+    @SerializedName("isUnlocked")
+    val isUnlocked: Boolean?,
     @SerializedName("name")
     val name: String?,
-    @SerializedName("no")
-    val no: Int?,
+    @SerializedName("noModule")
+    val noModule: Int?,
     @SerializedName("updatedAt")
     val updatedAt: String?,
     @SerializedName("videoId")
@@ -32,16 +34,17 @@ data class ModuleItemResponse(
 
 fun ModuleItemResponse.toModule() = Module(
     id = this.id ?: 0,
-    no = this.no ?: 0,
-    name = this.name.orEmpty(),
-    description = this.description.orEmpty(),
+    noModule = this.noModule ?: 0,
     chapterId = this.chapterId ?: 0,
-    videoUrl = this.videoUrl.orEmpty(),
-    videoId = this.videoId.orEmpty(),
-    duration = this.duration ?: 0,
-    createdBy = this.createdBy.orEmpty(),
+    name = this.name.orEmpty(),
     createdAt = this.createdAt.orEmpty(),
-    updatedAt = this.updatedAt.orEmpty()
+    updatedAt = this.updatedAt.orEmpty(),
+    createdBy = this.createdBy ?: 0,
+    description = this.description.orEmpty(),
+    videoId = this.videoId.orEmpty(),
+    videoUrl = this.videoUrl.orEmpty(),
+    duration = this.duration ?: 0,
+    isUnlocked = this.isUnlocked
 )
 
 fun Collection<ModuleItemResponse>.toModuleList() = this.map {

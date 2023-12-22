@@ -28,7 +28,7 @@ class PopularCourseItemViewHolder(
         binding.tvLevel.text = item.level
         binding.tvModule.text = String.format("%.0f Modul", item.totalModule?.toDouble())
         binding.tvDuration.text = String.format("%.0f Menit", item.totalDuration?.toDouble())
-        binding.tvRating.text = ""
+        binding.tvRating.text = item.rating.toString()
         binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
         binding.ivCourseImg.load(item.imageUrl)
     }

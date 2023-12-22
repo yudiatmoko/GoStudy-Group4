@@ -1,19 +1,20 @@
 package com.group4.gostudy.data.network.api.model.coursev2
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
+import com.group4.gostudy.data.network.api.model.category.toCategory
+import com.group4.gostudy.model.Course
 
 @Keep
 data class CourseItemResponseV2(
     @SerializedName("benefits")
     val benefits: List<String>?,
     @SerializedName("Category")
-    val category: Category?,
+    val category: CategoryItemResponseV2?,
     @SerializedName("categoryId")
     val categoryId: Int?,
     @SerializedName("Chapters")
-    val chapters: List<Chapter>?,
+    val chapters: List<ChapterItemResponseV2>?,
     @SerializedName("classCode")
     val classCode: String?,
     @SerializedName("courseBy")
@@ -41,11 +42,39 @@ data class CourseItemResponseV2(
     @SerializedName("rating")
     val rating: Double?,
     @SerializedName("totalDuration")
-    val totalDuration: Any?,
+    val totalDuration: Int?,
     @SerializedName("totalModule")
-    val totalModule: Any?,
+    val totalModule: Int?,
     @SerializedName("type")
     val type: String?,
     @SerializedName("updatedAt")
     val updatedAt: String?
 )
+
+fun CourseItemResponseV2.toCourse() = Course(
+    benefits = this.benefits ?: emptyList(),
+    categoryId = this.categoryId ?: 0,
+    classCode = this.classCode.orEmpty(),
+    courseBy = this.courseBy.orEmpty(),
+    rating = this.rating ?: 0.0,
+    createdAt = this.createdAt.orEmpty(),
+    createdBy = this.createdBy ?: 0,
+    description = this.description.orEmpty(),
+    id = this.id ?: 0,
+    imageId = this.imageId.orEmpty(),
+    imageUrl = this.imageUrl.orEmpty(),
+    level = this.level.orEmpty(),
+    name = this.name.orEmpty(),
+    price = this.price ?: 0,
+    totalDuration = this.totalDuration ?: 0,
+    totalModule = this.totalModule ?: 0,
+    type = this.type.orEmpty(),
+    updatedAt = this.updatedAt.orEmpty(),
+    category = this.category?.toCategory(),
+    promoPercentage = this.promoPercentage ?: 0,
+    chapters = this.chapters?.toChapterList()
+)
+
+fun Collection<CourseItemResponseV2>.toCourseList() = this.map {
+    it.toCourse()
+}

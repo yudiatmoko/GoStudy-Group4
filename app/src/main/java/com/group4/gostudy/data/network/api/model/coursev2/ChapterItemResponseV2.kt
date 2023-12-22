@@ -1,11 +1,11 @@
-package com.group4.gostudy.data.network.api.model.chapter
+package com.group4.gostudy.data.network.api.model.coursev2
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.group4.gostudy.data.network.api.model.coursev2.ModuleItemResponseV2
-import com.group4.gostudy.data.network.api.model.coursev2.toModuleList
 import com.group4.gostudy.model.Chapter
 
-data class DataChapterResponse(
+@Keep
+data class ChapterItemResponseV2(
     @SerializedName("courseId")
     val courseId: Int?,
     @SerializedName("createdAt")
@@ -26,7 +26,7 @@ data class DataChapterResponse(
     val updatedAt: String?
 )
 
-fun DataChapterResponse.toChapter() = Chapter(
+fun ChapterItemResponseV2.toChapter() = Chapter(
     id = this.id ?: 0,
     noChapter = this.noChapter ?: 0,
     courseId = this.courseId ?: 0,
@@ -38,6 +38,6 @@ fun DataChapterResponse.toChapter() = Chapter(
     modules = this.modules?.toModuleList()
 )
 
-fun Collection<DataChapterResponse>.toChapterList() = this.map {
+fun Collection<ChapterItemResponseV2>.toChapterList() = this.map {
     it.toChapter()
 }
