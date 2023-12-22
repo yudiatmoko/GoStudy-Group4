@@ -30,8 +30,8 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
     private val filterFragment = DialogFragmentFilter()
     private val selectedLevels = mutableListOf<String>()
     private val selectedCategories = mutableListOf<String>()
-    private val createAt = Boolean
-    private val promo = Boolean
+    private var createAt: Boolean = false
+    private var promo: Boolean = false
 
     private val mainViewModel: MainViewModel by viewModel()
     override fun onCreateView(
@@ -196,23 +196,29 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         levels?.let { selectedLevels.addAll(it) }
         selectedCategories.clear()
         categorySelected?.let { selectedCategories.addAll(it) }
-        applyFilter(createAt, promo)
+        this.createAt = createAt ?: false
+        this.promo = promo ?: false
+        applyFilter()
     }
 
-    private fun applyFilter(createAt: Boolean?, promo: Boolean?) {
-        val level: String? = when {
+    private fun applyFilter() {
+        val level: List<String>? = when {
             selectedLevels.isEmpty() -> null
-            selectedLevels.size == 3 -> null
-            else -> selectedLevels.joinToString("%2C")
+            else -> selectedLevels.toList()
         }
-
-        val category: String? = when {
+        val category: List<String>? = when {
             selectedCategories.isEmpty() -> null
-            else -> selectedCategories.joinToString("%2C")
+            else -> selectedCategories.toList()
         }
 
-        val createAtValue: Boolean = createAt ?: false
-        val promoValue: Boolean = promo ?: false
-        courseViewModel.getCourse(level = level, category = category, createAt = createAtValue, promoPrecentage = promoValue)
+        val createAtParam: Boolean? = if (createAt) createAt else null
+        val promoParam: Boolean? = if (promo) promo else null
+
+        courseViewModel.getCourse(
+            levels = level,
+            category = category,
+            createAt = createAtParam,
+            promoPrecentage = promoParam
+        )
     }
 }

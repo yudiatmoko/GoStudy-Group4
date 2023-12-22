@@ -16,6 +16,7 @@ class ClassItemViewHolder(
         binding.root.setOnClickListener {
             onClicked.invoke(item)
         }
+        binding.piMyClass.progress = item.id ?: 0
         binding.tvCategoryName.text = item.category?.name
         binding.tvClassTitle.text = item.name
         binding.tvMentorName.text = String.format("by %s", item.courseBy)

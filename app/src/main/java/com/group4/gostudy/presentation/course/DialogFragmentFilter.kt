@@ -46,29 +46,12 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
     }
 
     private fun setDeleteFilter() {
-        val selectedLevels = mutableListOf<String>()
-        val categorySelected = mutableListOf<String>()
-        val createAt = false
-        val promo = false
-        with(binding) {
-            cbAllLevel.isChecked = false
-            cbBeginnerLevel.isChecked = false
-            cbIntermediateLevel.isChecked = false
-            cbAdvancedLevel.isChecked = false
-            cbUiux.isChecked = false
-            cbWebDev.isChecked = false
-            cbBi.isChecked = false
-            cbAndroidDevelopment.isChecked = false
-            cbDs.isChecked = false
-            cbPalingBaru.isChecked = false
-            cbPromo.isChecked = false
-            cbPalingPopuler.isChecked = false
-        }
+        clearFilterCheckboxes()
         filterListener?.onFilterSelected(
             emptyList(),
             emptyList(),
-            createAt,
-            promo
+            false,
+            false
         )
     }
 
@@ -82,7 +65,7 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
             if (cbBeginnerLevel.isChecked) selectedLevels.add("Beginner")
             if (cbIntermediateLevel.isChecked) selectedLevels.add("Intermediate")
             if (cbAdvancedLevel.isChecked) selectedLevels.add("Advanced")
-            if (cbAllLevel.isChecked) selectedLevels.add("All")
+            if (cbAllLevel.isChecked) selectedLevels.add("UI/UX Design")
             if (cbUiux.isChecked) categorySelected.add("UI/UX")
             if (cbWebDev.isChecked) categorySelected.add("Web Development")
             if (cbAndroidDevelopment.isChecked) categorySelected.add("Android Development")
@@ -91,8 +74,10 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
             if (cbPalingBaru.isChecked) {
                 createAt = true
             }
-            if (cbPalingBaru.isChecked) {
-                createAt = true
+            if (cbPromo.isChecked) {
+                promo = true
+            }
+            if (cbPalingPopuler.isChecked) {
             }
 
             if (selectedLevels.isEmpty() && categorySelected.isEmpty() && !createAt && !promo) {
@@ -111,6 +96,22 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
     private fun exitTemporary() {
         binding.icCloseFilter.setOnClickListener {
             dismiss()
+        }
+    }
+
+    private fun clearFilterCheckboxes() {
+        with(binding) {
+            cbAllLevel.isChecked = false
+            cbBeginnerLevel.isChecked = false
+            cbIntermediateLevel.isChecked = false
+            cbAdvancedLevel.isChecked = false
+            cbUiux.isChecked = false
+            cbWebDev.isChecked = false
+            cbBi.isChecked = false
+            cbAndroidDevelopment.isChecked = false
+            cbDs.isChecked = false
+            cbPalingBaru.isChecked = false
+            cbPromo.isChecked = false
         }
     }
 

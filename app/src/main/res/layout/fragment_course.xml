@@ -73,8 +73,9 @@
                 android:shadowDy="1"
                 android:shadowRadius="2"
                 android:text="@string/txt_filter"
+                android:layout_marginHorizontal="8dp"
                 android:textColor="@color/md_theme_light_primary"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent" />
         </LinearLayout>

@@ -10,18 +10,32 @@ import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CourseViewModel(
-    private val courseRepository: CourseRepository
-) : ViewModel() {
+class CourseViewModel(private val courseRepository: CourseRepository) : ViewModel() {
 
     private val _courses = MutableLiveData<ResultWrapper<List<PopularCourse>>>()
 
     val courses: LiveData<ResultWrapper<List<PopularCourse>>>
         get() = _courses
 
-    fun getCourse(category: String? = null, search: String? = null, type: String? = null, level: String? = null, createAt: Boolean? = null, promoPrecentage: Boolean? = null) {
+    fun getCourse(
+        category: List<String>? = null,
+        search: String? = null,
+        type: String? = null,
+        levels: List<String>? = null,
+        createAt: Boolean? = null,
+        promoPrecentage: Boolean? = null
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            courseRepository.getCourses(category, search, type, level, createAt, promoPrecentage).collect {
+            val levelList = levels?.joinToString(",")
+            val categoryList = category?.joinToString(",")
+            courseRepository.getCourses(
+                categoryList,
+                search,
+                type,
+                levelList,
+                createAt,
+                promoPrecentage
+            ).collect {
                 _courses.postValue(it)
             }
         }
