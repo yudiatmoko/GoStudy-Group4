@@ -13,6 +13,7 @@ data class Module(
     val videoUrl: String,
     val videoId: String,
     val duration: Int,
+    val isUnlocked: Boolean,
     val createdBy: String,
     val createdAt: String,
     val updatedAt: String

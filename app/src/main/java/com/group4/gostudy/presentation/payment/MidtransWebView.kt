@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentDetailBinding
 
-class PaymentDetailActivity : AppCompatActivity() {
+class MidtransWebView : AppCompatActivity() {
     private val binding: ActivityPaymentDetailBinding by lazy {
         ActivityPaymentDetailBinding.inflate(layoutInflater)
     }
@@ -30,7 +30,7 @@ class PaymentDetailActivity : AppCompatActivity() {
     private fun openUrlFromWebView(url: String) {
         val webView: WebView = findViewById(R.id.myWebView)
         webView.setWebViewClient(object : WebViewClient() {
-            val pd: ProgressDialog = ProgressDialog(this@PaymentDetailActivity)
+            val pd: ProgressDialog = ProgressDialog(this@MidtransWebView)
             override fun shouldOverrideUrlLoading(
                 view: WebView?,
                 request: WebResourceRequest

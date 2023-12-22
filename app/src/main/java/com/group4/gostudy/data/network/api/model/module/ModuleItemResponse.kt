@@ -27,7 +27,9 @@ data class ModuleItemResponse(
     @SerializedName("videoId")
     val videoId: String?,
     @SerializedName("videoUrl")
-    val videoUrl: String?
+    val videoUrl: String?,
+    @SerializedName("isUnlocked")
+    val isUnlocked: Boolean
 )
 
 fun ModuleItemResponse.toModule() = Module(
@@ -41,7 +43,8 @@ fun ModuleItemResponse.toModule() = Module(
     duration = this.duration ?: 0,
     createdBy = this.createdBy.orEmpty(),
     createdAt = this.createdAt.orEmpty(),
-    updatedAt = this.updatedAt.orEmpty()
+    updatedAt = this.updatedAt.orEmpty(),
+    isUnlocked = this.isUnlocked
 )
 
 fun Collection<ModuleItemResponse>.toModuleList() = this.map {

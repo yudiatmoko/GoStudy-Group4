@@ -10,7 +10,7 @@ import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DialogOrderViewModel(private val orderRepo: CourseRepository) : ViewModel() {
+class DialogOrderViewModel(private val courseRepo: CourseRepository) : ViewModel() {
     private val _courses =
         MutableLiveData<ResultWrapper<List<PopularCourse>>>()
 
@@ -26,7 +26,7 @@ class DialogOrderViewModel(private val orderRepo: CourseRepository) : ViewModel(
         createAt: Boolean? = null
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            orderRepo.getCourses(
+            courseRepo.getCourses(
                 category,
                 search,
                 type,

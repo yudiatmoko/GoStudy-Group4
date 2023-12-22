@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import coil.load
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.group4.gostudy.databinding.FragmentDialogOrderBinding
 import com.group4.gostudy.model.PopularCourse
 import com.group4.gostudy.presentation.payment.PaymentActivity
@@ -16,7 +15,7 @@ import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DialogOrderFragment : Fragment() {
+class DialogOrderFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentDialogOrderBinding
     private val dialogOrderViewModel: DialogOrderViewModel by viewModel()
 
@@ -63,7 +62,7 @@ class DialogOrderFragment : Fragment() {
                         true
                     binding.btnOrder.isVisible = true
                     it.payload?.let {
-                        setData(it)
+                        showData(it)
                     }
                 },
                 doOnError = {
@@ -87,21 +86,21 @@ class DialogOrderFragment : Fragment() {
         }
     }
 
-    private fun setData(item: List<PopularCourse>) {
-        if (item.isNotEmpty()) {
-            val courses = item[0]
-            binding.layoutContent.ivCourseImg.load(courses.imageUrl)
-            binding.layoutContent.tvCategoryName.text = courses.category?.name
-            binding.layoutContent.tvCourseTitle.text = courses.name
-            binding.layoutContent.tvInstructorName.text = String.format("by %s", courses.courseBy)
+    private fun showData(course: List<PopularCourse>) {
+        if (course.isNotEmpty()) {
+            val item = course[0]
+            binding.layoutContent.ivCourseImg.load(item.imageUrl)
+            binding.layoutContent.tvCategoryName.text = item.category?.name
+            binding.layoutContent.tvCourseTitle.text = item.name
+            binding.layoutContent.tvInstructorName.text = String.format("by %s", item.courseBy)
             binding.layoutContent.tvDuration.text =
-                String.format("%.0f Menit", courses.totalDuration?.toDouble())
+                String.format("%.0f Menit", item.totalDuration?.toDouble())
             binding.layoutContent.tvPrice.text =
-                String.format("Beli Rp. %.0f", courses.price?.toDouble())
-            binding.layoutContent.tvLevel.text = courses.level
+                String.format("Beli Rp. %.0f", item.price?.toDouble())
+            binding.layoutContent.tvLevel.text = item.level
             binding.layoutContent.tvRating.text = ""
             binding.layoutContent.tvModule.text =
-                String.format("%.0f Modul", courses.totalModule?.toDouble())
+                String.format("%.0f Modul", item.totalModule?.toDouble())
         }
     }
 
@@ -110,7 +109,7 @@ class DialogOrderFragment : Fragment() {
             navigateToPayment()
         }
         binding.toolbar.setOnClickListener {
-            findNavController().popBackStack()
+            dismiss()
         }
     }
 

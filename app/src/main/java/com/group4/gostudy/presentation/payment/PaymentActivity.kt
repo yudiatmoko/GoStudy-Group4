@@ -120,7 +120,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun navigateToMidtrans() {
-        val intent = Intent(this, PaymentDetailActivity::class.java).apply {
+        val intent = Intent(this, MidtransWebView::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         }
         intent.putExtra(

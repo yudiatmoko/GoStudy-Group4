@@ -9,6 +9,8 @@ data class Chapter(
     var id: Int?,
     val courseId: Int?,
     val name: String?,
+    val totalDuration: Int?,
+    val totalModule: Int?,
     val createdAt: String?,
     val updateAt: String?
 ) : Parcelable
