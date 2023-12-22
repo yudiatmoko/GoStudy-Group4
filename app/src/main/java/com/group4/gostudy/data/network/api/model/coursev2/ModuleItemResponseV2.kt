@@ -1,11 +1,11 @@
-package com.group4.gostudy.data.network.api.model.module
+package com.group4.gostudy.data.network.api.model.coursev2
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.group4.gostudy.model.Module
 
 @Keep
-data class ModuleItemResponse(
+data class ModuleItemResponseV2(
     @SerializedName("chapterId")
     val chapterId: Int?,
     @SerializedName("createdAt")
@@ -32,7 +32,7 @@ data class ModuleItemResponse(
     val videoUrl: String?
 )
 
-fun ModuleItemResponse.toModule() = Module(
+fun ModuleItemResponseV2.toModule() = Module(
     id = this.id ?: 0,
     noModule = this.noModule ?: 0,
     chapterId = this.chapterId ?: 0,
@@ -47,6 +47,6 @@ fun ModuleItemResponse.toModule() = Module(
     isUnlocked = this.isUnlocked
 )
 
-fun Collection<ModuleItemResponse>.toModuleList() = this.map {
+fun Collection<ModuleItemResponseV2>.toModuleList() = this.map {
     it.toModule()
 }

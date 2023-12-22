@@ -105,7 +105,7 @@ class DetailCourseMaterialFragment : Fragment() {
                 }
             )
             val dataSection = it.dataItem?.map { data ->
-                DataItem(data.name) { data ->
+                DataItem(data.name.orEmpty()) { data ->
                     Toast.makeText(requireContext(), "Item Clicked : $data", Toast.LENGTH_SHORT)
                         .show()
                 }
