@@ -193,6 +193,7 @@
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:layout_width="280dp"
+                    android:id="@+id/pi_my_class"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"
                     android:max="100"
