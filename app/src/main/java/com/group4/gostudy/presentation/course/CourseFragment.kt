@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentCourseBinding
 import com.group4.gostudy.model.Course
@@ -16,6 +17,7 @@ import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.hideKeyboard
 import com.group4.gostudy.utils.proceedWhen
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
@@ -30,9 +32,8 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
     private val filterFragment = DialogFragmentFilter()
     private val selectedLevels = mutableListOf<String>()
     private val selectedCategories = mutableListOf<String>()
-    private val createAt = Boolean
-    private val promo = Boolean
-
+    private var createAt: Boolean = false
+    private var promo: Boolean = false
     private val mainViewModel: MainViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,13 +54,30 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         )
         setCourseRV()
         setSearchFeature()
-        observeCourse()
+        checkUserLoginAndLoadData()
         navigateToFilter()
         setupFilterButtons()
     }
+
     private fun navigateToDetail(courses: Course) {
         DetailCourseActivity.startActivity(requireContext(), courses)
     }
+
+    private fun checkUserLoginAndLoadData() {
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                observeCourse()
+            }
+        }
+    }
+
+    private fun navigateToNonLoginFragment() {
+        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
+    }
+
     private fun setupFilterButtons() {
         binding.tvAllText.setOnClickListener {
             courseViewModel.getCourse()
@@ -98,21 +116,16 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
                         false
                 },
                 doOnSuccess = {
-                    val userToken = mainViewModel.getUserToken()
-                    if (userToken != null) {
-                        binding.layoutStateCourse.root.isVisible =
-                            true
-                        binding.layoutStateCourse.animLoading.isVisible =
-                            false
-                        binding.layoutStateCourse.llAnimError.isVisible =
-                            false
-                        binding.rvListOfClass.isVisible =
-                            true
-                        it.payload?.let {
-                            courseAdapter.setData(it)
-                        }
-                    } else {
-                        navigateToNonLoginFragment()
+                    binding.layoutStateCourse.root.isVisible =
+                        true
+                    binding.layoutStateCourse.animLoading.isVisible =
+                        false
+                    binding.layoutStateCourse.llAnimError.isVisible =
+                        false
+                    binding.rvListOfClass.isVisible =
+                        true
+                    it.payload?.let {
+                        courseAdapter.setData(it)
                     }
                 },
                 doOnError = {
@@ -181,38 +194,45 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         )
     }
 
-    private fun navigateToNonLoginFragment() {
-        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
-    }
-
     private fun setCourseRV() {
         binding.rvListOfClass.apply {
             adapter = courseAdapter
         }
     }
 
-    override fun onFilterSelected(levels: List<String>?, categorySelected: List<String>?, createAt: Boolean?, promo: Boolean?) {
+    override fun onFilterSelected(
+        levels: List<String>?,
+        categorySelected: List<String>?,
+        createAt: Boolean?,
+        promo: Boolean?
+    ) {
         selectedLevels.clear()
         levels?.let { selectedLevels.addAll(it) }
         selectedCategories.clear()
         categorySelected?.let { selectedCategories.addAll(it) }
-        applyFilter(createAt, promo)
+        this.createAt = createAt ?: false
+        this.promo = promo ?: false
+        applyFilter()
     }
 
-    private fun applyFilter(createAt: Boolean?, promo: Boolean?) {
-        val level: String? = when {
+    private fun applyFilter() {
+        val level: List<String>? = when {
             selectedLevels.isEmpty() -> null
-            selectedLevels.size == 3 -> null
-            else -> selectedLevels.joinToString("%2C")
+            else -> selectedLevels.toList()
         }
-
-        val category: String? = when {
+        val category: List<String>? = when {
             selectedCategories.isEmpty() -> null
-            else -> selectedCategories.joinToString("%2C")
+            else -> selectedCategories.toList()
         }
 
-        val createAtValue: Boolean = createAt ?: false
-        val promoValue: Boolean = promo ?: false
-        courseViewModel.getCourse(level = level, category = category, createAt = createAtValue, promoPrecentage = promoValue)
+        val createAtParam: Boolean? = if (createAt) createAt else null
+        val promoParam: Boolean? = if (promo) promo else null
+
+        courseViewModel.getCourse(
+            levels = level,
+            category = category,
+            createAt = createAtParam,
+            promoPercentage = promoParam
+        )
     }
 }

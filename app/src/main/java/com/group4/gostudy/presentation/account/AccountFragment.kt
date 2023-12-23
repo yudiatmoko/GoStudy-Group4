@@ -7,20 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.databinding.FragmentAccountBinding
 import com.group4.gostudy.databinding.LayoutLogoutDialogBinding
 import com.group4.gostudy.presentation.account.changepassword.ChangePasswordActivity
 import com.group4.gostudy.presentation.account.history.HistoryActivity
 import com.group4.gostudy.presentation.account.myprofile.MyProfileActivity
+import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
 import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
-
-    private val accountViewModel: AccountViewModel by viewModel()
 
     private val mainViewModel: MainViewModel by viewModel()
 
@@ -45,14 +46,42 @@ class AccountFragment : Fragment() {
     }
 
     private fun navigateToMyProfile() {
-        MyProfileActivity.startActivity(requireContext())
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                MyProfileActivity.startActivity(requireContext())
+            }
+        }
     }
     private fun navigateToHistory() {
-        HistoryActivity.startActivity(requireContext())
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                HistoryActivity.startActivity(requireContext())
+            }
+        }
     }
     private fun navigateToChangePassword() {
-        ChangePasswordActivity.startActivity(requireContext())
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                ChangePasswordActivity.startActivity(requireContext())
+            }
+        }
     }
+
+    private val dialogFragment = DialogHomeNonLoginFragment()
+
+    private fun navigateToNonLoginFragment() {
+        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
+    }
+
     private fun navigateToLogin() {
         requireActivity().run {
             startActivity(Intent(this, LoginActivity::class.java))

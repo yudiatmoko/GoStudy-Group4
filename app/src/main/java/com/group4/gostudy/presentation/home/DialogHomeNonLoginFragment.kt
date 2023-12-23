@@ -1,5 +1,6 @@
 package com.group4.gostudy.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.group4.gostudy.databinding.FragmentHomeNonLoginBinding
+import com.group4.gostudy.presentation.login.LoginActivity
 
 class DialogHomeNonLoginFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentHomeNonLoginBinding
@@ -22,17 +24,20 @@ class DialogHomeNonLoginFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginTemporary()
-        exitTemporary()
+        navigateToLogin()
+        exitButton()
     }
 
-    private fun loginTemporary() {
+    private fun navigateToLogin() {
         binding.btnLogin.setOnClickListener {
-            dismiss()
+            val intent = Intent(requireContext(), LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            startActivity(intent)
         }
     }
 
-    private fun exitTemporary() {
+    private fun exitButton() {
         binding.tbExitDialog.setOnClickListener {
             findNavController().popBackStack()
             dismiss()

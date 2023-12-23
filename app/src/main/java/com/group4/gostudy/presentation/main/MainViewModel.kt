@@ -35,10 +35,8 @@ class MainViewModel(
             userPreferenceDataSource.removeUserToken()
         }
     }
-    fun getUserToken() {
-        viewModelScope.launch(Dispatchers.IO) {
-            userPreferenceDataSource.getUserToken()
-        }
+    suspend fun getUserToken(): String? {
+        return userPreferenceDataSource.getUserToken()
     }
 
     private val _profile =
