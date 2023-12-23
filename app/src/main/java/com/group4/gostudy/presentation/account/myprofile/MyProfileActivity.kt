@@ -99,6 +99,7 @@ class MyProfileActivity : AppCompatActivity() {
         binding.ivProfileImage.isVisible = true
         binding.layoutForm.tilName.isVisible = true
         binding.layoutForm.tilEmail.isVisible = true
+        binding.layoutForm.tilEmail.isEnabled = false
         binding.layoutForm.tilPhoneNumber.isVisible = true
         binding.layoutForm.tilCountry.isVisible = true
         binding.layoutForm.tilCity.isVisible = true

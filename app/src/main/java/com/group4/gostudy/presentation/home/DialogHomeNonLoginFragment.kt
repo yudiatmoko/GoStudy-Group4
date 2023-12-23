@@ -30,7 +30,9 @@ class DialogHomeNonLoginFragment : BottomSheetDialogFragment() {
 
     private fun navigateToLogin() {
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(requireContext(), LoginActivity::class.java)
+            val intent = Intent(requireContext(), LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
             startActivity(intent)
         }
     }

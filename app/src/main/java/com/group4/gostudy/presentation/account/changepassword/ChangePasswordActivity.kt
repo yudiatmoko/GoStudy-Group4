@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.databinding.ActivityChangePasswordBinding
-import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,8 +17,6 @@ class ChangePasswordActivity : AppCompatActivity() {
     private val binding: ActivityChangePasswordBinding by lazy {
         ActivityChangePasswordBinding.inflate(layoutInflater)
     }
-
-    private val viewModel: MyProfileViewModel by viewModel()
 
     private val changePasswordViewModel: ChangePasswordViewModel by viewModel()
 
