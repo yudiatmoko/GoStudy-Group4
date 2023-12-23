@@ -203,7 +203,13 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
             cbAdvancedLevel.isChecked = false
             cbPalingBaru.isChecked = false
             cbPromo.isChecked = false
+            cbPalingPopuler.isChecked = false
         }
+        courseViewModel.categories.value?.payload?.forEach { category ->
+            category.isChecked = false
+        }
+        // You may need to notify the adapter if using RecyclerView
+        filterAdapter.notifyDataSetChanged()
     }
 
     fun setFilterListener(listener: FilterListener) {
