@@ -80,7 +80,8 @@ interface GoStudyApiService {
         @Query("type") type: String? = null,
         @Query("level") level: String? = null,
         @Query("createAt") createAt: Boolean? = null,
-        @Query("promoPrecentage") promoPrecentage: Boolean? = null
+        @Query("promoPrecentage") promoPrecentage: Boolean? = null,
+        @Query("rating") rating: Boolean? = null
     ): CoursesResponseV2
 
     @POST("auth/register")

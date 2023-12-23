@@ -40,7 +40,7 @@ class HomeViewModel(
 
     fun getCourse(category: String? = null, search: String? = null, type: String? = null, level: String? = null, createAt: Boolean? = null, promoPrecentage: Boolean? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            courseRepository.getCourses(category, search, null, null, null, null).collect {
+            courseRepository.getCourses(category, search, null, null, null, null, null).collect {
                 _courses.postValue(it)
             }
         }
