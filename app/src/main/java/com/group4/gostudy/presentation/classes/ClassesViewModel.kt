@@ -19,9 +19,9 @@ class ClassesViewModel(
     val courses: LiveData<ResultWrapper<List<Course>>>
         get() = _courses
 
-    fun getCourse(category: String? = null, search: String? = null, type: String? = null, level: String? = null, createAt: Boolean? = null, promoPrecentage: Boolean? = null) {
+    fun getCourse(category: String? = null, search: String? = null, type: String? = null, level: String? = null, createAt: Boolean? = null, promoPrecentage: Boolean? = null, rating: Boolean? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            courseRepository.getCourses(category, search, type, level, createAt, promoPrecentage).collect {
+            courseRepository.getCourses(null, search, type, level, createAt, promoPrecentage, rating).collect {
                 _courses.postValue(it)
             }
         }

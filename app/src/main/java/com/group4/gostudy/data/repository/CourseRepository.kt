@@ -32,7 +32,8 @@ interface CourseRepository {
         type: String?,
         level: String?,
         promoPrecentage: Boolean?,
-        createAt: Boolean?
+        createAt: Boolean?,
+        rating: Boolean?
     ): Flow<ResultWrapper<List<Course>>>
 
     suspend fun getCourseById(id: Int): Flow<ResultWrapper<Course>>
@@ -61,7 +62,8 @@ class CourseRepositoryImpl(
         type: String?,
         level: String?,
         promoPrecentage: Boolean?,
-        createAt: Boolean?
+        createAt: Boolean?,
+        rating: Boolean?
     ): Flow<ResultWrapper<List<Course>>> {
         return proceedFlow {
             apiDataSource.getCourses(
@@ -70,7 +72,8 @@ class CourseRepositoryImpl(
                 type,
                 level,
                 promoPrecentage,
-                createAt
+                createAt,
+                rating
             ).data?.courses?.toCourseList() ?: emptyList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))

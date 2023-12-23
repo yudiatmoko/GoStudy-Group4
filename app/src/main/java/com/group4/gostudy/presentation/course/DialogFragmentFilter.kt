@@ -27,7 +27,8 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
             levels: List<String>?,
             categorySelected: List<String>?,
             createAt: Boolean?,
-            promo: Boolean?
+            promo: Boolean?,
+            rating: Boolean?
         )
     }
 
@@ -140,6 +141,7 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
             emptyList(),
             emptyList(),
             false,
+            false,
             false
         )
     }
@@ -149,6 +151,7 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
         val selectedCategories = mutableListOf<String>()
         var createAt = false
         var promo = false
+        var rating = false
 
         with(binding) {
             if (cbBeginnerLevel.isChecked) selectedLevels.add("Beginner")
@@ -161,17 +164,26 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
             if (cbPromo.isChecked) {
                 promo = true
             }
+            if (cbPalingPopuler.isChecked) {
+                rating = true
+            }
             val categories = courseViewModel.categories.value?.payload.orEmpty()
             selectedCategories.addAll(categories.filter { it.isChecked }.map { it.name ?: "" })
 
-            if (selectedLevels.isEmpty() && selectedCategories.isEmpty() && !createAt && !promo) {
+            if (selectedLevels.isEmpty() && selectedCategories.isEmpty() && !createAt && !promo && !rating) {
                 Toast.makeText(
                     requireContext(),
                     "Kamu belum memilih filter apapun",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                filterListener?.onFilterSelected(selectedLevels, selectedCategories, createAt, promo)
+                filterListener?.onFilterSelected(
+                    selectedLevels,
+                    selectedCategories,
+                    createAt,
+                    promo,
+                    rating
+                )
                 dismiss()
             }
         }
