@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.repository.CourseRepository
+import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +38,18 @@ class CourseViewModel(private val courseRepository: CourseRepository) : ViewMode
                 promoPercentage
             ).collect {
                 _courses.postValue(it)
+            }
+        }
+    }
+    private val _categories = MutableLiveData<ResultWrapper<List<Category>>>()
+
+    val categories: LiveData<ResultWrapper<List<Category>>>
+        get() = _categories
+
+    fun getCategory() {
+        viewModelScope.launch(Dispatchers.IO) {
+            courseRepository.getCategories().collect {
+                _categories.postValue(it)
             }
         }
     }

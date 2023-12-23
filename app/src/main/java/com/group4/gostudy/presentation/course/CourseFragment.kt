@@ -59,6 +59,10 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         setupFilterButtons()
     }
 
+    private fun navigateToDetail(courses: Course) {
+        DetailCourseActivity.startActivity(requireContext(), courses)
+    }
+
     private fun checkUserLoginAndLoadData() {
         lifecycleScope.launch {
             val userToken = mainViewModel.getUserToken()
@@ -72,10 +76,6 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
 
     private fun navigateToNonLoginFragment() {
         dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
-    }
-
-    private fun navigateToDetail(courses: PopularCourse) {
-        DetailCourseActivity.startActivity(requireContext(), courses)
     }
 
     private fun setupFilterButtons() {

@@ -23,8 +23,8 @@
                 android:id="@+id/ic_close_filter"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:src="@drawable/ic_close"
                 android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_close"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,50 +66,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_Promo" />
 
-            <CheckBox
-                android:id="@+id/cb_uiux"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_ui_ux_design"
+            <FrameLayout
+                android:id="@+id/fl_rv_filter_and_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_kategori_filter"
-                tools:layout_editor_absoluteX="102dp" />
+                app:layout_constraintTop_toBottomOf="@id/tv_kategori_filter">
 
-            <CheckBox
-                android:id="@+id/cb_web_dev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_web_development"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_uiux"
-                tools:layout_editor_absoluteX="102dp" />
+                <include
+                    android:id="@+id/layout_state_course"
+                    layout="@layout/common_layout_content_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            <CheckBox
-                android:id="@+id/cb_android_development"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_android_development"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_web_dev"
-                tools:layout_editor_absoluteX="102dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_filter_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_filter_category" />
 
-            <CheckBox
-                android:id="@+id/cb_ds"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_data_science"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_android_development"
-                tools:layout_editor_absoluteX="102dp" />
-
-            <CheckBox
-                android:id="@+id/cb_bi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_business_intelligence"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_ds"
-                tools:layout_editor_absoluteX="102dp" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_level_kesulitan"
@@ -120,7 +100,7 @@
                 android:text="@string/txt_level_kesulitan"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_bi" />
+                app:layout_constraintTop_toBottomOf="@+id/fl_rv_filter_and_state" />
 
             <CheckBox
                 android:id="@+id/cb_all_level"
