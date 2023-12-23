@@ -23,7 +23,8 @@ class DialogOrderViewModel(private val courseRepo: CourseRepository) : ViewModel
         type: String? = null,
         level: String? = null,
         promoPrecentage: Boolean? = null,
-        createAt: Boolean? = null
+        createAt: Boolean? = null,
+        rating: Boolean? = null
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             courseRepo.getCourses(
@@ -32,7 +33,8 @@ class DialogOrderViewModel(private val courseRepo: CourseRepository) : ViewModel
                 type,
                 level,
                 promoPrecentage,
-                createAt
+                createAt,
+                rating
             ).collect {
                 _courses.postValue(it)
             }
