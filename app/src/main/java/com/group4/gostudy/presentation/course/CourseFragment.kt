@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentCourseBinding
 import com.group4.gostudy.model.Course
@@ -57,7 +58,6 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         navigateToFilter()
         setupFilterButtons()
     }
-    private fun navigateToDetail(courses: Course) {
 
     private fun checkUserLoginAndLoadData() {
         lifecycleScope.launch {
