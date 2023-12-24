@@ -8,7 +8,7 @@
     tools:context=".presentation.detail.material.dialog.DialogOrderFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tb_exit_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,10 +22,9 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/text_selangkah_lagi_menuju"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_title_dialog2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/tb_exit_dialog" />
 
     <TextView
         android:id="@+id/tv_title_dialog2"
@@ -35,7 +34,6 @@
         android:text="@string/text_kelas_premium"
         android:textColor="@color/md_theme_light_primary"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/layout_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title_dialog" />
@@ -57,11 +55,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="40dp"
+        android:backgroundTint="@color/md_theme_light_primary"
         android:drawableEnd="@drawable/ic_next_rounded"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/text_beli_sekarang"
+        android:textColor="@color/white"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/layout_content" />
+        app:layout_constraintTop_toBottomOf="@id/layout_content"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <include
         android:id="@+id/layout_state_dialog"
