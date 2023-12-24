@@ -9,14 +9,17 @@
 
     <TextView
         android:id="@+id/tv_header_section_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/md_theme_light_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_header_section_time"
         tools:text="Ini header" />
 
     <TextView
