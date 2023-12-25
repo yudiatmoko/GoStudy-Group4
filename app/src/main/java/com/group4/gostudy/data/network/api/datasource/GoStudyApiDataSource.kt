@@ -7,7 +7,7 @@ import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
 import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
-import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
+import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.module.ModulesResponse
@@ -74,7 +74,7 @@ interface GoStudyApiDataSource {
         updatePasswordRequest: UpdatePasswordRequest
     ): UpdatePasswordResponse
 
-    suspend fun getHistories(): HistoriesResponse
+    suspend fun getHistoryPayments(): HistoryPaymentsResponse
 
     suspend fun login(loginRequest: LoginRequest): LoginResponse
 
@@ -157,8 +157,8 @@ class GoStudyApiDataSourceImpl(
         )
     }
 
-    override suspend fun getHistories(): HistoriesResponse {
-        return service.getHistories()
+    override suspend fun getHistoryPayments(): HistoryPaymentsResponse {
+        return service.getHistoryPayments()
     }
 
     override suspend fun login(

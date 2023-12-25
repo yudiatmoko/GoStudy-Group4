@@ -1,4 +1,4 @@
-package com.group4.gostudy.presentation.account.history
+package com.group4.gostudy.presentation.account.historypayment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,30 +7,30 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.HistoryItemListBinding
-import com.group4.gostudy.model.History
+import com.group4.gostudy.model.HistoryPayment
 
 /*
 Hi, Code Enthusiast!
 https://github.com/yudiatmoko
 */
 
-class HistoryListAdapter(
-    private val itemClick: (History) -> Unit
+class HistoryPaymentListAdapter(
+    private val itemClick: (HistoryPayment) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val differ = AsyncListDiffer(
         this,
-        object : DiffUtil.ItemCallback<History>() {
+        object : DiffUtil.ItemCallback<HistoryPayment>() {
             override fun areItemsTheSame(
-                oldItem: History,
-                newItem: History
+                oldItem: HistoryPayment,
+                newItem: HistoryPayment
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.course?.id == newItem.course?.id
             }
 
             override fun areContentsTheSame(
-                oldItem: History,
-                newItem: History
+                oldItem: HistoryPayment,
+                newItem: HistoryPayment
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
@@ -44,7 +44,7 @@ class HistoryListAdapter(
         val binding = HistoryItemListBinding.inflate(
             LayoutInflater.from(parent.context)
         )
-        return HistoryItemViewHolder(binding, itemClick)
+        return HistoryPaymentItemViewHolder(binding, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -55,10 +55,10 @@ class HistoryListAdapter(
         holder: RecyclerView.ViewHolder,
         position: Int
     ) {
-        (holder as ViewHolderBinder<History>).bind(differ.currentList[position])
+        (holder as ViewHolderBinder<HistoryPayment>).bind(differ.currentList[position])
     }
 
-    fun setData(data: List<History>) {
+    fun setData(data: List<HistoryPayment>) {
         differ.submitList(data)
     }
 }

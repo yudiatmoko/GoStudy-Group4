@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.databinding.FragmentAccountBinding
 import com.group4.gostudy.databinding.LayoutLogoutDialogBinding
 import com.group4.gostudy.presentation.account.changepassword.ChangePasswordActivity
-import com.group4.gostudy.presentation.account.history.HistoryActivity
+import com.group4.gostudy.presentation.account.historypayment.HistoryPaymentActivity
 import com.group4.gostudy.presentation.account.myprofile.MyProfileActivity
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
 import com.group4.gostudy.presentation.login.LoginActivity
@@ -61,7 +61,7 @@ class AccountFragment : Fragment() {
             if (userToken.isNullOrBlank()) {
                 navigateToNonLoginFragment()
             } else {
-                HistoryActivity.startActivity(requireContext())
+                HistoryPaymentActivity.startActivity(requireContext())
             }
         }
     }

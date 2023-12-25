@@ -1,16 +1,14 @@
-package com.group4.gostudy.data.network.api.model.history
+package com.group4.gostudy.data.network.api.model.historypayment
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class HistoriesResponse(
-    @SerializedName("code")
-    val code: Int?,
+data class HistoryPaymentsResponse(
     @SerializedName("data")
-    val data: List<HistoryItemResponse>?,
+    val data: DataHistoryPayments?,
     @SerializedName("message")
     val message: String?,
     @SerializedName("status")
-    val status: Boolean?
+    val status: String?
 )
