@@ -62,7 +62,7 @@
             android:name=".presentation.account.changepassword.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.account.history.HistoryActivity"
+            android:name=".presentation.account.historypayment.HistoryPaymentActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.account.myprofile.MyProfileActivity"

@@ -10,7 +10,7 @@ import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
 import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
-import com.group4.gostudy.data.network.api.model.history.HistoriesResponse
+import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.module.ModulesResponse
@@ -99,8 +99,8 @@ interface GoStudyApiService {
         @Body forgotPasswordRequest: ForgotPasswordRequest
     ): ForgotPasswordResponse
 
-    @GET("history")
-    suspend fun getHistories(): HistoriesResponse
+    @GET("payment/history")
+    suspend fun getHistoryPayments(): HistoryPaymentsResponse
 
     @GET("notification")
     suspend fun getNotifications(): NotificationsResponse

@@ -14,15 +14,13 @@ import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.data.repository.CourseRepositoryImpl
 import com.group4.gostudy.data.repository.DetailRepository
 import com.group4.gostudy.data.repository.DetailRepositoryImpl
-import com.group4.gostudy.data.repository.HistoryRepository
-import com.group4.gostudy.data.repository.HistoryRepositoryImpl
 import com.group4.gostudy.data.repository.NotificationRepository
 import com.group4.gostudy.data.repository.NotificationRepositoryImpl
 import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.data.repository.UserRepositoryImpl
 import com.group4.gostudy.presentation.account.AccountViewModel
 import com.group4.gostudy.presentation.account.changepassword.ChangePasswordViewModel
-import com.group4.gostudy.presentation.account.history.HistoryViewModel
+import com.group4.gostudy.presentation.account.historypayment.HistoryViewModel
 import com.group4.gostudy.presentation.account.myprofile.MyProfileViewModel
 import com.group4.gostudy.presentation.classes.ClassesViewModel
 import com.group4.gostudy.presentation.course.CourseViewModel
@@ -66,7 +64,6 @@ object AppModules {
     private val repositoryModule = module {
         single<NotificationRepository> { NotificationRepositoryImpl(get()) }
         single<UserRepository> { UserRepositoryImpl(get()) }
-        single<HistoryRepository> { HistoryRepositoryImpl(get()) }
         single<CourseRepository> { CourseRepositoryImpl(get()) }
         single<ChapterRepository> { ChapterRepositoryImpl(get()) }
         single<DetailRepository> { DetailRepositoryImpl(get()) }

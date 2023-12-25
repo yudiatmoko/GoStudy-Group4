@@ -5,9 +5,11 @@ import com.group4.gostudy.data.network.api.model.category.toCategoryList
 import com.group4.gostudy.data.network.api.model.coursev2.toChapterList
 import com.group4.gostudy.data.network.api.model.coursev2.toCourse
 import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
+import com.group4.gostudy.data.network.api.model.historypayment.toHistoryPaymentList
 import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Chapter
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.HistoryPayment
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
 import kotlinx.coroutines.delay
@@ -34,6 +36,7 @@ interface CourseRepository {
 
     suspend fun getCourseById(id: Int): Flow<ResultWrapper<Course>>
     suspend fun getChaptersV2(id: Int): Flow<ResultWrapper<List<Chapter>>>
+    suspend fun getHistoryPayments(): Flow<ResultWrapper<List<HistoryPayment>>>
 }
 
 class CourseRepositoryImpl(
@@ -89,6 +92,17 @@ class CourseRepositoryImpl(
     override suspend fun getChaptersV2(id: Int): Flow<ResultWrapper<List<Chapter>>> {
         return proceedFlow {
             apiDataSource.getCourseById(id).data.course.chapters?.toChapterList() ?: emptyList()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
+        }
+    }
+
+    override suspend fun getHistoryPayments(): Flow<ResultWrapper<List<HistoryPayment>>> {
+        return proceedFlow {
+            apiDataSource.getHistoryPayments().data?.historyPayment?.toHistoryPaymentList() ?: emptyList()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
