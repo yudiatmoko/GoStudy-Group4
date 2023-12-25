@@ -47,7 +47,7 @@
             android:name=".presentation.splashscreen.CustomAppIntroActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.payment.MidtransWebView"
+            android:name=".presentation.payment.PaymentWeb"
             android:exported="false" />
         <activity
             android:name=".presentation.payment.PaymentActivity"
