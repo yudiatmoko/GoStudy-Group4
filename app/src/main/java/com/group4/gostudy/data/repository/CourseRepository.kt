@@ -5,6 +5,7 @@ import com.group4.gostudy.data.network.api.model.category.toCategoryList
 import com.group4.gostudy.data.network.api.model.coursev2.toChapterList
 import com.group4.gostudy.data.network.api.model.coursev2.toCourse
 import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
+import com.group4.gostudy.data.network.api.model.historypayment.toHistoryPaymentList
 import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
 import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Chapter
@@ -101,6 +102,12 @@ class CourseRepositoryImpl(
         }
     }
 
+    override suspend fun order(paymentRequest: PaymentRequest): Flow<ResultWrapper<Int>> {
+        return proceedFlow {
+            apiDataSource.createOrder(paymentRequest).data?.createPayment?.courseId ?: 0
+        }
+    }
+
     override suspend fun getHistoryPayments(): Flow<ResultWrapper<List<HistoryPayment>>> {
         return proceedFlow {
             apiDataSource.getHistoryPayments().data?.historyPayment?.toHistoryPaymentList() ?: emptyList()
@@ -109,12 +116,6 @@ class CourseRepositoryImpl(
         }.onStart {
             emit(ResultWrapper.Loading())
             delay(2000)
-        }
-    }
-
-    override suspend fun order(paymentRequest: PaymentRequest): Flow<ResultWrapper<Int>> {
-        return proceedFlow {
-            apiDataSource.createOrder(paymentRequest).data?.createPayment?.courseId ?: 0
         }
     }
 }
