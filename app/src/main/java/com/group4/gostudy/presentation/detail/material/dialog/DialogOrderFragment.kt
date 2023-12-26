@@ -10,7 +10,6 @@ import coil.load
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.group4.gostudy.databinding.FragmentDialogOrderBinding
 import com.group4.gostudy.model.Course
-import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.presentation.payment.PaymentActivity
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
@@ -19,8 +18,7 @@ import org.koin.core.parameter.parametersOf
 
 class DialogOrderFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentDialogOrderBinding
-    private val dialogOrderViewModel: DialogOrderViewModel by viewModel()
-    private val detailViewModel: DetailViewModel by viewModel { parametersOf(requireActivity().intent?.extras) }
+    private val dialogOrderViewModel: DialogOrderViewModel by viewModel { parametersOf(requireActivity().intent?.extras) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,8 +36,8 @@ class DialogOrderFragment : BottomSheetDialogFragment() {
     }
 
     private fun observeData() {
-        detailViewModel.idCourse?.let {
-//            dialogOrderViewModel.getCourseById(it)
+        dialogOrderViewModel.idCourse?.let {
+            dialogOrderViewModel.getCourseById(it)
         }
         dialogOrderViewModel.courses.observe(
             viewLifecycleOwner

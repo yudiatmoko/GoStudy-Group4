@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.model.Chapter
+import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +14,11 @@ import kotlinx.coroutines.launch
 class MaterialViewModel(
     private val courseRepo: CourseRepository
 ) : ViewModel() {
+    private val _courses =
+        MutableLiveData<ResultWrapper<Course>>()
 
+    val courses: LiveData<ResultWrapper<Course>>
+        get() = _courses
     private val _chapter = MutableLiveData<ResultWrapper<List<Chapter>>>()
     val chapter: LiveData<ResultWrapper<List<Chapter>>>
         get() = _chapter
