@@ -17,6 +17,8 @@ import com.group4.gostudy.data.network.api.model.module.ModulesResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
+import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
+import com.group4.gostudy.data.network.api.model.payment.PaymentResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
@@ -123,6 +125,9 @@ interface GoStudyApiService {
 
     @GET("course/{id}")
     suspend fun getChaptersV2(@Path("id") id: Int? = null): CourseByIdResponse
+
+    @POST("payment")
+    suspend fun createOrder(@Body paymentRequest: PaymentRequest): PaymentResponse
 
     companion object {
         @JvmStatic
