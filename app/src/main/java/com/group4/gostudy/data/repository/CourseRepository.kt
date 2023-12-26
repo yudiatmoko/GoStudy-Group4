@@ -6,10 +6,13 @@ import com.group4.gostudy.data.network.api.model.coursev2.toChapterList
 import com.group4.gostudy.data.network.api.model.coursev2.toCourse
 import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
 import com.group4.gostudy.data.network.api.model.historypayment.toHistoryPaymentList
+import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
+import com.group4.gostudy.data.network.api.model.payment.toPayment
 import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Chapter
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.model.HistoryPayment
+import com.group4.gostudy.model.Payment
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
 import kotlinx.coroutines.delay
@@ -37,6 +40,7 @@ interface CourseRepository {
     suspend fun getCourseById(id: Int): Flow<ResultWrapper<Course>>
     suspend fun getChaptersV2(id: Int): Flow<ResultWrapper<List<Chapter>>>
     suspend fun getHistoryPayments(): Flow<ResultWrapper<List<HistoryPayment>>>
+    suspend fun order(paymentRequest: PaymentRequest): Flow<ResultWrapper<Payment>>
 }
 
 class CourseRepositoryImpl(
@@ -97,6 +101,12 @@ class CourseRepositoryImpl(
         }.onStart {
             emit(ResultWrapper.Loading())
             delay(2000)
+        }
+    }
+
+    override suspend fun order(paymentRequest: PaymentRequest): Flow<ResultWrapper<Payment>> {
+        return proceedFlow {
+            apiDataSource.createOrder(paymentRequest).data.createPayment.toPayment()
         }
     }
 

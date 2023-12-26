@@ -1,30 +1,36 @@
 package com.group4.gostudy.presentation.payment
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.Payment
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PaymentViewModel(private val courseRepository: CourseRepository) : ViewModel() {
-    val priceLiveData = MutableLiveData<Double>().apply {
-        postValue(0.0)
-    }
-    val ppnLiveData = MutableLiveData<Double>().apply {
-        postValue(0.0)
-    }
-    private val _courses = MutableLiveData<ResultWrapper<List<Course>>>()
+class PaymentViewModel(
+    private val extras: Bundle?,
+    private val courseRepo: CourseRepository
 
-    val courses: LiveData<ResultWrapper<List<Course>>>
-        get() = _courses
-    fun getCourse(category: String? = null, search: String? = null, type: String? = null, level: String? = null, createAt: Boolean? = null, promoPrecentage: Boolean? = null) {
+) : ViewModel() {
+    val courses = extras?.getParcelable<Course>(PaymentActivity.EXTRA_PRODUCT)
+
+    private val _checkoutResult = MutableLiveData<ResultWrapper<Payment>>()
+    val checkoutResult: LiveData<ResultWrapper<Payment>>
+        get() = _checkoutResult
+
+    init {
+        order(PaymentRequest(courses?.id))
+    }
+    fun order(paymentRequest: PaymentRequest) {
         viewModelScope.launch(Dispatchers.IO) {
-            courseRepository.getCourses(category, search, type, level, null, null).collect {
-                _courses.postValue(it)
+            courseRepo.order(paymentRequest).collect {
+                _checkoutResult.postValue(it)
             }
         }
     }

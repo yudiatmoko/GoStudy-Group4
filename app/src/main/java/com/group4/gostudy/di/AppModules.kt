@@ -39,6 +39,7 @@ import com.group4.gostudy.utils.AssetWrapper
 import com.group4.gostudy.utils.PreferenceDataStoreHelper
 import com.group4.gostudy.utils.PreferenceDataStoreHelperImpl
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -87,7 +88,7 @@ object AppModules {
         viewModelOf(::RegisterViewModel)
         viewModelOf(::OtpViewModel)
         viewModelOf(::ForgotPasswordViewModel)
-        viewModelOf(::PaymentViewModel)
+        viewModel { params -> PaymentViewModel(params.get(), get()) }
         viewModelOf(::DetailViewModel)
         viewModelOf(::MaterialViewModel)
         viewModelOf(::DialogOrderViewModel)
