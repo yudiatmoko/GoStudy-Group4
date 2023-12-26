@@ -2,14 +2,12 @@ package com.group4.gostudy.presentation.payment
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import coil.load
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentBinding
 import com.group4.gostudy.model.Course
-import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.utils.toCurrencyFormat
@@ -20,8 +18,7 @@ class PaymentActivity : AppCompatActivity() {
     private val binding: ActivityPaymentBinding by lazy {
         ActivityPaymentBinding.inflate(layoutInflater)
     }
-    private val paymentViewModel: PaymentViewModel by viewModel()
-    private val detailViewModel: DetailViewModel by viewModel { parametersOf(intent?.extras) }
+    private val paymentViewModel: PaymentViewModel by viewModel { parametersOf(intent?.extras) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +39,12 @@ class PaymentActivity : AppCompatActivity() {
                 doOnError = {
                     binding.layoutStatePayment.root.isVisible = false
                     binding.layoutStatePayment.animLoading.isVisible = false
-                    Toast.makeText(this, "Checkout Error", Toast.LENGTH_SHORT).show()
+                    if (it.exception is ApiException) {
+                        binding.layoutStatePayment.tvError.isVisible =
+                            true
+                        binding.layoutStatePayment.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
                 },
                 doOnLoading = {
                     binding.layoutStatePayment.root.isVisible = true
@@ -53,7 +55,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun observePayment() {
-        detailViewModel.idCourse?.let {
+        paymentViewModel.idCourse?.let {
             paymentViewModel.getCourseById(
                 it
             )

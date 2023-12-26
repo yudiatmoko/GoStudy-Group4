@@ -1,5 +1,6 @@
 package com.group4.gostudy.presentation.payment
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,11 +8,18 @@ import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PaymentViewModel(private val courseRepo: CourseRepository) : ViewModel() {
+class PaymentViewModel(
+    private val courseRepo: CourseRepository,
+    private val extras: Bundle?
+) : ViewModel() {
+    val courseId = extras?.getParcelable<Course>(DetailCourseActivity.EXTRA_PRODUCT)
+
+    var idCourse: Int? = courseId?.id
     private val _checkoutResult = MutableLiveData<ResultWrapper<Int>>()
     val checkoutResult: LiveData<ResultWrapper<Int>>
         get() = _checkoutResult
