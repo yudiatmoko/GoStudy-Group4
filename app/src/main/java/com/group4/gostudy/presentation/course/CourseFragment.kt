@@ -57,7 +57,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         setSearchFeature()
         checkUserLoginAndLoadData()
         navigateToFilter()
-        setupFilterButtons()
+        setTypeButtons()
     }
 
     private fun navigateToDetail(courses: Course) {
@@ -79,7 +79,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
     }
 
-    private fun setupFilterButtons() {
+    private fun setTypeButtons() {
         binding.tvAllText.setOnClickListener {
             courseViewModel.getCourse()
         }

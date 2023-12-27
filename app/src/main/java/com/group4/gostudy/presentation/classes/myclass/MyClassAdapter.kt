@@ -5,27 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.MyClassItemBinding
-import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.UserCourse
 
 class MyClassAdapter(
-    private val itemClick: (Course) -> Unit
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val itemClick: (UserCourse) -> Unit
+) : RecyclerView.Adapter<ClassItemViewHolder>() {
 
     private val differ = AsyncListDiffer(
         this,
-        object : DiffUtil.ItemCallback<Course>() {
+        object : DiffUtil.ItemCallback<UserCourse>() {
             override fun areItemsTheSame(
-                oldItem: Course,
-                newItem: Course
+                oldItem: UserCourse,
+                newItem: UserCourse
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Course,
-                newItem: Course
+                oldItem: UserCourse,
+                newItem: UserCourse
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
@@ -35,7 +34,7 @@ class MyClassAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
+    ): ClassItemViewHolder {
         val binding = MyClassItemBinding.inflate(
             LayoutInflater.from(parent.context)
         )
@@ -47,13 +46,13 @@ class MyClassAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
+        holder: ClassItemViewHolder,
         position: Int
     ) {
-        (holder as ViewHolderBinder<Course>).bind(differ.currentList[position])
+        holder.bind(differ.currentList[position])
     }
 
-    fun setData(data: List<Course>) {
+    fun setData(data: List<UserCourse>) {
         differ.submitList(data)
     }
 }

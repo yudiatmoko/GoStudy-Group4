@@ -4,26 +4,28 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.MyClassItemBinding
-import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.UserCourse
+import com.group4.gostudy.utils.formatDurationToMinutes
 
 class ClassItemViewHolder(
     private val binding: MyClassItemBinding,
-    private val onClicked: (Course) -> Unit
+    private val onClicked: (UserCourse) -> Unit
 ) : RecyclerView.ViewHolder(binding.root),
-    ViewHolderBinder<Course> {
+    ViewHolderBinder<UserCourse> {
 
-    override fun bind(item: Course) {
+    override fun bind(item: UserCourse) {
+        binding.piMyClass.progress = item.totalProgress ?: 0
+        binding.tvCategoryName.text = item.courseX?.category?.name.orEmpty()
+        binding.tvClassTitle.text = item.courseX?.name.orEmpty()
+        binding.tvMentorName.text = String.format("by %s", item.courseX?.courseBy.orEmpty())
+        binding.tvLevel.text = item.courseX?.level.orEmpty()
+        binding.tvModule.text = item.courseX?.totalModule.toString()
+        binding.tvDuration.text = item.courseX?.totalDuration.formatDurationToMinutes()
+        binding.tvRating.text = item.courseX?.rating.toString()
+        binding.ivMyClass.load(item.courseX?.imageUrl)
+
         binding.root.setOnClickListener {
             onClicked.invoke(item)
         }
-        binding.piMyClass.progress = item.id ?: 0
-        binding.tvCategoryName.text = item.category?.name
-        binding.tvClassTitle.text = item.name
-        binding.tvMentorName.text = String.format("by %s", item.courseBy)
-        binding.tvLevel.text = item.level
-        binding.tvModule.text = item.totalModule.toString()
-        binding.tvDuration.text = item.totalDuration.toString()
-        binding.tvRating.text = item.rating.toString()
-        binding.ivMyClass.load(item.imageUrl)
     }
 }
