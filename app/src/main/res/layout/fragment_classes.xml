@@ -58,7 +58,7 @@
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:text="@string/txt_class_topic"
+                android:text="@string/txt_kelas_berjalan"
                 android:textColor="@color/md_theme_light_primary"
                 android:textSize="24sp" />
 

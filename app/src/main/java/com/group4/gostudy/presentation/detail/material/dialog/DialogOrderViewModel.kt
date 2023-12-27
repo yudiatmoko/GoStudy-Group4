@@ -26,20 +26,22 @@ class DialogOrderViewModel(private val courseRepo: CourseRepository) : ViewModel
         createAt: Boolean? = null,
         rating: Boolean? = null
     ) {
-    fun getCourseById(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            courseRepo.getCourses(
-                category,
-                search,
-                type,
-                level,
-                promoPrecentage,
-                createAt,
-                rating
-            ).collect {
-                courseRepo.getCourseById(id).collect {
-                    _courses.postValue(it)
+        fun getCourseById(id: Int) {
+            viewModelScope.launch(Dispatchers.IO) {
+                courseRepo.getCourses(
+                    category,
+                    search,
+                    type,
+                    level,
+                    promoPrecentage,
+                    createAt,
+                    rating
+                ).collect {
+                    courseRepo.getCourseById(id).collect {
+                        _courses.postValue(it)
+                    }
                 }
             }
         }
-    }}}
+    } 
+}

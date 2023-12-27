@@ -39,7 +39,7 @@ class DialogOrderFragment : BottomSheetDialogFragment() {
 
     private fun observeData() {
         detailViewModel.idCourse?.let {
-            dialogOrderViewModel.getCourseById(it)
+//            dialogOrderViewModel.getCourseById(it)
         }
         dialogOrderViewModel.courses.observe(
             viewLifecycleOwner
