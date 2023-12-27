@@ -10,10 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentClassesBinding
-import com.group4.gostudy.model.Course
 import com.group4.gostudy.model.UserCourse
 import com.group4.gostudy.presentation.classes.myclass.MyClassAdapter
-import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
@@ -34,12 +32,12 @@ class ClassesFragment : Fragment() {
 
     private val myClassAdapter: MyClassAdapter by lazy {
         MyClassAdapter { userCourse: UserCourse ->
-            navigateToDetail(userCourse.courseX)
+            navigateToDetail(userCourse)
         }
     }
 
-    private fun navigateToDetail(courses: Course?) {
-        DetailCourseActivity.startActivity(requireContext(), courses)
+    private fun navigateToDetail(courses: UserCourse) {
+//        DetailCourseActivity.startActivity(requireContext(), courses)
     }
 
     override fun onCreateView(

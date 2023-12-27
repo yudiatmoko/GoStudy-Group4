@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.onStart
 
 interface UserCourseRepository {
     suspend fun getUserCourse(type: String?, search: String?): Flow<ResultWrapper<List<UserCourse>>>
-    suspend fun getUserCourseById(id: Int): Flow<ResultWrapper<Course?>>
+    suspend fun getUserCourseById(id: Int): Flow<ResultWrapper<Course>>
 }
 
 class UserCourseRepositoryImpl(
@@ -31,9 +31,9 @@ class UserCourseRepositoryImpl(
         }
     }
 
-    override suspend fun getUserCourseById(id: Int): Flow<ResultWrapper<Course?>> {
+    override suspend fun getUserCourseById(id: Int): Flow<ResultWrapper<Course>> {
         return proceedFlow {
-            apiDataSource.getUserCourseById(id).data?.course?.toCourse()
+            apiDataSource.getCourseById(id).data.course.toCourse()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {

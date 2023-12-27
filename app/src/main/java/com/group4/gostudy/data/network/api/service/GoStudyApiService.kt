@@ -138,8 +138,8 @@ interface GoStudyApiService {
         @Query("search")search: String? = null
     ): UserCourseResponseV2
 
-    @GET("view-course/course/{courseId}")
-    suspend fun getUserCourseById(@Path("courseId") id: Int? = null): UserCourseById
+    @GET("view-course/course/{id}")
+    suspend fun getUserCourseById(@Path("id") id: Int? = null): UserCourseById
 
     companion object {
         @JvmStatic
