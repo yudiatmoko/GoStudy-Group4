@@ -208,7 +208,6 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
         courseViewModel.categories.value?.payload?.forEach { category ->
             category.isChecked = false
         }
-        // You may need to notify the adapter if using RecyclerView
         filterAdapter.notifyDataSetChanged()
     }
 
