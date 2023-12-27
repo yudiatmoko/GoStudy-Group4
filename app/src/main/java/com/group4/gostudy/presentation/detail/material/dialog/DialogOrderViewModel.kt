@@ -43,5 +43,5 @@ class DialogOrderViewModel(private val courseRepo: CourseRepository) : ViewModel
                 }
             }
         }
-    } 
+    }
 }
