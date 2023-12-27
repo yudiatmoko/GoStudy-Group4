@@ -22,6 +22,8 @@ import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.usercourseid.UserCourseById
+import com.group4.gostudy.data.network.api.model.usercoursev2.UserCourseResponseV2
 import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import okhttp3.MultipartBody
@@ -87,8 +89,10 @@ interface GoStudyApiDataSource {
     suspend fun resendOtp(): OtpResponse
 
     suspend fun verify(otp: OtpRequest): VerifyResponse
+    suspend fun getUserCourse(status: String?, search: String?): UserCourseResponseV2
 
     suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse
+    suspend fun getUserCourseById(id: Int?): UserCourseById
     suspend fun createOrder(paymentRequest: PaymentRequest): PaymentResponse
 }
 
@@ -189,12 +193,19 @@ class GoStudyApiDataSourceImpl(
         return service.verify(otp)
     }
 
+    override suspend fun getUserCourse(status: String?, search: String?): UserCourseResponseV2 {
+        return service.getUserCourse(status, search)
+    }
+
     override suspend fun forgotPassword(request: ForgotPasswordRequest): ForgotPasswordResponse {
         return service.forgotPassword(request)
     }
 
     override suspend fun getCourseById(id: Int?): CourseByIdResponse {
         return service.getCourseById(id)
+    }
+    override suspend fun getUserCourseById(id: Int?): UserCourseById {
+        return service.getUserCourseById(id)
     }
     override suspend fun createOrder(paymentRequest: PaymentRequest): PaymentResponse {
         return service.createOrder(paymentRequest)
