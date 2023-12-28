@@ -9,11 +9,10 @@ import com.xwray.groupie.viewbinding.BindableItem
 class HeaderItem(
     private val title: String,
     private val duration: Int
-//                 private val onHeaderClick: (item: String) -> Unit
 ) : BindableItem<ItemSectionHeaderBinding>() {
     override fun bind(viewBinding: ItemSectionHeaderBinding, position: Int) {
         viewBinding.tvHeaderSectionName.text = title
-        viewBinding.tvHeaderSectionTime.text = duration.toString()
+        viewBinding.tvHeaderSectionTime.text = String.format("%.0f Detik", duration.toDouble())
     }
 
     override fun getLayout(): Int = R.layout.item_section_header
@@ -26,7 +25,6 @@ class DataItem(private val data: String, private val onItemClick: (item: String)
     BindableItem<ItemSectionDataBinding>() {
     override fun bind(viewBinding: ItemSectionDataBinding, position: Int) {
         viewBinding.tvSectionData.text = data
-//        viewBinding.ivLock.setImageResource(R.drawable.ic_lock)
         viewBinding.root.setOnClickListener { onItemClick.invoke(data) }
     }
 
