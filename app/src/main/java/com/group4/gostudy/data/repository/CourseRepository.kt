@@ -6,7 +6,9 @@ import com.group4.gostudy.data.network.api.model.coursev2.toChapterList
 import com.group4.gostudy.data.network.api.model.coursev2.toCourse
 import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
 import com.group4.gostudy.data.network.api.model.historypayment.toHistoryPaymentList
+import com.group4.gostudy.data.network.api.model.notification.toAllNotifList
 import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
+import com.group4.gostudy.model.AllNotif
 import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Chapter
 import com.group4.gostudy.model.Course
@@ -40,6 +42,8 @@ interface CourseRepository {
     suspend fun getChaptersV2(id: Int): Flow<ResultWrapper<List<Chapter>>>
     suspend fun getHistoryPayments(): Flow<ResultWrapper<List<HistoryPayment>>>
     suspend fun order(paymentRequest: PaymentRequest): Flow<ResultWrapper<Int>>
+
+    suspend fun getNotifications(): Flow<ResultWrapper<List<AllNotif>>>
 }
 
 class CourseRepositoryImpl(
@@ -119,6 +123,12 @@ class CourseRepositoryImpl(
         }.onStart {
             emit(ResultWrapper.Loading())
             delay(2000)
+        }
+    }
+
+    override suspend fun getNotifications(): Flow<ResultWrapper<List<AllNotif>>> {
+        return proceedFlow {
+            apiDataSource.getNotifications().data?.allNotif?.toAllNotifList() ?: emptyList()
         }
     }
 }
