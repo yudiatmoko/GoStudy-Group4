@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.NotificationItemListBinding
-import com.group4.gostudy.model.Notification
+import com.group4.gostudy.model.AllNotif
 
 /*
 Hi, Code Enthusiast!
@@ -15,22 +15,22 @@ https://github.com/yudiatmoko
 */
 
 class NotificationListAdapter(
-    private val itemClick: (Notification) -> Unit
+    private val itemClick: (AllNotif) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val differ = AsyncListDiffer(
         this,
-        object : DiffUtil.ItemCallback<Notification>() {
+        object : DiffUtil.ItemCallback<AllNotif>() {
             override fun areItemsTheSame(
-                oldItem: Notification,
-                newItem: Notification
+                oldItem: AllNotif,
+                newItem: AllNotif
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Notification,
-                newItem: Notification
+                oldItem: AllNotif,
+                newItem: AllNotif
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
@@ -53,10 +53,10 @@ class NotificationListAdapter(
         holder: RecyclerView.ViewHolder,
         position: Int
     ) {
-        (holder as ViewHolderBinder<Notification>).bind(differ.currentList[position])
+        (holder as ViewHolderBinder<AllNotif>).bind(differ.currentList[position])
     }
 
-    fun setData(data: List<Notification>) {
+    fun setData(data: List<AllNotif>) {
         differ.submitList(data)
     }
 }

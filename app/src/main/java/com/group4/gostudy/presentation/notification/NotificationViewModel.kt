@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.group4.gostudy.data.repository.NotificationRepository
-import com.group4.gostudy.model.Notification
+import com.group4.gostudy.data.repository.CourseRepository
+import com.group4.gostudy.model.AllNotif
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,17 +16,17 @@ https://github.com/yudiatmoko
 */
 
 class NotificationViewModel(
-    private val notificationRepository: NotificationRepository
+    private val repository: CourseRepository
 ) : ViewModel() {
 
-    private val _notifications = MutableLiveData<ResultWrapper<List<Notification>>>()
+    private val _notifications = MutableLiveData<ResultWrapper<List<AllNotif>>>()
 
-    val notifications: LiveData<ResultWrapper<List<Notification>>>
+    val notifications: LiveData<ResultWrapper<List<AllNotif>>>
         get() = _notifications
 
     fun getNotification() {
         viewModelScope.launch(Dispatchers.IO) {
-            notificationRepository.getNotifications().collect {
+            repository.getNotifications().collect {
                 _notifications.postValue(it)
             }
         }
