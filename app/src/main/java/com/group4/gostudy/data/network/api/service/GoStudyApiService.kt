@@ -104,7 +104,7 @@ interface GoStudyApiService {
     @GET("payment/history")
     suspend fun getHistoryPayments(): HistoryPaymentsResponse
 
-    @GET("notification")
+    @GET("my-notification")
     suspend fun getNotifications(): NotificationsResponse
 
     @GET("module")

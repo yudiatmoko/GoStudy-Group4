@@ -14,8 +14,6 @@ import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.data.repository.CourseRepositoryImpl
 import com.group4.gostudy.data.repository.DetailRepository
 import com.group4.gostudy.data.repository.DetailRepositoryImpl
-import com.group4.gostudy.data.repository.NotificationRepository
-import com.group4.gostudy.data.repository.NotificationRepositoryImpl
 import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.data.repository.UserRepositoryImpl
 import com.group4.gostudy.presentation.account.AccountViewModel
@@ -62,7 +60,6 @@ object AppModules {
     }
 
     private val repositoryModule = module {
-        single<NotificationRepository> { NotificationRepositoryImpl(get()) }
         single<UserRepository> { UserRepositoryImpl(get()) }
         single<CourseRepository> { CourseRepositoryImpl(get()) }
         single<ChapterRepository> { ChapterRepositoryImpl(get()) }

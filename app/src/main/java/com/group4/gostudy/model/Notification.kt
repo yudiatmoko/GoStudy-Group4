@@ -6,10 +6,12 @@ https://github.com/yudiatmoko
 */
 
 data class Notification(
-    val id: Int,
-    val title: String,
-    val subtitle: String,
-    val content: String
+    val category: String?,
+    val createdAt: String?,
+    val description: String?,
+    val id: Int?,
+    val title: String?,
+    val updatedAt: String?
 )
 
 object NotificationProvider {
