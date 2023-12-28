@@ -7,7 +7,7 @@ data class Payment(
     val orderId: String,
     val paymentType: Any,
     val price: Int,
-    val redirect_url: String,
+    val redirectUrl: String,
     val settlementTime: Any,
     val status: String,
     val token: String,
