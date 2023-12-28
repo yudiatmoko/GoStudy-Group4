@@ -26,30 +26,10 @@ class DialogOrderViewModel(
     val courses: LiveData<ResultWrapper<Course>>
         get() = _courses
 
-    fun getCourse(
-        category: String? = null,
-        search: String? = null,
-        type: String? = null,
-        level: String? = null,
-        promoPrecentage: Boolean? = null,
-        createAt: Boolean? = null,
-        rating: Boolean? = null
-    ) {
-        fun getCourseById(id: Int) {
-            viewModelScope.launch(Dispatchers.IO) {
-                courseRepo.getCourses(
-                    category,
-                    search,
-                    type,
-                    level,
-                    promoPrecentage,
-                    createAt,
-                    rating
-                ).collect {
-                    courseRepo.getCourseById(id).collect {
-                        _courses.postValue(it)
-                    }
-                }
+    fun getCourseById(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            courseRepo.getCourseById(id).collect {
+                _courses.postValue(it)
             }
         }
     }
