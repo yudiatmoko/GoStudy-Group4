@@ -1,6 +1,5 @@
 package com.group4.gostudy.presentation.detail.material.dialog
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -108,17 +107,14 @@ class DialogOrderFragment : BottomSheetDialogFragment() {
 
     private fun setClickListeners() {
         binding.btnOrder.setOnClickListener {
-            navigateToPayment()
+            navigateToPayment(detailViewModel.course)
         }
         binding.tbExitDialog.setOnClickListener {
             dismiss()
         }
     }
 
-    private fun navigateToPayment() {
-        val intent = Intent(requireContext(), PaymentActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-        startActivity(intent)
+    private fun navigateToPayment(course: Course?) {
+        PaymentActivity.startActivity(requireContext(), course)
     }
 }

@@ -7,7 +7,7 @@ import com.group4.gostudy.data.network.api.model.common.BaseResponse
 @Keep
 data class PaymentResponse(
     @SerializedName("data")
-    val data: DataPaymentResponse?,
+    val data: DataPaymentResponse,
     val baseResponse: BaseResponse
 
 )
