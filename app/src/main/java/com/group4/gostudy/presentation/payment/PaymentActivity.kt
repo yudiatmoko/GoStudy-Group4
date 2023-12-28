@@ -1,7 +1,9 @@
 package com.group4.gostudy.presentation.payment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import coil.load
@@ -19,32 +21,45 @@ class PaymentActivity : AppCompatActivity() {
         ActivityPaymentBinding.inflate(layoutInflater)
     }
     private val paymentViewModel: PaymentViewModel by viewModel { parametersOf(intent?.extras) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setClickListener()
-        observePayment()
+        bindProduct()
         observeCheckoutResult()
+    }
+
+    private fun bindProduct() {
+        paymentViewModel.courses.let {
+            binding.layoutContent.ivCourseImg.load(it?.imageUrl)
+            binding.layoutContent.tvCategoryName.text = it?.category?.name
+            binding.layoutContent.tvCourseName.text = it?.name
+            binding.layoutContent.tvCreatorName.text = it?.courseBy
+            binding.tvPrice.text = it?.price?.toDouble()?.toCurrencyFormat()
+            val ppn: Double? = it?.price?.times(0.11)
+            val totalPrice: Double? = (it?.price?.toDouble())?.plus(ppn ?: 0.0)
+            binding.tvPpn.text = ppn?.toCurrencyFormat()
+            binding.tvTotalPrice.text = totalPrice?.toCurrencyFormat()
+        }
     }
 
     private fun observeCheckoutResult() {
         paymentViewModel.checkoutResult.observe(this) {
             it.proceedWhen(
-                doOnSuccess = {
+                doOnSuccess = { result ->
                     binding.layoutStatePayment.root.isVisible = false
                     binding.layoutStatePayment.animLoading.isVisible = false
-                    navigateToPaymentWeb("https://app.sandbox.midtrans.com/snap/v3/redirection/")
+                    binding.layoutContent.root.isVisible = true
+                    binding.cvItemOrder.isVisible = true
+                    binding.btnJoinClass.setOnClickListener {
+                        navigateToPaymentWeb(result.payload?.redirectUrl.toString())
+                    }
                 },
                 doOnError = {
                     binding.layoutStatePayment.root.isVisible = false
                     binding.layoutStatePayment.animLoading.isVisible = false
                     if (it.exception is ApiException) {
-                        binding.layoutStatePayment.tvError.isVisible =
-                            true
-                        binding.layoutStatePayment.tvError.text =
-                            it.exception.getParsedError()?.message
-                    }
+                        it.exception.getParsedError()?.message                    }
                 },
                 doOnLoading = {
                     binding.layoutStatePayment.root.isVisible = true
@@ -54,98 +69,7 @@ class PaymentActivity : AppCompatActivity() {
         }
     }
 
-    private fun observePayment() {
-        paymentViewModel.idCourse?.let {
-            paymentViewModel.getCourseById(
-                it
-            )
-        }
-        paymentViewModel.course.observe(this) {
-            it.proceedWhen(
-                doOnLoading = {
-                    binding.layoutStatePayment.root.isVisible =
-                        true
-                    binding.layoutStatePayment.animLoading.isVisible =
-                        true
-                    binding.layoutStatePayment.llAnimError.isVisible =
-                        false
-                    binding.cvItemOrder.isVisible =
-                        false
-                    binding.btnJoinClass.isVisible = false
-                },
-                doOnSuccess = { result ->
-                    binding.layoutStatePayment.root.isVisible =
-                        true
-                    binding.layoutStatePayment.animLoading.isVisible =
-                        false
-                    binding.layoutStatePayment.llAnimError.isVisible =
-                        false
-                    binding.cvItemOrder.isVisible =
-                        true
-                    binding.btnJoinClass.isVisible = true
-                    result.payload?.let {
-                        setData(it)
-                    }
-                },
-                doOnError = {
-                    binding.layoutStatePayment.root.isVisible =
-                        true
-                    binding.layoutStatePayment.animLoading.isVisible =
-                        false
-                    binding.layoutStatePayment.llAnimError.isVisible =
-                        true
-                    binding.cvItemOrder.isVisible =
-                        false
-                    binding.btnJoinClass.isVisible = false
-                    if (it.exception is ApiException) {
-                        binding.layoutStatePayment.tvError.isVisible =
-                            true
-                        binding.layoutStatePayment.tvError.text =
-                            it.exception.getParsedError()?.message
-                    }
-                },
-                doOnEmpty = {
-                    binding.layoutStatePayment.root.isVisible =
-                        true
-                    binding.layoutStatePayment.animLoading.isVisible =
-                        false
-                    binding.layoutStatePayment.tvError.isVisible =
-                        true
-                    binding.layoutStatePayment.llAnimError.isVisible =
-                        true
-                    binding.cvItemOrder.isVisible =
-                        false
-                    binding.layoutStatePayment.tvError.text =
-                        getString(R.string.text_no_data)
-                    if (it.exception is ApiException) {
-                        binding.layoutStatePayment.tvError.text =
-                            it.exception.getParsedError()?.message
-                    }
-                }
-            )
-        }
-        paymentViewModel.priceLiveData.observe(this) {
-            binding.tvTotalPrice.text = it.toCurrencyFormat()
-        }
-        paymentViewModel.ppnLiveData.observe(this) {
-            binding.tvPpn.text = it.toCurrencyFormat()
-        }
-    }
-
-    private fun setData(course: Course?) {
-        course?.let {
-            binding.layoutContent.ivCourseImg.load(course.imageUrl)
-            binding.layoutContent.tvCategoryName.text = course.category?.name
-            binding.layoutContent.tvCourseName.text = course.name
-            binding.layoutContent.tvCreatorName.text = course.courseBy
-            binding.tvPrice.text = course.price.toString()
-        }
-    }
-
     private fun setClickListener() {
-        binding.btnJoinClass.setOnClickListener {
-            paymentViewModel.order()
-        }
         binding.toolbar.setOnClickListener {
             onBackPressed()
         }
@@ -155,5 +79,14 @@ class PaymentActivity : AppCompatActivity() {
         val intent = Intent(this, PaymentWeb::class.java)
         intent.putExtra("URL", urlPayment)
         startActivity(intent)
+    }
+
+    companion object {
+        const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+        fun startActivity(context: Context, course: Course?) {
+            val intent = Intent(context, PaymentActivity::class.java)
+            intent.putExtra(EXTRA_PRODUCT, course)
+            context.startActivity(intent)
+        }
     }
 }

@@ -8,47 +8,29 @@ import androidx.lifecycle.viewModelScope
 import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.model.Course
-import com.group4.gostudy.presentation.detail.DetailCourseActivity
+import com.group4.gostudy.model.Payment
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PaymentViewModel(
-    private val courseRepo: CourseRepository,
-    private val extras: Bundle?
-) : ViewModel() {
-    val courseId = extras?.getParcelable<Course>(DetailCourseActivity.EXTRA_PRODUCT)
+    private val extras: Bundle?,
+    private val courseRepo: CourseRepository
 
-    var idCourse: Int? = courseId?.id
-    private val _checkoutResult = MutableLiveData<ResultWrapper<Int>>()
-    val checkoutResult: LiveData<ResultWrapper<Int>>
+) : ViewModel() {
+    val courses = extras?.getParcelable<Course>(PaymentActivity.EXTRA_PRODUCT)
+
+    private val _checkoutResult = MutableLiveData<ResultWrapper<Payment>>()
+    val checkoutResult: LiveData<ResultWrapper<Payment>>
         get() = _checkoutResult
 
-    val priceLiveData = MutableLiveData<Double>().apply {
-        postValue(0.0)
+    init {
+        order(PaymentRequest(courses?.id))
     }
-    val ppnLiveData = MutableLiveData<Double>().apply {
-        postValue(0.0)
-    }
-
-    fun order() {
-        val courseId = course.value?.payload?.id
+    fun order(paymentRequest: PaymentRequest) {
         viewModelScope.launch(Dispatchers.IO) {
-            courseRepo.order(PaymentRequest(courseId = courseId)).collect {
+            courseRepo.order(paymentRequest).collect {
                 _checkoutResult.postValue(it)
-            }
-        }
-    }
-
-    private val _course = MutableLiveData<ResultWrapper<Course>>()
-
-    val course: LiveData<ResultWrapper<Course>>
-        get() = _course
-
-    fun getCourseById(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            courseRepo.getCourseById(id).collect {
-                _course.postValue(it)
             }
         }
     }
