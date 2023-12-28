@@ -14,6 +14,8 @@ class DetailViewModel(
 
     var idCourse: Int? = course?.id
 
+    val desc: String? = course?.description
+
   /*  private val _detail = MutableLiveData<ResultWrapper<List<PopularCourse>>>()
 
     val details: LiveData<ResultWrapper<List<DetailCourse>>>
