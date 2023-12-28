@@ -34,7 +34,7 @@ class AboutFragment : Fragment() {
     private fun showData(course: Course?) {
         course?.let {
             binding.tvAboutClass.text = it.description.toString()
-            binding.tvPurposeClass.text = it.benefits.toString()
+            binding.tvPurposeClass.text = it.benefits?.joinToString("\n")
         }
     }
 
