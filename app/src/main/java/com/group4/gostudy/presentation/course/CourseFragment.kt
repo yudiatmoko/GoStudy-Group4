@@ -34,6 +34,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
     private val selectedCategories = mutableListOf<String>()
     private var createAt: Boolean = false
     private var promo: Boolean = false
+    private var rating: Boolean = false
     private val mainViewModel: MainViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +57,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         setSearchFeature()
         checkUserLoginAndLoadData()
         navigateToFilter()
-        setupFilterButtons()
+        setTypeButtons()
     }
 
     private fun navigateToDetail(courses: Course) {
@@ -78,7 +79,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
     }
 
-    private fun setupFilterButtons() {
+    private fun setTypeButtons() {
         binding.tvAllText.setOnClickListener {
             courseViewModel.getCourse()
         }
@@ -204,7 +205,8 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         levels: List<String>?,
         categorySelected: List<String>?,
         createAt: Boolean?,
-        promo: Boolean?
+        promo: Boolean?,
+        rating: Boolean?
     ) {
         selectedLevels.clear()
         levels?.let { selectedLevels.addAll(it) }
@@ -212,6 +214,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         categorySelected?.let { selectedCategories.addAll(it) }
         this.createAt = createAt ?: false
         this.promo = promo ?: false
+        this.rating = rating ?: false
         applyFilter()
     }
 
@@ -227,12 +230,14 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
 
         val createAtParam: Boolean? = if (createAt) createAt else null
         val promoParam: Boolean? = if (promo) promo else null
+        val ratingParam: Boolean? = if (rating) rating else null
 
         courseViewModel.getCourse(
             levels = level,
             category = category,
             createAt = createAtParam,
-            promoPercentage = promoParam
+            promoPercentage = promoParam,
+            rating = ratingParam
         )
     }
 }

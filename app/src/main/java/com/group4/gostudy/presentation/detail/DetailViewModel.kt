@@ -1,13 +1,20 @@
 package com.group4.gostudy.presentation.detail
 
 import android.os.Bundle
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.group4.gostudy.data.repository.DetailRepository
+import androidx.lifecycle.viewModelScope
+import com.group4.gostudy.data.repository.UserCourseRepository
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.utils.ResultWrapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class DetailViewModel(
     private val extras: Bundle?,
-    private val detailRepository: DetailRepository
+    private val userCourseRepository: UserCourseRepository
 
 ) : ViewModel() {
     val course = extras?.getParcelable<Course>(DetailCourseActivity.EXTRA_PRODUCT)
@@ -15,17 +22,24 @@ class DetailViewModel(
     var idCourse: Int? = course?.id
 
     val desc: String? = course?.description
+    private val _detail = MutableLiveData<ResultWrapper<Course?>>()
 
-  /*  private val _detail = MutableLiveData<ResultWrapper<List<PopularCourse>>>()
-
-    val details: LiveData<ResultWrapper<List<DetailCourse>>>
+    val details: LiveData<ResultWrapper<Course?>>
         get() = _detail
 
-    fun getDetails(category: String? = null, module: String? = null, chapter: String? = null) {
+    fun getDetail() {
         viewModelScope.launch(Dispatchers.IO) {
-            detailRepository.getCourseID(category, module,chapter).collect {
+            userCourseRepository.getUserCourseById(idCourse ?: 0).collect {
                 _detail.postValue(it)
             }
         }
-    }*/
+    }
+
+    /*    fun getDetails(category: String? = null, module: String? = null, chapter: String? = null) {
+            viewModelScope.launch(Dispatchers.IO) {
+                detailRepository.getCourseID(category, module,chapter).collect {
+                    _detail.postValue(it)
+                }
+            }
+        }*/
 }

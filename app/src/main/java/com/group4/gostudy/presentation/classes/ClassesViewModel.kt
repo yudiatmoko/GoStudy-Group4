@@ -4,25 +4,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.group4.gostudy.data.repository.CourseRepository
-import com.group4.gostudy.model.Course
+import com.group4.gostudy.data.repository.UserCourseRepository
+import com.group4.gostudy.model.UserCourse
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ClassesViewModel(
-    private val courseRepository: CourseRepository
+    private val courseRepository: UserCourseRepository
 ) : ViewModel() {
 
-    private val _courses = MutableLiveData<ResultWrapper<List<Course>>>()
+    private val _usercourse = MutableLiveData<ResultWrapper<List<UserCourse>>>()
 
-    val courses: LiveData<ResultWrapper<List<Course>>>
-        get() = _courses
+    val usercourses: LiveData<ResultWrapper<List<UserCourse>>>
+        get() = _usercourse
 
-    fun getCourse(category: String? = null, search: String? = null, type: String? = null, level: String? = null, createAt: Boolean? = null, promoPrecentage: Boolean? = null) {
+    fun getUserCourses(status: String? = null, search: String? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            courseRepository.getCourses(category, search, type, level, createAt, promoPrecentage).collect {
-                _courses.postValue(it)
+            courseRepository.getUserCourse(status, search).collect {
+                _usercourse.postValue(it)
             }
         }
     }

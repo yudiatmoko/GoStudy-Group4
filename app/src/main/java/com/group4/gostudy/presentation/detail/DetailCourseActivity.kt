@@ -20,6 +20,7 @@ import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityDetailCourseBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
+import com.group4.gostudy.utils.proceedWhen
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
@@ -51,6 +52,8 @@ class DetailCourseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         showData(viewModel.course)
+        viewModel.getDetail()
+        showDataUserCourse()
 
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -194,6 +197,16 @@ class DetailCourseActivity : AppCompatActivity() {
             binding.tvClassTitle.text = it.name
             binding.tvRating.text = it.rating.toString()
             binding.txtMentorName.text = String.format("by %s", it.courseBy)
+        }
+    }
+
+    private fun showDataUserCourse() {
+        viewModel.details.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    showData(it.payload)
+                }
+            )
         }
     }
 

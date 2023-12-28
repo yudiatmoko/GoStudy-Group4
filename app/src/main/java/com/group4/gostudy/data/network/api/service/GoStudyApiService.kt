@@ -25,6 +25,8 @@ import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.usercourseid.UserCourseById
+import com.group4.gostudy.data.network.api.model.usercoursev2.UserCourseResponseV2
 import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -80,7 +82,8 @@ interface GoStudyApiService {
         @Query("type") type: String? = null,
         @Query("level") level: String? = null,
         @Query("createAt") createAt: Boolean? = null,
-        @Query("promoPrecentage") promoPrecentage: Boolean? = null
+        @Query("promoPrecentage") promoPrecentage: Boolean? = null,
+        @Query("rating") rating: Boolean? = null
     ): CoursesResponseV2
 
     @POST("auth/register")
@@ -128,6 +131,15 @@ interface GoStudyApiService {
 
     @POST("payment")
     suspend fun createOrder(@Body paymentRequest: PaymentRequest): PaymentResponse
+
+    @GET("view-course")
+    suspend fun getUserCourse(
+        @Query("status")status: String? = null,
+        @Query("search")search: String? = null
+    ): UserCourseResponseV2
+
+    @GET("view-course/course/{courseId}")
+    suspend fun getUserCourseById(@Path("courseId") id: Int? = null): UserCourseById
 
     companion object {
         @JvmStatic

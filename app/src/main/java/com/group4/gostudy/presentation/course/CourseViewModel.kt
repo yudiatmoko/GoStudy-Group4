@@ -24,7 +24,8 @@ class CourseViewModel(private val courseRepository: CourseRepository) : ViewMode
         type: String? = null,
         levels: List<String>? = null,
         createAt: Boolean? = null,
-        promoPercentage: Boolean? = null
+        promoPercentage: Boolean? = null,
+        rating: Boolean? = null
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             val levelList = levels?.joinToString(",")
@@ -35,7 +36,8 @@ class CourseViewModel(private val courseRepository: CourseRepository) : ViewMode
                 type,
                 levelList,
                 createAt,
-                promoPercentage
+                promoPercentage,
+                rating
             ).collect {
                 _courses.postValue(it)
             }

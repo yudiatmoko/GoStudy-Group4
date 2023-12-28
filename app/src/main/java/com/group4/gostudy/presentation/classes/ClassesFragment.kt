@@ -11,8 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentClassesBinding
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.UserCourse
 import com.group4.gostudy.presentation.classes.myclass.MyClassAdapter
-import com.group4.gostudy.presentation.course.course.CourseAdapter
 import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
 import com.group4.gostudy.presentation.main.MainViewModel
@@ -33,14 +33,12 @@ class ClassesFragment : Fragment() {
     }
 
     private val myClassAdapter: MyClassAdapter by lazy {
-        MyClassAdapter {
-            CourseAdapter { course: Course ->
-                navigateToDetail(course)
-            }
+        MyClassAdapter { userCourse: UserCourse ->
+            navigateToDetail(userCourse.courseX)
         }
     }
 
-    private fun navigateToDetail(courses: Course) {
+    private fun navigateToDetail(courses: Course?) {
         DetailCourseActivity.startActivity(requireContext(), courses)
     }
 
@@ -64,8 +62,22 @@ class ClassesFragment : Fragment() {
         checkUserLoginAndLoadData()
         setMyClassRv()
         setSearchFeature()
+        setTypeButtons()
     }
 
+    private fun setTypeButtons() {
+        binding.tvAllText.setOnClickListener {
+            classesViewModel.getUserCourses()
+        }
+
+        binding.tvProgressText.setOnClickListener {
+            classesViewModel.getUserCourses(status = "in_progress".trim())
+        }
+
+        binding.tvDoneText.setOnClickListener {
+            classesViewModel.getUserCourses(status = "selesai".trim())
+        }
+    }
     private fun checkUserLoginAndLoadData() {
         lifecycleScope.launch {
             val userToken = mainViewModel.getUserToken()
@@ -78,8 +90,8 @@ class ClassesFragment : Fragment() {
     }
 
     private fun observeCourse() {
-        classesViewModel.getCourse()
-        classesViewModel.courses.observe(
+        classesViewModel.getUserCourses()
+        classesViewModel.usercourses.observe(
             viewLifecycleOwner
         ) {
             it.proceedWhen(
@@ -147,17 +159,17 @@ class ClassesFragment : Fragment() {
     private fun setSearchFeature() {
         binding.svCourse.setOnCloseListener() {
             hideKeyboard()
-            classesViewModel.getCourse()
+            classesViewModel.getUserCourses()
             false
         }
 
         binding.svCourse.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return if (!query.isNullOrEmpty()) {
-                    classesViewModel.getCourse(search = query.trim())
+                    classesViewModel.getUserCourses(search = query)
                     false
                 } else {
-                    classesViewModel.getCourse() // Mengambil semua data course
+                    classesViewModel.getUserCourses()
                     false
                 }
             }
