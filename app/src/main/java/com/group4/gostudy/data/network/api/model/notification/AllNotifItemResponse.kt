@@ -1,4 +1,4 @@
-package com.group4.gostudy.data.network.api.model.notifcation
+package com.group4.gostudy.data.network.api.model.notification
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

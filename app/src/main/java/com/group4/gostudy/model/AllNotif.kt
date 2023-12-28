@@ -1,6 +1,6 @@
 package com.group4.gostudy.model
 
-import com.group4.gostudy.data.network.api.model.notifcation.NotificationItemResponse
+import com.group4.gostudy.data.network.api.model.notification.NotificationItemResponse
 
 data class AllNotif(
     val createdAt: String?,

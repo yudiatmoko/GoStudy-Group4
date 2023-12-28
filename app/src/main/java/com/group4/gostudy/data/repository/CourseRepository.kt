@@ -6,7 +6,7 @@ import com.group4.gostudy.data.network.api.model.coursev2.toChapterList
 import com.group4.gostudy.data.network.api.model.coursev2.toCourse
 import com.group4.gostudy.data.network.api.model.coursev2.toCourseList
 import com.group4.gostudy.data.network.api.model.historypayment.toHistoryPaymentList
-import com.group4.gostudy.data.network.api.model.notifcation.toAllNotifList
+import com.group4.gostudy.data.network.api.model.notification.toAllNotifList
 import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
 import com.group4.gostudy.model.AllNotif
 import com.group4.gostudy.model.Category
