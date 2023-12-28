@@ -107,7 +107,7 @@ class DialogOrderFragment : BottomSheetDialogFragment() {
 
     private fun setClickListeners() {
         binding.btnOrder.setOnClickListener {
-            navigateToPayment(detailViewModel.course)
+            navigateToPayment(dialogOrderViewModel.course)
         }
         binding.tbExitDialog.setOnClickListener {
             dismiss()

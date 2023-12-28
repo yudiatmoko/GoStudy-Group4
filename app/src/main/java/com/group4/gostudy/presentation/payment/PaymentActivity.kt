@@ -3,11 +3,9 @@ package com.group4.gostudy.presentation.payment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import coil.load
-import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ApiException
@@ -59,7 +57,8 @@ class PaymentActivity : AppCompatActivity() {
                     binding.layoutStatePayment.root.isVisible = false
                     binding.layoutStatePayment.animLoading.isVisible = false
                     if (it.exception is ApiException) {
-                        it.exception.getParsedError()?.message                    }
+                        it.exception.getParsedError()?.message
+                    }
                 },
                 doOnLoading = {
                     binding.layoutStatePayment.root.isVisible = true
