@@ -6,21 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/md_theme_light_background"
     android:padding="16dp"
-    tools:context=".presentation.account.AccountFragment">
+    tools:context=".presentation.notification.NotificationFragment">
 
     <TextView
         android:id="@+id/tv_notification_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="86dp"
-        android:textColor="@color/md_theme_light_primary"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/notification"
+        android:gravity="center"
         android:shadowColor="@color/md_theme_light_outline"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="2"
+        android:text="@string/notification"
+        android:textAlignment="center"
+        android:textColor="@color/md_theme_light_primary"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,14 @@
         app:layout_constraintTop_toBottomOf="@id/tv_notification_text"
         tools:itemCount="4"
         tools:listitem="@layout/notification_item_list" />
+
+    <include
+        android:id="@+id/layout_state"
+        layout="@layout/common_layout_content_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

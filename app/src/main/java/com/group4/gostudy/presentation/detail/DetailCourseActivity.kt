@@ -20,6 +20,7 @@ import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityDetailCourseBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
+import com.group4.gostudy.presentation.detail.material.MaterialViewModel
 import com.group4.gostudy.utils.proceedWhen
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -45,6 +46,8 @@ class DetailCourseActivity : AppCompatActivity() {
     }
 
     private var previousOrientation: Int = -1
+
+    private val materialViewModel: MaterialViewModel by viewModel()
 
     private val viewModel: DetailViewModel by viewModel { parametersOf(intent?.extras) }
 
@@ -137,6 +140,9 @@ class DetailCourseActivity : AppCompatActivity() {
                 object : AbstractYouTubePlayerListener() {
                     override fun onReady(youTubePlayer: YouTubePlayer) {
                         this@DetailCourseActivity.youtubePlayer = youTubePlayer
+
+                        val bundle = intent.extras
+                        bundle?.getString("data")
                         youTubePlayer.loadVideo("dQw4w9WgXcQ", 0f)
                     }
                 },

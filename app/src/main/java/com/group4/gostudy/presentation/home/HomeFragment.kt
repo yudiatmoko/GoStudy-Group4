@@ -11,6 +11,7 @@ import coil.load
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentHomeBinding
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.presentation.account.myprofile.MyProfileActivity
 import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.home.category.CategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
@@ -72,6 +73,16 @@ class HomeFragment : Fragment() {
     private fun setClickListener() {
         binding.tvCourseViewMoreText.setOnClickListener {
             navigateToViewMore()
+        }
+        binding.ivProfileImage.setOnClickListener {
+            navigateToMyProfile()
+        }
+    }
+
+    private fun navigateToMyProfile() {
+        activity.let {
+            val intent = Intent(it, MyProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -307,5 +318,10 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         binding.svCourse.setQuery(null, false)
         super.onDestroyView()
+    }
+
+    override fun onResume() {
+        setHeader()
+        super.onResume()
     }
 }

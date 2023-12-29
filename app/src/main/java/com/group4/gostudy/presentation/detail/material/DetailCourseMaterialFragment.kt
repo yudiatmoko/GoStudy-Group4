@@ -58,6 +58,7 @@ class DetailCourseMaterialFragment : Fragment() {
             }
         }
     }
+
     private fun navigateToNonLoginFragment() {
         DialogHomeNonLoginFragment().show(childFragmentManager, "DialogHomeNonLoginFragment")
     }
@@ -127,6 +128,11 @@ class DetailCourseMaterialFragment : Fragment() {
             )
             val dataSection = it.modules?.map { data ->
                 DataItem(data.name.orEmpty()) {
+                   /* val bundle = Bundle()
+                    bundle.putString("data", data.videoId?.get(0).toString())
+                    val intent = Intent(requireContext(), DetailCourseActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)*/
                     showDialogOrder()
                 }
             }

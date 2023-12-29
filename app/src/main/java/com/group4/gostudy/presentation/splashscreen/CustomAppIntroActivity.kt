@@ -47,11 +47,13 @@ class CustomAppIntroActivity : AppIntro() {
             val btnLogin = newFragment.view?.findViewById<Button>(R.id.btn_login_intro)
             btnLogin?.setOnClickListener {
                 startLoginActivity()
+                finish()
             }
 
             val btnGuest = newFragment.view?.findViewById<Button>(R.id.btn_guest_intro)
             btnGuest?.setOnClickListener {
                 navigateToHome()
+                finish()
             }
         }
     }
