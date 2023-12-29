@@ -1,7 +1,8 @@
-package com.group4.gostudy.presentation.account.myprofile
+package com.group4.gostudy.presentation.account.historypayment
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.group4.gostudy.data.repository.UserRepository
+import com.group4.gostudy.data.repository.CourseRepository
+import com.group4.gostudy.model.HistoryPayment
 import com.group4.gostudy.tools.MainCoroutineRule
 import com.group4.gostudy.tools.getOrAwaitValue
 import com.group4.gostudy.utils.ResultWrapper
@@ -16,18 +17,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class MyProfileViewModelTest {
+class HistoryViewModelTest {
 
     @MockK
-    private lateinit var repository: UserRepository
+    private lateinit var repository: CourseRepository
 
     @get:Rule
     val testRule: TestRule = InstantTaskExecutorRule()
@@ -38,38 +37,37 @@ class MyProfileViewModelTest {
         UnconfinedTestDispatcher()
     )
 
-    private lateinit var viewModel: MyProfileViewModel
+    private lateinit var viewModel: HistoryViewModel
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
         viewModel = spyk(
-            MyProfileViewModel(repository),
+            HistoryViewModel(repository),
             recordPrivateCalls = true
         )
-        coEvery { repository.getProfile() } returns flow {
+        coEvery { repository.getHistoryPayments() } returns flow {
             emit(
                 ResultWrapper.Success(
-                    mockk(relaxed = true)
-                )
-            )
-        }
-        coEvery { repository.updateProfile(any(), any(), any(), any(), any()) } returns flow {
-            emit(
-                ResultWrapper.Success(
-                    mockk(relaxed = true)
+                    listOf(
+                        mockk(relaxed = true),
+                        mockk(relaxed = true),
+                        mockk(relaxed = true),
+                        mockk(relaxed = true)
+                    )
                 )
             )
         }
     }
 
     @Test
-    fun `test update profile live data`() {
+    fun `test notification live data`() {
         runTest {
-            viewModel.updateProfile("test".toRequestBody(), "test".toRequestBody(), "test".toRequestBody(), "test".toRequestBody(), MultipartBody.Part.create("test".toRequestBody()))
-            coVerify { repository.updateProfile(any(), any(), any(), any(), any()) }
-            val result = viewModel.profile.getOrAwaitValue()
+            viewModel.getHistoryPayments()
+            coVerify { repository.getHistoryPayments() }
+            val result = viewModel.historyPayment.getOrAwaitValue()
             TestCase.assertTrue(result is ResultWrapper.Success)
+            TestCase.assertTrue((result as ResultWrapper.Success<List<HistoryPayment>>).payload?.size == 4)
         }
     }
 }

@@ -113,6 +113,11 @@ class CourseRepositoryImpl(
     override suspend fun order(paymentRequest: PaymentRequest): Flow<ResultWrapper<Payment>> {
         return proceedFlow {
             apiDataSource.createOrder(paymentRequest).data.createPayment.toPayment()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
         }
     }
 
@@ -130,6 +135,11 @@ class CourseRepositoryImpl(
     override suspend fun getNotifications(): Flow<ResultWrapper<List<AllNotif>>> {
         return proceedFlow {
             apiDataSource.getNotifications().data?.allNotif?.toAllNotifList() ?: emptyList()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
         }
     }
 }
