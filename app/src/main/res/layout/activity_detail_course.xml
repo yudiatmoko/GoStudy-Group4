@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,15 +19,17 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="240dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/youtube_player_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,9 +57,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/montserrat_bold"
+                        tools:text="@string/txt_tittle_class"
                         android:textColor="@color/dark_blue"
-                        android:textStyle="bold"
-                        android:text="@string/txt_tittle_class" />
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -72,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:fontFamily="@font/montserrat_bold"
-                        android:text="5.0" />
+                        tools:text="@string/txt_rating" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -90,9 +93,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
+                        tools:text="@string/txt_sub_title"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:text="Belajar Web Designer dengan Figma" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txt_mentor_name"
@@ -100,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="by Angela Doe" />
+                        tools:text="@string/txt_course_by" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -125,8 +128,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:textColor="@color/dark_blue"
-                        android:text="@string/txt_intermediate_level" />
+                        tools:text="@string/txt_intermediate_level"
+                        android:textColor="@color/dark_blue" />
 
                     <ImageView
                         android:layout_width="16dp"
@@ -142,8 +145,8 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/montserrat_regular"
-                        android:textColor="@color/black"
-                        android:text="@string/txt_7_modul" />
+                        tools:text="@string/txt_7_modul"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:layout_width="16dp"
@@ -158,8 +161,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:textColor="@color/black"
-                        android:text="@string/txt_120_menit" />
+                        tools:text="@string/txt_120_menit"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -168,12 +171,12 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                app:tabMode="fixed"
                 android:layout_marginVertical="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cl_course" />
+                app:layout_constraintTop_toBottomOf="@+id/cl_course"
+                app:tabMode="fixed" />
 
 
             <androidx.viewpager2.widget.ViewPager2

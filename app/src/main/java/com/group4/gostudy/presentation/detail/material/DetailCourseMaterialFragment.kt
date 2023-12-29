@@ -1,5 +1,6 @@
 package com.group4.gostudy.presentation.detail.material
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
 import com.group4.gostudy.model.Chapter
+import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
@@ -58,6 +60,7 @@ class DetailCourseMaterialFragment : Fragment() {
             }
         }
     }
+
     private fun navigateToNonLoginFragment() {
         DialogHomeNonLoginFragment().show(childFragmentManager, "DialogHomeNonLoginFragment")
     }
@@ -127,6 +130,11 @@ class DetailCourseMaterialFragment : Fragment() {
             )
             val dataSection = it.modules?.map { data ->
                 DataItem(data.name.orEmpty()) {
+                    val bundle = Bundle()
+                    bundle.putString("data", data.videoId?.get(0).toString())
+                    val intent = Intent(requireContext(), DetailCourseActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
                     showDialogOrder()
                 }
             }
