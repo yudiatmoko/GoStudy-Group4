@@ -12,6 +12,8 @@ import com.group4.gostudy.data.repository.ChapterRepository
 import com.group4.gostudy.data.repository.ChapterRepositoryImpl
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.data.repository.CourseRepositoryImpl
+import com.group4.gostudy.data.repository.NotificationRepository
+import com.group4.gostudy.data.repository.NotificationRepositoryImpl
 import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.data.repository.UserRepositoryImpl
 import com.group4.gostudy.presentation.account.AccountViewModel

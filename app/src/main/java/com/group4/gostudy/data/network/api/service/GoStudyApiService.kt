@@ -13,6 +13,7 @@ import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsR
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.module.ModulesResponse
+import com.group4.gostudy.data.network.api.model.modulebyid.ChapterByIdResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
