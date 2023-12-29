@@ -7,14 +7,13 @@ import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
 import com.group4.gostudy.data.network.api.model.coursebyid.CourseByIdResponse
 import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
-import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.module.ModulesResponse
-import com.group4.gostudy.data.network.api.model.notification.NotificationsResponse
+import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
 import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
@@ -117,17 +116,13 @@ interface GoStudyApiService {
     suspend fun getChapters(): ChaptersResponse
 
     @GET("course/{id}")
-    suspend fun getCourseId(
-        @Query("categoryName") category: String? = null,
-        @Query("moduleName") module: String? = null,
-        @Query("chapterName") chapter: String? = null
-    ): CoursesIdResponse
-
-    @GET("course/{id}")
     suspend fun getCourseById(@Path("id") id: Int? = null): CourseByIdResponse
 
     @GET("course/{id}")
     suspend fun getChaptersV2(@Path("id") id: Int? = null): CourseByIdResponse
+
+    @GET("course/{id}")
+    suspend fun getModulesV2(@Path("id") id: Int? = null): ChapterByIdResponse
 
     @POST("payment")
     suspend fun createOrder(@Body paymentRequest: PaymentRequest): PaymentResponse

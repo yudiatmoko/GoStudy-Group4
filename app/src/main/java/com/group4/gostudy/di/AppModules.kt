@@ -12,10 +12,6 @@ import com.group4.gostudy.data.repository.ChapterRepository
 import com.group4.gostudy.data.repository.ChapterRepositoryImpl
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.data.repository.CourseRepositoryImpl
-import com.group4.gostudy.data.repository.DetailRepository
-import com.group4.gostudy.data.repository.DetailRepositoryImpl
-import com.group4.gostudy.data.repository.UserCourseRepository
-import com.group4.gostudy.data.repository.UserCourseRepositoryImpl
 import com.group4.gostudy.data.repository.UserRepository
 import com.group4.gostudy.data.repository.UserRepositoryImpl
 import com.group4.gostudy.presentation.account.AccountViewModel
@@ -39,7 +35,6 @@ import com.group4.gostudy.utils.AssetWrapper
 import com.group4.gostudy.utils.PreferenceDataStoreHelper
 import com.group4.gostudy.utils.PreferenceDataStoreHelperImpl
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -66,7 +61,6 @@ object AppModules {
         single<UserRepository> { UserRepositoryImpl(get()) }
         single<CourseRepository> { CourseRepositoryImpl(get()) }
         single<ChapterRepository> { ChapterRepositoryImpl(get()) }
-        single<DetailRepository> { DetailRepositoryImpl(get()) }
         single<UserCourseRepository> { UserCourseRepositoryImpl(get()) }
     }
 
