@@ -42,38 +42,28 @@ class AccountFragment : Fragment() {
             view,
             savedInstanceState
         )
-        setClickListener()
+        checkUserLoginAndLoadData()
+    }
+
+    private fun checkUserLoginAndLoadData() {
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                setClickListener()
+            }
+        }
     }
 
     private fun navigateToMyProfile() {
-        lifecycleScope.launch {
-            val userToken = mainViewModel.getUserToken()
-            if (userToken.isNullOrBlank()) {
-                navigateToNonLoginFragment()
-            } else {
-                MyProfileActivity.startActivity(requireContext())
-            }
-        }
+        MyProfileActivity.startActivity(requireContext())
     }
     private fun navigateToHistory() {
-        lifecycleScope.launch {
-            val userToken = mainViewModel.getUserToken()
-            if (userToken.isNullOrBlank()) {
-                navigateToNonLoginFragment()
-            } else {
-                HistoryPaymentActivity.startActivity(requireContext())
-            }
-        }
+        HistoryPaymentActivity.startActivity(requireContext())
     }
     private fun navigateToChangePassword() {
-        lifecycleScope.launch {
-            val userToken = mainViewModel.getUserToken()
-            if (userToken.isNullOrBlank()) {
-                navigateToNonLoginFragment()
-            } else {
-                ChangePasswordActivity.startActivity(requireContext())
-            }
-        }
+        ChangePasswordActivity.startActivity(requireContext())
     }
 
     private val dialogFragment = DialogHomeNonLoginFragment()
