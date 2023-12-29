@@ -2,6 +2,7 @@ package com.group4.gostudy.presentation.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.group4.gostudy.data.repository.CourseRepository
+import com.group4.gostudy.model.Category
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.tools.MainCoroutineRule
 import com.group4.gostudy.tools.getOrAwaitValue
@@ -46,7 +47,7 @@ class HomeViewModelTest {
             HomeViewModel(repository),
             recordPrivateCalls = true
         )
-        coEvery { repository.getCourses(any(), any(), any()) } returns flow {
+        coEvery { repository.getCourses(any(), any(), any(), any(), any(), any(), any()) } returns flow {
             emit(
                 ResultWrapper.Success(
                     listOf(
@@ -75,8 +76,8 @@ class HomeViewModelTest {
     @Test
     fun `test courses live data`() {
         runTest {
-            viewModel.getCourse("all", "search", "type")
-            coVerify { repository.getCourses(any(), any(), any()) }
+            viewModel.getCourse("all", "search", "type", "all", false, false)
+            coVerify { repository.getCourses(any(), any(), any(), any(), any(), any(), any()) }
             val result = viewModel.courses.getOrAwaitValue()
             TestCase.assertTrue(result is ResultWrapper.Success)
             TestCase.assertTrue((result as ResultWrapper.Success<List<Course>>).payload?.size == 4)
@@ -90,7 +91,7 @@ class HomeViewModelTest {
             coVerify { repository.getCategories() }
             val result = viewModel.categories.getOrAwaitValue()
             TestCase.assertTrue(result is ResultWrapper.Success)
-            TestCase.assertTrue((result as ResultWrapper.Success<List<Course>>).payload?.size == 4)
+            TestCase.assertTrue((result as ResultWrapper.Success<List<Category>>).payload?.size == 4)
         }
     }
 }

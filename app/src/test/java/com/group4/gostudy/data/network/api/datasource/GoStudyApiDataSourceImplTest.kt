@@ -1,22 +1,26 @@
 package com.group4.gostudy.data.network.api.datasource
 
 import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
-import com.group4.gostudy.data.network.api.model.chapter.ChapterRespone
-import com.group4.gostudy.data.network.api.model.course.CoursesResponse
-import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
+import com.group4.gostudy.data.network.api.model.coursebyid.CourseByIdResponse
+import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
+import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
-import com.group4.gostudy.data.network.api.model.module.ModuleResponse
+import com.group4.gostudy.data.network.api.model.notification.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
+import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
+import com.group4.gostudy.data.network.api.model.payment.PaymentResponse
 import com.group4.gostudy.data.network.api.model.register.RegisterRequest
 import com.group4.gostudy.data.network.api.model.register.RegistersResponse
 import com.group4.gostudy.data.network.api.model.user.UsersResponse
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordRequest
 import com.group4.gostudy.data.network.api.model.user.updatepassword.UpdatePasswordResponse
 import com.group4.gostudy.data.network.api.model.user.updateuser.UpdateUsersResponse
+import com.group4.gostudy.data.network.api.model.usercourseid.UserCourseById
+import com.group4.gostudy.data.network.api.model.usercoursev2.UserCourseResponseV2
 import com.group4.gostudy.data.network.api.model.verify.VerifyResponse
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
 import io.mockk.MockKAnnotations
@@ -25,7 +29,7 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -44,6 +48,13 @@ class GoStudyApiDataSourceImplTest {
 
     @Test
     fun getNotifications() {
+        runTest {
+            val mockResponse = mockk<NotificationsResponse>(relaxed = true)
+            coEvery { service.getNotifications() } returns mockResponse
+            val response = dataSource.getNotifications()
+            coVerify { service.getNotifications() }
+            assertEquals(response, mockResponse)
+        }
     }
 
     @Test
@@ -71,32 +82,62 @@ class GoStudyApiDataSourceImplTest {
     @Test
     fun getCourses() {
         runTest {
-            val mockResponse = mockk<CoursesResponse>(relaxed = true)
-            coEvery { service.getCourses(any(), any(), any()) } returns mockResponse
-            val response = dataSource.getCourses("", "", "")
-            coVerify { service.getCourses(any(), any(), any()) }
+            val mockResponse = mockk<CoursesResponseV2>(relaxed = true)
+            coEvery {
+                service.getCourses(
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any()
+                )
+            } returns mockResponse
+            val response = dataSource.getCourses(
+                "",
+                "",
+                "",
+                "",
+                null,
+                null,
+                null
+            )
+            coVerify {
+                service.getCourses(
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any()
+                )
+            }
             assertEquals(response, mockResponse)
         }
     }
 
     @Test
-    fun getModules() {
+    fun getUserCourses() {
         runTest {
-            val mockResponse = mockk<ModuleResponse>(relaxed = true)
-            coEvery { service.getModules() } returns mockResponse
-            val response = dataSource.getModules()
-            coVerify { service.getModules() }
-            assertEquals(response, mockResponse)
-        }
-    }
-
-    @Test
-    fun getChapters() {
-        runTest {
-            val mockResponse = mockk<ChapterRespone>(relaxed = true)
-            coEvery { service.getChapters() } returns mockResponse
-            val response = dataSource.getChapters()
-            coVerify { service.getChapters() }
+            val mockResponse = mockk<UserCourseResponseV2>(relaxed = true)
+            coEvery {
+                service.getUserCourse(
+                    any(),
+                    any()
+                )
+            } returns mockResponse
+            val response = dataSource.getUserCourse(
+                "",
+                ""
+            )
+            coVerify {
+                service.getUserCourse(
+                    any(),
+                    any()
+                )
+            }
             assertEquals(response, mockResponse)
         }
     }
@@ -104,10 +145,44 @@ class GoStudyApiDataSourceImplTest {
     @Test
     fun getCourseId() {
         runTest {
-            val mockResponse = mockk<CoursesIdResponse>(relaxed = true)
-            coEvery { service.getCourseId(any(), any(), any()) } returns mockResponse
-            val response = dataSource.getCourseId("", "", "")
-            coVerify { service.getCourseId(any(), any(), any()) }
+            val mockResponse = mockk<CourseByIdResponse>(relaxed = true)
+            coEvery { service.getCourseById(any()) } returns mockResponse
+            val response = dataSource.getCourseById(0)
+            coVerify { service.getCourseById(any()) }
+            assertEquals(response, mockResponse)
+        }
+    }
+
+    @Test
+    fun getUserCourseById() {
+        runTest {
+            val mockResponse = mockk<UserCourseById>(relaxed = true)
+            coEvery { service.getUserCourseById(any()) } returns mockResponse
+            val response = dataSource.getUserCourseById(0)
+            coVerify { service.getUserCourseById(any()) }
+            assertEquals(response, mockResponse)
+        }
+    }
+
+    @Test
+    fun createOrder() {
+        runTest {
+            val mockResponse = mockk<PaymentResponse>(relaxed = true)
+            coEvery { service.createOrder(any()) } returns mockResponse
+            val mockBody = mockk<PaymentRequest>(relaxed = true)
+            val response = dataSource.createOrder(mockBody)
+            coVerify { service.createOrder(any()) }
+            assertEquals(response, mockResponse)
+        }
+    }
+
+    @Test
+    fun getChapters() {
+        runTest {
+            val mockResponse = mockk<CourseByIdResponse>(relaxed = true)
+            coEvery { service.getChaptersV2(any()) } returns mockResponse
+            val response = dataSource.getChaptersV2(0)
+            coVerify { service.getChaptersV2(any()) }
             assertEquals(response, mockResponse)
         }
     }
@@ -137,6 +212,13 @@ class GoStudyApiDataSourceImplTest {
 
     @Test
     fun getHistories() {
+        runTest {
+            val mockResponse = mockk<HistoryPaymentsResponse>(relaxed = true)
+            coEvery { service.getHistoryPayments() } returns mockResponse
+            val response = dataSource.getHistoryPayments()
+            coVerify { service.getHistoryPayments() }
+            assertEquals(response, mockResponse)
+        }
     }
 
     @Test

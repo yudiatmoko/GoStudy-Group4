@@ -1,9 +1,8 @@
-package com.group4.gostudy.presentation.forgotpassword
+package com.group4.gostudy.presentation.notification
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
-import com.group4.gostudy.data.repository.UserRepository
-import com.group4.gostudy.presentation.main.MainViewModel
+import com.group4.gostudy.data.repository.CourseRepository
+import com.group4.gostudy.model.Notification
 import com.group4.gostudy.tools.MainCoroutineRule
 import com.group4.gostudy.tools.getOrAwaitValue
 import com.group4.gostudy.utils.ResultWrapper
@@ -11,6 +10,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import io.mockk.spyk
 import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,13 +23,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class ForgotPasswordViewModelTest {
+class NotificationViewModelTest {
 
     @MockK
-    private lateinit var repository: UserRepository
-
-    @MockK
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var repository: CourseRepository
 
     @get:Rule
     val testRule: TestRule = InstantTaskExecutorRule()
@@ -40,33 +37,37 @@ class ForgotPasswordViewModelTest {
         UnconfinedTestDispatcher()
     )
 
-    private lateinit var viewModel: ForgotPasswordViewModel
+    private lateinit var viewModel: NotificationViewModel
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
         viewModel = spyk(
-            ForgotPasswordViewModel(repository, mainViewModel),
+            NotificationViewModel(repository),
             recordPrivateCalls = true
         )
-        coEvery { repository.forgotPassword(any()) } returns flow {
+        coEvery { repository.getNotifications() } returns flow {
             emit(
                 ResultWrapper.Success(
-                    "success"
+                    listOf(
+                        mockk(relaxed = true),
+                        mockk(relaxed = true),
+                        mockk(relaxed = true),
+                        mockk(relaxed = true)
+                    )
                 )
             )
         }
     }
 
     @Test
-    fun `test forgot password live data`() {
+    fun `test notification live data`() {
         runTest {
-            viewModel.forgotPassword(
-                ForgotPasswordRequest("email")
-            )
-            coVerify { repository.forgotPassword(any()) }
-            val result = viewModel.forgotPasswordResult.getOrAwaitValue()
+            viewModel.getNotification()
+            coVerify { repository.getNotifications() }
+            val result = viewModel.notifications.getOrAwaitValue()
             TestCase.assertTrue(result is ResultWrapper.Success)
+            TestCase.assertTrue((result as ResultWrapper.Success<List<Notification>>).payload?.size == 4)
         }
     }
 }

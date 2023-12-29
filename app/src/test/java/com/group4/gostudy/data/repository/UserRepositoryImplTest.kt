@@ -310,7 +310,6 @@ class UserRepositoryImplTest {
             ),
             data = DataRegisterResponse(
                 token = "token",
-                otp = null,
                 user = DataUserResponse(
                     city = null,
                     country = null,
@@ -353,7 +352,6 @@ class UserRepositoryImplTest {
             ),
             data = DataRegisterResponse(
                 token = "token",
-                otp = null,
                 user = DataUserResponse(
                     city = null,
                     country = null,
