@@ -2,6 +2,7 @@ package com.group4.gostudy.presentation.home.popularcourse
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.group4.gostudy.R
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.PopularCourseItemBinding
 import com.group4.gostudy.databinding.PopularCourseViewMoreItemBinding
@@ -29,7 +30,11 @@ class PopularCourseItemViewHolder(
         binding.tvModule.text = String.format("%.0f Modul", item.totalModule?.toDouble())
         binding.tvDuration.text = String.format("%.0f Menit", item.totalDuration?.toDouble())
         binding.tvRating.text = item.rating.toString()
-        binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
+        if ((item.price ?: 0) > 0) {
+            binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
+        } else {
+            binding.tvPrice.text = itemView.context.getString(R.string.free_class)
+        }
         binding.ivCourseImg.load(item.imageUrl)
     }
 }
@@ -52,7 +57,11 @@ class PopularCourseViewMoreItemViewHolder(
         binding.tvModule.text = String.format("%.0f Modul", item.totalModule?.toDouble())
         binding.tvDuration.text = String.format("%.0f Menit", item.totalDuration?.toDouble())
         binding.tvRating.text = item.rating.toString()
-        binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
+        if ((item.price ?: 0) > 0) {
+            binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
+        } else {
+            binding.tvPrice.text = itemView.context.getString(R.string.free_class)
+        }
         binding.ivCourseImg.load(item.imageUrl)
     }
 }

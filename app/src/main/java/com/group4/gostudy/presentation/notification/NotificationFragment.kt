@@ -8,7 +8,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentNotificationBinding
+import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,10 +47,61 @@ class NotificationFragment : Fragment() {
     private fun setObserveNotificationData() {
         notificationViewModel.notifications.observe(viewLifecycleOwner) {
             it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.root.isVisible =
+                        true
+                    binding.layoutState.animLoading.isVisible =
+                        true
+                    binding.layoutState.llAnimError.isVisible =
+                        false
+                    binding.rvNotificationList.isVisible =
+                        false
+                },
                 doOnSuccess = {
-                    binding.rvNotificationList.isVisible = true
+                    binding.layoutState.root.isVisible =
+                        true
+                    binding.layoutState.animLoading.isVisible =
+                        false
+                    binding.layoutState.llAnimError.isVisible =
+                        false
+                    binding.rvNotificationList.isVisible =
+                        true
                     it.payload?.let {
                         notificationAdapter.setData(it)
+                    }
+                },
+                doOnError = {
+                    binding.layoutState.root.isVisible =
+                        true
+                    binding.layoutState.animLoading.isVisible =
+                        false
+                    binding.layoutState.llAnimError.isVisible =
+                        true
+                    binding.rvNotificationList.isVisible =
+                        false
+                    if (it.exception is ApiException) {
+                        binding.layoutState.tvError.isVisible =
+                            true
+                        binding.layoutState.tvError.text =
+                            it.exception.getParsedError()?.message
+                    }
+                },
+                doOnEmpty = {
+                    binding.layoutState.root.isVisible =
+                        true
+                    binding.layoutState.animLoading.isVisible =
+                        false
+                    binding.layoutState.tvError.isVisible =
+                        true
+                    binding.layoutState.llAnimError.isVisible =
+                        true
+                    binding.rvNotificationList.isVisible =
+                        false
+                    binding.layoutState.tvError.text =
+                        getString(R.string.text_no_data)
+                    if (it.exception is ApiException) {
+                        binding.layoutState.tvError.text =
+                            it.exception.getParsedError()?.message
                     }
                 }
             )

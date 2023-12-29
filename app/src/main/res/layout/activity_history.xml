@@ -16,17 +16,17 @@
 
     <TextView
         android:id="@+id/tv_history_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="86dp"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
         android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
         android:shadowColor="@color/md_theme_light_outline"
         android:shadowDx="1"
         android:shadowDy="1"
-        android:textColor="@color/md_theme_light_primary"
         android:shadowRadius="2"
         android:text="@string/history_text"
+        android:textAlignment="center"
+        android:textColor="@color/md_theme_light_primary"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,6 +1,5 @@
 package com.group4.gostudy.presentation.detail.material
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
 import com.group4.gostudy.model.Chapter
-import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.detail.DetailViewModel
 import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
