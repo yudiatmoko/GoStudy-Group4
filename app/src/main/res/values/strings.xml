@@ -118,4 +118,7 @@
     <string name="txt_advanced_level">Advanced level</string>
     <string name="text_title_list">Materi belajar</string>
     <string name="text_materi_belajar">Materi belajar</string>
+    <string name="txt_sub_title">Belajar Web Designer dengan Figma</string>
+    <string name="txt_course_by">by Angela Doe</string>
+    <string name="txt_rating">5.0</string>
 </resources>

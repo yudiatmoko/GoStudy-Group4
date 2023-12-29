@@ -4,13 +4,13 @@ import com.group4.gostudy.data.network.api.model.category.CategoriesResponse
 import com.group4.gostudy.data.network.api.model.chapter.ChaptersResponse
 import com.group4.gostudy.data.network.api.model.coursebyid.CourseByIdResponse
 import com.group4.gostudy.data.network.api.model.coursev2.CoursesResponseV2
-import com.group4.gostudy.data.network.api.model.detail.CoursesIdResponse
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRequest
 import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordResponse
 import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
 import com.group4.gostudy.data.network.api.model.module.ModulesResponse
+import com.group4.gostudy.data.network.api.model.modulebyid.ChapterByIdResponse
 import com.group4.gostudy.data.network.api.model.notifcation.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
@@ -50,11 +50,6 @@ interface GoStudyApiDataSource {
 
     suspend fun getModules(): ModulesResponse
     suspend fun getChapters(): ChaptersResponse
-    suspend fun getCourseId(
-        category: String?,
-        chapter: String?,
-        module: String?
-    ): CoursesIdResponse
 
     suspend fun updateProfile(
         name: RequestBody?,
@@ -71,6 +66,10 @@ interface GoStudyApiDataSource {
     suspend fun getChaptersV2(
         id: Int?
     ): CourseByIdResponse
+
+    suspend fun getModulesV2(
+        id: Int?
+    ): ChapterByIdResponse
 
     suspend fun updatePassword(
         updatePasswordRequest: UpdatePasswordRequest
@@ -128,12 +127,8 @@ class GoStudyApiDataSourceImpl(
         return service.getChaptersV2(id)
     }
 
-    override suspend fun getCourseId(
-        category: String?,
-        chapter: String?,
-        module: String?
-    ): CoursesIdResponse {
-        return service.getCourseId(category, module, chapter)
+    override suspend fun getModulesV2(id: Int?): ChapterByIdResponse {
+        return service.getModulesV2(id)
     }
 
     override suspend fun updateProfile(
