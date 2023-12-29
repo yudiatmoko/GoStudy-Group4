@@ -20,8 +20,8 @@ import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityDetailCourseBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
-import com.group4.gostudy.utils.proceedWhen
 import com.group4.gostudy.presentation.detail.material.MaterialViewModel
+import com.group4.gostudy.utils.proceedWhen
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener

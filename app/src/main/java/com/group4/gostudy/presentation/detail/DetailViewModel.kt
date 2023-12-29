@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.group4.gostudy.data.repository.UserCourseRepository
+import com.group4.gostudy.data.repository.DetailRepository
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
