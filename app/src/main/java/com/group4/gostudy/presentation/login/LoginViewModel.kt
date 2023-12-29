@@ -25,13 +25,10 @@ class LoginViewModel(
     val login: LiveData<ResultWrapper<String>>
         get() = _login
 
-    fun login(email: String, password: String) {
+    fun login(loginRequest: LoginRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.login(
-                LoginRequest(
-                    email = email,
-                    password = password
-                )
+                loginRequest
             ).collect {
                 _login.postValue(it)
             }

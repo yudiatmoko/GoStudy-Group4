@@ -47,7 +47,7 @@ interface UserRepository {
 
     suspend fun resendOtp(): Flow<ResultWrapper<OtpResponse>>
 
-    suspend fun forgotPassword(email: String): Flow<ResultWrapper<String>>
+    suspend fun forgotPassword(email: ForgotPasswordRequest): Flow<ResultWrapper<String>>
 }
 
 class UserRepositoryImpl(
@@ -145,9 +145,9 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun forgotPassword(email: String): Flow<ResultWrapper<String>> {
+    override suspend fun forgotPassword(email: ForgotPasswordRequest): Flow<ResultWrapper<String>> {
         return proceedFlow {
-            apiDataSource.forgotPassword(ForgotPasswordRequest(email)).message.orEmpty()
+            apiDataSource.forgotPassword(email).message.orEmpty()
         }.onStart {
             emit(ResultWrapper.Loading())
             delay(2000)

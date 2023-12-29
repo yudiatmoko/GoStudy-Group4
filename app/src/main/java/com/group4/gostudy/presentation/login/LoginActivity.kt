@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.group4.gostudy.R
+import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.databinding.ActivityLoginBinding
 import com.group4.gostudy.presentation.forgotpassword.ForgotPasswordActivity
 import com.group4.gostudy.presentation.main.MainActivity
@@ -109,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
         if (isFormValid()) {
             val email = binding.layoutFormLogin.etEmail.text.toString().trim()
             val password = binding.layoutFormLogin.etPassword.text.toString().trim()
-            viewModel.login(email, password)
+            viewModel.login(LoginRequest(email, password))
         }
     }
 

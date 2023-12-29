@@ -8,12 +8,8 @@ import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSourceImpl
 import com.group4.gostudy.data.network.api.service.AuthorizationInterceptor
 import com.group4.gostudy.data.network.api.service.GoStudyApiService
-import com.group4.gostudy.data.repository.ChapterRepository
-import com.group4.gostudy.data.repository.ChapterRepositoryImpl
 import com.group4.gostudy.data.repository.CourseRepository
 import com.group4.gostudy.data.repository.CourseRepositoryImpl
-import com.group4.gostudy.data.repository.DetailRepository
-import com.group4.gostudy.data.repository.DetailRepositoryImpl
 import com.group4.gostudy.data.repository.UserCourseRepository
 import com.group4.gostudy.data.repository.UserCourseRepositoryImpl
 import com.group4.gostudy.data.repository.UserRepository
@@ -65,8 +61,6 @@ object AppModules {
     private val repositoryModule = module {
         single<UserRepository> { UserRepositoryImpl(get()) }
         single<CourseRepository> { CourseRepositoryImpl(get()) }
-        single<ChapterRepository> { ChapterRepositoryImpl(get()) }
-        single<DetailRepository> { DetailRepositoryImpl(get()) }
         single<UserCourseRepository> { UserCourseRepositoryImpl(get()) }
     }
 
