@@ -223,5 +223,10 @@ class DetailCourseActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_PRODUCT, course)
             context.startActivity(intent)
         }
+//        fun startNewActivity(context: Context, id: Int?) {
+//            val detailIntent = Intent(context, DetailCourseActivity::class.java)
+//            detailIntent.putExtra(EXTRA_PRODUCT, id)
+//            context.startActivity(detailIntent)
+//        }
     }
 }

@@ -30,6 +30,7 @@ import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.presentation.notification.NotificationViewModel
 import com.group4.gostudy.presentation.otp.OtpViewModel
 import com.group4.gostudy.presentation.payment.PaymentViewModel
+import com.group4.gostudy.presentation.payment.PaymentWebViewModel
 import com.group4.gostudy.presentation.register.RegisterViewModel
 import com.group4.gostudy.utils.AssetWrapper
 import com.group4.gostudy.utils.PreferenceDataStoreHelper
@@ -86,6 +87,7 @@ object AppModules {
         viewModelOf(::DetailViewModel)
         viewModelOf(::MaterialViewModel)
         viewModelOf(::DialogOrderViewModel)
+        viewModel { params -> PaymentWebViewModel(params.get()) }
     }
 
     val modules: List<Module> = listOf(

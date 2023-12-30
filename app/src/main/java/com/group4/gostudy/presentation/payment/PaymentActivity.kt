@@ -3,9 +3,11 @@ package com.group4.gostudy.presentation.payment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import coil.load
+import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ApiException
@@ -28,7 +30,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun bindProduct() {
-        paymentViewModel.courses.let {
+        paymentViewModel.course.let {
             binding.layoutContent.ivCourseImg.load(it?.imageUrl)
             binding.layoutContent.tvCategoryName.text = it?.category?.name
             binding.layoutContent.tvCourseName.text = it?.name
@@ -56,8 +58,17 @@ class PaymentActivity : AppCompatActivity() {
                 doOnError = {
                     binding.layoutStatePayment.root.isVisible = false
                     binding.layoutStatePayment.animLoading.isVisible = false
-                    if (it.exception is ApiException) {
-                        it.exception.getParsedError()?.message
+                    binding.btnJoinClass.apply {
+                        if (it.exception is ApiException) {
+                            Toast.makeText(
+                                this@PaymentActivity,
+                                getString(
+                                    R.string.text_pemesanan_gagal,
+                                    it.exception.getParsedError()?.message
+                                ),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 },
                 doOnLoading = {
@@ -76,7 +87,7 @@ class PaymentActivity : AppCompatActivity() {
 
     private fun navigateToPaymentWeb(urlPayment: String) {
         val intent = Intent(this, PaymentWeb::class.java)
-        intent.putExtra("URL", urlPayment)
+        intent.putExtra(getString(R.string.text_url), urlPayment)
         startActivity(intent)
     }
 

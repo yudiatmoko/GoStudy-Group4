@@ -12,18 +12,22 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentDetailBinding
+import com.group4.gostudy.presentation.detail.DetailCourseActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PaymentWeb : AppCompatActivity() {
     private val binding: ActivityPaymentDetailBinding by lazy {
         ActivityPaymentDetailBinding.inflate(layoutInflater)
     }
+    private val viewModel: PaymentWebViewModel by viewModel { parametersOf(intent?.extras) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val `in`: Intent = getIntent()
-        val url: String = `in`.getStringExtra("URL").toString()
-        openUrlFromWebView(url)
+//        val `in`: Intent = getIntent()
+//        val url: String = `in`.getStringExtra("URL").toString()
+        openUrlFromWebView(viewModel.url.toString())
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -33,22 +37,24 @@ class PaymentWeb : AppCompatActivity() {
             val pd: ProgressDialog = ProgressDialog(this@PaymentWeb)
             override fun shouldOverrideUrlLoading(
                 view: WebView?,
-                request: WebResourceRequest
+                request: WebResourceRequest?
             ): Boolean {
-                val requestUrl: String = request.getUrl().toString()
-                return if (requestUrl.contains("gojek://") ||
+                val requestUrl: String = request?.url.toString()
+                if (requestUrl.contains("gojek://") ||
                     requestUrl.contains("shopeeid://") ||
-                    requestUrl.contains("//wsa.wallet.airpay.co.id/") || // This is handle for sandbox Simulator
+                    requestUrl.contains("//wsa.wallet.airpay.co.id/") ||
                     requestUrl.contains("/gopay/partner/") ||
                     requestUrl.contains("/shopeepay/")
                 ) {
-                    val intent = Intent(Intent.ACTION_VIEW, request.getUrl())
+                    val intent = Intent(Intent.ACTION_VIEW, request?.url)
                     startActivity(intent)
-                    // `true` means for the specified url, will be handled by OS by starting Intent
-                    true
+                    return true
+                } else if (requestUrl.startsWith("midtrans-90809.com/")) {
+                    val id = viewModel.idCourse ?: 0
+//                    DetailCourseActivity.startNewActivity(this@PaymentWeb, id)
+                    return true
                 } else {
-                    // `false` means any other url will be loaded normally by the WebView
-                    false
+                    return false
                 }
             }
 
