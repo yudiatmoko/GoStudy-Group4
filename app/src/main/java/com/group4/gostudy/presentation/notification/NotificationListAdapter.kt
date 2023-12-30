@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.NotificationItemListBinding
 import com.group4.gostudy.model.AllNotif
 
@@ -17,6 +16,12 @@ https://github.com/yudiatmoko
 class NotificationListAdapter(
     private val itemClick: (AllNotif) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var selectedPosition: Int = RecyclerView.NO_POSITION
+
+    fun getSelectedPosition(): Int {
+        return selectedPosition
+    }
 
     private val differ = AsyncListDiffer(
         this,
@@ -42,7 +47,7 @@ class NotificationListAdapter(
         viewType: Int
     ): RecyclerView.ViewHolder {
         val binding = NotificationItemListBinding.inflate(LayoutInflater.from(parent.context))
-        return NotificationItemViewHolder(binding, itemClick)
+        return NotificationItemViewHolder(binding, itemClick, this)
     }
 
     override fun getItemCount(): Int {
@@ -53,7 +58,15 @@ class NotificationListAdapter(
         holder: RecyclerView.ViewHolder,
         position: Int
     ) {
-        (holder as ViewHolderBinder<AllNotif>).bind(differ.currentList[position])
+        val viewHolder = holder as NotificationItemViewHolder
+        val notification = differ.currentList[position]
+        viewHolder.bind(notification)
+
+        viewHolder.itemView.setOnClickListener {
+            selectedPosition = holder.adapterPosition
+            notifyDataSetChanged()
+            itemClick(notification)
+        }
     }
 
     fun setData(data: List<AllNotif>) {
