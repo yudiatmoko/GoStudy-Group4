@@ -29,7 +29,7 @@ class ClassesFragment : Fragment() {
     private val mainViewModel: MainViewModel by viewModel()
 
     private fun navigateToNonLoginFragment() {
-        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
+        dialogFragment.show(childFragmentManager, getString(R.string.tag_dialoghomenonloginfragment))
     }
 
     private val myClassAdapter: MyClassAdapter by lazy {
@@ -71,11 +71,11 @@ class ClassesFragment : Fragment() {
         }
 
         binding.tvProgressText.setOnClickListener {
-            classesViewModel.getUserCourses(status = "in_progress".trim())
+            classesViewModel.getUserCourses(status = getString(R.string.status_in_progress).trim())
         }
 
         binding.tvDoneText.setOnClickListener {
-            classesViewModel.getUserCourses(status = "selesai".trim())
+            classesViewModel.getUserCourses(status = getString(R.string.status_selesai).trim())
         }
     }
     private fun checkUserLoginAndLoadData() {
