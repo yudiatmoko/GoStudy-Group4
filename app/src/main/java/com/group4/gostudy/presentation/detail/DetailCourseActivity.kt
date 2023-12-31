@@ -21,6 +21,7 @@ import com.group4.gostudy.databinding.ActivityDetailCourseBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
 import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
+import com.group4.gostudy.utils.formatDurationToMinutes
 import com.group4.gostudy.utils.proceedWhen
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -200,6 +201,7 @@ class DetailCourseActivity : AppCompatActivity() {
         windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
         binding.clCourse.isVisible = true
         binding.youtubePlayerView.isVisible = true
+        binding.clSectionOrder.isVisible = true
         binding.flFullscreen.apply {
             isVisible = false
             removeAllViews()
@@ -212,6 +214,7 @@ class DetailCourseActivity : AppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         binding.clCourse.isVisible = false
         binding.youtubePlayerView.isVisible = false
+        binding.clSectionOrder.isVisible = false
         binding.flFullscreen.apply {
             isVisible = true
             addView(view)
@@ -226,7 +229,7 @@ class DetailCourseActivity : AppCompatActivity() {
         course?.let {
             binding.tvClassName.text = it.category?.name
             binding.tvLevel.text = it.level
-            binding.tvDuration.text = String.format("%.0f Menit", it.totalDuration?.toDouble())
+            binding.tvDuration.text = it.totalDuration?.formatDurationToMinutes().plus(" Menit")
             binding.tvModule.text = String.format("%.0f Modul", it.totalModule?.toDouble())
             binding.tvClassTitle.text = it.name
             binding.tvRating.text = it.rating.toString()
