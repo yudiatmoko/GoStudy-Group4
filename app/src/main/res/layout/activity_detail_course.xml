@@ -9,7 +9,7 @@
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:id="@+id/youtube_player_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -19,8 +19,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="240dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/cl_section_order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +58,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/montserrat_bold"
-                        tools:text="@string/txt_tittle_class"
-                        android:textColor="@color/dark_blue"
-                        android:textStyle="bold" />
+                        android:textColor="@color/md_theme_light_primary"
+                        android:textStyle="bold"
+                        tools:text="@string/txt_tittle_class" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -89,17 +90,15 @@
 
                     <TextView
                         android:id="@+id/tv_class_title"
-                        style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
-                        tools:text="@string/txt_sub_title"
                         android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="@string/txt_sub_title" />
 
                     <TextView
                         android:id="@+id/txt_mentor_name"
-                        style="@style/TextAppearance.Material3.BodySmall"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
@@ -117,52 +116,51 @@
                     app:layout_constraintTop_toBottomOf="@id/ll_desc_author">
 
                     <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_marginHorizontal="2dp"
                         android:src="@drawable/ic_level" />
 
                     <TextView
                         android:id="@+id/tv_level"
-                        style="@style/TextAppearance.Material3.BodySmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        tools:text="@string/txt_intermediate_level"
-                        android:textColor="@color/dark_blue" />
+                        android:textColor="@color/md_theme_light_primary"
+                        tools:text="@string/txt_intermediate_level" />
 
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="16dp"
                         android:src="@drawable/ic_module" />
 
                     <TextView
                         android:id="@+id/tv_module"
-                        style="@style/TextAppearance.Material3.BodySmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/montserrat_regular"
-                        tools:text="@string/txt_7_modul"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        tools:text="@string/txt_7_modul" />
 
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="2dp"
                         android:src="@drawable/ic_time" />
 
                     <TextView
                         android:id="@+id/tv_duration"
-                        style="@style/TextAppearance.Material3.BodySmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        tools:text="@string/txt_120_menit"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        tools:text="@string/txt_120_menit" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -189,6 +187,32 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_section_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_buy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:backgroundTint="@color/md_theme_light_primary"
+            android:drawableEnd="@drawable/ic_next_rounded"
+            android:fontFamily="@font/montserrat_bold"
+            android:nestedScrollingEnabled="false"
+            android:text="@string/text_beli_dan_ikuti_kelas"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/fl_fullscreen"

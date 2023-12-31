@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group4.gostudy.databinding.FragmentDetailCourseMaterialBinding
 import com.group4.gostudy.model.Chapter
+import com.group4.gostudy.presentation.detail.DetailCourseActivity
 import com.group4.gostudy.presentation.detail.DetailViewModel
-import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
 import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
 import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
@@ -127,24 +127,30 @@ class DetailCourseMaterialFragment : Fragment() {
                 )
             )
             val dataSection = it.modules?.map { data ->
-                DataItem(data.name.orEmpty()) {
-                   /* val bundle = Bundle()
-                    bundle.putString("data", data.videoId?.get(0).toString())
-                    val intent = Intent(requireContext(), DetailCourseActivity::class.java)
-                    intent.putExtras(bundle)
-                    startActivity(intent)*/
-                    showDialogOrder()
+                data.let { module ->
+                    DataItem(
+                        requireContext(),
+                        data.noModule.toString(),
+                        module,
+                        data.name.orEmpty(),
+                        data.isUnlocked == true
+                    ) { data ->
+                        detailViewModel.getContentUrl(data.videoId.orEmpty())
+                        val courseId = detailViewModel.idCourse ?: return@DataItem
+                        val moduleId = data.id ?: return@DataItem
+                        val videoId = data.videoId.orEmpty()
+                        detailViewModel.getModuleVideo(courseId, moduleId).apply {
+                            (requireActivity() as DetailCourseActivity).loadVideoUrl(videoId)
+                        }
+                    }
                 }
             }
+
             if (dataSection != null) {
                 section.addAll(dataSection)
             }
             section
         }
         groupieAdapter.addAll(section)
-    }
-
-    private fun showDialogOrder() {
-        DialogOrderFragment().show(childFragmentManager, "DialogOrderFragment")
     }
 }

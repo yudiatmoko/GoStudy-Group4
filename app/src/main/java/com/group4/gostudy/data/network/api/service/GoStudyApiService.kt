@@ -11,6 +11,7 @@ import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRe
 import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
+import com.group4.gostudy.data.network.api.model.moduleVideo.ModuleVideoResponse
 import com.group4.gostudy.data.network.api.model.notification.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
@@ -118,12 +119,18 @@ interface GoStudyApiService {
 
     @GET("view-course")
     suspend fun getUserCourse(
-        @Query("status")status: String? = null,
-        @Query("search")search: String? = null
+        @Query("status") status: String? = null,
+        @Query("search") search: String? = null
     ): UserCourseResponseV2
 
     @GET("view-course/course/{courseId}")
     suspend fun getUserCourseById(@Path("courseId") id: Int? = null): UserCourseById
+
+    @GET("view-course/course/{courseId}/modules/{moduleId}")
+    suspend fun getUserCourseModuleById(
+        @Path("courseId") courseId: Int? = null,
+        @Path("moduleId") moduleId: Int? = null
+    ): ModuleVideoResponse
 
     companion object {
         @JvmStatic

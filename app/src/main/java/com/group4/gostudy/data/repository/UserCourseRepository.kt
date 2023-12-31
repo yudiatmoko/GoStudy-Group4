@@ -2,8 +2,10 @@ package com.group4.gostudy.data.repository
 
 import com.group4.gostudy.data.network.api.datasource.GoStudyApiDataSource
 import com.group4.gostudy.data.network.api.model.coursev2.toCourse
+import com.group4.gostudy.data.network.api.model.coursev2.toModule
 import com.group4.gostudy.data.network.api.model.usercoursev2.toCourseList
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.Module
 import com.group4.gostudy.model.UserCourse
 import com.group4.gostudy.utils.ResultWrapper
 import com.group4.gostudy.utils.proceedFlow
@@ -15,12 +17,16 @@ import kotlinx.coroutines.flow.onStart
 interface UserCourseRepository {
     suspend fun getUserCourse(type: String?, search: String?): Flow<ResultWrapper<List<UserCourse>>>
     suspend fun getUserCourseById(id: Int): Flow<ResultWrapper<Course?>>
+    suspend fun getModuleVideoById(courseId: Int, moduleId: Int): Flow<ResultWrapper<Module>>
 }
 
 class UserCourseRepositoryImpl(
     private val apiDataSource: GoStudyApiDataSource
 ) : UserCourseRepository {
-    override suspend fun getUserCourse(type: String?, search: String?): Flow<ResultWrapper<List<UserCourse>>> {
+    override suspend fun getUserCourse(
+        type: String?,
+        search: String?
+    ): Flow<ResultWrapper<List<UserCourse>>> {
         return proceedFlow {
             apiDataSource.getUserCourse(type, search).data?.course?.toCourseList() ?: emptyList()
         }.catch {
@@ -34,6 +40,20 @@ class UserCourseRepositoryImpl(
     override suspend fun getUserCourseById(id: Int): Flow<ResultWrapper<Course?>> {
         return proceedFlow {
             apiDataSource.getUserCourseById(id).data?.course?.toCourse()
+        }.catch {
+            emit(ResultWrapper.Error(Exception(it)))
+        }.onStart {
+            emit(ResultWrapper.Loading())
+            delay(2000)
+        }
+    }
+
+    override suspend fun getModuleVideoById(
+        courseId: Int,
+        moduleId: Int
+    ): Flow<ResultWrapper<Module>> {
+        return proceedFlow {
+            apiDataSource.getModuleVideoById(courseId, moduleId).data.module.findModule.toModule()
         }.catch {
             emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
