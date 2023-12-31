@@ -20,7 +20,7 @@ class ClassItemViewHolder(
 
         if (item.totalProgress == 100) {
             binding.tvProgressText.visibility = View.VISIBLE
-            binding.tvProgressText.text = binding.root.context.getString(R.string.text_done)
+            binding.tvProgressText.text = binding.root.context.getString(R.string.text_selesai)
         } else if (item.totalProgress!! < 100) {
             binding.tvProgressText.visibility = View.VISIBLE
             binding.tvProgressText.text = "${item.totalProgress}%"
@@ -30,7 +30,7 @@ class ClassItemViewHolder(
 
         binding.tvCategoryName.text = item.courseX?.category?.name.orEmpty()
         binding.tvClassTitle.text = item.courseX?.name.orEmpty()
-        binding.tvMentorName.text = String.format("by %s", item.courseX?.courseBy.orEmpty())
+        binding.tvMentorName.text = String.format(binding.root.context.getString(R.string.txt_by_s), item.courseX?.courseBy.orEmpty())
         binding.tvLevel.text = item.courseX?.level.orEmpty()
         binding.tvModule.text = item.courseX?.totalModule.toString()
         binding.tvDuration.text = item.courseX?.totalDuration.formatDurationToMinutes()

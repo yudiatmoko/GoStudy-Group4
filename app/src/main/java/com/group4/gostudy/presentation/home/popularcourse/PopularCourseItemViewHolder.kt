@@ -7,6 +7,7 @@ import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.PopularCourseItemBinding
 import com.group4.gostudy.databinding.PopularCourseViewMoreItemBinding
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.utils.formatDurationToMinutes
 
 /*
 Hi, Code Enthusiast!
@@ -28,7 +29,7 @@ class PopularCourseItemViewHolder(
         binding.tvInstructorName.text = String.format("by %s", item.courseBy)
         binding.tvLevel.text = item.level
         binding.tvModule.text = String.format("%.0f Modul", item.totalModule?.toDouble())
-        binding.tvDuration.text = String.format("%.0f Menit", item.totalDuration?.toDouble())
+        binding.tvDuration.text = item.totalDuration?.formatDurationToMinutes().plus(" Menit")
         binding.tvRating.text = item.rating.toString()
         if ((item.price ?: 0) > 0) {
             binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
