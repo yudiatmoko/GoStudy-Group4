@@ -1,7 +1,9 @@
 package com.group4.gostudy.presentation.classes.myclass
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.group4.gostudy.R
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.MyClassItemBinding
 import com.group4.gostudy.model.UserCourse
@@ -15,6 +17,17 @@ class ClassItemViewHolder(
 
     override fun bind(item: UserCourse) {
         binding.piMyClass.progress = item.totalProgress ?: 0
+
+        if (item.totalProgress == 100) {
+            binding.tvProgressText.visibility = View.VISIBLE
+            binding.tvProgressText.text = binding.root.context.getString(R.string.text_done)
+        } else if (item.totalProgress!! < 100) {
+            binding.tvProgressText.visibility = View.VISIBLE
+            binding.tvProgressText.text = "In Progress: ${item.totalProgress}%"
+        } else {
+            binding.tvProgressText.visibility = View.GONE
+        }
+
         binding.tvCategoryName.text = item.courseX?.category?.name.orEmpty()
         binding.tvClassTitle.text = item.courseX?.name.orEmpty()
         binding.tvMentorName.text = String.format("by %s", item.courseX?.courseBy.orEmpty())

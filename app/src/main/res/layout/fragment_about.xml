@@ -8,13 +8,13 @@
     tools:context=".presentation.detail.about.AboutFragment">
 
     <ScrollView
+        android:id="@+id/sv_about"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,13 +36,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_tele"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:drawableEnd="@drawable/ic_chat"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/text_join_telegram"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +57,7 @@
                 android:shadowRadius="2"
                 android:text="@string/text_about_course"
                 android:textColor="@color/md_theme_light_primary"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_tele" />
 
@@ -68,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:justificationMode="inter_word"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_about_course"
@@ -84,7 +84,7 @@
                 android:shadowRadius="2"
                 android:text="@string/text_class_indicate"
                 android:textColor="@color/md_theme_light_primary"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_about_class" />
 
@@ -93,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:justificationMode="inter_word"
+                android:fontFamily="@font/montserrat_regular"
                 android:layout_marginVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_purpose_course"
@@ -104,6 +105,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

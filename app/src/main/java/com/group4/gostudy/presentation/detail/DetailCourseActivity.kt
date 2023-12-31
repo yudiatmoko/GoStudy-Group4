@@ -20,7 +20,8 @@ import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityDetailCourseBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
-import com.group4.gostudy.presentation.detail.material.MaterialViewModel
+import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
+import com.group4.gostudy.utils.formatDurationToMinutes
 import com.group4.gostudy.utils.proceedWhen
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -47,8 +48,6 @@ class DetailCourseActivity : AppCompatActivity() {
 
     private var previousOrientation: Int = -1
 
-    private val materialViewModel: MaterialViewModel by viewModel()
-
     private val viewModel: DetailViewModel by viewModel { parametersOf(intent?.extras) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +56,7 @@ class DetailCourseActivity : AppCompatActivity() {
         showData(viewModel.course)
         viewModel.getDetail()
         showDataUserCourse()
+        setCoursePremiumAndFree(viewModel.course)
 
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -120,6 +120,22 @@ class DetailCourseActivity : AppCompatActivity() {
         })
     }
 
+    private fun setCoursePremiumAndFree(course: Course?) {
+        val isPremiumCourse = course?.type
+        if (isPremiumCourse == "Premium") {
+            binding.btnBuy.setOnClickListener {
+                showDialogOrder()
+            }
+            binding.clSectionOrder.isVisible = true
+        } else {
+            binding.clSectionOrder.isVisible = false
+        }
+    }
+
+    private fun showDialogOrder() {
+        DialogOrderFragment().show(supportFragmentManager, "DialogOrderFragment")
+    }
+
     private fun initYoutube() {
         val iFramePlayerOptions = IFramePlayerOptions.Builder()
             .controls(1)
@@ -140,16 +156,25 @@ class DetailCourseActivity : AppCompatActivity() {
                 object : AbstractYouTubePlayerListener() {
                     override fun onReady(youTubePlayer: YouTubePlayer) {
                         this@DetailCourseActivity.youtubePlayer = youTubePlayer
-
-                        val bundle = intent.extras
-                        bundle?.getString("data")
-                        youTubePlayer.loadVideo("dQw4w9WgXcQ", 0f)
+                        observeDataVideo()
                     }
                 },
                 iFramePlayerOptions
             )
         }
         lifecycle.addObserver(binding.youtubePlayerView)
+    }
+
+    private fun observeDataVideo() {
+        viewModel.videoId.observe(this) { result ->
+            playVideo(result)
+        }
+    }
+
+    private fun playVideo(videoUrl: String?) {
+        if (!videoUrl.isNullOrBlank()) {
+            youtubePlayer?.loadVideo(videoUrl, 0f)
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -176,6 +201,7 @@ class DetailCourseActivity : AppCompatActivity() {
         windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
         binding.clCourse.isVisible = true
         binding.youtubePlayerView.isVisible = true
+        binding.clSectionOrder.isVisible = true
         binding.flFullscreen.apply {
             isVisible = false
             removeAllViews()
@@ -188,17 +214,22 @@ class DetailCourseActivity : AppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         binding.clCourse.isVisible = false
         binding.youtubePlayerView.isVisible = false
+        binding.clSectionOrder.isVisible = false
         binding.flFullscreen.apply {
             isVisible = true
             addView(view)
         }
     }
 
+    fun loadVideoUrl(videoId: String) {
+        youtubePlayer?.loadVideo(videoId, 0f)
+    }
+
     private fun showData(course: Course?) {
         course?.let {
             binding.tvClassName.text = it.category?.name
             binding.tvLevel.text = it.level
-            binding.tvDuration.text = String.format("%.0f Menit", it.totalDuration?.toDouble())
+            binding.tvDuration.text = it.totalDuration?.formatDurationToMinutes().plus(" Menit")
             binding.tvModule.text = String.format("%.0f Modul", it.totalModule?.toDouble())
             binding.tvClassTitle.text = it.name
             binding.tvRating.text = it.rating.toString()

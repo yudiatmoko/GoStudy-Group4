@@ -1,5 +1,7 @@
 package com.group4.gostudy.presentation.detail.about
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +31,20 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showData(detailViewModel.course)
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.btTele.setOnClickListener {
+            navigateToTelegram()
+        }
+    }
+
+    private fun navigateToTelegram() {
+        val intent =
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+x9TdOOSfGwZlMWI1"))
+        intent.setPackage("org.telegram.messenger")
+        startActivity(intent)
     }
 
     private fun showData(course: Course?) {
@@ -38,61 +54,61 @@ class AboutFragment : Fragment() {
         }
     }
 
-/*    private fun observeChapter() {
-        detailViewModel.desc?.let {
-            AboutViewModel.
-        }
-        detailViewModel.course.(){
-            it.proceedWhen(
-                doOnLoading = {
-                    binding.layoutStateAbout.root.isVisible =
-                        true
-                    binding.layoutStateAbout.animLoading.isVisible =
-                        true
-                    binding.layoutStateAbout.llAnimError.isVisible =
-                        false
-                    binding.clAbout.isVisible =
-                        false
-                },
-                doOnSuccess = {
-                    binding.layoutStateAbout.root.isVisible =
-                        true
-                    binding.layoutStateAbout.animLoading.isVisible =
-                        false
-                    binding.layoutStateAbout.llAnimError.isVisible =
-                        false
-                    binding.clAbout.isVisible = true
-                    showData(detailViewModel.course)
-
-                },
-                doOnError = {
-                    binding.layoutStateAbout.root.isVisible =
-                        true
-                    binding.layoutStateAbout.animLoading.isVisible =
-                        false
-                    binding.layoutStateAbout.llAnimError.isVisible =
-                        true
-                    binding.clAbout.isVisible =
-                        false
-                    if (it.exception is Exception) {
-                        binding.layoutStateAbout.tvError.isVisible =
+    /*    private fun observeChapter() {
+            detailViewModel.desc?.let {
+                AboutViewModel.
+            }
+            detailViewModel.course.(){
+                it.proceedWhen(
+                    doOnLoading = {
+                        binding.layoutStateAbout.root.isVisible =
                             true
-                        binding.layoutStateAbout.tvError.text =
-                            it.exception.getParsedError()?.message
+                        binding.layoutStateAbout.animLoading.isVisible =
+                            true
+                        binding.layoutStateAbout.llAnimError.isVisible =
+                            false
+                        binding.clAbout.isVisible =
+                            false
+                    },
+                    doOnSuccess = {
+                        binding.layoutStateAbout.root.isVisible =
+                            true
+                        binding.layoutStateAbout.animLoading.isVisible =
+                            false
+                        binding.layoutStateAbout.llAnimError.isVisible =
+                            false
+                        binding.clAbout.isVisible = true
+                        showData(detailViewModel.course)
+
+                    },
+                    doOnError = {
+                        binding.layoutStateAbout.root.isVisible =
+                            true
+                        binding.layoutStateAbout.animLoading.isVisible =
+                            false
+                        binding.layoutStateAbout.llAnimError.isVisible =
+                            true
+                        binding.clAbout.isVisible =
+                            false
+                        if (it.exception is Exception) {
+                            binding.layoutStateAbout.tvError.isVisible =
+                                true
+                            binding.layoutStateAbout.tvError.text =
+                                it.exception.getParsedError()?.message
+                        }
                     }
-                }
-            )
-        }
-    }*/
+                )
+            }
+        }*/
 }
 
-    /*companion object {
-        const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
-        fun startActivity(context: Context, detail: AboutFragment?) {
-            val intent = Intent(context, AboutFragment::class.java)
-            intent.putExtra(EXTRA_PRODUCT, detail)
-            context.startActivity(intent)
-        }
+/*companion object {
+    const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+    fun startActivity(context: Context, detail: AboutFragment?) {
+        val intent = Intent(context, AboutFragment::class.java)
+        intent.putExtra(EXTRA_PRODUCT, detail)
+        context.startActivity(intent)
     }
- }
+}
+}
 */

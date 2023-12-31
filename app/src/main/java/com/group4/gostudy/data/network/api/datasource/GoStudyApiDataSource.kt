@@ -8,6 +8,7 @@ import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRe
 import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
+import com.group4.gostudy.data.network.api.model.moduleVideo.ModuleVideoResponse
 import com.group4.gostudy.data.network.api.model.notification.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse
@@ -86,6 +87,7 @@ interface GoStudyApiDataSource {
     suspend fun getUserCourseById(id: Int?): UserCourseById
 
     suspend fun createOrder(paymentRequest: PaymentRequest): PaymentResponse
+    suspend fun getModuleVideoById(courseId: Int?, moduleId: Int?): ModuleVideoResponse
 }
 
 class GoStudyApiDataSourceImpl(
@@ -185,5 +187,9 @@ class GoStudyApiDataSourceImpl(
     }
     override suspend fun createOrder(paymentRequest: PaymentRequest): PaymentResponse {
         return service.createOrder(paymentRequest)
+    }
+
+    override suspend fun getModuleVideoById(courseId: Int?, moduleId: Int?): ModuleVideoResponse {
+        return service.getUserCourseModuleById(courseId, moduleId)
     }
 }
