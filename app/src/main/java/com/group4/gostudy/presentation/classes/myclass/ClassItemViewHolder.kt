@@ -1,5 +1,6 @@
 package com.group4.gostudy.presentation.classes.myclass
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -15,6 +16,7 @@ class ClassItemViewHolder(
 ) : RecyclerView.ViewHolder(binding.root),
     ViewHolderBinder<UserCourse> {
 
+    @SuppressLint("StringFormatInvalid")
     override fun bind(item: UserCourse) {
         binding.piMyClass.progress = item.totalProgress ?: 0
 
