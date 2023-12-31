@@ -125,4 +125,6 @@
     <string name="txt_rating">5.0</string>
     <string name="text_free">Gratis</string>
     <string name="text_beli_dan_ikuti_kelas">Beli dan Ikuti kelas</string>
+    <string name="text_selesai">Selesai</string>
+    <string name="text_done">Done</string>
 </resources>
