@@ -190,34 +190,30 @@
                     android:layout_marginVertical="8dp"
                     android:src="@drawable/ic_check_progress" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/pi_my_class"
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="8dp"
+                    android:max="100"
+                    android:progress="50"
+                    android:visibility="visible"
+                    app:trackColor="@color/md_theme_light_inversePrimary"
+                    app:indicatorColor="@color/md_theme_light_primary"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="14dp"/>
 
-                    <com.google.android.material.progressindicator.LinearProgressIndicator
-                        android:id="@+id/pi_my_class"
-                        android:layout_width="280dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:max="100"
-                        android:progress="50"
-                        android:visibility="visible"
-                        app:indicatorColor="@color/md_theme_light_inversePrimary"
-                        app:trackColor="@color/md_theme_light_primary"
-                        app:trackCornerRadius="10dp"
-                        app:trackThickness="14dp"/>
-
-                    <TextView
-                        android:id="@+id/tvProgressText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:text="@string/text_selesai"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"
-                        android:visibility="visible"/>
-                </RelativeLayout>
-
+                <TextView
+                    android:id="@+id/tvProgressText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/text_selesai"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

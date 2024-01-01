@@ -6,18 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentNotificationBinding
+import com.group4.gostudy.presentation.home.DialogHomeNonLoginFragment
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationBinding
     private val notificationViewModel: NotificationViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
     private val notificationAdapter: NotificationListAdapter by lazy {
         NotificationListAdapter {}
     }
@@ -39,9 +44,25 @@ class NotificationFragment : Fragment() {
             view,
             savedInstanceState
         )
+        checkUserLoginAndLoadData()
+    }
 
-        setNotificationRV()
-        getData()
+    private fun checkUserLoginAndLoadData() {
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                setNotificationRV()
+                getData()
+            }
+        }
+    }
+
+    private val dialogFragment = DialogHomeNonLoginFragment()
+
+    private fun navigateToNonLoginFragment() {
+        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
     }
 
     private fun setObserveNotificationData() {

@@ -12,11 +12,15 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentDetailBinding
+import com.group4.gostudy.presentation.detail.DetailCourseActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PaymentWeb : AppCompatActivity() {
     private val binding: ActivityPaymentDetailBinding by lazy {
         ActivityPaymentDetailBinding.inflate(layoutInflater)
     }
+
+    private val viewmodel: PaymentViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +50,10 @@ class PaymentWeb : AppCompatActivity() {
                     startActivity(intent)
                     // `true` means for the specified url, will be handled by OS by starting Intent
                     true
+                } else if (requestUrl.contains("example.com/")) {
+                    DetailCourseActivity.startActivity(this@PaymentWeb, viewmodel.courses)
+                    true
                 } else {
-                    // `false` means any other url will be loaded normally by the WebView
                     false
                 }
             }

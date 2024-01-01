@@ -23,7 +23,7 @@ class ClassItemViewHolder(
             binding.tvProgressText.text = binding.root.context.getString(R.string.text_done)
         } else if (item.totalProgress!! < 100) {
             binding.tvProgressText.visibility = View.VISIBLE
-            binding.tvProgressText.text = "In Progress: ${item.totalProgress}%"
+            binding.tvProgressText.text = "${item.totalProgress}%"
         } else {
             binding.tvProgressText.visibility = View.GONE
         }

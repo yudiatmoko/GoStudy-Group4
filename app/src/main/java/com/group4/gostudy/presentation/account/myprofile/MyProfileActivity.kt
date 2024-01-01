@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import coil.load
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.group4.gostudy.databinding.ActivityMyProfileBinding
+import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -119,6 +120,16 @@ class MyProfileActivity : AppCompatActivity() {
             finish()
             startActivity(this)
         }
+        binding.btnLogin.setOnClickListener {
+            navigateToLogin()
+        }
+    }
+
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
     }
 
     private fun imagePicker() {
