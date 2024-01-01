@@ -15,8 +15,6 @@ import org.koin.core.parameter.parametersOf
 
 class AboutFragment : Fragment() {
     private lateinit var binding: FragmentAboutBinding
-
-    private val aboutViewModel: AboutViewModel by viewModel()
     private val detailViewModel: DetailViewModel by viewModel { parametersOf(requireActivity().intent?.extras) }
 
     override fun onCreateView(
@@ -53,62 +51,4 @@ class AboutFragment : Fragment() {
             binding.tvPurposeClass.text = it.benefits?.joinToString("\n")
         }
     }
-
-    /*    private fun observeChapter() {
-            detailViewModel.desc?.let {
-                AboutViewModel.
-            }
-            detailViewModel.course.(){
-                it.proceedWhen(
-                    doOnLoading = {
-                        binding.layoutStateAbout.root.isVisible =
-                            true
-                        binding.layoutStateAbout.animLoading.isVisible =
-                            true
-                        binding.layoutStateAbout.llAnimError.isVisible =
-                            false
-                        binding.clAbout.isVisible =
-                            false
-                    },
-                    doOnSuccess = {
-                        binding.layoutStateAbout.root.isVisible =
-                            true
-                        binding.layoutStateAbout.animLoading.isVisible =
-                            false
-                        binding.layoutStateAbout.llAnimError.isVisible =
-                            false
-                        binding.clAbout.isVisible = true
-                        showData(detailViewModel.course)
-
-                    },
-                    doOnError = {
-                        binding.layoutStateAbout.root.isVisible =
-                            true
-                        binding.layoutStateAbout.animLoading.isVisible =
-                            false
-                        binding.layoutStateAbout.llAnimError.isVisible =
-                            true
-                        binding.clAbout.isVisible =
-                            false
-                        if (it.exception is Exception) {
-                            binding.layoutStateAbout.tvError.isVisible =
-                                true
-                            binding.layoutStateAbout.tvError.text =
-                                it.exception.getParsedError()?.message
-                        }
-                    }
-                )
-            }
-        }*/
 }
-
-/*companion object {
-    const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
-    fun startActivity(context: Context, detail: AboutFragment?) {
-        val intent = Intent(context, AboutFragment::class.java)
-        intent.putExtra(EXTRA_PRODUCT, detail)
-        context.startActivity(intent)
-    }
-}
-}
-*/

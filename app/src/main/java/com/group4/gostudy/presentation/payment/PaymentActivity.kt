@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import coil.load
+import com.group4.gostudy.data.network.api.model.payment.PaymentRequest
 import com.group4.gostudy.databinding.ActivityPaymentBinding
 import com.group4.gostudy.model.Course
 import com.group4.gostudy.utils.ApiException
@@ -25,6 +26,7 @@ class PaymentActivity : AppCompatActivity() {
         setClickListener()
         bindProduct()
         observeCheckoutResult()
+        paymentViewModel.order(PaymentRequest(paymentViewModel.courses?.id))
     }
 
     private fun bindProduct() {

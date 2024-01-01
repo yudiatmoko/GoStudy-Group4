@@ -2,8 +2,6 @@ package com.group4.gostudy.viewitem
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
-import androidx.core.view.isVisible
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ItemSectionDataBinding
 import com.group4.gostudy.databinding.ItemSectionHeaderBinding
@@ -31,28 +29,14 @@ class DataItem(
     private val number: String,
     private val data: Module,
     private val title: String,
-    private val isUnlocked: Boolean?,
+    private val isUnlocked: Boolean? = true,
     private val onItemClick: (item: Module) -> Unit
 ) :
     BindableItem<ItemSectionDataBinding>() {
     override fun bind(viewBinding: ItemSectionDataBinding, position: Int) {
         viewBinding.tvModuleNumber.text = number
         viewBinding.tvSectionData.text = title
-
-        if (isUnlocked == false) {
-            viewBinding.ivPlay.isVisible = false
-            viewBinding.ivNotPlay.isVisible = false
-            viewBinding.ivLock.isVisible = true
-            viewBinding.ivLock.setOnClickListener {
-                Toast.makeText(
-                    context,
-                    "Anda belum  membeli course ini!",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            viewBinding.root.setOnClickListener { onItemClick.invoke(data) }
-        }
+        viewBinding.root.setOnClickListener { onItemClick.invoke(data) }
     }
 
     override fun getLayout(): Int = R.layout.item_section_data

@@ -121,4 +121,10 @@ class HistoryPaymentActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
     }
+
+    override fun onResume() {
+        getData()
+        setObserveHistoryData()
+        super.onResume()
+    }
 }

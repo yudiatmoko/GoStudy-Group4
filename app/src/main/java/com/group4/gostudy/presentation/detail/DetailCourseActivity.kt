@@ -19,10 +19,10 @@ import com.google.android.material.tabs.TabLayout
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityDetailCourseBinding
 import com.group4.gostudy.model.Course
+import com.group4.gostudy.model.UserCourse
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
 import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
 import com.group4.gostudy.utils.formatDurationToMinutes
-import com.group4.gostudy.utils.proceedWhen
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
@@ -53,10 +53,8 @@ class DetailCourseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        showData(viewModel.course)
-        viewModel.getDetail()
-        showDataUserCourse()
-        setCoursePremiumAndFree(viewModel.course)
+        showData(viewModel.course, viewModel.userCourse)
+        setCoursePremiumAndFree(viewModel.course, viewModel.userCourse)
 
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -120,15 +118,24 @@ class DetailCourseActivity : AppCompatActivity() {
         })
     }
 
-    private fun setCoursePremiumAndFree(course: Course?) {
+    private fun setCoursePremiumAndFree(course: Course?, userCourse: UserCourse?) {
         val isPremiumCourse = course?.type
-        if (isPremiumCourse == "Premium") {
+        val isAccessibleCourse: Boolean = userCourse?.isAccessible ?: false
+        if (isPremiumCourse == "Premium" && !isAccessibleCourse) {
             binding.btnBuy.setOnClickListener {
                 showDialogOrder()
             }
             binding.clSectionOrder.isVisible = true
+            binding.tabLayout.isVisible = false
+            binding.viewpager2.isUserInputEnabled = false
+        } else if (isPremiumCourse == "Premium" && isAccessibleCourse) {
+            binding.clSectionOrder.isVisible = false
+            binding.tabLayout.isVisible = true
+            binding.viewpager2.isUserInputEnabled = true
         } else {
             binding.clSectionOrder.isVisible = false
+            binding.tabLayout.isVisible = true
+            binding.viewpager2.isUserInputEnabled = true
         }
     }
 
@@ -225,7 +232,7 @@ class DetailCourseActivity : AppCompatActivity() {
         youtubePlayer?.loadVideo(videoId, 0f)
     }
 
-    private fun showData(course: Course?) {
+    private fun showData(course: Course?, userCourse: UserCourse?) {
         course?.let {
             binding.tvClassName.text = it.category?.name
             binding.tvLevel.text = it.level
@@ -237,20 +244,17 @@ class DetailCourseActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDataUserCourse() {
-        viewModel.details.observe(this) {
-            it.proceedWhen(
-                doOnSuccess = {
-                    showData(it.payload)
-                }
-            )
-        }
-    }
-
     companion object {
         const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+        const val EXTRA_USER_COURSE = "EXTRA_USER_COURSE"
         fun startActivity(context: Context, course: Course?) {
             val intent = Intent(context, DetailCourseActivity::class.java)
+            intent.putExtra(EXTRA_PRODUCT, course)
+            context.startActivity(intent)
+        }
+        fun startActivityUserCourse(context: Context, userCourse: UserCourse?, course: Course?) {
+            val intent = Intent(context, DetailCourseActivity::class.java)
+            intent.putExtra(EXTRA_USER_COURSE, userCourse)
             intent.putExtra(EXTRA_PRODUCT, course)
             context.startActivity(intent)
         }

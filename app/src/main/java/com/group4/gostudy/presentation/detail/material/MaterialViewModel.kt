@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 
 class MaterialViewModel(
     private val courseRepo: CourseRepository
-//    private val userCourseRepository: UserCourseRepository
 ) : ViewModel() {
     private val _courses =
         MutableLiveData<ResultWrapper<Course>>()
@@ -31,17 +30,4 @@ class MaterialViewModel(
             }
         }
     }
-//    init {
-//        getModuleVideo(moduleVideo.value?.payload?.id)
-//    }
-//    private val _moduleVideo = MutableLiveData<ResultWrapper<Module>>()
-//    val moduleVideo: LiveData<ResultWrapper<Module>>
-//        get() = _moduleVideo
-//    fun getModuleVideo(id: Int?) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            userCourseRepository.getModuleVideobyId(id).collect() {
-//                _moduleVideo.postValue(it)
-//            }
-//        }
-//    }
 }

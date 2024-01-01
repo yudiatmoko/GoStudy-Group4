@@ -24,9 +24,6 @@ class PaymentViewModel(
     val checkoutResult: LiveData<ResultWrapper<Payment>>
         get() = _checkoutResult
 
-    init {
-        order(PaymentRequest(courses?.id))
-    }
     fun order(paymentRequest: PaymentRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             courseRepo.order(paymentRequest).collect {

@@ -34,12 +34,12 @@ class ClassesFragment : Fragment() {
 
     private val myClassAdapter: MyClassAdapter by lazy {
         MyClassAdapter { userCourse: UserCourse ->
-            navigateToDetail(userCourse.courseX)
+            navigateToDetail(userCourse, userCourse.courseX)
         }
     }
 
-    private fun navigateToDetail(courses: Course?) {
-        DetailCourseActivity.startActivity(requireContext(), courses)
+    private fun navigateToDetail(userCourse: UserCourse?, course: Course?) {
+        DetailCourseActivity.startActivityUserCourse(requireContext(), userCourse, course)
     }
 
     override fun onCreateView(
@@ -184,5 +184,10 @@ class ClassesFragment : Fragment() {
         binding.rvListOfClass.apply {
             adapter = myClassAdapter
         }
+    }
+
+    override fun onResume() {
+        observeCourse()
+        super.onResume()
     }
 }

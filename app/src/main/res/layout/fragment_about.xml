@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv_about"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     android:padding="12dp"
-    tools:context=".presentation.detail.about.AboutFragment">
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <ScrollView
-        android:id="@+id/sv_about"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/layout_state_about"
+            layout="@layout/common_layout_content_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_about"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include
-                android:id="@+id/layout_state_about"
-                layout="@layout/common_layout_content_state"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_about"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_height="match_parent">
 
 
             <com.google.android.material.button.MaterialButton
@@ -62,16 +58,16 @@
                 app:layout_constraintTop_toBottomOf="@id/bt_tele" />
 
 
-                <TextView
-                    android:id="@+id/tv_about_class"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="8dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:justificationMode="inter_word"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_about_course"
-                    tools:text="@string/text_random" />
+            <TextView
+                android:id="@+id/tv_about_class"
+                tools:text="@string/text_random"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:justificationMode="inter_word"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_course" />
 
 
             <TextView
@@ -90,20 +86,19 @@
 
             <TextView
                 android:id="@+id/tv_purpose_class"
+                tools:text="@string/text_random"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:justificationMode="inter_word"
-                android:fontFamily="@font/montserrat_regular"
                 android:layout_marginVertical="8dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:justificationMode="inter_word"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_purpose_course"
-                tools:text="@string/text_random" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                app:layout_constraintTop_toBottomOf="@+id/tv_purpose_course" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+

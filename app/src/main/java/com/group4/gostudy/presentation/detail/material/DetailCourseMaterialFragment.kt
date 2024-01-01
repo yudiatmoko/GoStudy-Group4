@@ -133,7 +133,7 @@ class DetailCourseMaterialFragment : Fragment() {
                         data.noModule.toString(),
                         module,
                         data.name.orEmpty(),
-                        data.isUnlocked == true
+                        data.isUnlocked
                     ) { data ->
                         detailViewModel.getContentUrl(data.videoId.orEmpty())
                         val courseId = detailViewModel.idCourse ?: return@DataItem
