@@ -78,7 +78,7 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
                         val categories = result
                         filterAdapter.setData(categories)
                         for (category in categories) {
-                            val name = category.name
+                            category.name
                         }
                     }
                 },
@@ -154,10 +154,14 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
         var rating = false
 
         with(binding) {
-            if (cbBeginnerLevel.isChecked) selectedLevels.add("Beginner")
-            if (cbIntermediateLevel.isChecked) selectedLevels.add("Intermediate")
-            if (cbAdvancedLevel.isChecked) selectedLevels.add("Advanced")
-            if (cbAllLevel.isChecked) selectedLevels.add("")
+            if (cbBeginnerLevel.isChecked) selectedLevels.add(getString(R.string.txt_beginner))
+            if (cbIntermediateLevel.isChecked) selectedLevels.add(getString(R.string.txt_intermediate))
+            if (cbAdvancedLevel.isChecked) selectedLevels.add(getString(R.string.txt_advanced))
+            if (cbAllLevel.isChecked) {
+                selectedLevels.add(getString(R.string.txt_beginner))
+                selectedLevels.add(getString(R.string.txt_intermediate))
+                selectedLevels.add(getString(R.string.txt_advanced))
+            }
             if (cbPalingBaru.isChecked) {
                 createAt = true
             }
@@ -168,12 +172,12 @@ class DialogFragmentFilter : BottomSheetDialogFragment() {
                 rating = true
             }
             val categories = courseViewModel.categories.value?.payload.orEmpty()
-            selectedCategories.addAll(categories.filter { it.isChecked }.map { it.name ?: "" })
+            selectedCategories.addAll(categories.filter { it.isChecked }.map { it.name ?: getString(R.string.txt_blank) })
 
             if (selectedLevels.isEmpty() && selectedCategories.isEmpty() && !createAt && !promo && !rating) {
                 Toast.makeText(
                     requireContext(),
-                    "Kamu belum memilih filter apapun",
+                    (getString(R.string.txt_not_select_anything)),
                     Toast.LENGTH_SHORT
                 ).show()
             } else {

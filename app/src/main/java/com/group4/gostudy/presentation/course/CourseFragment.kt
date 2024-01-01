@@ -76,7 +76,7 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
     }
 
     private fun navigateToNonLoginFragment() {
-        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
+        dialogFragment.show(childFragmentManager, getString(R.string.tag_dialoghomenonloginfragment))
     }
 
     private fun setTypeButtons() {
@@ -85,18 +85,18 @@ class CourseFragment : Fragment(), DialogFragmentFilter.FilterListener {
         }
 
         binding.tvFreeText.setOnClickListener {
-            courseViewModel.getCourse(type = "Free".trim())
+            courseViewModel.getCourse(type = getString(R.string.txt_free).trim())
         }
 
         binding.tvPremiumText.setOnClickListener {
-            courseViewModel.getCourse(type = "Premium".trim())
+            courseViewModel.getCourse(type = getString(R.string.txt_premium).trim())
         }
     }
 
     private fun navigateToFilter() {
         binding.tvClassFilterText.setOnClickListener {
             filterFragment.setFilterListener(this@CourseFragment)
-            filterFragment.show(childFragmentManager, "DialogFragmentFilter")
+            filterFragment.show(childFragmentManager, getString(R.string.tag_filterfragment))
         }
     }
 
