@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityHistoryBinding
+import com.group4.gostudy.model.HistoryPayment
+import com.group4.gostudy.presentation.paymentsummary.PaymentSummaryActivity
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,7 +22,13 @@ class HistoryPaymentActivity : AppCompatActivity() {
     }
 
     private val historyAdapter: HistoryPaymentListAdapter by lazy {
-        HistoryPaymentListAdapter {}
+        HistoryPaymentListAdapter { payment: HistoryPayment ->
+            navigateToPaymentSummary(payment)
+        }
+    }
+
+    private fun navigateToPaymentSummary(payment: HistoryPayment) {
+        PaymentSummaryActivity.startActivity(this, payment)
     }
 
     private val historyViewModel: HistoryViewModel by viewModel()
@@ -40,7 +48,8 @@ class HistoryPaymentActivity : AppCompatActivity() {
 
     private fun setHistoryRV() {
         binding.rvHistoryList.apply {
-            layoutManager = LinearLayoutManager(this@HistoryPaymentActivity, RecyclerView.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(this@HistoryPaymentActivity, RecyclerView.VERTICAL, false)
             adapter = historyAdapter
         }
         setObserveHistoryData()
@@ -115,6 +124,7 @@ class HistoryPaymentActivity : AppCompatActivity() {
             onBackPressed()
         }
     }
+
     companion object {
         fun startActivity(context: Context) {
             val intent = Intent(context, HistoryPaymentActivity::class.java)

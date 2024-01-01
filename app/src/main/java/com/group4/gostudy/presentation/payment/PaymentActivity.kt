@@ -82,7 +82,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun setClickListener() {
-        binding.toolbar.setOnClickListener {
+        binding.tbExit.setOnClickListener {
             onBackPressed()
         }
     }

@@ -6,6 +6,5 @@ import androidx.lifecycle.ViewModel
 class PaymentWebViewModel(
     val extras: Bundle?
 ) : ViewModel() {
-    val url = extras?.getString("URL")
-    val idCourse = extras?.getInt("ID")
+//    val payment = extras?.getParcelable<HistoryPayment>(HistoryPaymentActivity.EXTRA_HISTORY)
 }
