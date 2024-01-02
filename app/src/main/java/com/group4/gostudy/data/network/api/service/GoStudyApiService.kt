@@ -11,7 +11,7 @@ import com.group4.gostudy.data.network.api.model.forgotpassword.ForgotPasswordRe
 import com.group4.gostudy.data.network.api.model.historypayment.HistoryPaymentsResponse
 import com.group4.gostudy.data.network.api.model.login.LoginRequest
 import com.group4.gostudy.data.network.api.model.login.LoginResponse
-import com.group4.gostudy.data.network.api.model.moduleVideo.ModuleVideoResponse
+import com.group4.gostudy.data.network.api.model.modulevideo.ModuleVideoResponse
 import com.group4.gostudy.data.network.api.model.notification.NotificationsResponse
 import com.group4.gostudy.data.network.api.model.otp.OtpRequest
 import com.group4.gostudy.data.network.api.model.otp.OtpResponse

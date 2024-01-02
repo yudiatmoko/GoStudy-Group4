@@ -19,6 +19,9 @@ class HistoryPaymentItemViewHolder(
     ViewHolderBinder<HistoryPayment> {
 
     override fun bind(item: HistoryPayment) {
+        binding.root.setOnClickListener {
+            onClicked.invoke(item)
+        }
         binding.tvCategoryName.text = item.course?.category?.name
         binding.tvCourseTitle.text = item.course?.name
         binding.tvInstructorName.text = String.format("by %s", item.course?.courseBy)

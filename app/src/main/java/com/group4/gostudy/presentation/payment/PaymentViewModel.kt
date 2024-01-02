@@ -16,14 +16,16 @@ import kotlinx.coroutines.launch
 class PaymentViewModel(
     private val extras: Bundle?,
     private val courseRepo: CourseRepository
-
 ) : ViewModel() {
-    val courses = extras?.getParcelable<Course>(PaymentActivity.EXTRA_PRODUCT)
+    val course = extras?.getParcelable<Course>(PaymentActivity.EXTRA_PRODUCT)
 
     private val _checkoutResult = MutableLiveData<ResultWrapper<Payment>>()
     val checkoutResult: LiveData<ResultWrapper<Payment>>
         get() = _checkoutResult
 
+    init {
+        order(PaymentRequest(course?.id))
+    }
     fun order(paymentRequest: PaymentRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             courseRepo.order(paymentRequest).collect {

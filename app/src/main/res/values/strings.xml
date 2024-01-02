@@ -120,6 +120,7 @@
     <string name="text_materi_belajar">Materi belajar</string>
     <string name="txt_mulai_kelas">Mulai Kelas</string>
     <string name="txt_kelas_berjalan">Kelas Berjalan</string>
+    <string name="text_pemesanan_gagal">Pemesanan gagal: %1$s</string>
     <string name="tag_dialoghomenonloginfragment">DialogHomeNonLoginFragment</string>
     <string name="txt_sub_title">Belajar Web Designer dengan Figma</string>
     <string name="txt_course_by">by Angela Doe</string>
@@ -140,4 +141,14 @@
     <string name="txt_not_select_anything">Kamu belum memilih apapun!</string>
     <string name="txt_by_s">by %s</string>
     <string name="txt_must_paid">Yuk beli course ini terlebih dahulu!</string>
+    <string name="text_detail_pembayaran">Detail Pembayaran</string>
+    <string name="text_rincian_pembayaran">Rincian Pembayaran</string>
+    <string name="text_order_id">Order Id</string>
+    <string name="text_status">Status</string>
+    <string name="text_rincian_pesananmu">Rincian Pesananmu</string>
+    <string name="text_waktu">Waktu</string>
+    <string name="text_url">URL</string>
+    <string name="text_order_gagal">Pemesanan gagal: %1$s</string>
+    <string name="text_expired">Expired</string>
+
 </resources>

@@ -15,13 +15,13 @@ data class PaymentItemResponse(
     @SerializedName("orderId")
     val orderId: String?,
     @SerializedName("paymentType")
-    val paymentType: Any?,
+    val paymentType: String?,
     @SerializedName("price")
     val price: Int?,
     @SerializedName("redirect_url")
     val redirect_url: String?,
     @SerializedName("settelemtTime")
-    val settlementTime: Any?,
+    val settlementTime: String?,
     @SerializedName("status")
     val status: String?,
     @SerializedName("token")
@@ -36,10 +36,10 @@ fun PaymentItemResponse.toPayment() = Payment(
     createdAt = this.createdAt.orEmpty(),
     id = this.id ?: 0,
     orderId = this.orderId.orEmpty(),
-    paymentType = this.paymentType ?: 0,
+    paymentType = this.paymentType.orEmpty(),
     price = this.price ?: 0,
     redirectUrl = this.redirect_url.orEmpty(),
-    settlementTime = this.settlementTime ?: 0,
+    settlementTime = this.settlementTime.orEmpty(),
     status = this.status.orEmpty(),
     token = this.token.orEmpty(),
     updatedAt = this.updatedAt.orEmpty(),
