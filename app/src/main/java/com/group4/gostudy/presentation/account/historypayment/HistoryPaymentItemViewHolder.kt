@@ -6,6 +6,7 @@ import coil.load
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.HistoryItemListBinding
 import com.group4.gostudy.model.HistoryPayment
+import com.group4.gostudy.utils.formatDurationToMinutes
 
 /*
 Hi, Code Enthusiast!
@@ -27,7 +28,7 @@ class HistoryPaymentItemViewHolder(
         binding.tvInstructorName.text = String.format("by %s", item.course?.courseBy)
         binding.tvLevel.text = item.course?.level
         binding.tvModule.text = String.format("%.0f Modul", item.course?.totalModule?.toDouble())
-        binding.tvDuration.text = String.format("%.0f Menit", item.course?.totalDuration?.toDouble())
+        binding.tvDuration.text = item.course?.totalDuration.formatDurationToMinutes()
         binding.tvRating.text = item.course?.rating.toString()
         binding.ivCourseImg.load(item.course?.imageUrl)
         if (item.status == "paid") {
