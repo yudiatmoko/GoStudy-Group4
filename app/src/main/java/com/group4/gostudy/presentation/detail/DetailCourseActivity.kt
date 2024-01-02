@@ -3,10 +3,8 @@ package com.group4.gostudy.presentation.detail
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.res.Configuration
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.OrientationEventListener
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -196,31 +194,13 @@ class DetailCourseActivity : AppCompatActivity() {
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        val oldOrientation = requestedOrientation
-        val newOrientation = newConfig.orientation
-        Log.d("DetailActivity", "onConfigurationChanged Old Orientation: $oldOrientation")
-        Log.d("DetailActivity", "onConfigurationChanged New Orientation: $newOrientation")
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            if (!isFullScreen) {
-                youtubePlayer?.toggleFullscreen()
-            }
-        } else {
-            if (isFullScreen) {
-                youtubePlayer?.toggleFullscreen()
-            }
-        }
-
-        super.onConfigurationChanged(newConfig)
-    }
-
     private fun exitFullscreen() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         isFullScreen = false
         windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
         binding.clCourse.isVisible = true
         binding.youtubePlayerView.isVisible = true
-        binding.clSectionOrder.isVisible = true
+        binding.clSectionOrder.isVisible = false
         binding.flFullscreen.apply {
             isVisible = false
             removeAllViews()
