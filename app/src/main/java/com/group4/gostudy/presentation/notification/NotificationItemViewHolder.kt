@@ -1,6 +1,8 @@
 package com.group4.gostudy.presentation.notification
 
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.group4.gostudy.R
 import com.group4.gostudy.core.ViewHolderBinder
 import com.group4.gostudy.databinding.NotificationItemListBinding
 import com.group4.gostudy.model.AllNotif
@@ -27,8 +29,10 @@ class NotificationItemViewHolder(
     private fun setSelected(selected: Boolean) {
         itemView.isActivated = selected
 
-        var maxLines: Int? = null
+        var maxLines: Int?
+        val backgroundColor = ContextCompat.getColor(itemView.context, R.color.white)
         if (selected) {
+            binding.root.setCardBackgroundColor(backgroundColor)
             maxLines = 50
         } else {
             maxLines = 3

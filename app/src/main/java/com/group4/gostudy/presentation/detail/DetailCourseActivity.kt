@@ -14,6 +14,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.group4.gostudy.R
@@ -22,11 +23,13 @@ import com.group4.gostudy.model.Course
 import com.group4.gostudy.model.UserCourse
 import com.group4.gostudy.presentation.detail.adapter.AdapterViewPager
 import com.group4.gostudy.presentation.detail.material.dialog.DialogOrderFragment
+import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.formatDurationToMinutes
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -49,6 +52,8 @@ class DetailCourseActivity : AppCompatActivity() {
     private var previousOrientation: Int = -1
 
     private val viewModel: DetailViewModel by viewModel { parametersOf(intent?.extras) }
+
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,21 +126,28 @@ class DetailCourseActivity : AppCompatActivity() {
     private fun setCoursePremiumAndFree(course: Course?, userCourse: UserCourse?) {
         val isPremiumCourse = course?.type
         val isAccessibleCourse: Boolean = userCourse?.isAccessible ?: false
-        if (isPremiumCourse == "Premium" && !isAccessibleCourse) {
-            binding.btnBuy.setOnClickListener {
-                showDialogOrder()
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (isPremiumCourse == "Premium" && !isAccessibleCourse && userToken?.isNotEmpty() == true) {
+                binding.btnBuy.setOnClickListener {
+                    showDialogOrder()
+                }
+                binding.clSectionOrder.isVisible = true
+                binding.tabLayout.isVisible = false
+                binding.viewpager2.isUserInputEnabled = false
+            } else if (isPremiumCourse == "Premium" && isAccessibleCourse && userToken?.isNotEmpty() == true) {
+                binding.clSectionOrder.isVisible = false
+                binding.tabLayout.isVisible = true
+                binding.viewpager2.isUserInputEnabled = true
+            } else if (isPremiumCourse == "Premium" && isAccessibleCourse && userToken?.isEmpty() == true) {
+                binding.clSectionOrder.isVisible = false
+            } else if (isPremiumCourse == "Premium" && !isAccessibleCourse && userToken?.isEmpty() == true) {
+                binding.clSectionOrder.isVisible = false
+            } else {
+                binding.clSectionOrder.isVisible = false
+                binding.tabLayout.isVisible = true
+                binding.viewpager2.isUserInputEnabled = true
             }
-            binding.clSectionOrder.isVisible = true
-            binding.tabLayout.isVisible = false
-            binding.viewpager2.isUserInputEnabled = false
-        } else if (isPremiumCourse == "Premium" && isAccessibleCourse) {
-            binding.clSectionOrder.isVisible = false
-            binding.tabLayout.isVisible = true
-            binding.viewpager2.isUserInputEnabled = true
-        } else {
-            binding.clSectionOrder.isVisible = false
-            binding.tabLayout.isVisible = true
-            binding.viewpager2.isUserInputEnabled = true
         }
     }
 

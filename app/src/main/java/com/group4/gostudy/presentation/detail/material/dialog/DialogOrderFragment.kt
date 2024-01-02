@@ -116,5 +116,6 @@ class DialogOrderFragment : BottomSheetDialogFragment() {
 
     private fun navigateToPayment(course: Course?) {
         PaymentActivity.startActivity(requireContext(), course)
+        activity?.finish()
     }
 }

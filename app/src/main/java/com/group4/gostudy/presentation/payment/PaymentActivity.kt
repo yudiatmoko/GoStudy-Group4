@@ -91,6 +91,7 @@ class PaymentActivity : AppCompatActivity() {
         val intent = Intent(this, PaymentWeb::class.java)
         intent.putExtra(getString(R.string.text_url), urlPayment)
         startActivity(intent)
+        finish()
     }
 
     companion object {

@@ -10,8 +10,12 @@ import com.github.appintro.AppIntroCustomLayoutFragment
 import com.group4.gostudy.R
 import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainActivity
+import com.group4.gostudy.presentation.main.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CustomAppIntroActivity : AppIntro() {
+
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,7 @@ class CustomAppIntroActivity : AppIntro() {
 
             val btnGuest = newFragment.view?.findViewById<Button>(R.id.btn_guest_intro)
             btnGuest?.setOnClickListener {
+                mainViewModel.setBoarding(true)
                 navigateToHome()
                 finish()
             }

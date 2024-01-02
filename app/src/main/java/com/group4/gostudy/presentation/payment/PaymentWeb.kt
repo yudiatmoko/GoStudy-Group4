@@ -12,17 +12,12 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.ActivityPaymentWebBinding
-import com.group4.gostudy.presentation.detail.DetailCourseActivity
-import com.group4.gostudy.presentation.detail.DetailViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+import com.group4.gostudy.presentation.account.historypayment.HistoryPaymentActivity
 
 class PaymentWeb : AppCompatActivity() {
     private val binding: ActivityPaymentWebBinding by lazy {
         ActivityPaymentWebBinding.inflate(layoutInflater)
     }
-
-    private val viewModel: DetailViewModel by viewModel { parametersOf(intent.extras) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +48,8 @@ class PaymentWeb : AppCompatActivity() {
                     // `true` means for the specified url, will be handled by OS by starting Intent
                     true
                 } else if (requestUrl.contains("example.com/")) {
-                    DetailCourseActivity.startActivity(this@PaymentWeb, viewModel.course)
+                    HistoryPaymentActivity.startActivity(this@PaymentWeb)
+                    finish()
                     true
                 } else {
                     false

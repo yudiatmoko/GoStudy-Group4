@@ -24,19 +24,32 @@ class MainViewModel(
 
     val userTokenLiveData = userPreferenceDataSource.getUserTokenFlow().asLiveData(Dispatchers.IO)
 
+    val boardingLiveData = userPreferenceDataSource.getUserBoardingFlow().asLiveData(Dispatchers.IO)
+
     fun setUserToken(token: String) {
         viewModelScope.launch(Dispatchers.IO) {
             userPreferenceDataSource.setUserToken(token)
         }
     }
 
+    suspend fun getUserToken(): String? {
+        return userPreferenceDataSource.getUserToken()
+    }
+
+    fun setBoarding(isBoarding: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userPreferenceDataSource.setBoarding(isBoarding)
+        }
+    }
+
+    suspend fun getBoarding(): Boolean {
+        return userPreferenceDataSource.isFromBoarding()
+    }
+
     fun removeUserToken() {
         viewModelScope.launch(Dispatchers.IO) {
             userPreferenceDataSource.removeUserToken()
         }
-    }
-    suspend fun getUserToken(): String? {
-        return userPreferenceDataSource.getUserToken()
     }
 
     private val _profile =

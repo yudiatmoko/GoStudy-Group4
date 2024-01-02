@@ -3,9 +3,11 @@ package com.group4.gostudy.presentation.splashscreen
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.group4.gostudy.databinding.ActivitySplashScreenBinding
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashScreen : AppCompatActivity() {
@@ -21,14 +23,26 @@ class SplashScreen : AppCompatActivity() {
         setContentView(binding.root)
 
         checkIfUserLogin()
+        checkIfBoarding()
+    }
+
+    private fun checkIfBoarding() {
+        lifecycleScope.launch {
+            mainViewModel.getBoarding()
+        }
+        mainViewModel.boardingLiveData.observe(this) {
+            if (it == true) {
+                startMainActivity()
+            } else {
+                startAppIntro()
+            }
+        }
     }
 
     private fun checkIfUserLogin() {
         mainViewModel.userTokenLiveData.observe(this) {
             if (it != "") {
                 startMainActivity()
-            } else {
-                startAppIntro()
             }
         }
     }

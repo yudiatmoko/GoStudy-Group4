@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.group4.gostudy.R
 import com.group4.gostudy.databinding.FragmentHomeBinding
@@ -20,6 +21,7 @@ import com.group4.gostudy.presentation.main.MainViewModel
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.hideKeyboard
 import com.group4.gostudy.utils.proceedWhen
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -70,12 +72,29 @@ class HomeFragment : Fragment() {
         setClickListener()
     }
 
+    private fun checkUserLoginAndLoadData() {
+        lifecycleScope.launch {
+            val userToken = mainViewModel.getUserToken()
+            if (userToken.isNullOrBlank()) {
+                navigateToNonLoginFragment()
+            } else {
+                navigateToMyProfile()
+            }
+        }
+    }
+
+    private val dialogFragment = DialogHomeNonLoginFragment()
+
+    private fun navigateToNonLoginFragment() {
+        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
+    }
+
     private fun setClickListener() {
         binding.tvCourseViewMoreText.setOnClickListener {
             navigateToViewMore()
         }
         binding.ivProfileImage.setOnClickListener {
-            navigateToMyProfile()
+            checkUserLoginAndLoadData()
         }
     }
 
