@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroCustomLayoutFragment
 import com.group4.gostudy.R
+import com.group4.gostudy.data.local.datastore.NonLoginMode
 import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
@@ -56,7 +57,7 @@ class CustomAppIntroActivity : AppIntro() {
 
             val btnGuest = newFragment.view?.findViewById<Button>(R.id.btn_guest_intro)
             btnGuest?.setOnClickListener {
-                mainViewModel.setBoarding(true)
+                mainViewModel.setNonLogin(NonLoginMode.LOGIN_AS_GUEST.value)
                 navigateToHome()
                 finish()
             }

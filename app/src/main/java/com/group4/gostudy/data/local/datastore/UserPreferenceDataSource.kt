@@ -1,18 +1,18 @@
 package com.group4.gostudy.data.local.datastore
 
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.group4.gostudy.utils.PreferenceDataStoreHelper
 import kotlinx.coroutines.flow.Flow
 
 interface UserPreferenceDataSource {
     fun getUserTokenFlow(): Flow<String>
-    fun getUserBoardingFlow(): Flow<Boolean>
+    fun getNonLoginFlow(): Flow<String>
     suspend fun setUserToken(token: String)
-    suspend fun setBoarding(isBoarding: Boolean)
+    suspend fun setNonLogin(loginAsGuest: String)
     suspend fun getUserToken(): String
     suspend fun removeUserToken()
-    suspend fun isFromBoarding(): Boolean
+    suspend fun removeNonLogin()
+    suspend fun getNonLogin(): String
 }
 
 class UserPreferenceDataSourceImpl(
@@ -25,10 +25,10 @@ class UserPreferenceDataSourceImpl(
         )
     }
 
-    override fun getUserBoardingFlow(): Flow<Boolean> {
+    override fun getNonLoginFlow(): Flow<String> {
         return preferenceDataStoreHelper.getPreference(
-            BOARDING_PASS,
-            false
+            NON_LOGIN_PREF,
+            NonLoginMode.FIRST_INSTALL.value
         )
     }
 
@@ -41,10 +41,10 @@ class UserPreferenceDataSourceImpl(
         )
     }
 
-    override suspend fun setBoarding(isBoarding: Boolean) {
+    override suspend fun setNonLogin(loginAsGuest: String) {
         return preferenceDataStoreHelper.putPreference(
-            BOARDING_PASS,
-            true
+            NON_LOGIN_PREF,
+            loginAsGuest
         )
     }
 
@@ -59,15 +59,19 @@ class UserPreferenceDataSourceImpl(
         return preferenceDataStoreHelper.removePreference(USER_TOKEN_PREF)
     }
 
-    override suspend fun isFromBoarding(): Boolean {
+    override suspend fun removeNonLogin() {
+        return preferenceDataStoreHelper.removePreference(NON_LOGIN_PREF)
+    }
+
+    override suspend fun getNonLogin(): String {
         return preferenceDataStoreHelper.getFirstPreference(
-            BOARDING_PASS,
-            false
+            NON_LOGIN_PREF,
+            NonLoginMode.FIRST_INSTALL.value
         )
     }
 
     companion object {
         val USER_TOKEN_PREF = stringPreferencesKey("USER_TOKEN_PREF")
-        val BOARDING_PASS = booleanPreferencesKey("BOARDING_PASS")
+        val NON_LOGIN_PREF = stringPreferencesKey("NON_LOGIN_PREF")
     }
 }

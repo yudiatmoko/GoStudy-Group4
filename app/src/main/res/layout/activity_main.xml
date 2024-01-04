@@ -23,6 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:itemIconSize="22dp"
+        android:visibility="gone"
         app:itemBackground="@android:color/transparent"
         app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
         app:itemIconTint="@color/bottom_nav_color"

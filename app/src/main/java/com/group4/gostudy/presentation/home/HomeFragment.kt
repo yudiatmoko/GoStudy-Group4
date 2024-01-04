@@ -18,6 +18,7 @@ import com.group4.gostudy.presentation.home.category.CategoryAdapter
 import com.group4.gostudy.presentation.home.popularcourse.PopularCourseAdapter
 import com.group4.gostudy.presentation.home.popularcourse.ViewMoreCourseActivity
 import com.group4.gostudy.presentation.main.MainViewModel
+import com.group4.gostudy.presentation.payment.PaymentActivity
 import com.group4.gostudy.utils.ApiException
 import com.group4.gostudy.utils.hideKeyboard
 import com.group4.gostudy.utils.proceedWhen
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
     private val courseAdapter: PopularCourseAdapter by lazy {
         PopularCourseAdapter { course: Course ->
             navigateToDetail(course)
+            navigateToPayment(course)
         }
     }
 
@@ -81,6 +83,11 @@ class HomeFragment : Fragment() {
                 navigateToMyProfile()
             }
         }
+    }
+
+    private fun navigateToPayment(course: Course?) {
+        PaymentActivity.startActivity(requireContext(), course)
+        activity?.finish()
     }
 
     private val dialogFragment = DialogHomeNonLoginFragment()

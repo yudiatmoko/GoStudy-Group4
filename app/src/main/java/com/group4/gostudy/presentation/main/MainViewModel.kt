@@ -24,7 +24,7 @@ class MainViewModel(
 
     val userTokenLiveData = userPreferenceDataSource.getUserTokenFlow().asLiveData(Dispatchers.IO)
 
-    val boardingLiveData = userPreferenceDataSource.getUserBoardingFlow().asLiveData(Dispatchers.IO)
+    val nonLoginLiveData = userPreferenceDataSource.getNonLoginFlow().asLiveData(Dispatchers.IO)
 
     fun setUserToken(token: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,23 +32,29 @@ class MainViewModel(
         }
     }
 
-    suspend fun getUserToken(): String? {
+    suspend fun getUserToken(): String {
         return userPreferenceDataSource.getUserToken()
     }
 
-    fun setBoarding(isBoarding: Boolean) {
+    fun setNonLogin(loginAsGuest: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            userPreferenceDataSource.setBoarding(isBoarding)
+            userPreferenceDataSource.setNonLogin(loginAsGuest)
         }
     }
 
-    suspend fun getBoarding(): Boolean {
-        return userPreferenceDataSource.isFromBoarding()
+    suspend fun getNonLogin(): String {
+        return userPreferenceDataSource.getNonLogin()
     }
 
     fun removeUserToken() {
         viewModelScope.launch(Dispatchers.IO) {
             userPreferenceDataSource.removeUserToken()
+        }
+    }
+
+    fun removeNonLogin() {
+        viewModelScope.launch(Dispatchers.IO) {
+            userPreferenceDataSource.removeNonLogin()
         }
     }
 

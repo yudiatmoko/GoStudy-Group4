@@ -3,11 +3,11 @@ package com.group4.gostudy.presentation.splashscreen
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import com.group4.gostudy.data.local.datastore.NonLoginMode
 import com.group4.gostudy.databinding.ActivitySplashScreenBinding
+import com.group4.gostudy.presentation.login.LoginActivity
 import com.group4.gostudy.presentation.main.MainActivity
 import com.group4.gostudy.presentation.main.MainViewModel
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashScreen : AppCompatActivity() {
@@ -22,30 +22,35 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        checkIfUserLogin()
         checkIfBoarding()
     }
 
     private fun checkIfBoarding() {
-        lifecycleScope.launch {
-            mainViewModel.getBoarding()
-        }
-        mainViewModel.boardingLiveData.observe(this) {
-            if (it == true) {
-                startMainActivity()
-            } else {
-                startAppIntro()
+        mainViewModel.nonLoginLiveData.observe(this) {
+            when (it) {
+                NonLoginMode.FIRST_INSTALL.value -> startAppIntro()
+                NonLoginMode.LOGIN_AS_GUEST.value -> startMainActivity()
+                NonLoginMode.LOGOUT_FROM_GUEST.value -> checkIfUserLogin()
             }
         }
     }
 
     private fun checkIfUserLogin() {
         mainViewModel.userTokenLiveData.observe(this) {
-            if (it != "") {
+            if (it.isNullOrBlank()) {
+                navigateToLogin()
+            } else {
                 startMainActivity()
             }
         }
     }
+
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun startAppIntro() {
         val intent = Intent(this, CustomAppIntroActivity::class.java)
         startActivity(intent)

@@ -33,6 +33,9 @@ class PopularCourseItemViewHolder(
         binding.tvRating.text = item.rating.toString()
         if ((item.price ?: 0) > 0) {
             binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
+            binding.tvPrice.setOnClickListener {
+                onClicked.invoke(item)
+            }
         } else {
             binding.tvPrice.text = itemView.context.getString(R.string.free_class)
         }
@@ -59,6 +62,9 @@ class PopularCourseViewMoreItemViewHolder(
         binding.tvDuration.text = String.format("%.0f Menit", item.totalDuration?.toDouble())
         binding.tvRating.text = item.rating.toString()
         if ((item.price ?: 0) > 0) {
+            binding.tvPrice.setOnClickListener {
+                onClicked.invoke(item)
+            }
             binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
         } else {
             binding.tvPrice.text = itemView.context.getString(R.string.free_class)
