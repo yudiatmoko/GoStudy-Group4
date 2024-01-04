@@ -33,9 +33,6 @@ class PopularCourseItemViewHolder(
         binding.tvRating.text = item.rating.toString()
         if ((item.price ?: 0) > 0) {
             binding.tvPrice.text = String.format("Beli Rp. %.0f", item.price?.toDouble())
-            binding.tvPrice.setOnClickListener {
-                onClicked.invoke(item)
-            }
         } else {
             binding.tvPrice.text = itemView.context.getString(R.string.free_class)
         }
