@@ -38,7 +38,6 @@ class HomeFragment : Fragment() {
     private val courseAdapter: PopularCourseAdapter by lazy {
         PopularCourseAdapter { course: Course ->
             navigateToDetail(course)
-            navigateToPayment(course)
         }
     }
 
@@ -83,17 +82,6 @@ class HomeFragment : Fragment() {
                 navigateToMyProfile()
             }
         }
-    }
-
-    private fun navigateToPayment(course: Course?) {
-        PaymentActivity.startActivity(requireContext(), course)
-        activity?.finish()
-    }
-
-    private val dialogFragment = DialogHomeNonLoginFragment()
-
-    private fun navigateToNonLoginFragment() {
-        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
     }
 
     private fun setClickListener() {
