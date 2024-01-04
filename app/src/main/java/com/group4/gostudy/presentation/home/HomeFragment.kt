@@ -84,6 +84,12 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private val dialogFragment = DialogHomeNonLoginFragment()
+
+    private fun navigateToNonLoginFragment() {
+        dialogFragment.show(childFragmentManager, "DialogHomeNonLoginFragment")
+    }
+
     private fun setClickListener() {
         binding.tvCourseViewMoreText.setOnClickListener {
             navigateToViewMore()
